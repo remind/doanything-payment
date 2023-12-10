@@ -16,6 +16,7 @@
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 
         <spring-boot.version>3.2.0</spring-boot.version>
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
         <example-commons-lang.version>1.0-SNAPSHOT</example-commons-lang.version>
     </properties>
 
@@ -28,17 +29,40 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- start 外部依赖包定义 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.3</version>
+            </dependency>
+            <!-- end 外部依赖包定义 -->
+
+            <!-- start 二方commons包依赖定义 -->
             <dependency>
                 <groupId>cn.doanything.commons</groupId>
                 <artifactId>doanything-commons-lang</artifactId>
                 <version>${example-commons-lang.version}</version>
             </dependency>
+            <!-- end 二方commons包依赖定义 -->
+
+            <!-- start 二方框架包依赖定义 -->
             <dependency>
                 <groupId>cn.doanything.framework</groupId>
                 <artifactId>doanything-framework-api</artifactId>
                 <version>${revision}</version>
             </dependency>
-
             <dependency>
                 <groupId>cn.doanything.framework</groupId>
                 <artifactId>doanything-framework-rpc</artifactId>
@@ -59,6 +83,8 @@
                 <artifactId>doanything-framework-sequence</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <!-- end 二方框架包依赖定义 -->
+
         </dependencies>
     </dependencyManagement>
 

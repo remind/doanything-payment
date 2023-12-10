@@ -3,8 +3,10 @@ package cn.doanything.commons.lang;
 import java.util.Date;
 
 /**
- * @author remind
- * 2023年05月08日 22:42
+ * 基础实体
+ *
+ * @author wxj
+ * 2023/12/10
  */
 public class Entity {
     /**

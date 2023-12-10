@@ -7,7 +7,7 @@ package cn.doanything.member.types;
  */
 public enum GenderEnum {
 
-    UNKOWN(0L, "保密"), MALE(1L, "男性"), FEMALE(2L, "女性");
+    UNKNOWN(0L, "保密"), MALE(1L, "男性"), FEMALE(2L, "女性");
 
     /** 代码 */
     private final Long   code;

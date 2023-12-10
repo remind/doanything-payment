@@ -29,9 +29,5 @@
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-sequence</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.doanything.commons</groupId>
-            <artifactId>doanything-commons-lang</artifactId>
-        </dependency>
     </dependencies>
 </project>

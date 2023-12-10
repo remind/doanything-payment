@@ -1,6 +1,5 @@
 package cn.doanything.commons.lang.utils;
 
-import cn.doanything.commons.lang.utils.IdGeneratorUtil;
 import org.junit.Test;
 
 /**

@@ -17,6 +17,7 @@
         <module>app/member-facade</module>
         <module>app/member-types</module>
         <module>app/member-bootstrap</module>
+        <module>gen/dalgen</module>
     </modules>
     <properties>
         <project.version>1.0-SNAPSHOT</project.version>
