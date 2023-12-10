@@ -9,7 +9,7 @@
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>doanything-framework-nacos</artifactId>
+    <artifactId>doanything-framework-config</artifactId>
     <properties>
         <nacos-spring-boot.version>0.3.0-RC</nacos-spring-boot.version>
     </properties>

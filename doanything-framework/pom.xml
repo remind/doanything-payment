@@ -7,9 +7,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>doanything-framework-api</module>
-        <module>doanything-framework-dubbo</module>
-        <module>doanything-framework-mybatis</module>
-        <module>doanything-framework-nacos</module>
+        <module>doanything-framework-rpc</module>
+        <module>doanything-framework-dal</module>
+        <module>doanything-framework-config</module>
         <module>doanything-framework-sequence</module>
     </modules>
 

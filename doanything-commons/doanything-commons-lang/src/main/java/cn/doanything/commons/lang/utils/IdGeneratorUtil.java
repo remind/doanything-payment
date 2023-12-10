@@ -1,4 +1,4 @@
-package cn.doanything.commons.sequence;
+package cn.doanything.commons.lang.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -10,7 +10,7 @@ import java.util.Date;
  * @author wxj
  * 2023/12/10
  */
-public class IdGenerator {
+public class IdGeneratorUtil {
 
     /**
      * 生成24位的ID，由 yyyyMMdd + 3位SystemCode + 3位bizType + 2位dbRouteId + 8位自增

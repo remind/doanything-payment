@@ -12,6 +12,7 @@
         <module>doanything-parent</module>
         <module>app/sample</module>
         <module>app/sampleweb</module>
+        <module>app/member</module>
     </modules>
 
     <properties>

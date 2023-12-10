@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.doanything</groupId>
+        <artifactId>doanything-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>cn.doanything.member</groupId>
+    <artifactId>doanything-member</artifactId>
+    <version>${project.version}</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>app/member-domain</module>
+        <module>app/member-application</module>
+        <module>app/member-infrastructure</module>
+        <module>app/member-facade</module>
+        <module>app/member-types</module>
+        <module>app/member-bootstrap</module>
+    </modules>
+    <properties>
+        <project.version>1.0-SNAPSHOT</project.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.doanything.member</groupId>
+                <artifactId>member-types</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.member</groupId>
+                <artifactId>member-types</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.member</groupId>
+                <artifactId>member-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.member</groupId>
+                <artifactId>member-infrastructure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.member</groupId>
+                <artifactId>member-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

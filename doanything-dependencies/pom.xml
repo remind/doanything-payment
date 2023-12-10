@@ -41,17 +41,17 @@
 
             <dependency>
                 <groupId>cn.doanything.framework</groupId>
-                <artifactId>doanything-framework-dubbo</artifactId>
+                <artifactId>doanything-framework-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.framework</groupId>
-                <artifactId>doanything-framework-mybatis</artifactId>
+                <artifactId>doanything-framework-dal</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.framework</groupId>
-                <artifactId>doanything-framework-nacos</artifactId>
+                <artifactId>doanything-framework-config</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

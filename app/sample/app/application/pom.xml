@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>
-            <artifactId>doanything-framework-dubbo</artifactId>
+            <artifactId>doanything-framework-rpc</artifactId>
         </dependency>
     </dependencies>
 </project>
