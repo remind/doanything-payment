@@ -32,11 +32,6 @@
             </dependency>
             <dependency>
                 <groupId>cn.doanything.member</groupId>
-                <artifactId>member-types</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.doanything.member</groupId>
                 <artifactId>member-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
