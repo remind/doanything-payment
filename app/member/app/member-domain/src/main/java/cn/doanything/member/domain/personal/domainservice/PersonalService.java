@@ -9,5 +9,10 @@ import cn.doanything.member.domain.personal.PersonalMember;
  */
 public interface PersonalService {
 
+    /**
+     * 创建个人用户
+     * @param personalMember
+     * @return
+     */
     void create(PersonalMember personalMember);
 }

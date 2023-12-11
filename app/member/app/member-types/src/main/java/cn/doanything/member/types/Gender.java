@@ -2,35 +2,41 @@ package cn.doanything.member.types;
 
 /**
  * 性别枚举
+ *
  * @author wxj
  * 2023/12/10
  */
-public enum GenderEnum {
+public enum Gender {
 
-    UNKNOWN(0L, "保密"), MALE(1L, "男性"), FEMALE(2L, "女性");
+    UNKNOWN(0, "保密"), MALE(1, "男性"), FEMALE(2, "女性");
 
-    /** 代码 */
-    private final Long   code;
-    /** 信息 */
+    /**
+     * 代码,只能为1位正整数
+     */
+    private final int code;
+    /**
+     * 信息
+     */
     private final String message;
 
-    GenderEnum(Long code, String message) {
+    Gender(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
     /**
      * 通过代码获取枚举项
+     *
      * @param code
      * @return
      */
-    public static GenderEnum getByCode(Long code) {
+    public static Gender getByCode(Integer code) {
         if (code == null) {
             return null;
         }
 
-        for (GenderEnum certType : GenderEnum.values()) {
-            if (certType.getCode().equals(code)) {
+        for (Gender certType : Gender.values()) {
+            if (certType.getCode() == code) {
                 return certType;
             }
         }
@@ -38,7 +44,7 @@ public enum GenderEnum {
         return null;
     }
 
-    public Long getCode() {
+    public int getCode() {
         return code;
     }
 

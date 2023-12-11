@@ -47,10 +47,10 @@ public class MybatisGenerator {
                             .pathInfo(pathInfo).entity("dataobject"); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("tp_personal_member")
-                            .addTablePrefix("tp_")
+                    builder.addInclude("tm_member","tm_personal_member")
+                            .addTablePrefix("tf_","tm_")
                             .mapperBuilder().enableFileOverride()//.enableBaseResultMap().enableBaseColumnList()
-                            .entityBuilder().formatFileName("%sDO").entityBuilder();
+                            .entityBuilder().formatFileName("%sDO").enableFileOverride();
                 })
 
                 .templateEngine(new VelocityTemplateEngine())

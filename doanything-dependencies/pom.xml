@@ -15,7 +15,7 @@
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <spring-boot.version>3.1.6</spring-boot.version>
         <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
         <example-commons-lang.version>1.0-SNAPSHOT</example-commons-lang.version>
     </properties>
@@ -50,6 +50,11 @@
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
+                <version>1.5.5.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
                 <version>1.5.5.Final</version>
             </dependency>
             <!-- end 外部依赖包定义 -->

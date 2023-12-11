@@ -1,7 +1,7 @@
 package cn.doanything.member.domain.repository;
 
 import cn.doanything.member.domain.Member;
-import cn.doanything.member.types.MemberTypeEnum;
+import cn.doanything.member.types.MemberType;
 
 /**
  * @author wxj
@@ -16,9 +16,16 @@ public interface MemberRepository {
     void store(Member member);
 
     /**
-     * 生成会员ID
-     * @param memberTypeEnum
+     * 加载会员
+     * @param memberId
      * @return
      */
-    String genMemberId(MemberTypeEnum memberTypeEnum);
+    Member load(String memberId);
+
+    /**
+     * 生成会员ID
+     * @param memberType
+     * @return
+     */
+    String genMemberId(MemberType memberType);
 }

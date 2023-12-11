@@ -18,5 +18,9 @@
             <groupId>cn.doanything.member</groupId>
             <artifactId>member-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.doanything.member</groupId>
+            <artifactId>member-facade</artifactId>
+        </dependency>
     </dependencies>
 </project>

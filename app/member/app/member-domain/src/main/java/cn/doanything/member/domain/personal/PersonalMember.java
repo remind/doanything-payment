@@ -1,7 +1,8 @@
 package cn.doanything.member.domain.personal;
 
 import cn.doanything.member.domain.Member;
-import cn.doanything.member.types.GenderEnum;
+import cn.doanything.member.types.Gender;
+import cn.doanything.member.types.MemberType;
 import lombok.Data;
 
 /**
@@ -12,5 +13,10 @@ import lombok.Data;
 public class PersonalMember extends Member {
 
     /** 性别 */
-    private GenderEnum gender;
+    private Gender gender;
+
+    @Override
+    public MemberType getMemberType() {
+        return MemberType.PERSONAL;
+    }
 }

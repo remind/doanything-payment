@@ -1,6 +1,6 @@
-package cn.doanything.infrastructure.persistence.mapper;
+package cn.doanything.member.infrastructure.persistence.mapper;
 
-import cn.doanything.infrastructure.persistence.dataobject.PersonalMemberDO;
+import cn.doanything.member.infrastructure.persistence.dataobject.PersonalMemberDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2023-12-10
+ * @since 2023-12-11
  */
 public interface PersonalMemberMapper extends BaseMapper<PersonalMemberDO> {
 

@@ -2,23 +2,28 @@ package cn.doanything.member.types;
 
 /**
  * 会员类型
+ *
  * @author wxj
  * 2023/12/10
  */
-public enum MemberTypeEnum {
-    PERSONAL(1L, "10","个人"), COMPANY(2L, "20","企业");
-
-    /** 代码 */
-    private final Long   code;
+public enum MemberType {
+    PERSONAL(1, "10", "个人"), COMPANY(2, "20", "企业");
 
     /**
-     * ID前缀
+     * 代码，只能为一位正整数
+     */
+    private final int code;
+
+    /**
+     * ID前缀,2位数字
      */
     private final String prefix;
-    /** 信息 */
+    /**
+     * 信息
+     */
     private final String message;
 
-    MemberTypeEnum(Long code, String prefix, String message) {
+    MemberType(int code, String prefix, String message) {
         this.code = code;
         this.prefix = prefix;
         this.message = message;
@@ -26,16 +31,17 @@ public enum MemberTypeEnum {
 
     /**
      * 通过代码获取枚举项
+     *
      * @param code
      * @return
      */
-    public static MemberTypeEnum getByCode(Long code) {
+    public static MemberType getByCode(Integer code) {
         if (code == null) {
             return null;
         }
 
-        for (MemberTypeEnum memberType : MemberTypeEnum.values()) {
-            if (memberType.getCode().equals(code)) {
+        for (MemberType memberType : MemberType.values()) {
+            if (memberType.getCode() == code) {
                 return memberType;
             }
         }
@@ -43,7 +49,7 @@ public enum MemberTypeEnum {
         return null;
     }
 
-    public Long getCode() {
+    public int getCode() {
         return code;
     }
 

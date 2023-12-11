@@ -1,4 +1,4 @@
-package cn.doanything.infrastructure.persistence.dataobject;
+package cn.doanything.member.infrastructure.persistence.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-10
+ * @since 2023-12-11
  */
-@TableName("tp_personal_member")
+@TableName("tm_personal_member")
 public class PersonalMemberDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class PersonalMemberDO implements Serializable {
     /**
      * 性别
      */
-    private String gender;
+    private Byte gender;
 
     /**
      * 创建时间
@@ -60,11 +60,11 @@ public class PersonalMemberDO implements Serializable {
         this.memberName = memberName;
     }
 
-    public String getGender() {
+    public Byte getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Byte gender) {
         this.gender = gender;
     }
 
