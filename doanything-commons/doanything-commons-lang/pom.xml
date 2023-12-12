@@ -4,7 +4,7 @@
     <parent>
         <groupId>cn.doanything.commons</groupId>
         <artifactId>doanything-commons</artifactId>
-        <version>${doanything-commons.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>doanything-commons-lang</artifactId>

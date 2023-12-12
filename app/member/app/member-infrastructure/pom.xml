@@ -4,7 +4,7 @@
     <parent>
         <groupId>cn.doanything.member</groupId>
         <artifactId>doanything-member</artifactId>
-        <version>${project.version}</version>
+        <version>${revision}</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>member-infrastructure</artifactId>

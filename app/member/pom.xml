@@ -8,7 +8,7 @@
     </parent>
     <groupId>cn.doanything.member</groupId>
     <artifactId>doanything-member</artifactId>
-    <version>${project.version}</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
         <module>app/member-domain</module>
@@ -20,7 +20,7 @@
         <module>gen/dalgen</module>
     </modules>
     <properties>
-        <project.version>1.0-SNAPSHOT</project.version>
+        <revision>1.0-SNAPSHOT</revision>
     </properties>
 
     <dependencyManagement>
@@ -28,27 +28,27 @@
             <dependency>
                 <groupId>cn.doanything.member</groupId>
                 <artifactId>member-types</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.member</groupId>
                 <artifactId>member-domain</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.member</groupId>
                 <artifactId>member-infrastructure</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.member</groupId>
                 <artifactId>member-facade</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.member</groupId>
                 <artifactId>member-application</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
