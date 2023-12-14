@@ -5,35 +5,29 @@ package cn.doanything.commons.response;
  * @param <T>
  */
 public class ResponseResult<T> {
-    /**
-     * 执行状态，是否成功
-     */
-    private boolean success;
 
     /**
      * 结果码
      */
-    private String code;
+    private final String code;
 
     /**
      * 结果消息
      */
-    private String message;
+    private final String message;
 
     /**
      * 数据
      */
-    private T data;
+    private final T data;
 
-    public ResponseResult(boolean success, String code, String message, T data) {
-        this.success = success;
+    public ResponseResult(String code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public ResponseResult(boolean success, ResultCode resultCode, T data) {
-        this.success = success;
+    public ResponseResult(ResultCode resultCode, T data) {
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
         this.data = data;
@@ -44,7 +38,7 @@ public class ResponseResult<T> {
      * @return
      * @param <T>
      */
-    public static <T> ResponseResult<T> success() {
+    public static ResponseResult<String> success() {
         return success(null);
     }
 
@@ -66,11 +60,47 @@ public class ResponseResult<T> {
      * @param <T>   数据类型
      */
     public static <T> ResponseResult<T> success(String message, T data) {
-        return new ResponseResult<T>(true, BaseResultCode.SUCCESS.getCode(), message, data);
+        return new ResponseResult<T>(BaseResultCode.SUCCESS.getCode(), message, data);
     }
 
-    public boolean isSuccess() {
-        return success;
+    /**
+     * 构造失败结果，使用默认错误码和错误消息
+     * @return
+     * @param <T>
+     */
+    public static ResponseResult<String> fail() {
+        return new ResponseResult<String>(BaseResultCode.FAIL.getCode(), BaseResultCode.FAIL.getMessage(), null);
+    }
+
+    /**
+     * 构造失败结果，使用默认错误码
+     * @param message
+     * @return
+     * @param <T>
+     */
+    public static ResponseResult<String> fail(String message) {
+        return new ResponseResult<String>(BaseResultCode.FAIL.getCode(), message, null);
+    }
+
+    /**
+     * 构造失败结果，指定错误码
+     * @param resultCode
+     * @return
+     * @param <T>
+     */
+    public static ResponseResult<String> fail(ResultCode resultCode) {
+        return new ResponseResult<String>(resultCode.getCode(), resultCode.getMessage(), null);
+    }
+
+    /**
+     * 构造失败结果，指定错误码和返回数据
+     * @param resultCode
+     * @param data
+     * @return
+     * @param <T>
+     */
+    public static <T> ResponseResult<T> fail(ResultCode resultCode, T data) {
+        return new ResponseResult<T>(resultCode.getCode(), resultCode.getMessage(), data);
     }
 
     public String getCode() {

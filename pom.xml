@@ -13,6 +13,7 @@
         <module>app/sample</module>
         <module>app/sampleweb</module>
         <module>app/member</module>
+        <module>app/mgs</module>
     </modules>
 
     <properties>

@@ -112,9 +112,7 @@ public class SequenceInnerService {
                 logger.error("序列刷新失败，sequenceName={}", sequenceName);
                 throw new SequenceUpdateException(e);
             }
-            if (sequenceQueue.get(sequenceName) == null) {
-                sequenceQueue.put(sequenceName, new ConcurrentLinkedQueue<>());
-            }
+            sequenceQueue.computeIfAbsent(sequenceName, k -> new ConcurrentLinkedQueue<>());
             for(long seq = beginValue; seq < endValue; seq += sequence.getIncrement().longValue()) {
                 sequenceQueue.get(sequenceName).add(seq);
             }

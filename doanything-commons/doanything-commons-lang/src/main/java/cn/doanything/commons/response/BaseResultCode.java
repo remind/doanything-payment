@@ -5,7 +5,9 @@ package cn.doanything.commons.response;
  * 结果码
  */
 public enum BaseResultCode implements ResultCode {
-    SUCCESS("S001", "成功")
+    SUCCESS("SUCCESS", "处理成功"),
+
+    FAIL("FAIL", "处理异常")
     ;
 
     private final String code;
