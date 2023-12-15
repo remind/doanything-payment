@@ -4,12 +4,16 @@
     <parent>
         <groupId>cn.doanything.sample</groupId>
         <artifactId>doanything-sample</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>infrastructure</artifactId>
+    <artifactId>sample-infrastructure</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.doanything.sample</groupId>
+            <artifactId>sample-domain</artifactId>
+        </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-dal</artifactId>
@@ -21,6 +25,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

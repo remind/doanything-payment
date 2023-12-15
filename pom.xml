@@ -14,6 +14,7 @@
         <module>app/sampleweb</module>
         <module>app/member</module>
         <module>app/mgs</module>
+        <module>doanything-archetypes</module>
     </modules>
 
     <properties>

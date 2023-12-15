@@ -4,15 +4,16 @@
     <parent>
         <groupId>cn.doanything.sample</groupId>
         <artifactId>doanything-sample</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>bootstrap</artifactId>
+    <artifactId>sample-facade</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.doanything.sample</groupId>
-            <artifactId>application</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

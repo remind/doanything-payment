@@ -8,16 +8,19 @@
     </parent>
     <groupId>cn.doanything.sample</groupId>
     <artifactId>doanything-sample</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>app/bootstrap</module>
-        <module>app/facade</module>
-        <module>app/infrastructure</module>
-        <module>app/application</module>
+        <module>app/sample-bootstrap</module>
+        <module>app/sample-facade</module>
+        <module>app/sample-infrastructure</module>
+        <module>app/sample-application</module>
+        <module>app/sample-domain</module>
+        <module>app/sample-types</module>
     </modules>
 
     <properties>
-        <project.version>1.0-SNAPSHOT</project.version>
+        <revision>1.0-SNAPSHOT</revision>
     </properties>
 
 
@@ -25,18 +28,28 @@
         <dependencies>
             <dependency>
                 <groupId>cn.doanything.sample</groupId>
-                <artifactId>facade</artifactId>
-                <version>${project.version}</version>
+                <artifactId>sample-types</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.sample</groupId>
-                <artifactId>application</artifactId>
-                <version>${project.version}</version>
+                <artifactId>sample-domain</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.doanything.sample</groupId>
-                <artifactId>infrastructure</artifactId>
-                <version>${project.version}</version>
+                <artifactId>sample-facade</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.sample</groupId>
+                <artifactId>sample-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.sample</groupId>
+                <artifactId>sample-infrastructure</artifactId>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

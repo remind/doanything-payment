@@ -39,7 +39,7 @@
 
             <dependency>
                 <groupId>cn.doanything.sample</groupId>
-                <artifactId>facade</artifactId>
+                <artifactId>sample-facade</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>

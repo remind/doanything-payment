@@ -1,40 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.doanything.framework</groupId>
-    <artifactId>doanything-framework</artifactId>
+    <groupId>cn.doanything</groupId>
+    <artifactId>doanything-archetypes</artifactId>
     <version>${revision}</version>
+    <name>doanything-archetypes</name>
     <packaging>pom</packaging>
+
     <modules>
-        <module>doanything-framework-api</module>
-        <module>doanything-framework-rpc</module>
-        <module>doanything-framework-dal</module>
-        <module>doanything-framework-config</module>
-        <module>doanything-framework-sequence</module>
+        <module>doanything-archetype-service</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>1.0-SNAPSHOT</revision>
 
+        <maven-archetype-plugin.version>3.2.1</maven-archetype-plugin.version>
+        <archetype-packaging.version>3.2.1</archetype-packaging.version>
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>cn.doanything</groupId>
-                <artifactId>doanything-dependencies</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>${maven-archetype-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
