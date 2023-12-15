@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-11
+ * @since 2023-12-15
  */
 @TableName("tm_personal_member")
 public class PersonalMemberDO implements Serializable {

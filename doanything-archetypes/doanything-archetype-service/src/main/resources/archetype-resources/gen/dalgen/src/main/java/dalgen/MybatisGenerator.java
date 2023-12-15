@@ -1,4 +1,7 @@
-package cn.doanything.member.dalgen;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.dalgen;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
@@ -11,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author wxj
- * 2023/12/10
+ * mybatis自动生成代码
  */
 public class MybatisGenerator {
 
@@ -25,8 +27,8 @@ public class MybatisGenerator {
     }
 
     public static void gen(Config config, String projectPath) {
-        String classDir = projectPath + "/app/member-infrastructure/src/main/java";
-        String xmlDir = projectPath + "/app/member-infrastructure/src/main/resources/mapper";
+        String classDir = projectPath + "/app/${rootArtifactId}-infrastructure/src/main/java";
+        String xmlDir = projectPath + "/app/${rootArtifactId}-infrastructure/src/main/resources/mapper";
         Map<OutputFile, String> pathInfo = new HashMap<>();
         pathInfo.put(OutputFile.xml, xmlDir);
         pathInfo.put(OutputFile.controller, "");
@@ -48,7 +50,7 @@ public class MybatisGenerator {
 
                 }))
                 .packageConfig(builder -> {
-                    builder.parent("cn.doanything.member.infrastructure.persistence") // 设置父包名
+                    builder.parent("${package}.infrastructure.persistence") // 设置父包名
                             .pathInfo(pathInfo).entity("dataobject"); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
