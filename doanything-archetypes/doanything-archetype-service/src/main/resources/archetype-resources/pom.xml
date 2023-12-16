@@ -18,7 +18,7 @@
         <module>app/${rootArtifactId}-application</module>
         <module>app/${rootArtifactId}-domain</module>
         <module>app/${rootArtifactId}-types</module>
-        <module>gen/dalgen</module>
+        <module>gen/${rootArtifactId}-dalgen</module>
     </modules>
 
     <properties>

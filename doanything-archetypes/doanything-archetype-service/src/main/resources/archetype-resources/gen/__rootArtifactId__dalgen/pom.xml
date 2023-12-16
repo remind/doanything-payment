@@ -7,7 +7,7 @@
         <version>${revision}</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>dalgen</artifactId>
+    <artifactId>${rootArtifactId}-dalgen</artifactId>
 
     <dependencies>
         <dependency>

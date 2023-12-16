@@ -90,7 +90,7 @@
                 </fileSet>
             </fileSets>
         </module>
-        <module id="dalgen" dir="gen/dalgen" name="dalgen">
+        <module id="${rootArtifactId}-dalgen" dir="gen/${rootArtifactId}-dalgen" name="${rootArtifactId}-dalgen">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
