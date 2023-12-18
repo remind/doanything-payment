@@ -2,6 +2,7 @@ package cn.doanything.account.domain.utils;
 
 import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.account.types.enums.IODirection;
+import cn.doanything.commons.lang.types.Money;
 
 /**
  * @author wxj
@@ -17,5 +18,22 @@ public class AccountUtil {
      */
     public static IODirection convert(CrDr accountDirection, CrDr detailDirection) {
         return accountDirection == detailDirection ? IODirection.IN : IODirection.OUT;
+    }
+
+    /**
+     * 更新余额
+     * @param balance
+     * @param ioDirection
+     * @param amount
+     */
+    public static Money changeBalance(Money balance, IODirection ioDirection, Money amount) {
+        switch (ioDirection) {
+            case IN:
+                return balance.add(amount);
+            case OUT:
+                return balance.subtract(amount);
+            default:
+                throw new RuntimeException("出入方向错误");
+        }
     }
 }

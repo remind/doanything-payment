@@ -41,15 +41,16 @@ public abstract class Account extends Entity {
      */
     protected String currencyCode;
     /**
-     * 账户余额
-     */
-    protected Money balance = new Money(0);
-
-    /**
      * 获取帐户分类
      *
      * @return
      */
     public abstract AccountFamily getAccountFamily();
+
+    /**
+     * 获取余额
+     * @return
+     */
+    public abstract Money getBalance();
 
 }

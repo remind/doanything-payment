@@ -3,14 +3,16 @@ package cn.doanything.account.domain;
 import cn.doanything.account.types.enums.AccountAttribute;
 import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.commons.lang.types.Money;
+import lombok.Data;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wxj
  * 2023/12/16
  */
+@Data
 public class OuterAccount extends Account {
 
     /**
@@ -20,7 +22,7 @@ public class OuterAccount extends Account {
     /**
      * 可用余额
      */
-    private Money availableBalance = new Money(0);
+    private Money availableBalance = new Money();
     /**
      * 账户属性
      */
@@ -36,12 +38,26 @@ public class OuterAccount extends Account {
     private OuterAccountStatus status;
 
     /**
-     * 子账户信息
+     * 子账户，一个资金类型的只能有一个
      */
-    private Map<String, OuterSubAccount> subAccountMap = new HashMap<String, OuterSubAccount>();
+    private List<OuterSubAccount> outerSubAccounts = new ArrayList<>();
+
 
     @Override
     public AccountFamily getAccountFamily() {
         return AccountFamily.OUTER;
+    }
+
+    @Override
+    public Money getBalance() {
+        Money balance = new Money();
+        outerSubAccounts.forEach(outerSubAccount -> balance.addTo(outerSubAccount.getBalance()));
+        return balance;
+    }
+
+    public Money getAvailableBalance() {
+        Money balance = new Money();
+        outerSubAccounts.forEach(outerSubAccount -> balance.addTo(outerSubAccount.getAvailableBalance()));
+        return balance;
     }
 }

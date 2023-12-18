@@ -14,8 +14,8 @@ public interface AccountRepository {
 
     void reStore(Account account);
 
-    Account load(String memberId);
+    Account load(String accountNo);
 
-    Account lock(String memberId);
+    Account lock(String accountNo);
 
 }

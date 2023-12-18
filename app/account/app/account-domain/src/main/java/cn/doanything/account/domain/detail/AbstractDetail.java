@@ -43,10 +43,6 @@ public abstract class AbstractDetail extends Entity {
      */
     protected IODirection ioDirection;
     /**
-     * 资金属性
-     */
-    protected String accountingRule;
-    /**
      * 会计日
      **/
     private String accountingDate;

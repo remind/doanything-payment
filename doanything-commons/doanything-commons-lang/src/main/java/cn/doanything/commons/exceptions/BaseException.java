@@ -17,13 +17,13 @@ public class BaseException extends RuntimeException {
     public BaseException(ResultCode resultCode) {
         super(resultCode.getMessage());
         this.resultCode = resultCode;
-        this.message = null;
+        this.message = resultCode.getMessage();
     }
 
     public BaseException(ResultCode resultCode, String message) {
-        super(StringUtils.isBlank(message) ? message : resultCode.getCode());
+        super(StringUtils.isNotBlank(message) ? message : resultCode.getCode());
         this.resultCode = resultCode != null ? resultCode : BaseResultCode.FAIL;
-        this.message = StringUtils.isBlank(message) ? message : this.resultCode.getCode();
+        this.message = StringUtils.isNotBlank(message) ? message : this.resultCode.getCode();
     }
 
     public BaseException(String message) {

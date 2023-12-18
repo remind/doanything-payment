@@ -1,7 +1,7 @@
 package cn.doanything.account.infrastructure.persistence.mapper;
 
 import cn.doanything.account.infrastructure.persistence.dataobject.InnerAccountDO;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2023-12-16
+ * @since 2023-12-18
  */
-public interface InnerAccountMapper extends BaseMapper<InnerAccountDO> {
+public interface InnerAccountMapper extends ExtBaseMapper<InnerAccountDO> {
 
 }

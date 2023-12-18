@@ -4,6 +4,8 @@ import cn.doanything.account.types.enums.AccountAttribute;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author wxj
  * 2023/12/16
@@ -44,7 +46,16 @@ public class AccountDetail extends AbstractDetail {
      **/
     private Integer accountType;
     /**
+     * 资金类型
+     */
+    private String fundType;
+    /**
      * 账户属性
      **/
     private AccountAttribute accountAttribute;
+
+    /**
+     * 子户明细
+     */
+    private List<SubAccountDetail> subAccountDetails;
 }

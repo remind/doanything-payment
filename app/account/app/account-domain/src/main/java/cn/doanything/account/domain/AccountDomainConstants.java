@@ -16,4 +16,9 @@ public interface AccountDomainConstants {
      */
     int ACCOUNT_TITLE_LEVEL_MAX = 3;
 
+    /**
+     * 默认资金类型
+     */
+    String DEFAULT_FUND_TYPE="NORMAL";
+
 }
