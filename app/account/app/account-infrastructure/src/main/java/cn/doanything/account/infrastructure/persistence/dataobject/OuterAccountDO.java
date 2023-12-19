@@ -1,6 +1,5 @@
 package cn.doanything.account.infrastructure.persistence.dataobject;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,7 +20,6 @@ public class OuterAccountDO implements Serializable {
     /**
      * 账户号
      */
-    @TableId("account_no")
     private String accountNo;
 
     /**

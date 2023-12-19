@@ -40,7 +40,7 @@ public class OuterUpdateBalanceProcessor implements UpdateBalanceProcessor {
         try {
             account = accountRepository.lock(operationGroup.getAccountNo());
         } catch (Exception e) {
-            log.error("账户锁定异常,accountNo={}", operationGroup.getAccountNo());
+            log.error("账户锁定异常,accountNo=" + operationGroup.getAccountNo(), e);
             throw new BaseException(AccountResultCode.ACCOUNT_LOCK_TIME_OUT);
         }
         AssertUtil.isNotNull(account, AccountResultCode.ACCOUNT_ID_NOT_EXISTS);

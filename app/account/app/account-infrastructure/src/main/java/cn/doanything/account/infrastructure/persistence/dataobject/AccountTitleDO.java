@@ -1,6 +1,5 @@
 package cn.doanything.account.infrastructure.persistence.dataobject;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,7 +20,6 @@ public class AccountTitleDO implements Serializable {
     /**
      * 科目代码
      */
-    @TableId("title_code")
     private String titleCode;
 
     /**

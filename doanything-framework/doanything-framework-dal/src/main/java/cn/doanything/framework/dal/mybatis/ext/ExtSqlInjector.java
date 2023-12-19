@@ -16,6 +16,7 @@ public class ExtSqlInjector extends DefaultSqlInjector {
     public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
         List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
         methodList.add(new LockById());
+        methodList.add(new LockOne());
         return methodList;
     }
 }

@@ -8,6 +8,7 @@ import cn.doanything.account.infrastructure.persistence.dataobject.OuterAccountD
 import cn.doanything.account.infrastructure.persistence.dataobject.OuterSubAccountDO;
 import cn.doanything.account.infrastructure.persistence.mapper.OuterAccountMapper;
 import cn.doanything.account.infrastructure.persistence.mapper.OuterSubAccountMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -50,7 +51,8 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
     @Override
     public Account lock(String accountNo) {
         OuterAccount outerAccount = null;
-        OuterAccountDO outerAccountDO = outerAccountMapper.lockById(accountNo);
+        OuterAccountDO outerAccountDO = outerAccountMapper.lockOne(new LambdaQueryWrapper<OuterAccountDO>().eq(OuterAccountDO::getAccountNo, accountNo));
+//        OuterAccountDO outerAccountDO = outerAccountMapper.lockOne(new LambdaQueryWrapper<OuterAccountDO>().eq(OuterAccountDO::getMemberId, "100000000"));
         if (outerAccountDO != null) {
             List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountMapper.selectList(Wrappers.lambdaQuery(OuterSubAccountDO.class)
                     .eq(OuterSubAccountDO::getAccountNo, outerAccountDO.getAccountNo()));

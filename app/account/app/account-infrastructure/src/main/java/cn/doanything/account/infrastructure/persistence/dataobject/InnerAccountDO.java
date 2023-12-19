@@ -1,6 +1,5 @@
 package cn.doanything.account.infrastructure.persistence.dataobject;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,7 +21,6 @@ public class InnerAccountDO implements Serializable {
     /**
      * 账户号
      */
-    @TableId("account_no")
     private String accountNo;
 
     /**
