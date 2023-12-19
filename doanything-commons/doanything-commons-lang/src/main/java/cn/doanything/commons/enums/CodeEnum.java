@@ -9,13 +9,12 @@ public interface CodeEnum {
     /**
      * 获取编码
      *
-     * @return
+     * @return 
      */
     String code();
 
     /**
      * 获取名称
-     *
      * @return
      */
     String displayName();

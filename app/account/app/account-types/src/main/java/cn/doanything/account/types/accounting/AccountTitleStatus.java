@@ -31,12 +31,12 @@ public enum AccountTitleStatus implements CodeEnum {
      * 通过枚举code获得枚举
      *
      * @param code
-     * @return AccountType
+     * @return AccountTitleStatus
      */
     public static AccountTitleStatus getByCode(String code) {
-        for (AccountTitleStatus accountTitleStatus : values()) {
-            if (accountTitleStatus.code.equals(code)) {
-                return accountTitleStatus;
+        for (AccountTitleStatus enumObject : values()) {
+            if (enumObject.code.equals(code)) {
+                return enumObject;
             }
         }
         return null;

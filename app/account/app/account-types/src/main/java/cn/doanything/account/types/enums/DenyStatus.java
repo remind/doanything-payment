@@ -3,6 +3,7 @@ package cn.doanything.account.types.enums;
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
+ * 禁止状态
  * @author wxj
  * 2023/12/16
  */
@@ -31,9 +32,9 @@ public enum DenyStatus implements CodeEnum {
      * @return
      */
     public static DenyStatus getByCode(String code) {
-        for (DenyStatus c : DenyStatus.values()) {
-            if (c.code().equals(code)) {
-                return c;
+        for (DenyStatus enumObject : DenyStatus.values()) {
+            if (enumObject.code().equals(code)) {
+                return enumObject;
             }
         }
 

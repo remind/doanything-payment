@@ -3,6 +3,7 @@ package cn.doanything.account.types.enums;
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
+ * 账户分类
  * @author wxj
  * 2023/12/16
  */
@@ -29,12 +30,12 @@ public enum AccountFamily  implements CodeEnum {
     /**
      * 根据代码获取枚举
      * @param code
-     * @return
+     * @return AccountFamily
      */
     public static AccountFamily getByCode(String code) {
-        for (AccountFamily family : AccountFamily.values()) {
-            if (family.code().equals(code)) {
-                return family;
+        for (AccountFamily enumObject : AccountFamily.values()) {
+            if (enumObject.code().equals(code)) {
+                return enumObject;
             }
         }
 

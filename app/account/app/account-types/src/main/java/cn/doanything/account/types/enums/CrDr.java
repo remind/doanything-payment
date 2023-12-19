@@ -3,11 +3,11 @@ package cn.doanything.account.types.enums;
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
+ * 借贷方向
  * @author wxj
  * 2023/12/16
  */
 public enum CrDr implements CodeEnum {
-
 
     DEBIT("1", "借方"),
 

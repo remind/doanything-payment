@@ -7,7 +7,7 @@ import lombok.Data;
  * 2023/12/17
  */
 @Data
-public class SubAccountDetail extends AbstractDetail {
+public class OuterSubAccountDetail extends AccountDetail {
 
     /**
      * 资金类型

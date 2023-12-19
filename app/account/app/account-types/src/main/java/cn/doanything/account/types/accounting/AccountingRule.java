@@ -1,21 +1,19 @@
-package cn.doanything.account.types.enums;
+package cn.doanything.account.types.accounting;
 
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
- * 外部账户类型
+ * 入账规则
  * @author wxj
- * 2023/12/16
+ * 2023/12/19
  */
-public enum AccountAttribute implements CodeEnum {
-
-    PERSONAL("1", "对私"),
-    COMPANY("2", "对公");
-
+public enum AccountingRule implements CodeEnum {
+    ;
     private final String code;
     private final String displayName;
 
-    AccountAttribute(String code, String displayName) {
+
+    AccountingRule(String code, String displayName) {
         this.code = code;
         this.displayName = displayName;
 
@@ -30,15 +28,16 @@ public enum AccountAttribute implements CodeEnum {
     public String displayName() {
         return displayName;
     }
+
     /**
      * 通过枚举code获得枚举
      *
      * @param code
-     * @return AccountAttribute
+     * @return AccountingRule
      */
-    public static AccountAttribute getByCode(String code) {
-        for (AccountAttribute enumObject : values()) {
-            if (enumObject.code().equals(code)) {
+    public static AccountingRule getByCode(String code) {
+        for (AccountingRule enumObject : values()) {
+            if (enumObject.code.equals(code)) {
                 return enumObject;
             }
         }

@@ -2,6 +2,10 @@ package cn.doanything.account.types.accounting;
 
 import cn.doanything.commons.enums.CodeEnum;
 
+
+/**
+ *
+ */
 public enum AccountTitleType implements CodeEnum {
     Assets("1","资产类"),
     Liabilities("2","负债类"),
@@ -36,9 +40,9 @@ public enum AccountTitleType implements CodeEnum {
      * @return AccountType
      */
     public static AccountTitleType getByCode(String code) {
-        for (AccountTitleType accountTitleType : values()) {
-            if (accountTitleType.code.equals(code)) {
-                return accountTitleType;
+        for (AccountTitleType enumObject : values()) {
+            if (enumObject.code.equals(code)) {
+                return enumObject;
             }
         }
 

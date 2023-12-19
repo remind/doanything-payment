@@ -55,6 +55,41 @@ create table `t_dpm_inner_account_detail` (
   key `idx_diad_txn_time` (`txn_time`)
 ) engine=innodb auto_increment=2025782 default charset=utf8 comment='内部账户余额明细';
 
+create table `t_dpm_outer_account_detail` (
+  `txn_seq_no` bigint(28) not null auto_increment comment '主键(自增处理)',
+  `sys_trace_no` varchar(32) default null comment '系统跟踪号',
+  `accounting_date` varchar(8) default null comment '会计日',
+  `txn_time` timestamp(3) not null default current_timestamp(3) on update current_timestamp(3) comment '入账时间',
+  `account_no` varchar(32) default null comment '账户号',
+  `txn_type` decimal(1,0) default null comment '0:正常 1:红字 2:蓝字 9:抹帐',
+  `txn_dscpt` varchar(256) default null comment '摘要',
+  `change_type` decimal(1,0) default null comment '1: 借贷 2: 冻结解冻',
+  `direction` decimal(1,0) default null comment '1:加(收入) 2:减(支出)',
+  `frozen_flag` varchar(1) default null comment '1:冻结 2:解冻',
+  `txn_amt` decimal(19,4) default null comment '交易金额',
+  `before_amt` decimal(19,4) default null comment '交易前余额',
+  `after_amt` decimal(19,4) default null comment '交易后余额',
+  `entry_seq_no` varchar(32) default null comment '分录号',
+  `other_account_no` varchar(32) default null comment '关联账户号',
+  `old_txn_seq_no` varchar(32) default null comment '原始明细流水号',
+  `remark` varchar(256) default null comment '备注',
+  `crdr` decimal(1,0) default null comment '借贷标志 1借2贷',
+  `product_code` varchar(12) default null comment 'pe产品编码',
+  `pay_code` varchar(12) default null comment 'pe支付编码',
+  `operation_type` decimal(1,0) default null comment '操作类型：1 正常交易，2 冻结资金，3 解冻资金',
+  `delete_sign` decimal(1,0) default null comment '删除标记(冲正用)',
+  `suite_no` varchar(32) default null comment '套号',
+  `context_voucher_no` varchar(32) default null comment '关联结算流水号',
+  `accounting_rule` varchar(16) default null comment '入账规则 0.先贷后借(默认) 1.借记 2.贷记 3.冻结',
+  `transaction_no` varchar(32) default null comment '事务号',
+  `voucher_no` varchar(50) default null comment '凭证号',
+  primary key (`txn_seq_no`),
+  unique key `uidx_oad_vo` (`voucher_no`),
+  key `idx_doad_an` (`account_no`),
+  key `idx_doad_stn` (`sys_trace_no`),
+  key `idx_doa_an_tt` (`account_no`,`txn_time`),
+  key `idx_doa_tt` (`txn_time`)
+) engine=innodb auto_increment=1678513 default charset=utf8 comment='外部户账户明细表';
 
 create table `t_dpm_outer_account_sub_detail` (
   `account_subset_log_id` bigint(32) unsigned not null auto_increment comment '分户账户余额明细',

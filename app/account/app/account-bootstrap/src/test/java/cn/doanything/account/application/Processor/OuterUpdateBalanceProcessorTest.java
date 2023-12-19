@@ -3,7 +3,7 @@ package cn.doanything.account.application.Processor;
 import cn.doanything.account.application.processor.AccountOperationGroup;
 import cn.doanything.account.application.processor.UpdateBalanceProcessor;
 import cn.doanything.account.application.processor.impl.OuterUpdateBalanceProcessor;
-import cn.doanything.account.domain.detail.AccountDetail;
+import cn.doanything.account.domain.detail.OuterAccountDetail;
 import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +26,8 @@ public class OuterUpdateBalanceProcessorTest {
         String accountNo = "200100200110000000000001";
         AccountOperationGroup operationGroup = new AccountOperationGroup();
         operationGroup.setAccountNo(accountNo);
-        AccountDetail accountDetail = new AccountDetail();
-        accountDetail.setSeqNo(123l);
-        operationGroup.getDetails().add(accountDetail);
+        OuterAccountDetail outerAccountDetail = new OuterAccountDetail();
+        operationGroup.getDetails().add(outerAccountDetail);
         updateBalanceProcessor.update(operationGroup);
     }
 }

@@ -3,6 +3,7 @@ package cn.doanything.account.types.enums;
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
+ * 账户实际余额方向
  * @author wxj
  * 2023/12/16
  */
@@ -28,9 +29,9 @@ public enum IODirection implements CodeEnum {
      * @return
      */
     public static IODirection getByCode(String code) {
-        for (IODirection ioDirection : IODirection.values()) {
-            if (ioDirection.code().equals(code)) {
-                return ioDirection;
+        for (IODirection enumObject : IODirection.values()) {
+            if (enumObject.code().equals(code)) {
+                return enumObject;
             }
         }
 

@@ -36,12 +36,12 @@ public enum AccountTitleRange implements CodeEnum {
      * 通过枚举code获得枚举
      *
      * @param code
-     * @return AccountType
+     * @return AccountTitleRange
      */
     public static AccountTitleRange getByCode(String code) {
-        for (AccountTitleRange accountTitleRange : values()) {
-            if (accountTitleRange.code.equals(code)) {
-                return accountTitleRange;
+        for (AccountTitleRange enumObject : values()) {
+            if (enumObject.code.equals(code)) {
+                return enumObject;
             }
         }
         return null;

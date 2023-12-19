@@ -3,6 +3,7 @@ package cn.doanything.account.types.enums;
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
+ * 激活状态
  * @author wxj
  * 2023/12/16
  */
@@ -24,12 +25,12 @@ public enum ActivateStatus implements CodeEnum {
      * 根据代码获取枚举
      *
      * @param code
-     * @return
+     * @return ActivateStatus
      */
     public static ActivateStatus getByCode(String code) {
-        for (ActivateStatus c : ActivateStatus.values()) {
-            if (c.code().equals(code)) {
-                return c;
+        for (ActivateStatus enumObject : ActivateStatus.values()) {
+            if (enumObject.code().equals(code)) {
+                return enumObject;
             }
         }
 

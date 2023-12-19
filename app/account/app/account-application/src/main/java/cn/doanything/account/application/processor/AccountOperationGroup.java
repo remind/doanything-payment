@@ -1,6 +1,6 @@
 package cn.doanything.account.application.processor;
 
-import cn.doanything.account.domain.detail.AccountDetail;
+import cn.doanything.account.domain.detail.OuterAccountDetail;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class AccountOperationGroup implements Comparable<AccountOperationGroup> 
     /**
      * 账户余额明细
      */
-    private List<AccountDetail> details = new ArrayList<>();
+    private List<OuterAccountDetail> details = new ArrayList<>();
 
     @Override
     public int compareTo(AccountOperationGroup accountOperationGroup) {

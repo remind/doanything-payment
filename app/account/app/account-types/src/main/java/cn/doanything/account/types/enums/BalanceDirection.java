@@ -3,6 +3,7 @@ package cn.doanything.account.types.enums;
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
+ * 余额方向
  * @author wxj
  * 2023/12/16
  */
@@ -26,12 +27,12 @@ public enum BalanceDirection implements CodeEnum {
      * 根据code获取枚举
      *
      * @param code
-     * @return
+     * @return BalanceDirection
      */
     public static BalanceDirection getByCode(String code) {
-        for (BalanceDirection direction : BalanceDirection.values()) {
-            if (direction.code().equals(code)) {
-                return direction;
+        for (BalanceDirection enumObject : BalanceDirection.values()) {
+            if (enumObject.code().equals(code)) {
+                return enumObject;
             }
         }
         return null;
