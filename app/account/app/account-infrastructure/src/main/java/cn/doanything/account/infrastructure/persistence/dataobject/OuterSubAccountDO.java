@@ -1,6 +1,5 @@
 package cn.doanything.account.infrastructure.persistence.dataobject;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-18
+ * @since 2023-12-19
  */
 @TableName("ta_outer_sub_account")
 public class OuterSubAccountDO implements Serializable {
@@ -22,13 +21,11 @@ public class OuterSubAccountDO implements Serializable {
     /**
      * 账户号
      */
-    @TableId("account_no")
     private String accountNo;
 
     /**
      * 资金类型
      */
-    @TableId("fund_type")
     private String fundType;
 
     /**
@@ -40,6 +37,11 @@ public class OuterSubAccountDO implements Serializable {
      * 可用余额
      */
     private BigDecimal availableBalance;
+
+    /**
+     * 币种代码
+     */
+    private String currencyCode;
 
     /**
      * 备注
@@ -88,6 +90,14 @@ public class OuterSubAccountDO implements Serializable {
         this.availableBalance = availableBalance;
     }
 
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
     public String getMemo() {
         return memo;
     }
@@ -119,6 +129,7 @@ public class OuterSubAccountDO implements Serializable {
         ", fundType = " + fundType +
         ", balance = " + balance +
         ", availableBalance = " + availableBalance +
+        ", currencyCode = " + currencyCode +
         ", memo = " + memo +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +

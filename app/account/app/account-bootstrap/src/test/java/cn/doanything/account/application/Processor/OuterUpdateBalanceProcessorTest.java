@@ -23,7 +23,7 @@ public class OuterUpdateBalanceProcessorTest {
 
     @Test
     public void updateSuccess() {
-        String accountNo = "10000";
+        String accountNo = "200100200110000000000001";
         AccountOperationGroup operationGroup = new AccountOperationGroup();
         operationGroup.setAccountNo(accountNo);
         AccountDetail accountDetail = new AccountDetail();

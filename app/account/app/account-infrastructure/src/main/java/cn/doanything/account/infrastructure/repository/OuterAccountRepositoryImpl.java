@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * 账户仓储实现
+ *
  * @author wxj
  * 2023/12/16
  */
@@ -53,10 +54,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
         if (outerAccountDO != null) {
             List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountMapper.selectList(Wrappers.lambdaQuery(OuterSubAccountDO.class)
                     .eq(OuterSubAccountDO::getAccountNo, outerAccountDO.getAccountNo()));
-
-
-            outerAccount = dalConvertor.toEntity(outerAccountDO);
-
+            outerAccount = dalConvertor.toEntity(outerAccountDO, outerSubAccountDOS);
         }
         return outerAccount;
     }

@@ -9,7 +9,7 @@ import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2023-12-18
+ * @since 2023-12-19
  */
 public interface AccountTitleMapper extends ExtBaseMapper<AccountTitleDO> {
 

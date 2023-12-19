@@ -1,5 +1,6 @@
 package cn.doanything.commons.lang.types;
 
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -8,13 +9,13 @@ import java.text.NumberFormat;
 import java.util.Currency;
 
 /**
- * 金额类型，仅支持人民币
- * 币种：CNY
- * 舍入法：四舍五入
- *
- * 持续可考虑多币种、多舍入法支持
+ * 币种：默认CNY
+ * 舍入法：默认四舍五入
+ * 分的转换涉及外币待测试
+ * <p>
  * 开源参考：
  * https://github.com/JodaOrg/joda-money 比较重，对于单一币种没必要
+ *
  * @author remind
  * @version Money.java, v 0.1 2021年08月23日 8:45 下午 remind
  */
@@ -23,9 +24,9 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
     private static final long serialVersionUID = -4299855586085442979L;
 
     /**
-     * 默认币种符号
+     * 默认币种
      */
-    public static final String DEFAULT_CURRENCY_SYMBOL = new String(new char[] { 0xffe5 });
+    public static final CurrencyEnum DEFAULT_CURRENCY = CurrencyEnum.CNY;
 
     /**
      * 默认舍入法
@@ -40,7 +41,12 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
     /**
      * 币种,人民币
      */
-    private static final Currency currency = Currency.getInstance("CNY");
+    private final Currency currency;
+
+    /**
+     * 精度
+     */
+    private final RoundingMode roundingMode;
 
     /**
      * 默认为0元的金额
@@ -51,7 +57,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 指定元的人民币金额
-     * @param amount	金额
+     *
+     * @param amount 金额
      */
     public Money(String amount) {
         this(new BigDecimal(amount));
@@ -59,7 +66,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 指定元的人民币金额
-     * @param amount	金额
+     *
+     * @param amount 金额
      */
     public Money(double amount) {
         this(new BigDecimal(amount));
@@ -67,32 +75,55 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 指定元的人民币金额
-     * @param amount	金额
+     *
+     * @param amount 金额
      */
     public Money(BigDecimal amount) {
+        this(amount, null, null);
+    }
+
+    /**
+     *
+     * @param amount
+     * @param currencyCode
+     */
+    public Money(BigDecimal amount, String currencyCode) {
+        this(amount, Currency.getInstance(currencyCode), null);
+    }
+    public Money(BigDecimal amount, Currency currency) {
+        this(amount, currency, null);
+    }
+
+    public Money(BigDecimal amount, Currency currency, RoundingMode roundingMode) {
+        this.currency = currency == null ? Currency.getInstance(DEFAULT_CURRENCY.getCode()) : currency;
+        this.roundingMode = roundingMode == null ? DEFAULT_ROUNDING_MODE : roundingMode;
         setAmount(amount);
     }
 
     /**
      * 获取金额
+     *
      * @return 金额
      */
     public BigDecimal getAmount() {
         return this.amount;
     }
 
+
     /**
      * 设置货币
-     * @param amount	金额
+     *
+     * @param amount 金额
      */
     private void setAmount(BigDecimal amount) {
         if (amount != null)
-            this.amount = amount.setScale(this.currency.getDefaultFractionDigits(), DEFAULT_ROUNDING_MODE);
+            this.amount = amount.setScale(this.currency.getDefaultFractionDigits(), this.roundingMode);
     }
 
     /**
      * 获取分
-     * @return	分
+     *
+     * @return 分
      */
     public long getCent() {
         return this.amount.multiply(getCentFactor()).longValue();
@@ -100,7 +131,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 获取币种
-     * @return	币种
+     *
+     * @return 币种
      */
     public Currency getCurrency() {
         return this.currency;
@@ -108,6 +140,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 换算成分的换算值
+     *
      * @return
      */
     public BigDecimal getCentFactor() {
@@ -116,7 +149,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 是否大于指定金额
-     * @param other	对手金额
+     *
+     * @param other 对手金额
      * @return
      */
     public boolean greaterThan(Money other) {
@@ -125,7 +159,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 是否小于指定金额
-     * @param other	对手金额
+     *
+     * @param other 对手金额
      * @return
      */
     public boolean lessThan(Money other) {
@@ -134,7 +169,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 加上指定金额，返回一个新对象
-     * @param other	指定金额
+     *
+     * @param other 指定金额
      * @return
      */
     public Money add(Money other) {
@@ -143,7 +179,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 加上指定金额，返回原有对象
-     * @param other	指定金额
+     *
+     * @param other 指定金额
      * @return
      */
     public Money addTo(Money other) {
@@ -153,6 +190,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 减指定金额，返回一个新对象
+     *
      * @param other
      * @return
      */
@@ -162,6 +200,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 减指定金额，返回原有对象
+     *
      * @param other
      * @return
      */
@@ -172,6 +211,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额乘以指定数字，并返回新对象
+     *
      * @param val
      * @return
      */
@@ -181,6 +221,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额乘以指定数字，并返回原有对象
+     *
      * @param val
      * @return
      */
@@ -190,6 +231,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额乘以指定数字，并返回新对象
+     *
      * @param val
      * @return
      */
@@ -199,6 +241,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额乘以指定数字，并返回原有对象
+     *
      * @param val
      * @return
      */
@@ -208,6 +251,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额乘以指定数字，并返回新对象
+     *
      * @param val
      * @return
      */
@@ -217,6 +261,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额乘以指定数字，并返回原有对象
+     *
      * @param val
      * @return
      */
@@ -227,6 +272,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额除以指定数字，并返回新对象
+     *
      * @param val
      * @return
      */
@@ -236,6 +282,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额除以指定数字，并返回原对象
+     *
      * @param val
      * @return
      */
@@ -245,6 +292,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额除以指定数字，并返回新对象
+     *
      * @param val
      * @return
      */
@@ -254,6 +302,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 金额除以指定数字，并返回原对象
+     *
      * @param val
      * @return
      */
@@ -264,7 +313,8 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 将金额分成指定份数，如12.77分成3份分别为：4.26、4.26、4.25
-     * @param targets	分配份数
+     *
+     * @param targets 分配份数
      * @return
      */
     public Money[] allocate(int targets) {
@@ -285,6 +335,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 将金额按指定比率进行分配，如12.77按[1,2]分配，分配结果为[4.26,8.51]
+     *
      * @param ratios 分配比率
      * @return
      */
@@ -309,6 +360,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 带币种code格式化的金额字符串，如：CNY123,456.78
+     *
      * @return
      */
     public String formatWithCode() {
@@ -320,6 +372,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 格式化后的金额字符串，如：123,456.78
+     *
      * @return
      */
     public String format() {
@@ -329,16 +382,18 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 带符号格式化后的金额，如：￥123,456.78
+     *
      * @return
      */
     public String formatWithSymbols() {
-        NumberFormat nf = new DecimalFormat(DEFAULT_CURRENCY_SYMBOL + getNumberFormatPattern());
+        NumberFormat nf = new DecimalFormat(this.currency.getSymbol() + getNumberFormatPattern());
         nf.setCurrency(this.currency);
         return nf.format(this.amount);
     }
 
     /**
      * 格式化串
+     *
      * @return
      */
     private String getNumberFormatPattern() {
@@ -379,6 +434,7 @@ public class Money implements Serializable, Comparable<Money>, Cloneable {
 
     /**
      * 是否等于
+     *
      * @param other
      * @return
      */

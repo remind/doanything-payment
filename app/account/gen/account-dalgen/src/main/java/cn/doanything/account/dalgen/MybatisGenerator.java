@@ -56,7 +56,7 @@ public class MybatisGenerator {
                             .addTablePrefix(config.getArray("db.table.prefix"))
                             .mapperBuilder().enableFileOverride()//.enableBaseResultMap().enableBaseColumnList()
                             .superClass(ExtBaseMapper.class)
-                            .entityBuilder().formatFileName("%sDO").enableFileOverride();
+                            .entityBuilder().formatFileName("%sDO").enableFileOverride().addIgnoreColumns("auto_id");
                 })
 
                 .templateEngine(new VelocityTemplateEngine())

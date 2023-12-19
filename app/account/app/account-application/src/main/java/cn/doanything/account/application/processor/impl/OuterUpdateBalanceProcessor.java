@@ -68,13 +68,8 @@ public class OuterUpdateBalanceProcessor implements UpdateBalanceProcessor {
      * @return
      */
     private List<SubAccountDetail> buildSubAccountDetail(OuterAccount outerAccount, AccountDetail accountDetail) {
-        OuterSubAccount outerSubAccount;
-        Map<String, OuterSubAccount> subAccountMap = outerAccount.getSubAccountMap();
-        if (StringUtils.isNotBlank(accountDetail.getFundType())) {
-            outerSubAccount = subAccountMap.get(accountDetail.getFundType());
-        } else {
-            outerSubAccount = subAccountMap.get(AccountDomainConstants.DEFAULT_FUND_TYPE);
-        }
+        String fundType = StringUtils.isNotBlank(accountDetail.getFundType()) ? accountDetail.getFundType() : AccountDomainConstants.DEFAULT_FUND_TYPE;
+        OuterSubAccount outerSubAccount = outerAccount.getSubAccountByFundType(fundType);
         AssertUtil.isNotNull(outerSubAccount, AccountResultCode.SUB_ACCOUNT_NOT_EXISTS);
         return Lists.newArrayList(composeSubAccountDetail(outerAccount, accountDetail, outerSubAccount));
     }

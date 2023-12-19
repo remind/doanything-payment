@@ -60,4 +60,15 @@ public class OuterAccount extends Account {
         outerSubAccounts.forEach(outerSubAccount -> balance.addTo(outerSubAccount.getAvailableBalance()));
         return balance;
     }
+
+    /**
+     * 根据资金类型获取子账户
+     * @param fundType
+     * @return
+     */
+    public OuterSubAccount getSubAccountByFundType(String fundType) {
+        return outerSubAccounts.stream().filter(outerSubAccount ->
+                outerSubAccount.getFundType().equals(fundType)
+        ).findFirst().orElse(null);
+    }
 }
