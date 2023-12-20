@@ -10,7 +10,7 @@ import lombok.Data;
  * 2023/12/20
  */
 @Data
-public class AccountingDetail {
+public class AccountingRequestDetail {
 
     /**
      * 凭证号

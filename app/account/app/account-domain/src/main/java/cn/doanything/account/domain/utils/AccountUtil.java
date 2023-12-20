@@ -1,8 +1,10 @@
 package cn.doanything.account.domain.utils;
 
+import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.types.Money;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author wxj
@@ -12,6 +14,7 @@ public class AccountUtil {
 
     /**
      * 根据账户方向和明细方向计算加减方向
+     *
      * @param accountDirection
      * @param detailDirection
      * @return
@@ -22,6 +25,7 @@ public class AccountUtil {
 
     /**
      * 更新余额
+     *
      * @param balance
      * @param ioDirection
      * @param amount
@@ -36,4 +40,22 @@ public class AccountUtil {
                 throw new RuntimeException("出入方向错误");
         }
     }
+
+    /**
+     * 识别账户类型
+     *
+     * @param accountNo
+     * @return
+     */
+    public static AccountFamily getAccountFamily(String accountNo) {
+        if (StringUtils.isNotBlank(accountNo)) {
+            if (accountNo.length() == 24) {
+                return AccountFamily.OUTER;
+            } else if (accountNo.length() == 14) {
+                return AccountFamily.INNER;
+            }
+        }
+        return null;
+    }
+
 }
