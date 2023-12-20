@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 
 /**
  * @author wxj
@@ -23,7 +24,7 @@ public interface OuterSubAccountDalConvertor  {
     OuterSubAccount toEntity(OuterSubAccountDO outerSubAccountDO);
 
     default Money toMoney(BigDecimal amount, String currencyCode) {
-        return new Money(amount, currencyCode);
+        return new Money(amount, Currency.getInstance(currencyCode));
     }
 
 }

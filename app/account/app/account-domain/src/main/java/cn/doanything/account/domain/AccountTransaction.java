@@ -4,18 +4,18 @@ import cn.doanything.commons.lang.Entity;
 import lombok.Data;
 
 /**
- * 入账请求明细
+ * 入账事务
  *
  * @author wxj
  * 2023/12/19
  */
 @Data
-public class AccountingRequest extends Entity {
+public class AccountTransaction extends Entity {
 
     /**
      * 入账请求流水号，唯一，一般由支付按统一规则生成
      */
-    private String request_no;
+    private String requestNo;
 
     /**
      * 会计日
