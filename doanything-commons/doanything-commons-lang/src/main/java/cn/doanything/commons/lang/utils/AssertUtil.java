@@ -9,7 +9,7 @@ import cn.doanything.commons.response.ResultCode;
  */
 public class AssertUtil {
 
-    private static void isTrue(boolean expression, ResultCode resultCode, String message) {
+    public static void isTrue(boolean expression, ResultCode resultCode, String message) {
         if (!expression) {
             throw new BaseException(resultCode, message);
         }
@@ -27,10 +27,14 @@ public class AssertUtil {
     }
 
     public static void isNotNull(Object object, ResultCode resultCode) {
-        isTrue(object != null, resultCode, null);
+        isNotNull(object, resultCode, null);
     }
 
     public static void isNotNull(Object object, String message) {
-        isTrue(object != null, null, message);
+        isNotNull(object, null, message);
+    }
+
+    public static void isNotNull(Object object, ResultCode resultCode, String message) {
+        isTrue(object != null, resultCode, message);
     }
 }

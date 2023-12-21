@@ -10,12 +10,17 @@ import lombok.Data;
  * 2023/12/20
  */
 @Data
-public class AccountingRequestDetail {
+public class EntryDetail {
 
     /**
      * 凭证号
      **/
     private String voucherNo;
+
+    /**
+     * 套号，同一套号内借贷平衡
+     */
+    private String suiteNo;
 
     /**
      * 账户号

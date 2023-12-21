@@ -5,6 +5,7 @@ import cn.doanything.account.types.accounting.AccountTitleStatus;
 import cn.doanything.account.types.accounting.AccountTitleType;
 import cn.doanything.account.types.enums.AccountAttribute;
 import cn.doanything.account.types.enums.BalanceDirection;
+import cn.doanything.account.types.enums.CrDr;
 import org.mapstruct.Mapper;
 
 /**
@@ -52,6 +53,14 @@ public interface EnumsConvertor {
 
     default String toAccountAttributeCode(AccountAttribute accountAttribute) {
         return accountAttribute == null ? null : accountAttribute.code();
+    }
+
+    default CrDr toCrDr(String crDrCode) {
+        return CrDr.getByCode(crDrCode);
+    }
+
+    default String toCrDrCode(CrDr crDr) {
+        return crDr == null ? null : crDr.code();
     }
 
 }

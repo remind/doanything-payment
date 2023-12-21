@@ -51,22 +51,13 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
         accountDetails.forEach(accountDetail -> {
             OuterAccountDetail outerAccountDetail = (OuterAccountDetail) accountDetail;
             outerAccountDetail.setIoDirection(AccountUtil.convert(account.getCurrentBalanceDirection()
-                    , outerAccountDetail.getCrdr()));
+                    , outerAccountDetail.getCrDr()));
             outerAccountDetail.setBeforeBalance(account.getBalance());
             outerAccountDetail.setOuterSubAccountDetails(buildSubAccountDetail((OuterAccount) account, outerAccountDetail));
-            updateSubAccountBalance((OuterAccount) account, outerAccountDetail.getOuterSubAccountDetails());
             outerAccountDetail.setAfterBalance(account.getBalance());
         });
 
         accountDetailRepository.store(accountDetails);
-    }
-
-    private void updateSubAccountBalance(OuterAccount outerAccount, List<OuterSubAccountDetail> outerSubAccountDetails) {
-        outerSubAccountDetails.forEach(outerSubAccountDetail -> {
-            AccountUtil.changeBalance(outerAccount.getAvailableBalance(), outerSubAccountDetail.getIoDirection(), outerSubAccountDetail.getAmount());
-            AccountUtil.changeBalance(outerAccount.getBalance(), outerSubAccountDetail.getIoDirection(), outerSubAccountDetail.getAmount());
-            outerSubAccountDetail.setAfterBalance(outerAccount.getBalance());
-        });
     }
 
     /**
@@ -80,17 +71,29 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
         String fundType = StringUtils.isNotBlank(outerAccountDetail.getFundType()) ? outerAccountDetail.getFundType() : AccountDomainConstants.DEFAULT_FUND_TYPE;
         OuterSubAccount outerSubAccount = outerAccount.getSubAccountByFundType(fundType);
         AssertUtil.isNotNull(outerSubAccount, AccountResultCode.SUB_ACCOUNT_NOT_EXISTS);
-        return Lists.newArrayList(composeSubAccountDetail(outerAccount, outerAccountDetail, outerSubAccount));
+        List<OuterSubAccountDetail> outerSubAccountDetails = Lists.newArrayList(composeSubAccountDetail(outerAccount, outerAccountDetail, outerSubAccount));
+        updateSubAccountBalance(outerSubAccount, outerSubAccountDetails);
+        return outerSubAccountDetails;
+    }
+
+    private void updateSubAccountBalance(OuterSubAccount outerSubAccount, List<OuterSubAccountDetail> outerSubAccountDetails) {
+        outerSubAccountDetails.forEach(outerSubAccountDetail -> {
+            outerSubAccount.updateAvailableBalance(outerSubAccountDetail.getIoDirection(), outerSubAccountDetail.getAmount());
+            outerSubAccountDetail.setAfterBalance(outerSubAccount.getBalance());
+        });
     }
 
     private OuterSubAccountDetail composeSubAccountDetail(OuterAccount outerAccount, OuterAccountDetail outerAccountDetail, OuterSubAccount outerSubAccount) {
         OuterSubAccountDetail subDetail = new OuterSubAccountDetail();
+        subDetail.setRequestNo(outerAccountDetail.getRequestNo());
         subDetail.setVoucherNo(outerAccountDetail.getVoucherNo());
         subDetail.setAccountNo(outerAccountDetail.getAccountNo());
-        subDetail.setIoDirection(AccountUtil.convert(outerAccount.getCurrentBalanceDirection(), outerAccountDetail.getCrdr()));
-        subDetail.setCrdr(outerAccountDetail.getCrdr());
+        subDetail.setIoDirection(AccountUtil.convert(outerAccount.getCurrentBalanceDirection(), outerAccountDetail.getCrDr()));
+        subDetail.setCrdr(outerAccountDetail.getCrDr());
+        subDetail.setBeforeBalance(outerSubAccount.getBalance());
         subDetail.setAmount(outerAccountDetail.getAmount());
         subDetail.setFundType(outerSubAccount.getFundType());
+        subDetail.setAccountingDate(outerAccountDetail.getAccountingDate());
         subDetail.setMemo(outerAccountDetail.getMemo());
         return subDetail;
     }

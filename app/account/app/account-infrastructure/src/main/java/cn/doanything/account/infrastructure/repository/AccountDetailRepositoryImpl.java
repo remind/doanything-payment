@@ -15,5 +15,6 @@ public class AccountDetailRepositoryImpl implements AccountDetailRepository {
     @Override
     public void store(List<AccountDetail> accountDetails) {
 
+        System.out.println("12");
     }
 }

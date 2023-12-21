@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-19
+ * @since 2023-12-21
  */
 @TableName("ta_account_title")
 public class AccountTitleDO implements Serializable {

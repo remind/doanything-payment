@@ -12,32 +12,20 @@ public class BaseException extends RuntimeException {
 
     private final ResultCode resultCode;
 
-    private final String message;
-
     public BaseException(ResultCode resultCode) {
-        super(resultCode.getMessage());
-        this.resultCode = resultCode;
-        this.message = resultCode.getMessage();
+        this(resultCode, null);
+    }
+    public BaseException(String message) {
+        this(null, message);
     }
 
     public BaseException(ResultCode resultCode, String message) {
-        super(StringUtils.isNotBlank(message) ? message : resultCode.getCode());
+        super(StringUtils.isNotBlank(message) ? message : resultCode.getMessage());
         this.resultCode = resultCode != null ? resultCode : BaseResultCode.FAIL;
-        this.message = StringUtils.isNotBlank(message) ? message : this.resultCode.getCode();
-    }
-
-    public BaseException(String message) {
-        super(message);
-        this.resultCode = null;
-        this.message = message;
     }
 
     public ResultCode getResultCode() {
         return resultCode;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
 }

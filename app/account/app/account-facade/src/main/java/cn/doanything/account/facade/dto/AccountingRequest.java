@@ -25,6 +25,6 @@ public class AccountingRequest {
     /**
      * 明细明细
      */
-    private List<AccountingRequestDetail> accountingRequestDetails;
+    private List<EntryDetail> entryDetails;
 
 }

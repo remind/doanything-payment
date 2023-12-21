@@ -30,7 +30,6 @@ public class AccountEntryServiceImpl implements AccountEntryService {
     @Autowired
     private AccountTransactionRepository accountTransactionRepository;
 
-
     @Override
     public void process(AccountingRequest request) {
         EntryContext entryContext = new EntryContext();

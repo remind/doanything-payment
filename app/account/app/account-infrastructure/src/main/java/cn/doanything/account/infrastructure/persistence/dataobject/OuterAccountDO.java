@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-19
+ * @since 2023-12-21
  */
 @TableName("ta_outer_account")
 public class OuterAccountDO implements Serializable {
@@ -45,22 +45,22 @@ public class OuterAccountDO implements Serializable {
     /**
      * 账户属性 1:对私，2:对公
      */
-    private Short accountAttribute;
+    private String accountAttribute;
 
     /**
      * 账户类型
      */
-    private Short accountType;
+    private String accountType;
 
     /**
      * 当前余额方向 1:借，2:贷
      */
-    private Short currBalDirection;
+    private String currentBalanceDirection;
 
     /**
      * 账户余额方向 1:借，2:贷，0:双向
      */
-    private Short balDirection;
+    private String balanceDirection;
 
     /**
      * 货币类型
@@ -117,36 +117,36 @@ public class OuterAccountDO implements Serializable {
         this.statusMap = statusMap;
     }
 
-    public Short getAccountAttribute() {
+    public String getAccountAttribute() {
         return accountAttribute;
     }
 
-    public void setAccountAttribute(Short accountAttribute) {
+    public void setAccountAttribute(String accountAttribute) {
         this.accountAttribute = accountAttribute;
     }
 
-    public Short getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(Short accountType) {
+    public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
 
-    public Short getCurrBalDirection() {
-        return currBalDirection;
+    public String getCurrentBalanceDirection() {
+        return currentBalanceDirection;
     }
 
-    public void setCurrBalDirection(Short currBalDirection) {
-        this.currBalDirection = currBalDirection;
+    public void setCurrentBalanceDirection(String currentBalanceDirection) {
+        this.currentBalanceDirection = currentBalanceDirection;
     }
 
-    public Short getBalDirection() {
-        return balDirection;
+    public String getBalanceDirection() {
+        return balanceDirection;
     }
 
-    public void setBalDirection(Short balDirection) {
-        this.balDirection = balDirection;
+    public void setBalanceDirection(String balanceDirection) {
+        this.balanceDirection = balanceDirection;
     }
 
     public String getCurrencyCode() {
@@ -183,8 +183,8 @@ public class OuterAccountDO implements Serializable {
         ", statusMap = " + statusMap +
         ", accountAttribute = " + accountAttribute +
         ", accountType = " + accountType +
-        ", currBalDirection = " + currBalDirection +
-        ", balDirection = " + balDirection +
+        ", currentBalanceDirection = " + currentBalanceDirection +
+        ", balanceDirection = " + balanceDirection +
         ", currencyCode = " + currencyCode +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +

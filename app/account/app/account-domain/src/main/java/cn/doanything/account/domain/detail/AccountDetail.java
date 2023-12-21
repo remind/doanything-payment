@@ -1,7 +1,7 @@
 package cn.doanything.account.domain.detail;
 
 import cn.doanything.account.types.enums.CrDr;
-import cn.doanything.account.types.enums.IODirection;
+import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
@@ -10,26 +10,39 @@ import lombok.Data;
  * 2023/12/16
  */
 @Data
-public abstract class AccountDetail extends BaseDetail {
+public abstract class AccountDetail extends Entity {
+    /**
+     * 明细流水号
+     */
+    private String voucherNo;
 
     /**
-     * 入账前余额
+     * 请求号
      */
-    private Money beforeBalance = new Money();
+    private String requestNo;
 
     /**
-     * 入账后余额
+     * 帐号
      */
-    private Money afterBalance = new Money();
+    private String accountNo;
+
+    /**
+     * 发生金额
+     */
+    private Money amount = new Money();
 
     /**
      * 借贷标志
      */
-    private CrDr crdr;
+    private CrDr crDr;
 
     /**
-     * 加减方向
-     */
-    private IODirection ioDirection;
+     * 会计日
+     **/
+    private String accountingDate;
 
+    /**
+     * 备注
+     **/
+    private String memo;
 }

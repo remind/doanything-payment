@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class ParamValidationProcessor implements AccountEntryPreprocessor {
     @Override
-    public void process(AccountingRequest accountingRequest, EntryContext entryContext) {
+    public void process(AccountingRequest request, EntryContext entryContext) {
 
     }
 }

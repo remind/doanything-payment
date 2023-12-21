@@ -1,10 +1,10 @@
 package cn.doanything.account.domain;
 
+import cn.doanything.account.domain.utils.AccountUtil;
+import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @author wxj
@@ -26,7 +26,7 @@ public class OuterSubAccount extends Entity {
     /**
      * 余额
      **/
-    private Money balance = new Money(0);
+    private Money balance = new Money();
 
     /**
      * 可用余额
@@ -36,5 +36,16 @@ public class OuterSubAccount extends Entity {
      * 备注
      **/
     private String memo;
+
+    /**
+     * 修改可用余额
+     *
+     * @param ioDirection
+     * @param amount
+     */
+    public void updateAvailableBalance(IODirection ioDirection, Money amount) {
+        this.availableBalance = AccountUtil.changeBalance(this.balance, ioDirection, amount);
+        this.balance = AccountUtil.changeBalance(this.balance, ioDirection, amount);
+    }
 
 }

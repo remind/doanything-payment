@@ -1,5 +1,7 @@
 package cn.doanything.account.domain.detail;
 
+import cn.doanything.account.types.enums.IODirection;
+import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
 import java.util.List;
@@ -17,9 +19,19 @@ public class OuterAccountDetail extends AccountDetail {
     private String fundType;
 
     /**
-     * 会员ID
+     * 入账前余额
      */
-    private String memberId;
+    private Money beforeBalance = new Money();
+
+    /**
+     * 入账后余额
+     */
+    private Money afterBalance = new Money();
+
+    /**
+     * 加减方向
+     */
+    private IODirection ioDirection;
 
     /**
      * 子户明细

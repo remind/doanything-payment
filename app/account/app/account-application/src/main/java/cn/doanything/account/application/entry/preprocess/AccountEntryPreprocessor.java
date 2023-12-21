@@ -9,5 +9,5 @@ import cn.doanything.account.facade.dto.AccountingRequest;
  */
 public interface AccountEntryPreprocessor {
 
-    void process(AccountingRequest accountingRequest, EntryContext entryContext);
+    void process(AccountingRequest request, EntryContext entryContext);
 }
