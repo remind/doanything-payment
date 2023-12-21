@@ -52,7 +52,6 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
     public Account lock(String accountNo) {
         OuterAccount outerAccount = null;
         OuterAccountDO outerAccountDO = outerAccountMapper.lockOne(new LambdaQueryWrapper<OuterAccountDO>().eq(OuterAccountDO::getAccountNo, accountNo));
-//        OuterAccountDO outerAccountDO = outerAccountMapper.lockOne(new LambdaQueryWrapper<OuterAccountDO>().eq(OuterAccountDO::getMemberId, "100000000"));
         if (outerAccountDO != null) {
             List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountMapper.selectList(Wrappers.lambdaQuery(OuterSubAccountDO.class)
                     .eq(OuterSubAccountDO::getAccountNo, outerAccountDO.getAccountNo()));

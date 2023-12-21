@@ -4,6 +4,7 @@ import cn.doanything.account.domain.AccountTransaction;
 import cn.doanything.account.domain.detail.BufferedDetail;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +23,10 @@ public class EntryContext {
     /**
      * 分组操作明细
      */
-    private List<AccountOperationGroup> accountOperationGroups;
+    private List<AccountEntryGroup> accountEntryGroups = new ArrayList<>();
 
     /**
      * 缓冲入账明细
      */
-    private List<BufferedDetail> bufferedDetails;
+    private List<BufferedDetail> bufferedDetails = new ArrayList<>();
 }

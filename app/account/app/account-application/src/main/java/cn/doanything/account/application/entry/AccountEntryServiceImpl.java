@@ -2,6 +2,7 @@ package cn.doanything.account.application.entry;
 
 import cn.doanything.account.application.entry.preprocess.AccountEntryPreprocessor;
 import cn.doanything.account.application.entry.processor.AccountEntryProcessor;
+import cn.doanything.account.domain.repository.AccountTransactionRepository;
 import cn.doanything.account.facade.dto.AccountingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,12 +27,16 @@ public class AccountEntryServiceImpl implements AccountEntryService {
     @Autowired
     private TransactionTemplate transactionTemplate;
 
+    @Autowired
+    private AccountTransactionRepository accountTransactionRepository;
+
 
     @Override
     public void process(AccountingRequest request) {
         EntryContext entryContext = new EntryContext();
         accountEntryPreprocessors.forEach(accountEntryPreprocessor -> accountEntryPreprocessor.process(request, entryContext));
         transactionTemplate.executeWithoutResult(status -> {
+            accountTransactionRepository.store(entryContext.getAccountTransaction());
             accountEntryProcessors.forEach(accountEntryProcessor -> accountEntryProcessor.process(entryContext));
         });
     }

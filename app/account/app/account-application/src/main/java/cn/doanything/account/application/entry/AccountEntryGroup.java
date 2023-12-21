@@ -12,7 +12,7 @@ import java.util.List;
  * 2023/12/20
  */
 @Data
-public class AccountOperationGroup implements Comparable<AccountOperationGroup> {
+public class AccountEntryGroup implements Comparable<AccountEntryGroup> {
 
     /**
      * 帐号
@@ -25,10 +25,10 @@ public class AccountOperationGroup implements Comparable<AccountOperationGroup> 
     private List<AccountDetail> details = new ArrayList<>();
 
     @Override
-    public int compareTo(AccountOperationGroup accountOperationGroup) {
-        if (accountNo.length() == accountOperationGroup.getAccountNo().length()) {
-            return this.accountNo.compareTo(accountOperationGroup.getAccountNo());
-        } else if (accountNo.length() > accountOperationGroup.getAccountNo().length()) {
+    public int compareTo(AccountEntryGroup accountEntryGroup) {
+        if (accountNo.length() == accountEntryGroup.getAccountNo().length()) {
+            return this.accountNo.compareTo(accountEntryGroup.getAccountNo());
+        } else if (accountNo.length() > accountEntryGroup.getAccountNo().length()) {
             return 1;
         } else {
             return -1;

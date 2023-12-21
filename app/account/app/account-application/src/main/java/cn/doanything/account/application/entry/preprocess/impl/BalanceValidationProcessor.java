@@ -7,6 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * 平衡校验
  * @author wxj
  * 2023/12/20
  */

@@ -8,7 +8,7 @@ import java.util.List;
  * @author wxj
  * 2023/12/20
  */
-public interface AccountDomainService {
+public interface OuterAccountDomainService {
 
     /**
      * 改变余额

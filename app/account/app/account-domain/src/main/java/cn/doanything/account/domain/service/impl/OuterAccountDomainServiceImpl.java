@@ -7,17 +7,18 @@ import cn.doanything.account.domain.OuterSubAccount;
 import cn.doanything.account.domain.detail.AccountDetail;
 import cn.doanything.account.domain.detail.OuterAccountDetail;
 import cn.doanything.account.domain.detail.OuterSubAccountDetail;
-import cn.doanything.account.domain.repository.AccountRepositoryFactory;
-import cn.doanything.account.domain.service.AccountDomainService;
+import cn.doanything.account.domain.repository.AccountDetailRepository;
+import cn.doanything.account.domain.repository.factory.AccountRepositoryFactory;
+import cn.doanything.account.domain.service.OuterAccountDomainService;
 import cn.doanything.account.domain.utils.AccountUtil;
 import cn.doanything.account.types.AccountResultCode;
 import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.commons.exceptions.BaseException;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import com.google.common.collect.Lists;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,16 +29,19 @@ import java.util.List;
  */
 @Component
 @Slf4j
-public class OuterAccountDomainServiceImpl implements AccountDomainService {
+public class OuterAccountDomainServiceImpl implements OuterAccountDomainService {
 
-    @Resource
+    @Autowired
     private AccountRepositoryFactory accountRepositoryFactory;
+
+    @Autowired
+    private AccountDetailRepository accountDetailRepository;
 
     @Override
     public void changeBalance(String accountNo, List<AccountDetail> accountDetails) {
         Account account;
         try {
-            account = accountRepositoryFactory.getAccountRepository(AccountFamily.OUTER).lock(accountNo);
+            account = accountRepositoryFactory.getRepository(AccountFamily.OUTER).lock(accountNo);
         } catch (Exception e) {
             log.error("账户锁定异常,accountNo=" + accountNo, e);
             throw new BaseException(AccountResultCode.ACCOUNT_LOCK_TIME_OUT);
@@ -53,6 +57,8 @@ public class OuterAccountDomainServiceImpl implements AccountDomainService {
             updateSubAccountBalance((OuterAccount) account, outerAccountDetail.getOuterSubAccountDetails());
             outerAccountDetail.setAfterBalance(account.getBalance());
         });
+
+        accountDetailRepository.store(accountDetails);
     }
 
     private void updateSubAccountBalance(OuterAccount outerAccount, List<OuterSubAccountDetail> outerSubAccountDetails) {
