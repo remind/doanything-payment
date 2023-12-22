@@ -23,7 +23,7 @@ public abstract class Account extends Entity {
     /**
      * 科目号
      */
-    protected String accountTitleNo;
+    protected String titleCode;
     /**
      * 账户名称
      */

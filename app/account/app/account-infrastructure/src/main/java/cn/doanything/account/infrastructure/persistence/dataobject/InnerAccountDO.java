@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-21
+ * @since 2023-12-22
  */
 @TableName("ta_inner_account")
 public class InnerAccountDO implements Serializable {
@@ -26,7 +26,7 @@ public class InnerAccountDO implements Serializable {
     /**
      * 科目号
      */
-    private String accountTitleNo;
+    private String titleCode;
 
     /**
      * 账户名称
@@ -71,12 +71,12 @@ public class InnerAccountDO implements Serializable {
         this.accountNo = accountNo;
     }
 
-    public String getAccountTitleNo() {
-        return accountTitleNo;
+    public String getTitleCode() {
+        return titleCode;
     }
 
-    public void setAccountTitleNo(String accountTitleNo) {
-        this.accountTitleNo = accountTitleNo;
+    public void setTitleCode(String titleCode) {
+        this.titleCode = titleCode;
     }
 
     public String getAccountName() {
@@ -139,7 +139,7 @@ public class InnerAccountDO implements Serializable {
     public String toString() {
         return "InnerAccountDO{" +
         "accountNo = " + accountNo +
-        ", accountTitleNo = " + accountTitleNo +
+        ", titleCode = " + titleCode +
         ", accountName = " + accountName +
         ", currBalDirection = " + currBalDirection +
         ", balDirection = " + balDirection +

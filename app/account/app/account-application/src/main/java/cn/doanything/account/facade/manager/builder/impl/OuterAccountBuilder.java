@@ -37,13 +37,13 @@ public class OuterAccountBuilder implements AccountBuilder {
         OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
         AssertUtil.isNotNull(outerAccountType, SystemResultCode.ILLEGAL_PARAM, "账户类型不存在");
         OuterAccount outerAccount = outerAccountConvertor.toOuterAccount(request, outerAccountType);
-        fillBalanceDirection(outerAccount, outerAccountType.getAccountTitleNo());
+        fillBalanceDirection(outerAccount, outerAccountType.getTitleCode());
         fillOuterSubAccount(outerAccount, outerAccountType.getFundTypes());
         return outerAccount;
     }
 
-    private void fillBalanceDirection(OuterAccount outerAccount, String titleNo) {
-        AccountTitle accountTitle = accountTitleRepository.load(titleNo);
+    private void fillBalanceDirection(OuterAccount outerAccount, String titleCode) {
+        AccountTitle accountTitle = accountTitleRepository.load(titleCode);
         outerAccount.setBalanceDirection(accountTitle.getBalanceDirection());
         outerAccount.setCurrentBalanceDirection(AccountUtil.getBalanceCrdr(accountTitle.getBalanceDirection()));
     }

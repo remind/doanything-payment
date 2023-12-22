@@ -3,7 +3,11 @@ package cn.doanything.account.infrastructure.repository;
 import cn.doanything.account.domain.accounting.AccountTitle;
 import cn.doanything.account.domain.repository.AccountTitleRepository;
 import cn.doanything.account.infrastructure.persistence.convertor.AccountTitleDalConvertor;
+import cn.doanything.account.infrastructure.persistence.dataobject.AccountTitleDO;
+import cn.doanything.account.infrastructure.persistence.dataobject.OuterAccountTypeDO;
 import cn.doanything.account.infrastructure.persistence.mapper.AccountTitleMapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -33,11 +37,15 @@ public class AccountTitleRepositoryImpl implements AccountTitleRepository {
 
     @Override
     public AccountTitle load(String titleCode) {
-        return dalConvertor.toEntity(accountTitleMapper.selectById(titleCode));
+        return dalConvertor.toEntity(accountTitleMapper.selectOne(getIdWrapper(titleCode)));
     }
 
     @Override
     public AccountTitle lock(String titleCode) {
         return null;
+    }
+
+    private Wrapper<AccountTitleDO> getIdWrapper(String titleCode) {
+        return new LambdaQueryWrapper<AccountTitleDO>().eq(AccountTitleDO::getTitleCode, titleCode);
     }
 }

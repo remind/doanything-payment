@@ -52,7 +52,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
         AssertUtil.isNotNull(account, SystemResultCode.ILLEGAL_PARAM);
         AssertUtil.isTrue(account instanceof OuterAccount, SystemResultCode.ILLEGAL_PARAM);
         OuterAccount outerAccount = (OuterAccount) account;
-        String accountNo = genAccountNo(outerAccount.getMemberId(), outerAccount.getAccountTitleNo(), Currency.getInstance(outerAccount.getCurrencyCode()));
+        String accountNo = genAccountNo(outerAccount.getMemberId(), outerAccount.getTitleCode(), Currency.getInstance(outerAccount.getCurrencyCode()));
         outerAccount.setAccountNo(accountNo);
         OuterAccountDO outerAccountDO = dalConvertor.toOuterAccountDo(outerAccount);
         List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountDalConvertor.toDo(outerAccount.getOuterSubAccounts());
@@ -123,7 +123,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
             intMaxNo = Integer.parseInt(maxNo);
             AssertUtil.isTrue(intMaxNo > 0 && intMaxNo < AccountDomainConstants.OUTER_ACCOUNT_NO_MAX_INC, "用户账户已经超过最大个数");
         }
-        return String.format("%" + maxLength + "d", intMaxNo + 1);
+        return String.format("%0" + maxLength + "d", intMaxNo + 1);
     }
 
 

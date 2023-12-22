@@ -27,6 +27,7 @@ public interface OuterSubAccountDalConvertor  extends ReadWriteConvertor<OuterSu
 
     @Mapping(target = "balance", expression = "java(outerSubAccount.getBalance().getAmount())")
     @Mapping(target = "availableBalance", expression = "java(outerSubAccount.getAvailableBalance().getAmount())")
+    @Mapping(target = "currencyCode", expression = "java(outerSubAccount.getBalance().getCurrency().getCurrencyCode())")
     @Override
     OuterSubAccountDO toDo(OuterSubAccount outerSubAccount);
 

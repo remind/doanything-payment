@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-21
+ * @since 2023-12-22
  */
 @TableName("ta_outer_account")
 public class OuterAccountDO implements Serializable {
@@ -25,7 +25,7 @@ public class OuterAccountDO implements Serializable {
     /**
      * 科目号
      */
-    private String accountTitleNo;
+    private String titleCode;
 
     /**
      * 账户名称
@@ -85,12 +85,12 @@ public class OuterAccountDO implements Serializable {
         this.accountNo = accountNo;
     }
 
-    public String getAccountTitleNo() {
-        return accountTitleNo;
+    public String getTitleCode() {
+        return titleCode;
     }
 
-    public void setAccountTitleNo(String accountTitleNo) {
-        this.accountTitleNo = accountTitleNo;
+    public void setTitleCode(String titleCode) {
+        this.titleCode = titleCode;
     }
 
     public String getAccountName() {
@@ -177,7 +177,7 @@ public class OuterAccountDO implements Serializable {
     public String toString() {
         return "OuterAccountDO{" +
         "accountNo = " + accountNo +
-        ", accountTitleNo = " + accountTitleNo +
+        ", titleCode = " + titleCode +
         ", accountName = " + accountName +
         ", memberId = " + memberId +
         ", statusMap = " + statusMap +

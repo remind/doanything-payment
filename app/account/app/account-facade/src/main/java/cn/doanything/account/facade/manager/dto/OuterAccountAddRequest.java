@@ -2,8 +2,6 @@ package cn.doanything.account.facade.manager.dto;
 
 import lombok.Data;
 
-import java.util.Currency;
-
 /**
  * @author wxj
  * 2023/12/22
@@ -26,9 +24,5 @@ public class OuterAccountAddRequest {
      **/
     private String accountType;
 
-    /**
-     * 币种
-     **/
-    private Currency currency;
 
 }

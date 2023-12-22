@@ -17,7 +17,6 @@ public class OuterSubAccount extends Entity {
      * 账户号
      **/
     private String accountNo;
-
     /**
      * 资金类型
      */

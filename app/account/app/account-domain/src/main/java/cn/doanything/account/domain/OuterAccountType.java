@@ -26,9 +26,9 @@ public class OuterAccountType extends Entity {
     private String name;
 
     /**
-     * 科目号
+     * 科目编码
      */
-    private String accountTitleNo;
+    private String titleCode;
 
     /**
      * 外部账户分类
