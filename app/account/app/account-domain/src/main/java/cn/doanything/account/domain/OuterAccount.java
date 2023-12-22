@@ -30,7 +30,7 @@ public class OuterAccount extends Account {
     /**
      * 账户类型
      */
-    private Integer accountType;
+    private String accountType;
 
     /**
      * 账户状态
@@ -63,6 +63,7 @@ public class OuterAccount extends Account {
 
     /**
      * 根据资金类型获取子账户
+     *
      * @param fundType
      * @return
      */
@@ -70,5 +71,24 @@ public class OuterAccount extends Account {
         return outerSubAccounts.stream().filter(outerSubAccount ->
                 outerSubAccount.getFundType().equals(fundType)
         ).findFirst().orElse(null);
+    }
+
+    /**
+     * 新增子账户
+     * @param fundType
+     * @return
+     */
+    public OuterSubAccount addSubAccount(String fundType) {
+        OuterSubAccount outerSubAccount = new OuterSubAccount();
+        outerSubAccount.setAccountNo(this.accountNo);
+        outerSubAccount.setFundType(fundType);
+        this.outerSubAccounts.add(outerSubAccount);
+        return outerSubAccount;
+    }
+
+    @Override
+    public void setAccountNo(String accountNo) {
+        super.setAccountNo(accountNo);
+        outerSubAccounts.forEach(outerSubAccount -> outerSubAccount.setAccountNo(accountNo));
     }
 }

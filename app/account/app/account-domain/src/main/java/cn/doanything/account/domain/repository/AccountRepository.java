@@ -10,7 +10,7 @@ import cn.doanything.account.types.enums.AccountFamily;
  */
 public interface AccountRepository {
 
-    void store(Account account);
+    String store(Account account);
 
     void reStore(Account account);
 

@@ -1,6 +1,5 @@
 package cn.doanything.account.domain.repository;
 
-import cn.doanything.account.domain.Account;
 import cn.doanything.account.domain.accounting.AccountTitle;
 
 /**

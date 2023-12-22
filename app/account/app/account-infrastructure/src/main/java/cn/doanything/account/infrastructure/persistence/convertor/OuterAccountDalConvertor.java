@@ -22,5 +22,6 @@ public interface OuterAccountDalConvertor {
     @Mapping(target = "outerSubAccounts", source = "outerSubAccountDOs")
     OuterAccount toEntity(OuterAccountDO outerAccountDO, List<OuterSubAccountDO> outerSubAccountDOs);
 
-    OuterAccountDO toDo(OuterAccount outerAccount);
+    OuterAccountDO toOuterAccountDo(OuterAccount outerAccount);
+
 }

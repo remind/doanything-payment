@@ -1,6 +1,7 @@
 package cn.doanything.account.domain.utils;
 
 import cn.doanything.account.types.enums.AccountFamily;
+import cn.doanything.account.types.enums.BalanceDirection;
 import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.types.Money;
@@ -56,6 +57,19 @@ public class AccountUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取余额实际借贷方向
+     * @param balanceDirection
+     * @return
+     */
+    public static CrDr getBalanceCrdr(BalanceDirection balanceDirection) {
+        if (balanceDirection == BalanceDirection.CREDIT) {
+            return CrDr.CREDIT;
+        } else {
+            return CrDr.DEBIT;
+        }
     }
 
 }

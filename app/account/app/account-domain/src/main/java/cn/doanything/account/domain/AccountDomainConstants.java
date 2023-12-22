@@ -19,6 +19,11 @@ public interface AccountDomainConstants {
     /**
      * 默认资金类型
      */
-    String DEFAULT_FUND_TYPE="NORMAL";
+    String DEFAULT_FUND_TYPE = "NORMAL";
+
+    /**
+     * 外部户账户最大自增值
+     */
+    int OUTER_ACCOUNT_NO_MAX_INC = 99999;
 
 }
