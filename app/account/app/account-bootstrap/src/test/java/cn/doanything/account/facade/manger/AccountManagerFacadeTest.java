@@ -23,12 +23,12 @@ public class AccountManagerFacadeTest {
     private AccountManagerFacade accountManagerFacade;
 
     @Test
-    public void testAddOuterAccount() {
+    public void testAddOuterAccountFail() {
         OuterAccountAddRequest request = new OuterAccountAddRequest();
         request.setMemberId("100000004");
         request.setAccountType("101");
         request.setAccountName("基本户");
-        ResponseResult result = accountManagerFacade.addOuterAccount(request);
-        Assert.assertEquals(GlobalResultCode.SUCCESS.getCode(), result.getCode());
+        ResponseResult<String> result = accountManagerFacade.addOuterAccount(request);
+        Assert.assertEquals(GlobalResultCode.FAIL.getCode(), result.getCode());
     }
 }

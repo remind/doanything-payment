@@ -38,7 +38,7 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
     private TransactionTemplate transactionTemplate;
 
     @Override
-    public ResponseResult addOuterAccount(OuterAccountAddRequest request) {
+    public ResponseResult<String> addOuterAccount(OuterAccountAddRequest request) {
         try {
             OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
             AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");

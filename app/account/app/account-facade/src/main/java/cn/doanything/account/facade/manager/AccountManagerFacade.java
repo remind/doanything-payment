@@ -1,7 +1,6 @@
 package cn.doanything.account.facade.manager;
 
 import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
-import cn.doanything.account.facade.manager.dto.OuterAccountResponse;
 import cn.doanything.commons.response.ResponseResult;
 
 /**
@@ -11,5 +10,5 @@ import cn.doanything.commons.response.ResponseResult;
  */
 public interface AccountManagerFacade {
 
-    ResponseResult addOuterAccount(OuterAccountAddRequest request);
+    ResponseResult<String> addOuterAccount(OuterAccountAddRequest request);
 }
