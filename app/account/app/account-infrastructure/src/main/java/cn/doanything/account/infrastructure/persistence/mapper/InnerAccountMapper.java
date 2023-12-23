@@ -5,11 +5,11 @@ import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * 内部户 Mapper 接口
  * </p>
  *
  * @author wxj
- * @since 2023-12-22
+ * @since 2023-12-24
  */
 public interface InnerAccountMapper extends ExtBaseMapper<InnerAccountDO> {
 

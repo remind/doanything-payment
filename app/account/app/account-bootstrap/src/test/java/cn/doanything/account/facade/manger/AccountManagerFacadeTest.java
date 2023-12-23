@@ -1,6 +1,7 @@
 package cn.doanything.account.facade.manger;
 
 import cn.doanything.account.facade.manager.AccountManagerFacade;
+import cn.doanything.account.facade.manager.dto.InnerAccountAddRequest;
 import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
 import cn.doanything.commons.response.ResponseResult;
 import cn.doanything.commons.response.GlobalResultCode;
@@ -30,5 +31,16 @@ public class AccountManagerFacadeTest {
         request.setAccountName("基本户");
         ResponseResult<String> result = accountManagerFacade.addOuterAccount(request);
         Assert.assertEquals(GlobalResultCode.FAIL.getCode(), result.getCode());
+    }
+
+    @Test
+    public void testAddInnerAccountSuccess() {
+        InnerAccountAddRequest request = new InnerAccountAddRequest();
+        request.setAccountName("测试账户");
+        request.setCurrencyCode("CNY");
+        request.setTitleCode("4001001001");
+        request.setMemo("测试账户备注");
+        ResponseResult<String> result = accountManagerFacade.addInnerAccount(request);
+        Assert.assertEquals(GlobalResultCode.SUCCESS.getCode(), result.getCode());
     }
 }

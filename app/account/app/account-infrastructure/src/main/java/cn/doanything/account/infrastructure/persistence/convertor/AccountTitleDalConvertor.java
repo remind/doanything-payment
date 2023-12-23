@@ -15,5 +15,4 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring", uses = {EnumsConvertor.class})
 public interface AccountTitleDalConvertor extends ReadWriteConvertor<AccountTitle, AccountTitleDO> {
 
-    AccountTitleDalConvertor INSTANCE = Mappers.getMapper(AccountTitleDalConvertor.class);
 }

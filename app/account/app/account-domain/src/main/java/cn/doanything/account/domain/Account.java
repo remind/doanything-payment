@@ -7,6 +7,8 @@ import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
+import java.util.Currency;
+
 /**
  * 账户基础模型
  *

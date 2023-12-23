@@ -17,8 +17,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {OuterSubAccountDalConvertor.class, EnumsConvertor.class})
 public interface OuterAccountDalConvertor {
 
-    OuterAccountDalConvertor INSTANCE = Mappers.getMapper(OuterAccountDalConvertor.class);
-
     @Mapping(target = "outerSubAccounts", source = "outerSubAccountDOs")
     OuterAccount toEntity(OuterAccountDO outerAccountDO, List<OuterSubAccountDO> outerSubAccountDOs);
 

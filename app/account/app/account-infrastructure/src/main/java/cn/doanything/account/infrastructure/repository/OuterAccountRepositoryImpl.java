@@ -49,7 +49,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
         AssertUtil.isTrue(account instanceof OuterAccount, GlobalResultCode.ILLEGAL_PARAM);
         OuterAccount outerAccount = (OuterAccount) account;
         AssertUtil.isFalse(isExists(outerAccount.getMemberId(), outerAccount.getAccountType()), "该用户的账户类型已经存在");
-        String accountNo = genAccountNo(outerAccount.getMemberId(), outerAccount.getTitleCode(), Currency.getInstance(outerAccount.getCurrencyCode()));
+        String accountNo = genAccountNo(outerAccount.getMemberId(), outerAccount.getTitleCode(), outerAccount.getCurrencyCode());
         outerAccount.setAccountNo(accountNo);
         OuterAccountDO outerAccountDO = dalConvertor.toOuterAccountDo(outerAccount);
         List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountDalConvertor.toDo(outerAccount.getOuterSubAccounts());
@@ -98,9 +98,9 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
         return outerAccount;
     }
 
-    private String genAccountNo(String memberId, String accountTitleNo, Currency currency) {
+    private String genAccountNo(String memberId, String accountTitleNo, String currencyCode) {
         String incId = getIncId(memberId, accountTitleNo);
-        return accountTitleNo + memberId + currency.getNumericCode() + incId;
+        return accountTitleNo + memberId + Currency.getInstance(currencyCode).getNumericCode() + incId;
     }
 
     private String getIncId(String memberId, String accountTitleNo) {

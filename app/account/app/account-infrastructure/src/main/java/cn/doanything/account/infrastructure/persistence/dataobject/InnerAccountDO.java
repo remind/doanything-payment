@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ * 内部户
  * </p>
  *
  * @author wxj
- * @since 2023-12-22
+ * @since 2023-12-24
  */
 @TableName("ta_inner_account")
 public class InnerAccountDO implements Serializable {
@@ -36,12 +36,12 @@ public class InnerAccountDO implements Serializable {
     /**
      * 当前余额方向 1:借，2:贷
      */
-    private Short currBalDirection;
+    private String currentBalanceDirection;
 
     /**
      * 账户余额方向 1:借，2:贷，0:双向
      */
-    private Short balDirection;
+    private String balanceDirection;
 
     /**
      * 货币类型
@@ -87,20 +87,20 @@ public class InnerAccountDO implements Serializable {
         this.accountName = accountName;
     }
 
-    public Short getCurrBalDirection() {
-        return currBalDirection;
+    public String getCurrentBalanceDirection() {
+        return currentBalanceDirection;
     }
 
-    public void setCurrBalDirection(Short currBalDirection) {
-        this.currBalDirection = currBalDirection;
+    public void setCurrentBalanceDirection(String currentBalanceDirection) {
+        this.currentBalanceDirection = currentBalanceDirection;
     }
 
-    public Short getBalDirection() {
-        return balDirection;
+    public String getBalanceDirection() {
+        return balanceDirection;
     }
 
-    public void setBalDirection(Short balDirection) {
-        this.balDirection = balDirection;
+    public void setBalanceDirection(String balanceDirection) {
+        this.balanceDirection = balanceDirection;
     }
 
     public String getCurrencyCode() {
@@ -141,8 +141,8 @@ public class InnerAccountDO implements Serializable {
         "accountNo = " + accountNo +
         ", titleCode = " + titleCode +
         ", accountName = " + accountName +
-        ", currBalDirection = " + currBalDirection +
-        ", balDirection = " + balDirection +
+        ", currentBalanceDirection = " + currentBalanceDirection +
+        ", balanceDirection = " + balanceDirection +
         ", currencyCode = " + currencyCode +
         ", balance = " + balance +
         ", gmtCreate = " + gmtCreate +

@@ -1,16 +1,18 @@
-package cn.doanything.account.facade.manager.builder.impl;
+package cn.doanything.account.facade.manager.builder;
 
-import cn.doanything.account.domain.*;
+import cn.doanything.account.domain.Account;
+import cn.doanything.account.domain.AccountDomainConstants;
+import cn.doanything.account.domain.OuterAccount;
+import cn.doanything.account.domain.OuterAccountType;
 import cn.doanything.account.domain.accounting.AccountTitle;
 import cn.doanything.account.domain.repository.AccountTitleRepository;
 import cn.doanything.account.domain.repository.AccountTypeRepository;
 import cn.doanything.account.domain.utils.AccountUtil;
-import cn.doanything.account.facade.manager.builder.AccountBuilder;
 import cn.doanything.account.facade.manager.convertor.OuterAccountConvertor;
 import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
 import cn.doanything.account.types.enums.DenyStatus;
-import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.commons.response.GlobalResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -22,7 +24,7 @@ import java.util.List;
  * 2023/12/22
  */
 @Component
-public class OuterAccountBuilder implements AccountBuilder {
+public class OuterAccountBuilder {
 
     @Autowired
     private AccountTypeRepository accountTypeRepository;
@@ -33,7 +35,6 @@ public class OuterAccountBuilder implements AccountBuilder {
     @Autowired
     private OuterAccountConvertor outerAccountConvertor;
 
-    @Override
     public Account build(OuterAccountAddRequest request) {
         OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
         AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");
