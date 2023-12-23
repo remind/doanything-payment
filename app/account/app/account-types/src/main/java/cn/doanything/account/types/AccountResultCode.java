@@ -13,6 +13,7 @@ public enum AccountResultCode implements ResultCode {
     SUB_ACCOUNT_NOT_EXISTS("SUB_ACCOUNT_NOT_EXISTS", "不存在指定的子账户"),
     CR_DR_NOT_EXISTS("CR_DR_NOT_EXISTS", "不存借贷方向"),
     CR_DR_NOT_BALANCE("CR_DR_NOT_BALANCE", "借贷不平衡"),
+    ACCOUNT_BALANCE_NOT_ENOUGH("ACCOUNT_BALANCE_NOT_ENOUGH","账户余额不足"),
     ;
 
     private final String code;

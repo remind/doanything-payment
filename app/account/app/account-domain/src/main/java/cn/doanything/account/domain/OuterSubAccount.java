@@ -43,7 +43,7 @@ public class OuterSubAccount extends Entity {
      * @param amount
      */
     public void updateAvailableBalance(IODirection ioDirection, Money amount) {
-        this.availableBalance = AccountUtil.changeBalance(this.balance, ioDirection, amount);
+        this.availableBalance = AccountUtil.changeBalance(this.availableBalance, ioDirection, amount);
         this.balance = AccountUtil.changeBalance(this.balance, ioDirection, amount);
     }
 

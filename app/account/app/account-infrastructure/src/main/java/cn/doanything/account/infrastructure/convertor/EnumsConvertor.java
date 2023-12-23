@@ -3,10 +3,7 @@ package cn.doanything.account.infrastructure.convertor;
 import cn.doanything.account.types.accounting.AccountTitleRange;
 import cn.doanything.account.types.accounting.AccountTitleStatus;
 import cn.doanything.account.types.accounting.AccountTitleType;
-import cn.doanything.account.types.enums.AccountAttribute;
-import cn.doanything.account.types.enums.BalanceDirection;
-import cn.doanything.account.types.enums.CrDr;
-import cn.doanything.account.types.enums.DenyStatus;
+import cn.doanything.account.types.enums.*;
 import org.mapstruct.Mapper;
 
 /**
@@ -69,6 +66,14 @@ public interface EnumsConvertor {
     }
 
     default String toDenyStatusCode(DenyStatus enumObject) {
+        return enumObject == null ? null : enumObject.code();
+    }
+
+    default IODirection toIODirection(String code) {
+        return IODirection.getByCode(code);
+    }
+
+    default String toIODirectionCode(IODirection enumObject) {
         return enumObject == null ? null : enumObject.code();
     }
 

@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public abstract class AccountDetail extends Entity {
     /**
-     * 明细流水号
+     * 凭证号
      */
     private String voucherNo;
 

@@ -50,7 +50,7 @@ public class AccountUtil {
      */
     public static AccountFamily getAccountFamily(String accountNo) {
         if (StringUtils.isNotBlank(accountNo)) {
-            if (accountNo.length() == 24) {
+            if (accountNo.length() == 27) {
                 return AccountFamily.OUTER;
             } else if (accountNo.length() == 14) {
                 return AccountFamily.INNER;

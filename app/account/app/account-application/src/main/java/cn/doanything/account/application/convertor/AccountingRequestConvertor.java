@@ -24,7 +24,6 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring")
 public interface AccountingRequestConvertor {
-    AccountingRequestConvertor INSTANCE = Mappers.getMapper(AccountingRequestConvertor.class);
 
     AccountTransaction toAccountTransaction(AccountingRequest request);
 

@@ -21,4 +21,5 @@ public class AccountTransaction extends Entity {
      * 会计日
      **/
     private String accountingDate;
+
 }

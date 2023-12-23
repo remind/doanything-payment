@@ -5,11 +5,14 @@ import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.commons.lang.types.Money;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.UUID;
 
 /**
  * @author wxj
@@ -26,18 +29,18 @@ public class AccountEntryServiceTest {
     public void success() {
         AccountingRequest request = new AccountingRequest();
         request.setAccountingDate("20231221");
-        request.setRequestNo("123456");
+        request.setRequestNo(getUUID());
         EntryDetail entryDetail1 = new EntryDetail();
-        entryDetail1.setVoucherNo("123");
-        entryDetail1.setAccountNo("200100200110000000000001");
+        entryDetail1.setVoucherNo(getUUID());
+        entryDetail1.setAccountNo("200100200110000000215600001");
         entryDetail1.setSuiteNo("1");
         entryDetail1.setAmount(new Money(1));
         entryDetail1.setCrDr(CrDr.CREDIT);
         entryDetail1.setMemo("测试入账1");
 
         EntryDetail entryDetail2 = new EntryDetail();
-        entryDetail2.setVoucherNo("456");
-        entryDetail2.setAccountNo("200100200110000000100001");
+        entryDetail2.setVoucherNo(getUUID());
+        entryDetail2.setAccountNo("200100200110000000315600001");
         entryDetail2.setSuiteNo("1");
         entryDetail2.setAmount(new Money(1));
         entryDetail2.setCrDr(CrDr.DEBIT);
@@ -45,5 +48,10 @@ public class AccountEntryServiceTest {
 
         request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
         accountEntryService.process(request);
+    }
+
+    private String getUUID() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replace("-","").substring(0,32);
     }
 }

@@ -4,6 +4,8 @@ import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 入账明细
  * @author wxj
@@ -28,9 +30,9 @@ public class EntryDetail {
     private String accountNo;
 
     /**
-     * 资金类型
+     * 资金分摊规则
      */
-    private String fundType;
+    private List<FundSpiltRule> spiltRules;
 
     /**
      * 金额

@@ -1,5 +1,6 @@
 package cn.doanything.account.application.entry;
 
+import cn.doanything.account.application.convertor.AccountingRequestConvertor;
 import cn.doanything.account.application.entry.preprocess.AccountEntryPreprocessor;
 import cn.doanything.account.application.entry.processor.AccountEntryProcessor;
 import cn.doanything.account.domain.repository.AccountTransactionRepository;
@@ -12,12 +13,15 @@ import java.util.List;
 
 /**
  * 入账
+ *
  * @author wxj
  * 2023/12/20
  */
 @Component
 public class AccountEntryServiceImpl implements AccountEntryService {
 
+    @Autowired
+    private AccountingRequestConvertor requestConvertor;
     @Autowired
     private List<AccountEntryPreprocessor> accountEntryPreprocessors;
 
@@ -33,6 +37,7 @@ public class AccountEntryServiceImpl implements AccountEntryService {
     @Override
     public void process(AccountingRequest request) {
         EntryContext entryContext = new EntryContext();
+        entryContext.setAccountTransaction(requestConvertor.toAccountTransaction(request));
         accountEntryPreprocessors.forEach(accountEntryPreprocessor -> accountEntryPreprocessor.process(request, entryContext));
         transactionTemplate.executeWithoutResult(status -> {
             accountTransactionRepository.store(entryContext.getAccountTransaction());

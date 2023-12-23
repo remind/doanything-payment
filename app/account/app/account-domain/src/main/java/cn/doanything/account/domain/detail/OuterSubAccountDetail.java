@@ -1,7 +1,5 @@
 package cn.doanything.account.domain.detail;
 
-import cn.doanything.account.types.enums.CrDr;
-import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
@@ -34,16 +32,6 @@ public class OuterSubAccountDetail extends Entity {
     private Money amount = new Money();
 
     /**
-     * 借贷标志
-     */
-    private CrDr crdr;
-
-    /**
-     * 会计日
-     **/
-    private String accountingDate;
-
-    /**
      * 资金类型
      */
     private String fundType;
@@ -57,11 +45,6 @@ public class OuterSubAccountDetail extends Entity {
      * 入账后余额
      */
     private Money afterBalance = new Money();
-
-    /**
-     * 加减方向
-     */
-    private IODirection ioDirection;
 
     /**
      * 备注

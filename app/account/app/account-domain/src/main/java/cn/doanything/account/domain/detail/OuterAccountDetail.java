@@ -2,8 +2,11 @@ package cn.doanything.account.domain.detail;
 
 import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.types.Money;
+import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.commons.response.GlobalResultCode;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,11 +15,6 @@ import java.util.List;
  */
 @Data
 public class OuterAccountDetail extends AccountDetail {
-
-    /**
-     * 资金类型
-     */
-    private String fundType;
 
     /**
      * 入账前余额
@@ -36,5 +34,19 @@ public class OuterAccountDetail extends AccountDetail {
     /**
      * 子户明细
      */
-    private List<OuterSubAccountDetail> outerSubAccountDetails;
+    private List<OuterSubAccountDetail> outerSubAccountDetails = new ArrayList<>();
+
+    public void addSubDetail(String fundType, Money amount) {
+        AssertUtil.isTrue(outerSubAccountDetails.stream().filter(
+                        outerSubAccountDetail -> outerSubAccountDetail.getFundType().equals(fundType))
+                .findAny().isEmpty(), GlobalResultCode.FAIL, "已经存在对应的明细");
+        OuterSubAccountDetail outerSubAccountDetail = new OuterSubAccountDetail();
+        outerSubAccountDetail.setRequestNo(this.getRequestNo());
+        outerSubAccountDetail.setVoucherNo(this.getVoucherNo());
+        outerSubAccountDetail.setAccountNo(this.getAccountNo());
+        outerSubAccountDetail.setFundType(fundType);
+        outerSubAccountDetail.setAmount(amount);
+        outerSubAccountDetails.add(outerSubAccountDetail);
+    }
+
 }
