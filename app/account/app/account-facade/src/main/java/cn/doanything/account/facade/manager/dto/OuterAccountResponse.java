@@ -5,4 +5,8 @@ package cn.doanything.account.facade.manager.dto;
  * 2023/12/22
  */
 public class OuterAccountResponse {
+
+    private String AccountNo;
+
+
 }

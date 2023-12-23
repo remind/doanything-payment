@@ -2,6 +2,7 @@ package cn.doanything.account.facade.manager;
 
 import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
 import cn.doanything.account.facade.manager.dto.OuterAccountResponse;
+import cn.doanything.commons.response.ResponseResult;
 
 /**
  * 账户管理相关
@@ -10,5 +11,5 @@ import cn.doanything.account.facade.manager.dto.OuterAccountResponse;
  */
 public interface AccountManagerFacade {
 
-    OuterAccountResponse addOuterAccount(OuterAccountAddRequest request);
+    ResponseResult addOuterAccount(OuterAccountAddRequest request);
 }

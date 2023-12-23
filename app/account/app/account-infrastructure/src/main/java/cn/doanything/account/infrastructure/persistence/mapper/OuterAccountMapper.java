@@ -9,7 +9,7 @@ import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2023-12-22
+ * @since 2023-12-23
  */
 public interface OuterAccountMapper extends ExtBaseMapper<OuterAccountDO> {
 

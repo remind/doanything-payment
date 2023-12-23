@@ -6,6 +6,7 @@ import cn.doanything.account.types.accounting.AccountTitleType;
 import cn.doanything.account.types.enums.AccountAttribute;
 import cn.doanything.account.types.enums.BalanceDirection;
 import cn.doanything.account.types.enums.CrDr;
+import cn.doanything.account.types.enums.DenyStatus;
 import org.mapstruct.Mapper;
 
 /**
@@ -61,6 +62,14 @@ public interface EnumsConvertor {
 
     default String toCrDrCode(CrDr crDr) {
         return crDr == null ? null : crDr.code();
+    }
+
+    default DenyStatus toDenyStatus(String code) {
+        return DenyStatus.getByCode(code);
+    }
+
+    default String toDenyStatusCode(DenyStatus enumObject) {
+        return enumObject == null ? null : enumObject.code();
     }
 
 }

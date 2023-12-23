@@ -2,6 +2,7 @@ package cn.doanything.account.domain;
 
 import cn.doanything.account.types.enums.AccountAttribute;
 import cn.doanything.account.types.enums.AccountFamily;
+import cn.doanything.account.types.enums.DenyStatus;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
@@ -33,9 +34,9 @@ public class OuterAccount extends Account {
     private String accountType;
 
     /**
-     * 账户状态
+     * 冻结状态
      */
-    private OuterAccountStatus status;
+    private DenyStatus denyStatus;
 
     /**
      * 子账户，一个资金类型的只能有一个

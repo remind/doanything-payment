@@ -2,13 +2,14 @@ package cn.doanything.account.facade.manger;
 
 import cn.doanything.account.facade.manager.AccountManagerFacade;
 import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
+import cn.doanything.commons.response.ResponseResult;
+import cn.doanything.commons.response.GlobalResultCode;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Currency;
 
 /**
  * @author wxj
@@ -24,9 +25,10 @@ public class AccountManagerFacadeTest {
     @Test
     public void testAddOuterAccount() {
         OuterAccountAddRequest request = new OuterAccountAddRequest();
-        request.setMemberId("100000002");
+        request.setMemberId("100000004");
         request.setAccountType("101");
         request.setAccountName("基本户");
-        accountManagerFacade.addOuterAccount(request);
+        ResponseResult result = accountManagerFacade.addOuterAccount(request);
+        Assert.assertEquals(GlobalResultCode.SUCCESS.getCode(), result.getCode());
     }
 }

@@ -1,14 +1,14 @@
-package cn.doanything.commons.lang;
-
-import cn.doanything.commons.response.ResultCode;
+package cn.doanything.commons.response;
 
 /**
- * 系统结果码
+ * 全局结果码
+ *
  * @author wxj
  * 2023/12/22
  */
-public enum SystemResultCode implements ResultCode {
-
+public enum GlobalResultCode implements ResultCode {
+    SUCCESS("SUCCESS", "处理成功"),
+    FAIL("FAIL", "处理异常"),
     ILLEGAL_PARAM("ILLEGAL_PARAM", "非法参数"),
     ;
 
@@ -16,7 +16,7 @@ public enum SystemResultCode implements ResultCode {
 
     private final String message;
 
-    SystemResultCode(String code, String message) {
+    GlobalResultCode(String code, String message) {
         this.code = code;
         this.message = message;
     }

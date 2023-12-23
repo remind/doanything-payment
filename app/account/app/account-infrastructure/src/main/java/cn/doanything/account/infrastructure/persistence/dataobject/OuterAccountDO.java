@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-22
+ * @since 2023-12-23
  */
 @TableName("ta_outer_account")
 public class OuterAccountDO implements Serializable {
@@ -38,9 +38,9 @@ public class OuterAccountDO implements Serializable {
     private String memberId;
 
     /**
-     * 状态，共6位，每位表示一种类型的状态
+     * 禁止状态
      */
-    private String statusMap;
+    private String denyStatus;
 
     /**
      * 账户属性 1:对私，2:对公
@@ -109,12 +109,12 @@ public class OuterAccountDO implements Serializable {
         this.memberId = memberId;
     }
 
-    public String getStatusMap() {
-        return statusMap;
+    public String getDenyStatus() {
+        return denyStatus;
     }
 
-    public void setStatusMap(String statusMap) {
-        this.statusMap = statusMap;
+    public void setDenyStatus(String denyStatus) {
+        this.denyStatus = denyStatus;
     }
 
     public String getAccountAttribute() {
@@ -180,7 +180,7 @@ public class OuterAccountDO implements Serializable {
         ", titleCode = " + titleCode +
         ", accountName = " + accountName +
         ", memberId = " + memberId +
-        ", statusMap = " + statusMap +
+        ", denyStatus = " + denyStatus +
         ", accountAttribute = " + accountAttribute +
         ", accountType = " + accountType +
         ", currentBalanceDirection = " + currentBalanceDirection +

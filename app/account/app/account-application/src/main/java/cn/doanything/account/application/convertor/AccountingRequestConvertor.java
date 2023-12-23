@@ -10,7 +10,7 @@ import cn.doanything.account.facade.dto.AccountingRequest;
 import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.commons.exceptions.BaseException;
-import cn.doanything.commons.lang.SystemResultCode;
+import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -36,11 +36,11 @@ public interface AccountingRequestConvertor {
 
     default AccountDetail toAccountDetail(AccountingRequest request, EntryDetail entryDetail) {
         AccountFamily accountFamily = AccountUtil.getAccountFamily(entryDetail.getAccountNo());
-        AssertUtil.isNotNull(accountFamily, SystemResultCode.ILLEGAL_PARAM, "账户分类不存在");
+        AssertUtil.isNotNull(accountFamily, GlobalResultCode.ILLEGAL_PARAM, "账户分类不存在");
         return switch (accountFamily) {
             case INNER -> toInnerAccountDetail(request, entryDetail);
             case OUTER -> toOuterAccountDetail(request, entryDetail);
-            default -> throw new BaseException(SystemResultCode.ILLEGAL_PARAM);
+            default -> throw new BaseException(GlobalResultCode.ILLEGAL_PARAM);
         };
     }
 

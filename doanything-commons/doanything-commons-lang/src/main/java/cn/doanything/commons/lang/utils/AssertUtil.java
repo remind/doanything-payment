@@ -23,7 +23,14 @@ public class AssertUtil {
     }
 
     public static void isFalse(boolean expression, ResultCode resultCode) {
-        isTrue(!expression, resultCode, null);
+        isFalse(expression, resultCode, null);
+    }
+    public static void isFalse(boolean expression, String message) {
+        isFalse(expression, null, message);
+    }
+
+    public static void isFalse(boolean expression, ResultCode resultCode, String message) {
+        isTrue(!expression, resultCode, message);
     }
 
     public static void isNotNull(Object object, ResultCode resultCode) {

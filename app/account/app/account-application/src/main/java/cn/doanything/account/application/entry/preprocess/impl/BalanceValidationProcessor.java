@@ -6,7 +6,7 @@ import cn.doanything.account.facade.dto.AccountingRequest;
 import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.AccountResultCode;
 import cn.doanything.commons.exceptions.BaseException;
-import cn.doanything.commons.lang.SystemResultCode;
+import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.commons.lang.types.Money;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import org.springframework.core.annotation.Order;
@@ -28,7 +28,7 @@ public class BalanceValidationProcessor implements AccountEntryPreprocessor {
     @Override
     public void process(AccountingRequest request, EntryContext entryContext) {
         Map<String, List<EntryDetail>> entryMap = new HashMap<>();
-        AssertUtil.isNotNull(request.getEntryDetails(), SystemResultCode.ILLEGAL_PARAM, "入账明细不能为空");
+        AssertUtil.isNotNull(request.getEntryDetails(), GlobalResultCode.ILLEGAL_PARAM, "入账明细不能为空");
         request.getEntryDetails().forEach(entryDetail -> {
             if (!entryMap.containsKey(entryDetail.getSuiteNo())) {
                 entryMap.put(entryDetail.getSuiteNo(), new ArrayList<>());

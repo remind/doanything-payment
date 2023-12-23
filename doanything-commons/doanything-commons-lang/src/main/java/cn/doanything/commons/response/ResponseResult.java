@@ -36,7 +36,6 @@ public class ResponseResult<T> {
     /**
      * 返回成功，不带数据
      * @return
-     * @param <T>
      */
     public static ResponseResult<String> success() {
         return success(null);
@@ -49,7 +48,7 @@ public class ResponseResult<T> {
      * @param <T>
      */
     public static <T> ResponseResult<T> success(T data) {
-        return success(BaseResultCode.SUCCESS.getMessage(), data);
+        return success(GlobalResultCode.SUCCESS.getMessage(), data);
     }
 
     /**
@@ -60,33 +59,30 @@ public class ResponseResult<T> {
      * @param <T>   数据类型
      */
     public static <T> ResponseResult<T> success(String message, T data) {
-        return new ResponseResult<T>(BaseResultCode.SUCCESS.getCode(), message, data);
+        return new ResponseResult<T>(GlobalResultCode.SUCCESS.getCode(), message, data);
     }
 
     /**
      * 构造失败结果，使用默认错误码和错误消息
      * @return
-     * @param <T>
      */
     public static ResponseResult<String> fail() {
-        return new ResponseResult<String>(BaseResultCode.FAIL.getCode(), BaseResultCode.FAIL.getMessage(), null);
+        return new ResponseResult<String>(GlobalResultCode.FAIL.getCode(), GlobalResultCode.FAIL.getMessage(), null);
     }
 
     /**
      * 构造失败结果，使用默认错误码
      * @param message
      * @return
-     * @param <T>
      */
     public static ResponseResult<String> fail(String message) {
-        return new ResponseResult<String>(BaseResultCode.FAIL.getCode(), message, null);
+        return new ResponseResult<String>(GlobalResultCode.FAIL.getCode(), message, null);
     }
 
     /**
      * 构造失败结果，指定错误码
      * @param resultCode
      * @return
-     * @param <T>
      */
     public static ResponseResult<String> fail(ResultCode resultCode) {
         return new ResponseResult<String>(resultCode.getCode(), resultCode.getMessage(), null);

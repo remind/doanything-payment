@@ -1,7 +1,7 @@
 package cn.doanything.commons.exceptions;
 
-import cn.doanything.commons.response.BaseResultCode;
 import cn.doanything.commons.response.ResultCode;
+import cn.doanything.commons.response.GlobalResultCode;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -21,7 +21,7 @@ public class BaseException extends RuntimeException {
 
     public BaseException(ResultCode resultCode, String message) {
         super(StringUtils.isNotBlank(message) ? message : resultCode.getMessage());
-        this.resultCode = resultCode != null ? resultCode : BaseResultCode.FAIL;
+        this.resultCode = resultCode != null ? resultCode : GlobalResultCode.FAIL;
     }
 
     public ResultCode getResultCode() {
