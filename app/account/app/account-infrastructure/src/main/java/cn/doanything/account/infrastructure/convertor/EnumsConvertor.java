@@ -3,6 +3,7 @@ package cn.doanything.account.infrastructure.convertor;
 import cn.doanything.account.types.accounting.AccountTitleRange;
 import cn.doanything.account.types.accounting.AccountTitleStatus;
 import cn.doanything.account.types.accounting.AccountTitleType;
+import cn.doanything.account.types.buffer.BufferedRuleStatus;
 import cn.doanything.account.types.enums.*;
 import org.mapstruct.Mapper;
 
@@ -74,6 +75,22 @@ public interface EnumsConvertor {
     }
 
     default String toIODirectionCode(IODirection enumObject) {
+        return enumObject == null ? null : enumObject.code();
+    }
+
+    default BufferDetailStatus toBufferDetailStatus(String code) {
+        return BufferDetailStatus.getByCode(code);
+    }
+
+    default String toBufferDetailStatusCode(BufferDetailStatus enumObject) {
+        return enumObject == null ? null : enumObject.code();
+    }
+
+    default BufferedRuleStatus toBufferedRuleStatus(String code) {
+        return BufferedRuleStatus.getByCode(code);
+    }
+
+    default String toBufferedRuleStatusCode(BufferedRuleStatus enumObject) {
         return enumObject == null ? null : enumObject.code();
     }
 

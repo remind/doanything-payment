@@ -52,7 +52,7 @@ public class AccountUtil {
         if (StringUtils.isNotBlank(accountNo)) {
             if (accountNo.length() == 27) {
                 return AccountFamily.OUTER;
-            } else if (accountNo.length() == 14) {
+            } else if (accountNo.length() == 17) {
                 return AccountFamily.INNER;
             }
         }

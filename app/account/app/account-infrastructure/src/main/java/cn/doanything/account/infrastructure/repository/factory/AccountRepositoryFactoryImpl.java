@@ -1,6 +1,6 @@
 package cn.doanything.account.infrastructure.repository.factory;
 
-import cn.doanything.account.domain.repository.AccountRepository;
+import cn.doanything.account.domain.repository.OuterAccountRepository;
 import cn.doanything.account.domain.repository.factory.AccountRepositoryFactory;
 import cn.doanything.account.infrastructure.repository.OuterAccountRepositoryImpl;
 import cn.doanything.account.types.enums.AccountFamily;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountRepositoryFactoryImpl implements AccountRepositoryFactory {
     @Resource(type = OuterAccountRepositoryImpl.class)
-    private AccountRepository outerAccountRepository;
+    private OuterAccountRepository outerAccountRepository;
 
     @Override
-    public AccountRepository getRepository(AccountFamily accountFamily) {
+    public OuterAccountRepository getRepository(AccountFamily accountFamily) {
         if (accountFamily == AccountFamily.OUTER) {
             return outerAccountRepository;
         }

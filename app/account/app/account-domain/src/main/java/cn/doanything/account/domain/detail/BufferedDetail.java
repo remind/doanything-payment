@@ -20,5 +20,5 @@ public class BufferedDetail extends AccountDetail {
     /**
      * 执行次数
      **/
-    private Integer count;
+    private Integer executeCount;
 }

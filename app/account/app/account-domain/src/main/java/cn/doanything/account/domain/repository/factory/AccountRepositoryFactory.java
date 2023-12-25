@@ -1,6 +1,6 @@
 package cn.doanything.account.domain.repository.factory;
 
-import cn.doanything.account.domain.repository.AccountRepository;
+import cn.doanything.account.domain.repository.OuterAccountRepository;
 import cn.doanything.account.types.enums.AccountFamily;
 
 /**
@@ -9,5 +9,5 @@ import cn.doanything.account.types.enums.AccountFamily;
  */
 public interface AccountRepositoryFactory {
 
-    AccountRepository getRepository(AccountFamily accountFamily);
+    OuterAccountRepository getRepository(AccountFamily accountFamily);
 }

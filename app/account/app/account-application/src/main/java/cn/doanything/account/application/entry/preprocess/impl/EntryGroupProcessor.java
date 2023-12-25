@@ -5,11 +5,13 @@ import cn.doanything.account.application.entry.AccountEntryGroup;
 import cn.doanything.account.application.entry.EntryContext;
 import cn.doanything.account.application.entry.preprocess.AccountEntryPreprocessor;
 import cn.doanything.account.domain.AccountDomainConstants;
+import cn.doanything.account.domain.buffer.service.BufferedService;
 import cn.doanything.account.domain.detail.AccountDetail;
+import cn.doanything.account.domain.detail.BufferedDetail;
 import cn.doanything.account.domain.detail.OuterAccountDetail;
-import cn.doanything.account.domain.service.AccountDetailService;
 import cn.doanything.account.facade.dto.AccountingRequest;
 import cn.doanything.account.facade.dto.FundSpiltRule;
+import cn.doanything.account.types.enums.BufferDetailStatus;
 import cn.doanything.commons.lang.types.Money;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +38,17 @@ public class EntryGroupProcessor implements AccountEntryPreprocessor {
     private AccountingRequestConvertor convertor;
 
     @Autowired
-    private AccountDetailService accountDetailService;
+    private BufferedService bufferedService;
 
     @Override
     public void process(AccountingRequest request, EntryContext entryContext) {
         Map<String, AccountEntryGroup> groupMap = new HashMap<>();
         request.getEntryDetails().forEach(entryDetail -> {
             AccountDetail accountDetail = convertor.toAccountDetail(request, entryDetail);
-            if (accountDetailService.isBuffer(accountDetail)) {
-                entryContext.getBufferedDetails().add(convertor.toBufferedDetail(request, entryDetail));
+            if (bufferedService.isBuffer(accountDetail)) {
+                BufferedDetail bufferedDetail = convertor.toBufferedDetail(request, entryDetail);
+                bufferedDetail.setStatus(BufferDetailStatus.INIT);
+                entryContext.getBufferedDetails().add(bufferedDetail);
             } else {
                 if (!groupMap.containsKey(entryDetail.getAccountNo())) {
                     AccountEntryGroup accountEntryGroup = new AccountEntryGroup();

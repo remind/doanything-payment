@@ -2,9 +2,11 @@ package cn.doanything.account.facade.manager;
 
 import cn.doanything.account.domain.Account;
 import cn.doanything.account.domain.InnerAccount;
+import cn.doanything.account.domain.OuterAccount;
 import cn.doanything.account.domain.OuterAccountType;
 import cn.doanything.account.domain.repository.AccountTypeRepository;
 import cn.doanything.account.domain.repository.InnerAccountRepository;
+import cn.doanything.account.domain.repository.OuterAccountRepository;
 import cn.doanything.account.domain.repository.factory.AccountRepositoryFactory;
 import cn.doanything.account.facade.manager.builder.InnerAccountBuilder;
 import cn.doanything.account.facade.manager.builder.OuterAccountBuilder;
@@ -45,13 +47,16 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
     @Autowired
     private InnerAccountRepository innerAccountRepository;
 
+    @Autowired
+    private OuterAccountRepository outerAccountRepository;
+
     @Override
     public ResponseResult<String> addOuterAccount(OuterAccountAddRequest request) {
         try {
             OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
             AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");
-            Account account = outerAccountBuilder.build(request);
-            String accountNo = transactionTemplate.execute(status -> accountRepositoryFactory.getRepository(AccountFamily.OUTER).store(account));
+            OuterAccount account = outerAccountBuilder.build(request);
+            String accountNo = transactionTemplate.execute(status -> outerAccountRepository.store(account));
             return ResponseResult.success(accountNo);
         } catch (Exception e) {
             log.error("外部户开户失败,memberId="+ request.getMemberId(), e);

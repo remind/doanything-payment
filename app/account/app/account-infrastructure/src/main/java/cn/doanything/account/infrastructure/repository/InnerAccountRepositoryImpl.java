@@ -7,6 +7,8 @@ import cn.doanything.account.infrastructure.persistence.convertor.InnerAccountDa
 import cn.doanything.account.infrastructure.persistence.dataobject.InnerAccountDO;
 import cn.doanything.account.infrastructure.persistence.mapper.InnerAccountMapper;
 import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.commons.response.GlobalResultCode;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +38,24 @@ public class InnerAccountRepositoryImpl implements InnerAccountRepository {
         return account.getAccountNo();
     }
 
+    @Override
+    public void reStore(InnerAccount account) {
+        AssertUtil.isNotNull(account, GlobalResultCode.ILLEGAL_PARAM);
+        mapper.update(dalConvertor.toDo(account), getIdWrapper(account.getAccountNo()));
+    }
+
+    @Override
+    public InnerAccount load(String accountNo) {
+        AssertUtil.isNotNull(accountNo, GlobalResultCode.ILLEGAL_PARAM);
+        return dalConvertor.toEntity(mapper.selectOne(getIdWrapper(accountNo)));
+    }
+
+    @Override
+    public InnerAccount lock(String accountNo) {
+        AssertUtil.isNotNull(accountNo, GlobalResultCode.ILLEGAL_PARAM);
+        return dalConvertor.toEntity(mapper.lockOne(getIdWrapper(accountNo)));
+    }
+
     private String genAccountNo(String titleCode, String currencyCode) {
         String incId = getIncId(titleCode, currencyCode);
         return titleCode + Currency.getInstance(currencyCode).getNumericCode() + incId;
@@ -48,11 +68,14 @@ public class InnerAccountRepositoryImpl implements InnerAccountRepository {
                 .orderByDesc(InnerAccountDO::getAccountNo));
         int intMaxNo = 0;
         if (!CollectionUtils.isEmpty(accountDOS)) {
-            String maxNo = accountDOS.get(0).getAccountNo().substring(accountDOS.get(0).getAccountNo().length() - 5);
+            String maxNo = accountDOS.get(0).getAccountNo().substring(accountDOS.get(0).getAccountNo().length() - maxLength);
             intMaxNo = Integer.parseInt(maxNo);
             AssertUtil.isTrue(intMaxNo > 0 && intMaxNo < AccountDomainConstants.OUTER_ACCOUNT_NO_MAX_INC, "用户账户已经超过最大个数");
         }
         return String.format("%0" + maxLength + "d", intMaxNo + 1);
     }
 
+    private Wrapper<InnerAccountDO> getIdWrapper(String accountNo) {
+        return new LambdaQueryWrapper<InnerAccountDO>().eq(InnerAccountDO::getAccountNo, accountNo);
+    }
 }

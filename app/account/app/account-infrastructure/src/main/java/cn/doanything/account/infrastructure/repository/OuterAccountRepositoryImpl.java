@@ -1,17 +1,16 @@
 package cn.doanything.account.infrastructure.repository;
 
-import cn.doanything.account.domain.Account;
 import cn.doanything.account.domain.AccountDomainConstants;
 import cn.doanything.account.domain.OuterAccount;
-import cn.doanything.account.domain.repository.AccountRepository;
+import cn.doanything.account.domain.repository.OuterAccountRepository;
 import cn.doanything.account.infrastructure.persistence.convertor.OuterAccountDalConvertor;
 import cn.doanything.account.infrastructure.persistence.convertor.OuterSubAccountDalConvertor;
 import cn.doanything.account.infrastructure.persistence.dataobject.OuterAccountDO;
 import cn.doanything.account.infrastructure.persistence.dataobject.OuterSubAccountDO;
 import cn.doanything.account.infrastructure.persistence.mapper.OuterAccountMapper;
 import cn.doanything.account.infrastructure.persistence.mapper.OuterSubAccountMapper;
-import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.commons.response.GlobalResultCode;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -29,7 +28,7 @@ import java.util.List;
  * 2023/12/16
  */
 @Repository
-public class OuterAccountRepositoryImpl implements AccountRepository {
+public class OuterAccountRepositoryImpl implements OuterAccountRepository {
 
     @Autowired
     private OuterAccountMapper outerAccountMapper;
@@ -44,27 +43,22 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
     private OuterSubAccountDalConvertor outerSubAccountDalConvertor;
 
     @Override
-    public String store(Account account) {
-        AssertUtil.isNotNull(account, GlobalResultCode.ILLEGAL_PARAM);
-        AssertUtil.isTrue(account instanceof OuterAccount, GlobalResultCode.ILLEGAL_PARAM);
-        OuterAccount outerAccount = (OuterAccount) account;
-        AssertUtil.isFalse(isExists(outerAccount.getMemberId(), outerAccount.getAccountType()), "该用户的账户类型已经存在");
-        String accountNo = genAccountNo(outerAccount.getMemberId(), outerAccount.getTitleCode(), outerAccount.getCurrencyCode());
-        outerAccount.setAccountNo(accountNo);
-        OuterAccountDO outerAccountDO = dalConvertor.toOuterAccountDo(outerAccount);
-        List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountDalConvertor.toDo(outerAccount.getOuterSubAccounts());
+    public String store(OuterAccount account) {
+        AssertUtil.isFalse(isExists(account.getMemberId(), account.getAccountType()), "该用户的账户类型已经存在");
+        String accountNo = genAccountNo(account.getMemberId(), account.getTitleCode(), account.getCurrencyCode());
+        account.setAccountNo(accountNo);
+        OuterAccountDO outerAccountDO = dalConvertor.toOuterAccountDo(account);
+        List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountDalConvertor.toDo(account.getOuterSubAccounts());
         outerAccountMapper.insert(outerAccountDO);
         outerSubAccountDOS.forEach(outerSubAccountDO -> outerSubAccountMapper.insert(outerSubAccountDO));
         return accountNo;
     }
 
     @Override
-    public void reStore(Account account) {
+    public void reStore(OuterAccount account) {
         AssertUtil.isNotNull(account, GlobalResultCode.ILLEGAL_PARAM);
-        AssertUtil.isTrue(account instanceof OuterAccount, GlobalResultCode.ILLEGAL_PARAM);
-        OuterAccount outerAccount = (OuterAccount) account;
-        OuterAccountDO outerAccountDO = dalConvertor.toOuterAccountDo(outerAccount);
-        List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountDalConvertor.toDo(outerAccount.getOuterSubAccounts());
+        OuterAccountDO outerAccountDO = dalConvertor.toOuterAccountDo(account);
+        List<OuterSubAccountDO> outerSubAccountDOS = outerSubAccountDalConvertor.toDo(account.getOuterSubAccounts());
         outerAccountMapper.update(outerAccountDO, getOuterAccountIdWrapper(account.getAccountNo()));
         outerSubAccountDOS.forEach(outerSubAccountDO -> {
             outerSubAccountMapper.update(outerSubAccountDO
@@ -73,7 +67,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account load(String accountNo) {
+    public OuterAccount load(String accountNo) {
         AssertUtil.isNotNull(accountNo, GlobalResultCode.ILLEGAL_PARAM);
         OuterAccount outerAccount = null;
         OuterAccountDO outerAccountDO = outerAccountMapper.selectOne(getOuterAccountIdWrapper(accountNo));
@@ -86,7 +80,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account lock(String accountNo) {
+    public OuterAccount lock(String accountNo) {
         AssertUtil.isNotNull(accountNo, GlobalResultCode.ILLEGAL_PARAM);
         OuterAccount outerAccount = null;
         OuterAccountDO outerAccountDO = outerAccountMapper.lockOne(getOuterAccountIdWrapper(accountNo));
@@ -112,7 +106,7 @@ public class OuterAccountRepositoryImpl implements AccountRepository {
                 .orderByDesc(OuterAccountDO::getAccountNo));
         int intMaxNo = 0;
         if (!CollectionUtils.isEmpty(outerAccountDOS)) {
-            String maxNo = outerAccountDOS.get(0).getAccountNo().substring(outerAccountDOS.get(0).getAccountNo().length() - 5);
+            String maxNo = outerAccountDOS.get(0).getAccountNo().substring(outerAccountDOS.get(0).getAccountNo().length() - maxLength);
             intMaxNo = Integer.parseInt(maxNo);
             AssertUtil.isTrue(intMaxNo > 0 && intMaxNo < AccountDomainConstants.OUTER_ACCOUNT_NO_MAX_INC, "用户账户已经超过最大个数");
         }

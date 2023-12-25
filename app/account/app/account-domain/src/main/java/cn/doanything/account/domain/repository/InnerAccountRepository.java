@@ -14,4 +14,10 @@ public interface InnerAccountRepository {
      * @return
      */
     String store(InnerAccount account);
+
+    void reStore(InnerAccount account);
+
+    InnerAccount load(String accountNo);
+
+    InnerAccount lock(String accountNo);
 }

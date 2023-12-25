@@ -26,7 +26,7 @@ public class AccountEntryServiceTest {
     private AccountEntryService accountEntryService;
 
     @Test
-    public void success() {
+    public void outerSuccess() {
         AccountingRequest request = new AccountingRequest();
         request.setAccountingDate("20231221");
         request.setRequestNo(getUUID());
@@ -49,6 +49,58 @@ public class AccountEntryServiceTest {
         request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
         accountEntryService.process(request);
     }
+
+    @Test
+    public void innerSuccess() {
+        AccountingRequest request = new AccountingRequest();
+        request.setAccountingDate("20231221");
+        request.setRequestNo(getUUID());
+        EntryDetail entryDetail1 = new EntryDetail();
+        entryDetail1.setVoucherNo(getUUID());
+        entryDetail1.setAccountNo("200100200110000000215600001");
+        entryDetail1.setSuiteNo("1");
+        entryDetail1.setAmount(new Money(1));
+        entryDetail1.setCrDr(CrDr.CREDIT);
+        entryDetail1.setMemo("测试入账1");
+
+        EntryDetail entryDetail2 = new EntryDetail();
+        entryDetail2.setVoucherNo(getUUID());
+        entryDetail2.setAccountNo("40010010011560002");
+        entryDetail2.setSuiteNo("1");
+        entryDetail2.setAmount(new Money(1));
+        entryDetail2.setCrDr(CrDr.DEBIT);
+        entryDetail2.setMemo("测试入账2");
+
+        request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
+        accountEntryService.process(request);
+    }
+
+    @Test
+    public void innerBufferSuccess() {
+        AccountingRequest request = new AccountingRequest();
+        request.setAccountingDate("20231221");
+        request.setRequestNo(getUUID());
+        EntryDetail entryDetail1 = new EntryDetail();
+        entryDetail1.setVoucherNo(getUUID());
+        entryDetail1.setAccountNo("200100200110000000215600001");
+        entryDetail1.setSuiteNo("1");
+        entryDetail1.setAmount(new Money(1));
+        entryDetail1.setCrDr(CrDr.CREDIT);
+        entryDetail1.setMemo("测试入账1");
+
+        EntryDetail entryDetail2 = new EntryDetail();
+        entryDetail2.setVoucherNo(getUUID());
+        entryDetail2.setAccountNo("40010010011560001");
+        entryDetail2.setSuiteNo("1");
+        entryDetail2.setAmount(new Money(1));
+        entryDetail2.setCrDr(CrDr.DEBIT);
+        entryDetail2.setMemo("测试入账2");
+
+        request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
+        accountEntryService.process(request);
+    }
+
+
 
     private String getUUID() {
         String uuid = UUID.randomUUID().toString();

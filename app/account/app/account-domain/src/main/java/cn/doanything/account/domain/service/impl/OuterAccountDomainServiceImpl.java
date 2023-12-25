@@ -5,11 +5,10 @@ import cn.doanything.account.domain.OuterSubAccount;
 import cn.doanything.account.domain.detail.AccountDetail;
 import cn.doanything.account.domain.detail.OuterAccountDetail;
 import cn.doanything.account.domain.repository.AccountDetailRepository;
-import cn.doanything.account.domain.repository.factory.AccountRepositoryFactory;
+import cn.doanything.account.domain.repository.OuterAccountRepository;
 import cn.doanything.account.domain.service.OuterAccountDomainService;
 import cn.doanything.account.domain.utils.AccountUtil;
 import cn.doanything.account.types.AccountResultCode;
-import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.exceptions.BaseException;
 import cn.doanything.commons.lang.utils.AssertUtil;
@@ -28,7 +27,7 @@ import java.util.List;
 public class OuterAccountDomainServiceImpl implements OuterAccountDomainService {
 
     @Autowired
-    private AccountRepositoryFactory accountRepositoryFactory;
+    private OuterAccountRepository outerAccountRepository;
 
     @Autowired
     private AccountDetailRepository accountDetailRepository;
@@ -37,7 +36,7 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
     public void changeBalance(String accountNo, List<AccountDetail> accountDetails) {
         OuterAccount account;
         try {
-            account = (OuterAccount) accountRepositoryFactory.getRepository(AccountFamily.OUTER).lock(accountNo);
+            account = outerAccountRepository.lock(accountNo);
         } catch (Exception e) {
             log.error("账户锁定异常,accountNo=" + accountNo, e);
             throw new BaseException(AccountResultCode.ACCOUNT_LOCK_TIME_OUT);
@@ -49,13 +48,11 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
             outerAccountDetail.setIoDirection(AccountUtil.convert(account.getCurrentBalanceDirection()
                     , outerAccountDetail.getCrDr()));
             checkBalance(account, outerAccountDetail);
-            outerAccountDetail.setBeforeBalance(account.getBalance());
-            changeSubAccountBalance(account, outerAccountDetail);
-            outerAccountDetail.setAfterBalance(account.getBalance());
+            updateBalance(account, outerAccountDetail);
         });
 
         accountDetailRepository.store(accountDetails);
-        accountRepositoryFactory.getRepository(AccountFamily.OUTER).reStore(account);
+        outerAccountRepository.reStore(account);
     }
 
     private void checkBalance(OuterAccount outerAccount, OuterAccountDetail outerAccountDetail) {
@@ -71,7 +68,8 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
      * @param outerAccount
      * @param outerAccountDetail
      */
-    private void changeSubAccountBalance(OuterAccount outerAccount, OuterAccountDetail outerAccountDetail) {
+    private void updateBalance(OuterAccount outerAccount, OuterAccountDetail outerAccountDetail) {
+        outerAccountDetail.setBeforeBalance(outerAccount.getBalance());
         outerAccountDetail.getOuterSubAccountDetails().forEach(outerSubAccountDetail -> {
             OuterSubAccount outerSubAccount = outerAccount.getSubAccountByFundType(outerSubAccountDetail.getFundType());
             AssertUtil.isNotNull(outerSubAccount, AccountResultCode.SUB_ACCOUNT_NOT_EXISTS);
@@ -82,6 +80,7 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
             outerSubAccount.updateAvailableBalance(outerAccountDetail.getIoDirection(), outerSubAccountDetail.getAmount());
             outerSubAccountDetail.setAfterBalance(outerSubAccount.getBalance());
         });
+        outerAccountDetail.setAfterBalance(outerAccount.getBalance());
     }
 
 

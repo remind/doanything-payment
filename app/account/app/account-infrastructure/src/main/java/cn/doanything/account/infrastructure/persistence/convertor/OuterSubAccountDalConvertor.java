@@ -16,7 +16,7 @@ import java.util.Currency;
  * 2023/12/18
  */
 @Mapper(componentModel = "spring")
-public interface OuterSubAccountDalConvertor  extends ReadWriteConvertor<OuterSubAccount, OuterSubAccountDO> {
+public interface OuterSubAccountDalConvertor extends ReadWriteConvertor<OuterSubAccount, OuterSubAccountDO> {
 
     OuterSubAccountDalConvertor INSTANCE = Mappers.getMapper(OuterSubAccountDalConvertor.class);
 

@@ -1,6 +1,8 @@
 package cn.doanything.account.domain;
 
+import cn.doanything.account.domain.utils.AccountUtil;
 import cn.doanything.account.types.enums.AccountFamily;
+import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 import lombok.Setter;
@@ -27,4 +29,7 @@ public class InnerAccount extends Account {
         return AccountFamily.INNER;
     }
 
+    public void updateBalance(IODirection ioDirection, Money amount) {
+        this.balance = AccountUtil.changeBalance(this.balance, ioDirection, amount);
+    }
 }

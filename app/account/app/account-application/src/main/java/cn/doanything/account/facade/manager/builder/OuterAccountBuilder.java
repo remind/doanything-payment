@@ -35,7 +35,7 @@ public class OuterAccountBuilder {
     @Autowired
     private OuterAccountConvertor outerAccountConvertor;
 
-    public Account build(OuterAccountAddRequest request) {
+    public OuterAccount build(OuterAccountAddRequest request) {
         OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
         AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");
         OuterAccount outerAccount = outerAccountConvertor.toOuterAccount(request, outerAccountType);
