@@ -9,4 +9,6 @@ import cn.doanything.account.facade.dto.AccountingRequest;
 public interface AccountEntryService {
 
     void process(AccountingRequest request);
+
+    void processBufferedDetail(String voucherNo);
 }

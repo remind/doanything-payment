@@ -5,6 +5,7 @@ import cn.doanything.account.application.entry.AccountEntryGroup;
 import cn.doanything.account.application.entry.AccountEntryService;
 import cn.doanything.account.application.entry.EntryContext;
 import cn.doanything.account.application.entry.preprocess.AccountEntryPreprocessor;
+import cn.doanything.account.domain.detail.BufferedDetail;
 import cn.doanything.account.domain.repository.AccountTransactionRepository;
 import cn.doanything.account.domain.repository.BufferedDetailRepository;
 import cn.doanything.account.domain.service.InnerAccountDomainService;
@@ -57,6 +58,13 @@ public class AccountEntryServiceImpl implements AccountEntryService {
             accountTransactionRepository.store(entryContext.getAccountTransaction());
             processDetail(entryContext.getAccountEntryGroups());
             bufferedDetailRepository.store(entryContext.getBufferedDetails());
+        });
+    }
+
+    @Override
+    public void processBufferedDetail(String voucherNo) {
+        transactionTemplate.executeWithoutResult(status -> {
+            BufferedDetail bufferedDetail = bufferedDetailRepository.lock(voucherNo);
         });
     }
 

@@ -11,4 +11,8 @@ import java.util.List;
 public interface BufferedDetailRepository {
 
     void store(List<BufferedDetail> bufferedDetails);
+
+    void reStore(BufferedDetail bufferedDetail);
+
+    BufferedDetail lock(String voucherNo);
 }
