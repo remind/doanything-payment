@@ -34,7 +34,7 @@ public enum AccountFamily  implements CodeEnum {
      */
     public static AccountFamily getByCode(String code) {
         for (AccountFamily enumObject : AccountFamily.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -42,12 +42,12 @@ public enum AccountFamily  implements CodeEnum {
         return null;
     }
     @Override
-    public String code() {
+    public String getCode() {
         return code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
 }

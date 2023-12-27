@@ -5,6 +5,7 @@ import cn.doanything.account.types.accounting.AccountTitleStatus;
 import cn.doanything.account.types.accounting.AccountTitleType;
 import cn.doanything.account.types.buffer.BufferedRuleStatus;
 import cn.doanything.account.types.enums.*;
+import cn.doanything.commons.enums.CodeEnum;
 import org.mapstruct.Mapper;
 
 /**
@@ -14,12 +15,20 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface EnumsConvertor {
 
+    default <T extends Enum<?> & CodeEnum> T getByCode(Class<T> enumCls, String code) {
+        T[] enumConstants = enumCls.getEnumConstants();
+        for (T t : enumConstants) {
+            if (t.getCode().equals(code)) return t;
+        }
+        return null;
+    }
+
     default AccountTitleType toAccountTitleType(String titleType) {
         return AccountTitleType.getByCode(titleType);
     }
 
     default String toAccountTitleTypeCode(AccountTitleType accountTitleType) {
-        return accountTitleType == null ? null : accountTitleType.code();
+        return accountTitleType == null ? null : accountTitleType.getCode();
     }
 
     default BalanceDirection toBalanceDirection(String direction) {
@@ -27,7 +36,7 @@ public interface EnumsConvertor {
     }
 
     default String toBalanceDirectionCode(BalanceDirection balanceDirection) {
-        return balanceDirection == null ? null : balanceDirection.code();
+        return balanceDirection == null ? null : balanceDirection.getCode();
     }
 
     default AccountTitleStatus toAccountTitleStatus(String status) {
@@ -35,7 +44,7 @@ public interface EnumsConvertor {
     }
 
     default String toAccountTitleStatusCode(AccountTitleStatus accountTitleStatus) {
-        return accountTitleStatus == null ? null : accountTitleStatus.code();
+        return accountTitleStatus == null ? null : accountTitleStatus.getCode();
     }
 
     default AccountTitleRange toAccountTitleRange(String accountTitleRange) {
@@ -43,7 +52,7 @@ public interface EnumsConvertor {
     }
 
     default String toAccountTitleRangeCode(AccountTitleRange accountTitleRange) {
-        return accountTitleRange == null ? null : accountTitleRange.code();
+        return accountTitleRange == null ? null : accountTitleRange.getCode();
     }
 
     default AccountAttribute toAccountAttribute(String accountAttribute) {
@@ -51,7 +60,7 @@ public interface EnumsConvertor {
     }
 
     default String toAccountAttributeCode(AccountAttribute accountAttribute) {
-        return accountAttribute == null ? null : accountAttribute.code();
+        return accountAttribute == null ? null : accountAttribute.getCode();
     }
 
     default CrDr toCrDr(String crDrCode) {
@@ -59,7 +68,7 @@ public interface EnumsConvertor {
     }
 
     default String toCrDrCode(CrDr crDr) {
-        return crDr == null ? null : crDr.code();
+        return crDr == null ? null : crDr.getCode();
     }
 
     default DenyStatus toDenyStatus(String code) {
@@ -67,7 +76,7 @@ public interface EnumsConvertor {
     }
 
     default String toDenyStatusCode(DenyStatus enumObject) {
-        return enumObject == null ? null : enumObject.code();
+        return enumObject == null ? null : enumObject.getCode();
     }
 
     default IODirection toIODirection(String code) {
@@ -75,7 +84,7 @@ public interface EnumsConvertor {
     }
 
     default String toIODirectionCode(IODirection enumObject) {
-        return enumObject == null ? null : enumObject.code();
+        return enumObject == null ? null : enumObject.getCode();
     }
 
     default BufferDetailStatus toBufferDetailStatus(String code) {
@@ -83,7 +92,7 @@ public interface EnumsConvertor {
     }
 
     default String toBufferDetailStatusCode(BufferDetailStatus enumObject) {
-        return enumObject == null ? null : enumObject.code();
+        return enumObject == null ? null : enumObject.getCode();
     }
 
     default BufferedRuleStatus toBufferedRuleStatus(String code) {
@@ -91,7 +100,7 @@ public interface EnumsConvertor {
     }
 
     default String toBufferedRuleStatusCode(BufferedRuleStatus enumObject) {
-        return enumObject == null ? null : enumObject.code();
+        return enumObject == null ? null : enumObject.getCode();
     }
 
 }

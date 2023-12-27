@@ -30,7 +30,7 @@ public enum BufferedRuleStatus implements CodeEnum {
      */
     public static BufferedRuleStatus getByCode(String code) {
         for (BufferedRuleStatus enumObject : BufferedRuleStatus.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -38,12 +38,12 @@ public enum BufferedRuleStatus implements CodeEnum {
     }
 
     @Override
-    public String code() {
+    public String getCode() {
         return this.code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return this.displayName;
     }
 }

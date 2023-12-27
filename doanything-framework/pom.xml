@@ -11,6 +11,7 @@
         <module>doanything-framework-dal</module>
         <module>doanything-framework-config</module>
         <module>doanything-framework-sequence</module>
+        <module>doanything-framework-scheduler</module>
     </modules>
 
     <properties>

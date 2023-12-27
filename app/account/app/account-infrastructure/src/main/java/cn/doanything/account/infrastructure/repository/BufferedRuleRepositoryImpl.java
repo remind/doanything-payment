@@ -38,7 +38,7 @@ public class BufferedRuleRepositoryImpl implements BufferedRuleRepository {
     public boolean isExists(String accountNo, CrDr crDr) {
         Wrapper<BufferedRuleDO> wrapper = new LambdaQueryWrapper<BufferedRuleDO>()
                 .eq(BufferedRuleDO::getAccountNo, accountNo)
-                .and(a -> a.eq(BufferedRuleDO::getCrDr, crDr.code())
+                .and(a -> a.eq(BufferedRuleDO::getCrDr, crDr.getCode())
                         .or(b -> b.isNull(BufferedRuleDO::getCrDr)));
         return mapper.selectCount(wrapper) > 0;
     }

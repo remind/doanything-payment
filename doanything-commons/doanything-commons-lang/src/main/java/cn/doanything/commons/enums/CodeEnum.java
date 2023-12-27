@@ -5,18 +5,19 @@ package cn.doanything.commons.enums;
  * 2023/12/16
  */
 public interface CodeEnum {
-    
+
     /**
      * 获取编码
      *
-     * @return 
+     * @return
      */
-    String code();
+    String getCode();
 
     /**
      * 获取名称
+     *
      * @return
      */
-    String displayName();
+    String getDisplayName();
 
 }

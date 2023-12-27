@@ -29,7 +29,7 @@ public enum ActivateStatus implements CodeEnum {
      */
     public static ActivateStatus getByCode(String code) {
         for (ActivateStatus enumObject : ActivateStatus.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -39,12 +39,12 @@ public enum ActivateStatus implements CodeEnum {
 
 
     @Override
-    public String code() {
+    public String getCode() {
         return code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
 }

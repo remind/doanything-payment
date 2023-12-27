@@ -22,12 +22,12 @@ public enum AccountAttribute implements CodeEnum {
     }
 
     @Override
-    public String code() {
+    public String getCode() {
         return code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
     /**
@@ -38,7 +38,7 @@ public enum AccountAttribute implements CodeEnum {
      */
     public static AccountAttribute getByCode(String code) {
         for (AccountAttribute enumObject : values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }

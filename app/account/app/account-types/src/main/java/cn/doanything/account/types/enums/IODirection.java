@@ -30,7 +30,7 @@ public enum IODirection implements CodeEnum {
      */
     public static IODirection getByCode(String code) {
         for (IODirection enumObject : IODirection.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -39,12 +39,12 @@ public enum IODirection implements CodeEnum {
     }
 
     @Override
-    public String code() {
+    public String getCode() {
         return code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
 }

@@ -31,7 +31,7 @@ public enum BalanceDirection implements CodeEnum {
      */
     public static BalanceDirection getByCode(String code) {
         for (BalanceDirection enumObject : BalanceDirection.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -40,12 +40,12 @@ public enum BalanceDirection implements CodeEnum {
 
 
     @Override
-    public String code() {
+    public String getCode() {
         return this.code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return this.displayName;
     }
 }

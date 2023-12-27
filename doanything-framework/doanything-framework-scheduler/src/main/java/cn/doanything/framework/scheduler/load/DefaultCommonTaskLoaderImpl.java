@@ -1,0 +1,97 @@
+package cn.doanything.framework.scheduler.load;
+
+import cn.doanything.framework.scheduler.distribute.DistributorAdapter;
+import cn.doanything.framework.scheduler.model.ExecuteResult;
+import cn.doanything.framework.scheduler.model.Task;
+import cn.doanything.framework.scheduler.properties.CommonTaskProperties;
+import cn.doanything.framework.scheduler.repository.TaskRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+
+/**
+ * 默认任务加载器
+ */
+@Slf4j
+public class DefaultCommonTaskLoaderImpl implements CommonTaskLoader {
+
+    private TaskRepository taskRepository;
+
+    private CommonTaskProperties properties;
+
+    private DistributorAdapter distributorAdapter;
+
+    private ExecutorService executorService;
+
+    @Override
+    public int loadAndDistribute() {
+        List<String> taskIds;
+        int total = 0;
+        long startTime = System.currentTimeMillis();
+        List<Future<ExecuteResult>> executeResults = new ArrayList<>();
+        while (true) {
+            taskIds = taskRepository.pageQueryWaitExecuteTaskIds(properties.getLoadCount());
+            if (CollectionUtils.isEmpty(taskIds)) {
+                break;
+            }
+            executeResults.addAll(batchDistributeTask(taskIds));
+            total += taskIds.size();
+            if (taskIds.size() < properties.getLoadCount()) {
+                break;
+            }
+        }
+        if (total > 0) {
+            printExecuteResults(executeResults);
+            log.info("结束任务处理，处理条数={},耗时={}", total, (System.currentTimeMillis() - startTime));
+        }
+        return total;
+    }
+
+    private void printExecuteResults(List<Future<ExecuteResult>> executeResults) {
+        executeResults.forEach(executeResultFuture -> {
+            try {
+                ExecuteResult executeResult = executeResultFuture.get();
+                log.info("任务执行结果,taskId={},status={},cost={},message={}"
+                        , executeResult.getTaskId(), executeResult.isSuccess()
+                        , (executeResult.getEndTime() - executeResult.getStartTime())
+                        , executeResult.getMessage());
+            } catch (Exception e) {
+                log.error("打印执行结果异常", e);
+            }
+        });
+    }
+
+    private List<Future<ExecuteResult>> batchDistributeTask(List<String> taskIds) {
+        List<Future<ExecuteResult>> executeResults = new ArrayList<>();
+        for (String taskId : taskIds) {
+            try {
+                Task task = taskRepository.load(taskId);
+                if (task == null) {
+                    continue;
+                }
+                executeResults.add(executorService.submit(() -> {
+                    ExecuteResult executeResult;
+                    Long startTime = System.currentTimeMillis();
+                    try {
+                        executeResult = distributorAdapter.distribute(task);
+                    } catch (Exception e) {
+                        log.error("任务处理异常:" + task.getId(), e);
+                        executeResult = ExecuteResult.fail(task.getId(), e.getMessage());
+                    }
+                    executeResult.setTime(startTime, System.currentTimeMillis());
+                    return executeResult;
+
+                }));
+            } catch (Exception e) {
+                log.error("任务处理异常,taskId=" + taskId, e);
+            }
+        }
+        return executeResults;
+    }
+
+}

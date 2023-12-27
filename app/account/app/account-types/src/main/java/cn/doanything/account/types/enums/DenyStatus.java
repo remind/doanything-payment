@@ -33,7 +33,7 @@ public enum DenyStatus implements CodeEnum {
      */
     public static DenyStatus getByCode(String code) {
         for (DenyStatus enumObject : DenyStatus.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -41,11 +41,11 @@ public enum DenyStatus implements CodeEnum {
         return null;
     }
 
-    public String code() {
+    public String getCode() {
         return code;
     }
 
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
 }

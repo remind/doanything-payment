@@ -24,12 +24,12 @@ public enum AccountTitleType implements CodeEnum {
     }
 
     @Override
-    public String code() {
+    public String getCode() {
         return code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
 

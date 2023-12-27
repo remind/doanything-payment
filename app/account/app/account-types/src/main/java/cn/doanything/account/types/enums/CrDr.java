@@ -30,7 +30,7 @@ public enum CrDr implements CodeEnum {
      */
     public static CrDr getByCode(String code) {
         for (CrDr enumObject : CrDr.values()) {
-            if (enumObject.code().equals(code)) {
+            if (enumObject.getCode().equals(code)) {
                 return enumObject;
             }
         }
@@ -43,21 +43,21 @@ public enum CrDr implements CodeEnum {
      * @return
      */
     public static CrDr reverse(CrDr crDr) {
-        if (crDr.code().equals(DEBIT.code())) {
+        if (crDr.getCode().equals(DEBIT.getCode())) {
             return CREDIT;
-        } else if (crDr.code().equals(CREDIT.code())) {
+        } else if (crDr.getCode().equals(CREDIT.getCode())) {
             return DEBIT;
         }
         return null;
     }
 
     @Override
-    public String code() {
+    public String getCode() {
         return code;
     }
 
     @Override
-    public String displayName() {
+    public String getDisplayName() {
         return displayName;
     }
 
