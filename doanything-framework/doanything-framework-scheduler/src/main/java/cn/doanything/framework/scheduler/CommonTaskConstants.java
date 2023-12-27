@@ -11,9 +11,4 @@ public interface CommonTaskConstants {
      */
     String PREFIX = "doanything.framework.scheduler";
 
-    /**
-     * xxl任务名称
-     */
-    String XXLJOBNAME = "xxlCommonTaskJobHandler";
-
 }

@@ -14,7 +14,7 @@ public interface SchedulerTaskHandler<T> {
      * @param taskParam 任务参数
      * @return
      */
-    boolean handle(Long taskId, String taskType, String bizId, T taskParam);
+    boolean handle(String taskId, String taskType, String bizId);
 
     /**
      * 任务达到最大执行次数后还是失败时调用
@@ -24,5 +24,5 @@ public interface SchedulerTaskHandler<T> {
      * @param taskParam 任务参数
      * @return
      */
-    void failHandle(Long taskId, String taskType, String bizId, T taskParam);
+    void failHandle(String taskId, String taskType, String bizId);
 }

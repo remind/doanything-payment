@@ -2,10 +2,7 @@ package cn.doanything.framework.scheduler.local;
 
 
 import cn.doanything.framework.scheduler.distribute.TaskDistributor;
-import cn.doanything.framework.scheduler.model.ExecuteResult;
-import cn.doanything.framework.scheduler.model.HandlerInfo;
-import cn.doanything.framework.scheduler.model.LockModel;
-import cn.doanything.framework.scheduler.model.Task;
+import cn.doanything.framework.scheduler.model.*;
 import cn.doanything.framework.scheduler.properties.CommonTaskProperties;
 import cn.doanything.framework.scheduler.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,73 +15,80 @@ import java.util.Date;
 @Slf4j
 public class LocalTaskDistributor implements TaskDistributor {
 
-    private final TaskRepository commonTaskRepository;
+    private TaskRepository commonTaskRepository;
 
-    private final TransactionTemplate transactionTemplate;
+    private TransactionTemplate transactionTemplate;
 
-    private final CommonTaskProperties properties;
+    private CommonTaskProperties properties;
 
     @Override
-    public ExecuteResult process(Task commonTask, HandlerInfo handlerInfo) {
+    public ExecuteResult process(Task task, HandlerInfo handlerInfo) {
         LocalHandlerInfo localHandlerInfo = (LocalHandlerInfo) handlerInfo;
         try {
             if (LockModel.STRICT.equals(localHandlerInfo.getLockModel())) {
                 return transactionTemplate.execute(status -> {
-                    CommonTask lockCommonTask = commonTaskRepository.lock(commonTask.getTaskId());
-                    return handle(lockCommonTask, localHandlerInfo);
+                    Task lockTask = commonTaskRepository.lock(task.getId());
+                    return handle(lockTask, localHandlerInfo);
                 });
             } else {
-                validate(commonTask);
-                if (!commonTaskRepository.lockTask(commonTask)) {
-                    return ExecuteResult.fail(commonTask.getTaskId(), "任务锁定失败");
+                validate(task);
+                if (!commonTaskRepository.lockTask(task)) {
+                    return ExecuteResult.fail(task.getId(), "任务锁定失败");
                 }
-                return handle(commonTask, localHandlerInfo);
+                return handle(task, localHandlerInfo);
             }
         } catch (IllegalArgumentException e) {
-            return ExecuteResult.fail(commonTask.getTaskId(), e.getMessage());
+            return ExecuteResult.fail(task.getId(), e.getMessage());
         } catch (Exception e) {
             log.error("任务处理异常", e);
-            failHandle(commonTask, localHandlerInfo);
-            return ExecuteResult.fail(commonTask.getTaskId(), "任务处理异常");
+            failHandle(task, localHandlerInfo);
+            return ExecuteResult.fail(task.getId(), "任务处理异常");
         }
     }
 
     /**
      * 校验能否处理
      *
-     * @param commonTask
+     * @param task
      */
-    private void validate(CommonTask commonTask) {
-        Assert.isTrue(TaskStatus.WAIT.equals(commonTask.getStatus())
-                        || (TaskStatus.PROCESS.equals(commonTask.getStatus())
-                        && commonTask.getStartExecuteTime() != null
-                        && DateUtils.addMinutes(commonTask.getStartExecuteTime(), properties.getMaxExecuteMinutes()).compareTo(new Date()) < 0
+    private void validate(Task task) {
+        Assert.isTrue(TaskStatus.WAIT.equals(task.getStatus())
+                        || (TaskStatus.PROCESS.equals(task.getStatus())
+                        && task.getStartExecuteTime() != null
+                        && DateUtils.addMinutes(task.getStartExecuteTime(), properties.getMaxExecuteMinutes()).compareTo(new Date()) < 0
                 )
                 , "该任务在处理中或者已经失败");
     }
 
-    private ExecuteResult handle(CommonTask commonTask, LocalHandlerInfo handlerInfo) {
-        boolean ret = handlerInfo.getTaskHandler().handle(commonTask.getTaskId(), commonTask.getTaskType()
-                , commonTask.getBizId(), convertParam(commonTask.getTaskParam(), handlerInfo.getParamClazz()));
+    private ExecuteResult handle(Task task, LocalHandlerInfo handlerInfo) {
+        boolean ret = handlerInfo.getSchedulerTaskHandler().handle(task.getId(), task.getType()
+                , task.getBizId());
         if (ret) {
-            commonTaskRepository.delete(commonTask.getTaskId());
-            return ExecuteResult.success(commonTask.getTaskId());
+            commonTaskRepository.delete(task.getId());
+            return ExecuteResult.success(task.getId());
         } else {
-            failHandle(commonTask, handlerInfo);
-            return ExecuteResult.fail(commonTask.getTaskId(), "任务执行失败");
+            failHandle(task, handlerInfo);
+            return ExecuteResult.fail(task.getId(), "任务执行失败");
         }
     }
 
     /**
      * 失败处理
      *
-     * @param commonTask
+     * @param task
      */
-    private void failHandle(CommonTask commonTask, LocalHandlerInfo handlerInfo) {
-        commonTask.setExecuteCount(commonTask.getExecuteCount() + 1);
-        if (commonTask.getExecuteCount() >= properties.getMaxExecuteCount()) {
-            log.error("任务执行次数达到最大执行次数，置为失败:{}", commonTask.getTaskId());
-
+    private void failHandle(Task task, LocalHandlerInfo handlerInfo) {
+        task.setExecuteCount(task.getExecuteCount() + 1);
+        if (task.getExecuteCount() >= properties.getMaxExecuteCount()) {
+            log.error("任务执行次数达到最大执行次数，置为失败:{}", task.getId());
+            task.setStatus(TaskStatus.FAIL);
+            handlerInfo.getSchedulerTaskHandler().failHandle(task.getId(), task.getType()
+                    , task.getBizId());
+        } else {
+            task.setStatus(TaskStatus.WAIT);
+            task.setNextExecuteTime(DateUtils.addSeconds(task.getNextExecuteTime(), properties.getExecuteIntervalSeconds()));
         }
+        commonTaskRepository.save(task);
     }
+
 }

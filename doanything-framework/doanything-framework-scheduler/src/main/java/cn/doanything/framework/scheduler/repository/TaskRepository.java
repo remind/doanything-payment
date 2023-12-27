@@ -37,9 +37,12 @@ public class TaskRepository {
      * @return
      */
     public Task load(String taskId) {
-        return dalConvertor.toEntity(taskMapper.lockById(taskId));
+        return dalConvertor.toEntity(taskMapper.selectById(taskId));
     }
 
+    public Task lock(String taskId) {
+        return dalConvertor.toEntity(taskMapper.lockById(taskId));
+    }
     /**
      * 保存
      *
@@ -69,6 +72,7 @@ public class TaskRepository {
     public boolean lockTask(Task task) {
         return false;
     }
+
 
     public List<String> pageQueryWaitExecuteTaskIds(int count) {
         return new ArrayList<>();
