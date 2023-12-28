@@ -5,7 +5,6 @@ import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.commons.lang.types.Money;
 import jakarta.annotation.Resource;
-import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,7 +75,11 @@ public class AccountEntryServiceTest {
     }
 
     @Test
-    public void innerBufferSuccess() {
+    public void testProcessBuffer() {
+        accountEntryService.processBufferedDetail(createBufferDetail());
+    }
+
+    private String createBufferDetail() {
         AccountingRequest request = new AccountingRequest();
         request.setAccountingDate("20231221");
         request.setRequestNo(getUUID());
@@ -98,11 +101,7 @@ public class AccountEntryServiceTest {
 
         request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
         accountEntryService.process(request);
-    }
-
-    @Test
-    public void testProcessBuffer() {
-        accountEntryService.processBufferedDetail("b47a16164f8649ff992741d5ca17ac23");
+        return entryDetail2.getVoucherNo();
     }
 
 

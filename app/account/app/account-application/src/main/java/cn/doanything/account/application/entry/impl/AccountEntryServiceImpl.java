@@ -13,6 +13,7 @@ import cn.doanything.account.domain.service.InnerAccountDomainService;
 import cn.doanything.account.domain.service.OuterAccountDomainService;
 import cn.doanything.account.domain.utils.AccountUtil;
 import cn.doanything.account.facade.dto.AccountingRequest;
+import cn.doanything.account.types.AccountResultCode;
 import cn.doanything.account.types.enums.BufferDetailStatus;
 import cn.doanything.commons.exceptions.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,7 @@ public class AccountEntryServiceImpl implements AccountEntryService {
                 innerAccountDomainService.changeBalance(accountNo, details);
                 break;
             default:
-                throw new BizException("账户类型不支持");
+                throw new BizException(AccountResultCode.ACCOUNT_FAMILY_ILLEGAL);
         }
     }
 }

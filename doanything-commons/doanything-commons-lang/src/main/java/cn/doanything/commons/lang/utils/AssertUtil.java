@@ -1,6 +1,6 @@
 package cn.doanything.commons.lang.utils;
 
-import cn.doanything.commons.exceptions.BaseException;
+import cn.doanything.commons.exceptions.BizException;
 import cn.doanything.commons.response.ResultCode;
 
 /**
@@ -11,7 +11,7 @@ public class AssertUtil {
 
     public static void isTrue(boolean expression, ResultCode resultCode, String message) {
         if (!expression) {
-            throw new BaseException(resultCode, message);
+            throw new BizException(resultCode, message);
         }
     }
 

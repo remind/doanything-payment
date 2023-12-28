@@ -14,6 +14,7 @@ public enum AccountResultCode implements ResultCode {
     CR_DR_NOT_EXISTS("CR_DR_NOT_EXISTS", "不存借贷方向"),
     CR_DR_NOT_BALANCE("CR_DR_NOT_BALANCE", "借贷不平衡"),
     ACCOUNT_BALANCE_NOT_ENOUGH("ACCOUNT_BALANCE_NOT_ENOUGH","账户余额不足"),
+    ACCOUNT_FAMILY_ILLEGAL("ACCOUNT_FAMILY_ILLEGAL","账户类型非法"),
     ;
 
     private final String code;

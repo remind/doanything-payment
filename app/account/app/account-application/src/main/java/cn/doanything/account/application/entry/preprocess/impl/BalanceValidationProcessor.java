@@ -5,7 +5,7 @@ import cn.doanything.account.application.entry.preprocess.AccountEntryPreprocess
 import cn.doanything.account.facade.dto.AccountingRequest;
 import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.AccountResultCode;
-import cn.doanything.commons.exceptions.BaseException;
+import cn.doanything.commons.exceptions.BizException;
 import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.commons.lang.types.Money;
 import cn.doanything.commons.lang.utils.AssertUtil;
@@ -44,7 +44,7 @@ public class BalanceValidationProcessor implements AccountEntryPreprocessor {
                 switch (entryDetail.getCrDr()) {
                     case DEBIT -> drAmount.addTo(entryDetail.getAmount());
                     case CREDIT -> crAmount.addTo(entryDetail.getAmount());
-                    default -> throw new BaseException(AccountResultCode.CR_DR_NOT_EXISTS);
+                    default -> throw new BizException(AccountResultCode.CR_DR_NOT_EXISTS);
                 }
             });
             AssertUtil.isTrue(drAmount.equals(crAmount), AccountResultCode.CR_DR_NOT_EXISTS, "套号内借贷不平衡,套号:" + suiteNo);

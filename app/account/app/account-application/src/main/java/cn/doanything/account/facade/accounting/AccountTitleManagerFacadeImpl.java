@@ -5,7 +5,7 @@ import cn.doanything.account.domain.accounting.service.AccountTitleDomainService
 import cn.doanything.account.domain.repository.AccountTitleRepository;
 import cn.doanything.account.facade.accounting.convertor.AccountTitleConvertor;
 import cn.doanything.account.facade.accounting.dto.AccountTitleAddRequest;
-import cn.doanything.commons.exceptions.BaseException;
+import cn.doanything.commons.exceptions.BizException;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import cn.doanything.commons.response.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class AccountTitleManagerFacadeImpl implements AccountTitleManagerFacade 
             AccountTitle accountTitle = accountTitleConvertor.toEntity(request);
             accountTitleDomainService.setAccountTitleLevel(accountTitle, parentAccountTitle);
             accountTitleRepository.store(accountTitle);
-        } catch (BaseException e) {
+        } catch (BizException e) {
             log.info("新增科目异常,titleCode={}", request.getTitleCode());
             return ResponseResult.fail(e.getMessage());
         }

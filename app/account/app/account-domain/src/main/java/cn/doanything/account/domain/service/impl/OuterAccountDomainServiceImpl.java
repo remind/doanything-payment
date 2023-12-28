@@ -10,7 +10,7 @@ import cn.doanything.account.domain.service.OuterAccountDomainService;
 import cn.doanything.account.domain.utils.AccountUtil;
 import cn.doanything.account.types.AccountResultCode;
 import cn.doanything.account.types.enums.IODirection;
-import cn.doanything.commons.exceptions.BaseException;
+import cn.doanything.commons.exceptions.BizException;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class OuterAccountDomainServiceImpl implements OuterAccountDomainService 
             account = outerAccountRepository.lock(accountNo);
         } catch (Exception e) {
             log.error("账户锁定异常,accountNo=" + accountNo, e);
-            throw new BaseException(AccountResultCode.ACCOUNT_LOCK_TIME_OUT);
+            throw new BizException(AccountResultCode.ACCOUNT_LOCK_TIME_OUT);
         }
         AssertUtil.isNotNull(account, AccountResultCode.ACCOUNT_ID_NOT_EXISTS);
 
