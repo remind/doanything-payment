@@ -9,14 +9,9 @@ import cn.doanything.account.domain.utils.AccountUtil;
 import cn.doanything.account.facade.dto.AccountingRequest;
 import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.enums.AccountFamily;
-import cn.doanything.commons.exceptions.BaseException;
-import cn.doanything.commons.response.GlobalResultCode;
-import cn.doanything.commons.lang.utils.AssertUtil;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 /**
  * @author wxj
@@ -33,22 +28,23 @@ public interface AccountingRequestConvertor {
 
     BufferedDetail toBufferedDetail(AccountingRequest request, EntryDetail detail);
 
+    OuterAccountDetail toOuterAccountDetail(BufferedDetail bufferedDetail);
+
+    InnerAccountDetail toInnerAccountDetail(BufferedDetail bufferedDetail);
+
     default AccountDetail toAccountDetail(AccountingRequest request, EntryDetail entryDetail) {
         AccountFamily accountFamily = AccountUtil.getAccountFamily(entryDetail.getAccountNo());
-        AssertUtil.isNotNull(accountFamily, GlobalResultCode.ILLEGAL_PARAM, "账户分类不存在");
-        return switch (accountFamily) {
+        return switch (Objects.requireNonNull(accountFamily)) {
             case INNER -> toInnerAccountDetail(request, entryDetail);
             case OUTER -> toOuterAccountDetail(request, entryDetail);
-            default -> throw new BaseException(GlobalResultCode.ILLEGAL_PARAM);
         };
     }
-
-    default List<AccountDetail> toAccountDetail(AccountingRequest request, List<EntryDetail> entryDetails) {
-        List<AccountDetail> accountDetails = new ArrayList<>();
-        if (entryDetails != null) {
-            entryDetails.forEach(accountingRequestDetail -> accountDetails.add(toAccountDetail(request, accountingRequestDetail)));
-        }
-        return accountDetails;
+    default AccountDetail toAccountDetail(BufferedDetail bufferedDetail) {
+        AccountFamily accountFamily = AccountUtil.getAccountFamily(bufferedDetail.getAccountNo());
+        return switch (Objects.requireNonNull(accountFamily)) {
+            case INNER -> toInnerAccountDetail(bufferedDetail);
+            case OUTER -> toOuterAccountDetail(bufferedDetail);
+        };
     }
 
 }

@@ -100,6 +100,10 @@ public class AccountEntryServiceTest {
         accountEntryService.process(request);
     }
 
+    @Test
+    public void testProcessBuffer() {
+        accountEntryService.processBufferedDetail("b47a16164f8649ff992741d5ca17ac23");
+    }
 
 
     private String getUUID() {

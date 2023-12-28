@@ -10,7 +10,5 @@ import org.apache.commons.lang3.StringUtils;
 public class MainTest {
 
     public static void main(String[] args) {
-        int i = 125;
-        System.out.println(String.format("%0 " + String.valueOf(AccountDomainConstants.OUTER_ACCOUNT_NO_MAX_INC).length() +"d",i));
     }
 }
