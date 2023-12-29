@@ -1,11 +1,14 @@
 package cn.doanything.framework.scheduler.repository;
 
 import cn.doanything.framework.scheduler.model.Task;
+import cn.doanything.framework.scheduler.model.TaskStatus;
 import cn.doanything.framework.scheduler.repository.convertor.TaskDalConvertor;
 import cn.doanything.framework.scheduler.repository.mybatis.SchedulerTaskMapper;
+import cn.doanything.framework.scheduler.repository.mybatis.dataobject.SchedulerTaskDO;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +28,9 @@ public class TaskRepository {
      * @param task
      * @return
      */
-    public String add(Task task) {
+    public String store(Task task) {
         taskMapper.insert(dalConvertor.toDo(task));
-        return "";
+        return task.getId();
     }
 
     /**
@@ -43,6 +46,7 @@ public class TaskRepository {
     public Task lock(String taskId) {
         return dalConvertor.toEntity(taskMapper.lockById(taskId));
     }
+
     /**
      * 保存
      *
@@ -74,7 +78,10 @@ public class TaskRepository {
     }
 
 
-    public List<String> pageQueryWaitExecuteTaskIds(int count) {
-        return new ArrayList<>();
+    public List<Task> pageQueryWaitExecuteTaskIds(TaskStatus taskStatus, int count) {
+        return  dalConvertor.toEntity(taskMapper.selectList(new Page<>(1, count), new LambdaQueryWrapper<SchedulerTaskDO>()
+                .eq(SchedulerTaskDO::getStatus, taskStatus.getCode())
+                .orderByAsc(SchedulerTaskDO::getNextExecuteTime)
+        ));
     }
 }

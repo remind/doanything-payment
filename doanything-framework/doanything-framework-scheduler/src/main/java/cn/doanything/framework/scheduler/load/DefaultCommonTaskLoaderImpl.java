@@ -3,6 +3,7 @@ package cn.doanything.framework.scheduler.load;
 import cn.doanything.framework.scheduler.distribute.DistributorAdapter;
 import cn.doanything.framework.scheduler.model.ExecuteResult;
 import cn.doanything.framework.scheduler.model.Task;
+import cn.doanything.framework.scheduler.model.TaskStatus;
 import cn.doanything.framework.scheduler.properties.CommonTaskProperties;
 import cn.doanything.framework.scheduler.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,18 +31,18 @@ public class DefaultCommonTaskLoaderImpl implements CommonTaskLoader {
 
     @Override
     public int loadAndDistribute() {
-        List<String> taskIds;
+        List<Task> tasks;
         int total = 0;
         long startTime = System.currentTimeMillis();
         List<Future<ExecuteResult>> executeResults = new ArrayList<>();
         while (true) {
-            taskIds = taskRepository.pageQueryWaitExecuteTaskIds(properties.getLoadCount());
-            if (CollectionUtils.isEmpty(taskIds)) {
+            tasks = taskRepository.pageQueryWaitExecuteTaskIds(TaskStatus.WAIT, properties.getLoadCount());
+            if (CollectionUtils.isEmpty(tasks)) {
                 break;
             }
-            executeResults.addAll(batchDistributeTask(taskIds));
-            total += taskIds.size();
-            if (taskIds.size() < properties.getLoadCount()) {
+            executeResults.addAll(batchDistributeTask(tasks));
+            total += tasks.size();
+            if (tasks.size() < properties.getLoadCount()) {
                 break;
             }
         }
@@ -66,14 +67,10 @@ public class DefaultCommonTaskLoaderImpl implements CommonTaskLoader {
         });
     }
 
-    private List<Future<ExecuteResult>> batchDistributeTask(List<String> taskIds) {
+    private List<Future<ExecuteResult>> batchDistributeTask(List<Task> tasks) {
         List<Future<ExecuteResult>> executeResults = new ArrayList<>();
-        for (String taskId : taskIds) {
+        for (Task task : tasks) {
             try {
-                Task task = taskRepository.load(taskId);
-                if (task == null) {
-                    continue;
-                }
                 executeResults.add(executorService.submit(() -> {
                     ExecuteResult executeResult;
                     Long startTime = System.currentTimeMillis();
@@ -88,7 +85,7 @@ public class DefaultCommonTaskLoaderImpl implements CommonTaskLoader {
 
                 }));
             } catch (Exception e) {
-                log.error("任务处理异常,taskId=" + taskId, e);
+                log.error("任务处理异常,taskId=" + task.getId(), e);
             }
         }
         return executeResults;

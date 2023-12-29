@@ -5,12 +5,12 @@ import cn.doanything.account.facade.dto.EntryDetail;
 import cn.doanything.account.types.enums.CrDr;
 import cn.doanything.commons.lang.types.Money;
 import jakarta.annotation.Resource;
-import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -45,7 +45,7 @@ public class AccountEntryServiceTest {
         entryDetail2.setCrDr(CrDr.DEBIT);
         entryDetail2.setMemo("测试入账2");
 
-        request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
+        request.setEntryDetails(List.of(entryDetail1, entryDetail2));
         accountEntryService.process(request);
     }
 
@@ -70,10 +70,13 @@ public class AccountEntryServiceTest {
         entryDetail2.setCrDr(CrDr.DEBIT);
         entryDetail2.setMemo("测试入账2");
 
-        request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
+        request.setEntryDetails(List.of(entryDetail1, entryDetail2));
         accountEntryService.process(request);
     }
 
+    /**
+     * 测试入账缓冲
+     */
     @Test
     public void testProcessBuffer() {
         accountEntryService.processBufferedDetail(createBufferDetail());
@@ -99,11 +102,10 @@ public class AccountEntryServiceTest {
         entryDetail2.setCrDr(CrDr.DEBIT);
         entryDetail2.setMemo("测试入账2");
 
-        request.setEntryDetails(Lists.newArrayList(entryDetail1, entryDetail2));
+        request.setEntryDetails(List.of(entryDetail1, entryDetail2));
         accountEntryService.process(request);
         return entryDetail2.getVoucherNo();
     }
-
 
     private String getUUID() {
         String uuid = UUID.randomUUID().toString();
