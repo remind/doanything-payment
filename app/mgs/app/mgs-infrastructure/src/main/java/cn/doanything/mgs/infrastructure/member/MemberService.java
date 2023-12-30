@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberService {
 
-    @DubboReference
+//    @DubboReference
     private PersonalManageFacade personalManageFacade;
 
 
