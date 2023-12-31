@@ -38,8 +38,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     public void store(Member member) {
         memberMapper.insert(memberDalConvertor.toMemberDo(member));
         if (member instanceof PersonalMember) {
-            PersonalMember personalMember = new PersonalMember();
-            personalMemberMapper.insert(memberDalConvertor.toPersonalMemberDo(personalMember));
+            personalMemberMapper.insert(memberDalConvertor.toPersonalMemberDo((PersonalMember) member));
         }
     }
 

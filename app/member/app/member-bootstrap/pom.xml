@@ -14,5 +14,11 @@
             <groupId>cn.doanything.member</groupId>
             <artifactId>member-application</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.doanything.framework</groupId>
+            <artifactId>doanything-framework-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

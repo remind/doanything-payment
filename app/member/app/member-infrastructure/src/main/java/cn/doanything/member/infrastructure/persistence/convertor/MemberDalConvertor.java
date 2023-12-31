@@ -1,5 +1,6 @@
 package cn.doanything.member.infrastructure.persistence.convertor;
 
+import cn.doanything.member.infrastructure.convertor.EnumsConvertor;
 import cn.doanything.member.infrastructure.persistence.dataobject.MemberDO;
 import cn.doanything.member.infrastructure.persistence.dataobject.PersonalMemberDO;
 import cn.doanything.member.domain.Member;
@@ -15,7 +16,7 @@ import org.mapstruct.factory.Mappers;
  * @author wxj
  * 2023/12/10
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {EnumsConvertor.class})
 public interface MemberDalConvertor {
 
     MemberDalConvertor INSTANCE = Mappers.getMapper(MemberDalConvertor.class);
@@ -25,9 +26,9 @@ public interface MemberDalConvertor {
     PersonalMemberDO toPersonalMemberDo(PersonalMember personalMember);
 
     @Mappings({
-        @Mapping(source = "memberDO.memberId",target = "memberId"),
-        @Mapping(source = "memberDO.gmtCreate",target = "gmtCreate"),
-        @Mapping(source = "memberDO.gmtModified",target = "gmtModified")
+            @Mapping(source = "memberDO.memberId", target = "memberId"),
+            @Mapping(source = "memberDO.gmtCreate", target = "gmtCreate"),
+            @Mapping(source = "memberDO.gmtModified", target = "gmtModified")
     })
     PersonalMember toPersonalMember(MemberDO memberDO, PersonalMemberDO personalMemberDO);
 
@@ -37,6 +38,7 @@ public interface MemberDalConvertor {
         }
         return 0;
     }
+
     default MemberType toMemberType(Byte memberType) {
         return MemberType.getByCode(Integer.valueOf(memberType));
     }
@@ -47,6 +49,7 @@ public interface MemberDalConvertor {
         }
         return 0;
     }
+
     default Gender toGender(Byte gender) {
         return Gender.getByCode(Integer.valueOf(gender));
     }

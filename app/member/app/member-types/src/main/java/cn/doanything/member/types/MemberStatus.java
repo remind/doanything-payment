@@ -1,27 +1,32 @@
 package cn.doanything.member.types;
 
+import cn.doanything.commons.enums.CodeEnum;
+
 /**
  * 会员状态
  *
  * @author wxj
  * 2023/12/11
  */
-public enum MemberStatus {
+public enum MemberStatus implements CodeEnum {
 
-    INACTIVE(0, "未激活"), NORMAL(1, "正常"), SLEEP(2, "休眠"), CANCEL(3, "销户");
+    INACTIVE("0", "未激活"),
+    NORMAL("1", "正常"),
+    SLEEP("2", "休眠"),
+    CANCEL("3", "销户");
 
     /**
      * 代码,只能为1位正整数
      */
-    private final int code;
+    private final String code;
     /**
      * 信息
      */
-    private final String message;
+    private final String displayName;
 
-    MemberStatus(int code, String message) {
+    MemberStatus(String code, String displayName) {
         this.code = code;
-        this.message = message;
+        this.displayName = displayName;
     }
 
     /**
@@ -30,13 +35,13 @@ public enum MemberStatus {
      * @param code
      * @return
      */
-    public static MemberStatus getByCode(Integer code) {
+    public static MemberStatus getByCode(String code) {
         if (code == null) {
             return null;
         }
 
         for (MemberStatus memberStatus : MemberStatus.values()) {
-            if (memberStatus.getCode() == code) {
+            if (memberStatus.getCode().equals(code)) {
                 return memberStatus;
             }
         }
@@ -44,11 +49,14 @@ public enum MemberStatus {
         return null;
     }
 
-    public int getCode() {
+    @Override
+    public String getCode() {
         return code;
     }
 
-    public String getMessage() {
-        return message;
+    @Override
+    public String getDisplayName() {
+        return this.displayName;
     }
+
 }

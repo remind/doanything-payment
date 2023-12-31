@@ -12,8 +12,15 @@ import lombok.Data;
 @Data
 public class PersonalMember extends Member {
 
-    /** 性别 */
+    /**
+     * 性别
+     */
     private Gender gender;
+
+    /**
+     * 手机号
+     */
+    private String phone;
 
     @Override
     public MemberType getMemberType() {

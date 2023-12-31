@@ -68,7 +68,7 @@ nacos:
 dubbo:
   application:
     name: ${spring.application.name}
-    qos-port: 2221
+    qos-enable: false
   protocol:
     name: dubbo
     port: -1

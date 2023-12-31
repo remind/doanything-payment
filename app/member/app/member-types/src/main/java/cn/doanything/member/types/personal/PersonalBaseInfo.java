@@ -19,6 +19,11 @@ public class PersonalBaseInfo implements Serializable {
     private String memberName;
 
     /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
      * 性别
      */
     private Gender gender;
