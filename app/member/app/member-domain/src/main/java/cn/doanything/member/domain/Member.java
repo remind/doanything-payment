@@ -28,6 +28,16 @@ public abstract class Member extends Entity {
     private MemberStatus status;
 
     /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
      * 获取会员类型
      */
     public abstract MemberType getMemberType();

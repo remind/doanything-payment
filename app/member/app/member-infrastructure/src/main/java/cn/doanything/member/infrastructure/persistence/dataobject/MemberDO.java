@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-15
+ * @since 2024-01-01
  */
-@TableName("tm_member")
+@TableName("t_member")
 public class MemberDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +28,16 @@ public class MemberDO implements Serializable {
      * 会员类型
      */
     private Byte memberType;
+
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
 
     /**
      * 状态
@@ -60,6 +70,22 @@ public class MemberDO implements Serializable {
         this.memberType = memberType;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Byte getStatus() {
         return status;
     }
@@ -89,6 +115,8 @@ public class MemberDO implements Serializable {
         return "MemberDO{" +
         "memberId = " + memberId +
         ", memberType = " + memberType +
+        ", phone = " + phone +
+        ", email = " + email +
         ", status = " + status +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +

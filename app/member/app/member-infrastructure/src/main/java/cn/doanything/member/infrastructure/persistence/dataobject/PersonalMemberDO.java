@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2023-12-15
+ * @since 2024-01-01
  */
-@TableName("tm_personal_member")
+@TableName("t_personal_member")
 public class PersonalMemberDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

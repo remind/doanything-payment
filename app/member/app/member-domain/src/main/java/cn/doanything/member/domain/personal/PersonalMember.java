@@ -17,11 +17,6 @@ public class PersonalMember extends Member {
      */
     private Gender gender;
 
-    /**
-     * 手机号
-     */
-    private String phone;
-
     @Override
     public MemberType getMemberType() {
         return MemberType.PERSONAL;
