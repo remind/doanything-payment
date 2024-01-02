@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-01
+ * @since 2024-01-02
  */
 @TableName("t_personal_password")
 public class PersonalPasswordDO implements Serializable {
@@ -44,6 +44,11 @@ public class PersonalPasswordDO implements Serializable {
      * 状态，1正常，2锁定
      */
     private String status;
+
+    /**
+     * 密码内容
+     */
+    private String password;
 
     /**
      * 锁定结束时间
@@ -110,6 +115,14 @@ public class PersonalPasswordDO implements Serializable {
         this.status = status;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public LocalDateTime getLockEndTime() {
         return lockEndTime;
     }
@@ -158,6 +171,7 @@ public class PersonalPasswordDO implements Serializable {
         ", useType = " + useType +
         ", type = " + type +
         ", status = " + status +
+        ", password = " + password +
         ", lockEndTime = " + lockEndTime +
         ", errorCount = " + errorCount +
         ", lastErrorDate = " + lastErrorDate +

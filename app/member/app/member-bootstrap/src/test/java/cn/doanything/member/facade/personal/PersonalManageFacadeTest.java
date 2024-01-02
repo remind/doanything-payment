@@ -16,8 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class
-PersonalManageFacadeTest {
+public class PersonalManageFacadeTest {
 
     @Autowired
     private PersonalManageFacade personalManageFacade;

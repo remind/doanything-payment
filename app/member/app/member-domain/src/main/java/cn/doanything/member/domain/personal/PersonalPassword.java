@@ -17,6 +17,12 @@ import java.util.Date;
  */
 @Data
 public class PersonalPassword extends Entity {
+
+    /**
+     * 密码ID
+     */
+    private String id;
+
     /**
      * 会员id
      */
@@ -58,7 +64,7 @@ public class PersonalPassword extends Entity {
     private Date lastErrorDate;
 
     public void incErrorCount() {
-        if (DateUtils.isSameDay(lastErrorDate, new Date())) {
+        if (lastErrorDate != null && DateUtils.isSameDay(lastErrorDate, new Date())) {
             this.errorCount++;
         } else {
             this.errorCount = 1;
@@ -66,8 +72,12 @@ public class PersonalPassword extends Entity {
         }
     }
 
-    public void clearErrorCount() {
-        this.errorCount = 0;
-        this.lastErrorDate = null;
+    public boolean clearErrorCount() {
+        if (this.errorCount != 0) {
+            this.errorCount = 0;
+            this.lastErrorDate = null;
+            return true;
+        }
+        return false;
     }
 }

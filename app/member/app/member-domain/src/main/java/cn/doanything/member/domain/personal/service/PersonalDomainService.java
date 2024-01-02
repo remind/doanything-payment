@@ -1,7 +1,6 @@
 package cn.doanything.member.domain.personal.service;
 
 import cn.doanything.member.domain.personal.PersonalMember;
-import cn.doanything.member.types.PasswordType;
 
 /**
  * 新增个人用户
@@ -17,11 +16,4 @@ public interface PersonalDomainService {
      */
     void create(PersonalMember personalMember);
 
-    /**
-     * 登录验证
-     * @param loginName
-     * @param password
-     * @param type
-     */
-    void loginValidate(String loginName, String password, PasswordType type);
 }

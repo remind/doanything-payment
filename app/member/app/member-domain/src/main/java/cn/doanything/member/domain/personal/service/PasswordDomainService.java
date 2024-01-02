@@ -1,6 +1,7 @@
 package cn.doanything.member.domain.personal.service;
 
 import cn.doanything.member.types.PasswordType;
+import cn.doanything.member.types.PasswordUseType;
 
 /**
  * @author wxj
@@ -8,5 +9,22 @@ import cn.doanything.member.types.PasswordType;
  */
 public interface PasswordDomainService {
 
-    void loginValidate(String loginName, String password, PasswordType type);
+    /**
+     * 设置密码
+     *
+     * @param memberId
+     * @param useType
+     * @param type
+     * @param password
+     */
+    void create(String memberId, PasswordUseType useType, PasswordType type, String password);
+
+    /**
+     * 登录验证
+     *
+     * @param loginName
+     * @param type
+     * @param password
+     */
+    void loginValidate(String loginName, PasswordType type, String password);
 }

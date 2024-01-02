@@ -1,10 +1,12 @@
 package cn.doanything.member.infrastructure.persistence.repository;
 
+import cn.doanything.member.domain.personal.PersonalMember;
 import cn.doanything.member.domain.personal.PersonalPassword;
 import cn.doanything.member.domain.repository.PersonalPasswordRepository;
 import cn.doanything.member.infrastructure.persistence.convertor.PersonalPasswordDalConvertor;
 import cn.doanything.member.infrastructure.persistence.dataobject.PersonalPasswordDO;
 import cn.doanything.member.infrastructure.persistence.mapper.PersonalPasswordMapper;
+import cn.doanything.member.types.PasswordType;
 import cn.doanything.member.types.PasswordUseType;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,13 @@ public class PersonalPasswordRepositoryImpl implements PersonalPasswordRepositor
     private PersonalPasswordDalConvertor dalConvertor;
 
     @Override
-    public void reStore(PersonalPassword password) {
-
+    public void store(PersonalPassword password) {
+        mapper.insert(dalConvertor.toDo(password));
     }
 
     @Override
-    public void reStore(List<PersonalPassword> passwords) {
-
+    public void reStore(PersonalPassword password) {
+        mapper.updateById(dalConvertor.toDo(password));
     }
 
     @Override
@@ -40,5 +42,14 @@ public class PersonalPasswordRepositoryImpl implements PersonalPasswordRepositor
         LambdaQueryWrapper<PersonalPasswordDO> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(PersonalPasswordDO::getMemberId, memberId).eq(PersonalPasswordDO::getUseType, useType.getCode());
         return dalConvertor.toEntity(mapper.selectList(wrapper));
+    }
+
+    @Override
+    public PersonalPassword load(String memberId, PasswordUseType useType, PasswordType type) {
+        LambdaQueryWrapper<PersonalPasswordDO> wrapper = new LambdaQueryWrapper<PersonalPasswordDO>()
+                .eq(PersonalPasswordDO::getMemberId, memberId)
+                .eq(PersonalPasswordDO::getUseType, useType.getCode())
+                .eq(PersonalPasswordDO::getType, type.getCode());
+        return dalConvertor.toEntity(mapper.selectOne(wrapper));
     }
 }
