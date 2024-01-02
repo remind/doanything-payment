@@ -2,7 +2,7 @@ package cn.doanything.member.facade.personal;
 
 import cn.doanything.member.domain.Member;
 import cn.doanything.member.domain.personal.PersonalMember;
-import cn.doanything.member.domain.personal.domainservice.PersonalService;
+import cn.doanything.member.domain.personal.service.PersonalDomainService;
 import cn.doanything.member.domain.repository.MemberRepository;
 import cn.doanything.member.facade.personal.convertor.PersonalMemberDtoConvertor;
 import cn.doanything.member.facade.personal.dto.PersonalAddRequest;
@@ -23,7 +23,7 @@ public class PersonalManageFacadeImpl implements PersonalManageFacade {
     private MemberRepository memberRepository;
 
     @Autowired
-    private PersonalService personalService;
+    private PersonalDomainService personalDomainService;
 
     @Autowired
     private PersonalMemberDtoConvertor personalMemberDtoConvertor;
@@ -31,7 +31,7 @@ public class PersonalManageFacadeImpl implements PersonalManageFacade {
     @Override
     public PersonalDetailInfo create(PersonalAddRequest request) {
         PersonalMember personalMember = personalMemberDtoConvertor.toPersonalMember(request);
-        personalService.create(personalMember);
+        personalDomainService.create(personalMember);
         return personalMemberDtoConvertor.toPersonalDetailInfo(personalMember);
     }
 

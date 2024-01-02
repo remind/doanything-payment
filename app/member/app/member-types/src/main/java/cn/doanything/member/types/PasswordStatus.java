@@ -9,8 +9,8 @@ import cn.doanything.commons.enums.CodeEnum;
  */
 public enum PasswordStatus implements CodeEnum {
 
-    TEXT("1", "正常"),
-    FINGER("2", "锁定"),
+    NORMAL("1", "正常"),
+    LOCK("2", "锁定"),
     ;
 
     private final String code;

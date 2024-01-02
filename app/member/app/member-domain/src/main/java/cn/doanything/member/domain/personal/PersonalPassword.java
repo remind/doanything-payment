@@ -5,12 +5,13 @@ import cn.doanything.member.types.PasswordStatus;
 import cn.doanything.member.types.PasswordType;
 import cn.doanything.member.types.PasswordUseType;
 import lombok.Data;
+import org.apache.commons.lang3.time.DateUtils;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * 个人用户密码
+ *
  * @author wxj
  * 2024/1/1
  */
@@ -37,9 +38,14 @@ public class PersonalPassword extends Entity {
     private PasswordStatus status;
 
     /**
+     * 密码
+     */
+    private String password;
+
+    /**
      * 锁定结束时间
      */
-    private LocalDateTime lockEndTime;
+    private Date lockEndTime;
 
     /**
      * 错误次数
@@ -50,4 +56,18 @@ public class PersonalPassword extends Entity {
      * 上次错误日期
      */
     private Date lastErrorDate;
+
+    public void incErrorCount() {
+        if (DateUtils.isSameDay(lastErrorDate, new Date())) {
+            this.errorCount++;
+        } else {
+            this.errorCount = 1;
+            this.lastErrorDate = new Date();
+        }
+    }
+
+    public void clearErrorCount() {
+        this.errorCount = 0;
+        this.lastErrorDate = null;
+    }
 }
