@@ -1,5 +1,6 @@
 package cn.doanything.member.infrastructure.convertor;
 
+import cn.doanything.commons.convertor.GlobalTypeConvertor;
 import cn.doanything.commons.lang.utils.EnumUtil;
 import cn.doanything.member.types.MemberStatus;
 import cn.doanything.member.types.PasswordStatus;
@@ -12,7 +13,7 @@ import org.mapstruct.Mapper;
  * 2023/12/31
  */
 @Mapper(componentModel = "spring")
-public interface EnumsConvertor {
+public interface EnumsConvertor extends GlobalTypeConvertor {
 
     default MemberStatus toMemberStatus(String code) {
         return EnumUtil.getByCode(MemberStatus.class, code);

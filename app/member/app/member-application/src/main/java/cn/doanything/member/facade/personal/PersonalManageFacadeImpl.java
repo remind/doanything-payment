@@ -10,6 +10,7 @@ import cn.doanything.member.facade.personal.dto.PersonalDetailInfo;
 import cn.doanything.member.types.MemberType;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * 个人会员相关接口实现
@@ -28,10 +29,15 @@ public class PersonalManageFacadeImpl implements PersonalManageFacade {
     @Autowired
     private PersonalMemberDtoConvertor personalMemberDtoConvertor;
 
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
     @Override
     public PersonalDetailInfo create(PersonalAddRequest request) {
         PersonalMember personalMember = personalMemberDtoConvertor.toPersonalMember(request);
-        personalDomainService.create(personalMember);
+        transactionTemplate.executeWithoutResult(status -> {
+            personalDomainService.create(personalMember);
+        });
         return personalMemberDtoConvertor.toPersonalDetailInfo(personalMember);
     }
 
