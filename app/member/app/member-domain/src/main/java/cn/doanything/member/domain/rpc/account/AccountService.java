@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface AccountService {
 
-    List<AccountDTO> createAccount(String memberId, List<String> accountType);
+    List<AccountDTO> createAccount(String memberId, List<String> accountTypes);
 }

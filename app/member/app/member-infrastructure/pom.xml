@@ -29,5 +29,11 @@
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-sequence</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.doanything.account</groupId>
+            <artifactId>account-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

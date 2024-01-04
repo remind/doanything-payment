@@ -99,6 +99,14 @@ public class ResponseResult<T> {
         return new ResponseResult<T>(resultCode.getCode(), resultCode.getMessage(), data);
     }
 
+    /**
+     * 是否成功
+     * @return
+     */
+    public boolean isSuccess() {
+        return GlobalResultCode.SUCCESS.getCode().equals(code);
+    }
+
     public String getCode() {
         return code;
     }
