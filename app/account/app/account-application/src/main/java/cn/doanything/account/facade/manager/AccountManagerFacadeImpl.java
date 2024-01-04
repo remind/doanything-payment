@@ -51,7 +51,7 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
     private OuterAccountRepository outerAccountRepository;
 
     @Override
-    public ResponseResult<String> addOuterAccount(OuterAccountAddRequest request) {
+    public ResponseResult<String> createOuterAccount(OuterAccountAddRequest request) {
         try {
             OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
             AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");
@@ -65,7 +65,7 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
     }
 
     @Override
-    public ResponseResult<String> addInnerAccount(InnerAccountAddRequest request) {
+    public ResponseResult<String> createInnerAccount(InnerAccountAddRequest request) {
         try {
             InnerAccount account = innerAccountBuilder.build(request);
             String accountNo = transactionTemplate.execute(status -> innerAccountRepository.store(account));

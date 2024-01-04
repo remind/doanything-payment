@@ -11,7 +11,17 @@ import cn.doanything.commons.response.ResponseResult;
  */
 public interface AccountManagerFacade {
 
-    ResponseResult<String> addOuterAccount(OuterAccountAddRequest request);
+    /**
+     * 创建外部账户
+     * @param request
+     * @return
+     */
+    ResponseResult<String> createOuterAccount(OuterAccountAddRequest request);
 
-    ResponseResult<String> addInnerAccount(InnerAccountAddRequest request);
+    /**
+     * 创建内部账户
+     * @param request
+     * @return
+     */
+    ResponseResult<String> createInnerAccount(InnerAccountAddRequest request);
 }

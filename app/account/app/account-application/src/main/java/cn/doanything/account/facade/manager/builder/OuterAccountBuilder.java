@@ -1,6 +1,5 @@
 package cn.doanything.account.facade.manager.builder;
 
-import cn.doanything.account.domain.Account;
 import cn.doanything.account.domain.AccountDomainConstants;
 import cn.doanything.account.domain.OuterAccount;
 import cn.doanything.account.domain.OuterAccountType;
@@ -13,6 +12,7 @@ import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
 import cn.doanything.account.types.enums.DenyStatus;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import cn.doanything.commons.response.GlobalResultCode;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -39,6 +39,9 @@ public class OuterAccountBuilder {
         OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
         AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");
         OuterAccount outerAccount = outerAccountConvertor.toOuterAccount(request, outerAccountType);
+        if (StringUtils.isBlank(outerAccount.getAccountName())) {
+            outerAccount.setAccountName(outerAccountType.getName());
+        }
         outerAccount.setDenyStatus(DenyStatus.INIT);
         fillBalanceDirection(outerAccount, outerAccountType.getTitleCode());
         fillOuterSubAccount(outerAccount, outerAccountType.getFundTypes());

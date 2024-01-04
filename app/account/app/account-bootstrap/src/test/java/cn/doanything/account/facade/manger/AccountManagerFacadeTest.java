@@ -29,7 +29,7 @@ public class AccountManagerFacadeTest {
         request.setMemberId("100000004");
         request.setAccountType("101");
         request.setAccountName("基本户");
-        ResponseResult<String> result = accountManagerFacade.addOuterAccount(request);
+        ResponseResult<String> result = accountManagerFacade.createOuterAccount(request);
         Assert.assertEquals(GlobalResultCode.FAIL.getCode(), result.getCode());
     }
 
@@ -40,7 +40,7 @@ public class AccountManagerFacadeTest {
         request.setCurrencyCode("CNY");
         request.setTitleCode("4001001001");
         request.setMemo("测试账户备注");
-        ResponseResult<String> result = accountManagerFacade.addInnerAccount(request);
+        ResponseResult<String> result = accountManagerFacade.createInnerAccount(request);
         Assert.assertEquals(GlobalResultCode.SUCCESS.getCode(), result.getCode());
     }
 }
