@@ -19,6 +19,8 @@ public interface PasswordDomainService {
      */
     void create(String memberId, PasswordUseType useType, PasswordType type, String password);
 
+    void change(String memberId, PasswordUseType useType, PasswordType type, String oldPassword, String newPassword);
+
     /**
      * 登录验证
      *

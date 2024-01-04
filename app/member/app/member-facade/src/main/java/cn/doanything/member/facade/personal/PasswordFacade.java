@@ -20,6 +20,18 @@ public interface PasswordFacade {
      */
     ResponseResult<String> create(String memberId, PasswordUseType useType, PasswordType type, String password);
 
+
+    /**
+     * 修改密码
+     * @param memberId 会员ID
+     * @param useType   密码使用类型
+     * @param type  密码类型
+     * @param oldPassword   老密码
+     * @param newPassword   新密码
+     * @return
+     */
+    ResponseResult<String> change(String memberId, PasswordUseType useType, PasswordType type, String oldPassword, String newPassword);
+
     /**
      * 登录验证
      * @param loginName

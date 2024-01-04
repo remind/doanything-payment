@@ -56,6 +56,16 @@ public class PasswordDomainServiceImpl implements PasswordDomainService {
     }
 
     @Override
+    public void change(String memberId, PasswordUseType useType, PasswordType type, String oldPassword, String newPassword) {
+        PersonalPassword personalPassword = personalPasswordRepository.load(memberId, useType, type);
+        AssertUtil.isNotNull(personalPassword, MemberResultCode.PASSWORD_NOT_EXISTS);
+        AssertUtil.isTrue(personalPassword.getPassword().equals(oldPassword), MemberResultCode.PASSWORD_ERROR);
+        AssertUtil.isFalse(personalPassword.getStatus().equals(PasswordStatus.LOCK), MemberResultCode.PASSWORD_LOCKED);
+        personalPassword.setPassword(newPassword);
+        personalPasswordRepository.reStore(personalPassword);
+    }
+
+    @Override
     public void loginValidate(String loginName, PasswordType type, String password) {
         PersonalMember personalMember = personalMemberRepository.loadByLoginName(loginName);
         AssertUtil.isNotNull(personalMember, MemberResultCode.MEMBER_NOT_EXISTS);

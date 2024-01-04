@@ -40,6 +40,18 @@ public class PasswordFacadeImpl implements PasswordFacade {
     }
 
     @Override
+    public ResponseResult<String> change(String memberId, PasswordUseType useType, PasswordType type, String oldPassword, String newPassword) {
+        return transactionTemplate.execute(status -> {
+            try {
+                passwordDomainService.change(memberId, useType, type, oldPassword, newPassword);
+            } catch (BizException e) {
+                return ResponseResult.fail(e.getResultCode(), e.getMessage());
+            }
+            return ResponseResult.success();
+        });
+    }
+
+    @Override
     public ResponseResult<String> loginValidate(String loginName, PasswordType type, String password) {
         AssertUtil.isNotNull(loginName, GlobalResultCode.ILLEGAL_PARAM, "loginName不能为空");
         AssertUtil.isNotNull(type, GlobalResultCode.ILLEGAL_PARAM, "type不能为空");

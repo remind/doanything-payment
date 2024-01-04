@@ -40,4 +40,10 @@ public class PasswordFacadeTest {
         ResponseResult<String> result = passwordFacade.create("100000000201", PasswordUseType.LOGIN_PASSWORD, PasswordType.TEXT, "123");
         Assert.assertEquals(result.getCode(), GlobalResultCode.SUCCESS.getCode());
     }
+
+    @Test
+    public void testChangeSuccess() {
+        ResponseResult<String> result = passwordFacade.change("100000000201", PasswordUseType.LOGIN_PASSWORD, PasswordType.TEXT, "123", "456");
+        Assert.assertEquals(result.getCode(), GlobalResultCode.SUCCESS.getCode());
+    }
 }
