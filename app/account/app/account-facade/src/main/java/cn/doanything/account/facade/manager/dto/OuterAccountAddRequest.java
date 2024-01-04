@@ -15,14 +15,13 @@ public class OuterAccountAddRequest {
     private String memberId;
 
     /**
-     * 账户名称
-     **/
-    private String accountName;
-
-    /**
      * 账户类型
      **/
     private String accountType;
 
+    /**
+     * 账户名称
+     **/
+    private String accountName;
 
 }

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,12 @@ public class OuterAccountBuilder {
         fillBalanceDirection(outerAccount, outerAccountType.getTitleCode());
         fillOuterSubAccount(outerAccount, outerAccountType.getFundTypes());
         return outerAccount;
+    }
+
+    public List<OuterAccount> build(List<OuterAccountAddRequest> requests) {
+        List<OuterAccount> outerAccounts = new ArrayList<>();
+        requests.forEach(outerAccountAddRequest -> outerAccounts.add(build(outerAccountAddRequest)));
+        return outerAccounts;
     }
 
     private void fillBalanceDirection(OuterAccount outerAccount, String titleCode) {

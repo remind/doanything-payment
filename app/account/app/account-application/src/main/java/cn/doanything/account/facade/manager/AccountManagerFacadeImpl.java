@@ -12,6 +12,7 @@ import cn.doanything.account.facade.manager.builder.InnerAccountBuilder;
 import cn.doanything.account.facade.manager.builder.OuterAccountBuilder;
 import cn.doanything.account.facade.manager.dto.InnerAccountAddRequest;
 import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
+import cn.doanything.account.facade.manager.dto.OuterAccountAddResponse;
 import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.commons.lang.utils.AssertUtil;
@@ -20,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wxj
@@ -53,8 +57,6 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
     @Override
     public ResponseResult<String> createOuterAccount(OuterAccountAddRequest request) {
         try {
-            OuterAccountType outerAccountType = accountTypeRepository.load(request.getAccountType());
-            AssertUtil.isNotNull(outerAccountType, GlobalResultCode.ILLEGAL_PARAM, "账户类型不存在");
             OuterAccount account = outerAccountBuilder.build(request);
             String accountNo = transactionTemplate.execute(status -> outerAccountRepository.store(account));
             return ResponseResult.success(accountNo);
@@ -62,6 +64,19 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
             log.error("外部户开户失败,memberId="+ request.getMemberId(), e);
             return ResponseResult.fail(e.getMessage());
         }
+    }
+
+    @Override
+    public ResponseResult<List<OuterAccountAddResponse>> createOuterAccount(List<OuterAccountAddRequest> requests) {
+        List<OuterAccount> outerAccounts = outerAccountBuilder.build(requests);
+        List<OuterAccountAddResponse> responses = new ArrayList<>();
+        transactionTemplate.executeWithoutResult(status -> {
+            for (OuterAccount outerAccount : outerAccounts) {
+                String accountNo = outerAccountRepository.store(outerAccount);
+                responses.add(new OuterAccountAddResponse(accountNo, outerAccount.getAccountType(), outerAccount.getAccountNo()));
+            }
+        });
+        return ResponseResult.success(responses);
     }
 
     @Override
