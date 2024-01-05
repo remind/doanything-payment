@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: basic
+server:
+  port: 8080
+dubbo:
+  application:
+    name: basic-dubbo
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848
