@@ -28,7 +28,7 @@ public class MessageDetailDO implements Serializable {
     /**
      * 请求id
      */
-    private Long requestId;
+    private String requestId;
 
     /**
      * 业务id
@@ -93,11 +93,11 @@ public class MessageDetailDO implements Serializable {
         this.id = id;
     }
 
-    public Long getRequestId() {
+    public String getRequestId() {
         return requestId;
     }
 
-    public void setRequestId(Long requestId) {
+    public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
 
