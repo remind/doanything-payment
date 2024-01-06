@@ -5,7 +5,7 @@ import cn.doanything.account.facade.manager.dto.OuterAccountAddRequest;
 import cn.doanything.account.facade.manager.dto.OuterAccountAddResponse;
 import cn.doanything.commons.response.ResponseResult;
 import cn.doanything.member.domain.rpc.account.AccountDTO;
-import cn.doanything.member.domain.rpc.account.AccountService;
+import cn.doanything.member.domain.rpc.account.AccountServiceClient;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * 2024/1/4
  */
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceClientImpl implements AccountServiceClient {
 
     @DubboReference
     private AccountManagerFacade accountManagerFacade;

@@ -9,7 +9,7 @@ import cn.doanything.member.domain.repository.MemberRepository;
 import cn.doanything.member.domain.repository.PersonalMemberRepository;
 import cn.doanything.member.domain.repository.PersonalPasswordRepository;
 import cn.doanything.member.domain.rpc.account.AccountDTO;
-import cn.doanything.member.domain.rpc.account.AccountService;
+import cn.doanything.member.domain.rpc.account.AccountServiceClient;
 import cn.doanything.member.types.MemberAccount;
 import cn.doanything.member.types.MemberStatus;
 import cn.doanything.member.types.MemberType;
@@ -40,7 +40,7 @@ public class PersonalDomainServiceImpl implements PersonalDomainService {
     private PersonalPasswordRepository personalPasswordRepository;
 
     @Autowired
-    private AccountService accountService;
+    private AccountServiceClient accountServiceClient;
 
     @Override
     public void create(PersonalMember personalMember) {
@@ -51,7 +51,7 @@ public class PersonalDomainServiceImpl implements PersonalDomainService {
     }
 
     private void createAccount(String memberId, List<String> accountTypes) {
-        List<AccountDTO> accountDTOS = accountService.createAccount(memberId, accountTypes);
+        List<AccountDTO> accountDTOS = accountServiceClient.createAccount(memberId, accountTypes);
         List<MemberAccount> memberAccounts = new ArrayList<>();
         accountDTOS.forEach(accountDTO -> {
             MemberAccount account = new MemberAccount();
