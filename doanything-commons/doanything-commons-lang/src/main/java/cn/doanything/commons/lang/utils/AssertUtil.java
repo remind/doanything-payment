@@ -44,4 +44,16 @@ public class AssertUtil {
     public static void isNotNull(Object object, ResultCode resultCode, String message) {
         isTrue(object != null, resultCode, message);
     }
+
+    public static void isNull(Object object, ResultCode resultCode) {
+        isNull(object, resultCode, null);
+    }
+
+    public static void isNull(Object object, String message) {
+        isNull(object, null, message);
+    }
+
+    public static void isNull(Object object, ResultCode resultCode, String message) {
+        isTrue(object == null, resultCode, message);
+    }
 }

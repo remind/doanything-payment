@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2024-01-06
+ * @since 2024-01-07
  */
 public interface MessageDetailMapper extends BaseMapper<MessageDetailDO> {
 
