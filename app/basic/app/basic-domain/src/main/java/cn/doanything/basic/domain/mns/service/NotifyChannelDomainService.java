@@ -22,7 +22,7 @@ public class NotifyChannelDomainService {
         List<NotifyChannel> notifyChannels = notifyChannelRepository.findAll();
         return notifyChannels.stream().filter(notifyChannel ->
                 notifyChannel.getProtocol().contains(protocol)
-                && notifyChannel.isDefault()
+                && notifyChannel.getIsDefault()
         ).findFirst().orElse(null);
     }
 }

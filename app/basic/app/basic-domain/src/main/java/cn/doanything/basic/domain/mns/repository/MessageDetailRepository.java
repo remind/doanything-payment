@@ -12,7 +12,9 @@ public interface MessageDetailRepository {
 
     MessageDetail load(String id);
 
+    void store(MessageDetail messageDetail);
+
     void reStore(MessageDetail messageDetail);
 
-    <T> List<MessageDetail<T>> findBySceneCodeAndBizId(String sceneCode, String bizId, String recipient);
+    List<MessageDetail> findBySceneCodeAndBizId(String sceneCode, String batchId, String recipient);
 }

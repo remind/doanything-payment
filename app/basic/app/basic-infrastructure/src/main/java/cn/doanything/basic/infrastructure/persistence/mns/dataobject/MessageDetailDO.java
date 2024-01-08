@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-07
+ * @since 2024-01-08
  */
 @TableName("tm_message_detail")
 public class MessageDetailDO implements Serializable {
@@ -38,7 +38,7 @@ public class MessageDetailDO implements Serializable {
     /**
      * 业务id
      */
-    private String bizId;
+    private String batchId;
 
     /**
      * 场景编码
@@ -114,12 +114,12 @@ public class MessageDetailDO implements Serializable {
         this.memberId = memberId;
     }
 
-    public String getBizId() {
-        return bizId;
+    public String getBatchId() {
+        return batchId;
     }
 
-    public void setBizId(String bizId) {
-        this.bizId = bizId;
+    public void setBatchId(String batchId) {
+        this.batchId = batchId;
     }
 
     public String getSceneCode() {
@@ -208,7 +208,7 @@ public class MessageDetailDO implements Serializable {
         "id = " + id +
         ", requestId = " + requestId +
         ", memberId = " + memberId +
-        ", bizId = " + bizId +
+        ", batchId = " + batchId +
         ", sceneCode = " + sceneCode +
         ", recipient = " + recipient +
         ", protocol = " + protocol +

@@ -40,4 +40,12 @@ public class NotifyChannel extends Entity {
      */
     private String memo;
 
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
 }

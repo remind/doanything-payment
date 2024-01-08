@@ -19,17 +19,20 @@ import java.util.Map;
 @Service
 public class NotifyChannelAdapter {
 
+    public static final String PROCESSOR_BEAN_PREFIX = "MessageSendProcessor_prefix_";
+
     @Autowired
     private NotifyChannelDomainService notifyChannelDomainService;
 
     @Autowired
     private ChannelRecordRepository channelRecordRepository;
 
-    private final Map<String, NotifyChannelProcessor> processorMap = new HashMap<>();
+    @Autowired
+    private Map<String, NotifyChannelProcessor> processorMap;
 
     public void process(MessageDetail messageDetail) {
         NotifyChannel notifyChannel = notifyChannelDomainService.getDefault(messageDetail.getProtocol());
-        NotifyResult notifyResult = processorMap.get(notifyChannel.getCode()).process(messageDetail);
+        NotifyResult notifyResult = processorMap.get(PROCESSOR_BEAN_PREFIX + notifyChannel.getCode()).process(messageDetail);
         ChannelRecord channelRecord = new ChannelRecord();
         channelRecord.setChannelCode(notifyChannel.getCode());
         channelRecord.setMessageId(messageDetail.getId());
@@ -39,13 +42,4 @@ public class NotifyChannelAdapter {
         channelRecordRepository.store(channelRecord);
     }
 
-    /**
-     * 注册处理器
-     *
-     * @param notifyChannelCode
-     * @param processor
-     */
-    public void register(String notifyChannelCode, NotifyChannelProcessor processor) {
-        processorMap.put(notifyChannelCode, processor);
-    }
 }

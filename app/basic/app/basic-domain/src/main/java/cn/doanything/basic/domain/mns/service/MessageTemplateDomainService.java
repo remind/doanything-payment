@@ -25,13 +25,14 @@ public class MessageTemplateDomainService {
     @Autowired
     private MessageTemplateRepository messageTemplateRepository;
 
-    public void render(MessageDetail<AuthCode> authCodeMessage) {
+    public void render(MessageDetail authCodeMessage) {
         MessageTemplate template = messageTemplateRepository.findBySceneCodeAndProtocol(authCodeMessage.getSceneCode(), authCodeMessage.getProtocol());
         AssertUtil.isNotNull(template, "消息模板不存在");
         Map<String, Object> data = new HashMap<>();
-        data.put("authCode", authCodeMessage.getContent().getAuthCode());
-        data.put("validMinute", authCodeMessage.getContent().getValidMinute());
-        authCodeMessage.getContent().setMessageText(renderByTemplate(template.getContent(), data));
+        AuthCode authCode = (AuthCode) authCodeMessage.getContent();
+        data.put("authCode", authCode.getAuthCode());
+        data.put("validMinute", authCode.getValidMinute());
+        authCode.setMessageText(renderByTemplate(template.getContent(), data));
     }
 
     /**

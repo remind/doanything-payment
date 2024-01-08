@@ -14,7 +14,7 @@ import java.util.Date;
  * 2024/1/6
  */
 @Data
-public class MessageDetail<T extends Object> extends Entity {
+public class MessageDetail extends Entity {
 
     private Long id;
 
@@ -67,7 +67,7 @@ public class MessageDetail<T extends Object> extends Entity {
     /**
      * 消息内容，其类型由protocol，messageType决定
      */
-    private T content;
+    private Object content;
 
     /**
      * 状态,待发送、成功、失败

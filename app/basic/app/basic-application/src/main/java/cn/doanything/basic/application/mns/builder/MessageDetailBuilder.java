@@ -27,8 +27,8 @@ public class MessageDetailBuilder {
     @Autowired
     private MessageTemplateDomainService messageTemplateDomainService;
 
-    public MessageDetail<AuthCode> buildAuthCodeMessage(AuthCodeRequest request) {
-        MessageDetail<AuthCode> authCodeMessage = new MessageDetail<>();
+    public MessageDetail buildAuthCodeMessage(AuthCodeRequest request) {
+        MessageDetail authCodeMessage = new MessageDetail();
 
         authCodeMessage.setRequestId(request.getRequestId());
         authCodeMessage.setSceneCode(request.getSceneCode());

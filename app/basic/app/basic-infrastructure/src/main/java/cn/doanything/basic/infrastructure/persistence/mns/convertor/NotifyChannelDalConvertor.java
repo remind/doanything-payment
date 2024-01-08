@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @author wxj
  * 2024/1/8
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {EnumsConvertor.class})
 public interface NotifyChannelDalConvertor extends ReadWriteConvertor<NotifyChannel, NotifyChannelDO> {
 
     default List<Protocol> toProtocols(String protocol) {

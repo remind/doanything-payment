@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-06
+ * @since 2024-01-08
  */
 @TableName("tm_notify_channel")
 public class NotifyChannelDO implements Serializable {
@@ -33,6 +33,11 @@ public class NotifyChannelDO implements Serializable {
      * 协议，如短信、邮件、push
      */
     private String protocol;
+
+    /**
+     * 是否默认
+     */
+    private Boolean isDefault;
 
     /**
      * 备注
@@ -73,6 +78,14 @@ public class NotifyChannelDO implements Serializable {
         this.protocol = protocol;
     }
 
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
     public String getMemo() {
         return memo;
     }
@@ -103,6 +116,7 @@ public class NotifyChannelDO implements Serializable {
         "code = " + code +
         ", name = " + name +
         ", protocol = " + protocol +
+        ", isDefault = " + isDefault +
         ", memo = " + memo +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +
