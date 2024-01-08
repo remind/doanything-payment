@@ -5,6 +5,7 @@ import cn.doanything.account.types.accounting.AccountTitleStatus;
 import cn.doanything.account.types.accounting.AccountTitleType;
 import cn.doanything.account.types.buffer.BufferedRuleStatus;
 import cn.doanything.account.types.enums.*;
+import cn.doanything.commons.lang.utils.EnumUtil;
 import org.mapstruct.Mapper;
 
 /**
@@ -14,84 +15,45 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface EnumsConvertor {
 
-    default AccountTitleType toAccountTitleType(String titleType) {
-        return AccountTitleType.getByCode(titleType);
+    default AccountTitleType toAccountTitleType(String code) {
+        return EnumUtil.getByCode(AccountTitleType.class, code);
     }
 
-    default String toAccountTitleTypeCode(AccountTitleType accountTitleType) {
-        return accountTitleType == null ? null : accountTitleType.getCode();
+    default BalanceDirection toBalanceDirection(String code) {
+        return EnumUtil.getByCode(BalanceDirection.class, code);
     }
 
-    default BalanceDirection toBalanceDirection(String direction) {
-        return BalanceDirection.getByCode(direction);
+    default AccountTitleStatus toAccountTitleStatus(String code) {
+        return EnumUtil.getByCode(AccountTitleStatus.class, code);
     }
 
-    default String toBalanceDirectionCode(BalanceDirection balanceDirection) {
-        return balanceDirection == null ? null : balanceDirection.getCode();
+    default AccountTitleRange toAccountTitleRange(String code) {
+        return EnumUtil.getByCode(AccountTitleRange.class, code);
     }
 
-    default AccountTitleStatus toAccountTitleStatus(String status) {
-        return AccountTitleStatus.getByCode(status);
+    default AccountAttribute toAccountAttribute(String code) {
+        return EnumUtil.getByCode(AccountAttribute.class, code);
     }
 
-    default String toAccountTitleStatusCode(AccountTitleStatus accountTitleStatus) {
-        return accountTitleStatus == null ? null : accountTitleStatus.getCode();
-    }
-
-    default AccountTitleRange toAccountTitleRange(String accountTitleRange) {
-        return AccountTitleRange.getByCode(accountTitleRange);
-    }
-
-    default String toAccountTitleRangeCode(AccountTitleRange accountTitleRange) {
-        return accountTitleRange == null ? null : accountTitleRange.getCode();
-    }
-
-    default AccountAttribute toAccountAttribute(String accountAttribute) {
-        return AccountAttribute.getByCode(accountAttribute);
-    }
-
-    default String toAccountAttributeCode(AccountAttribute accountAttribute) {
-        return accountAttribute == null ? null : accountAttribute.getCode();
-    }
-
-    default CrDr toCrDr(String crDrCode) {
-        return CrDr.getByCode(crDrCode);
-    }
-
-    default String toCrDrCode(CrDr crDr) {
-        return crDr == null ? null : crDr.getCode();
+    default CrDr toCrDr(String code) {
+        return EnumUtil.getByCode(CrDr.class, code);
     }
 
     default DenyStatus toDenyStatus(String code) {
-        return DenyStatus.getByCode(code);
-    }
-
-    default String toDenyStatusCode(DenyStatus enumObject) {
-        return enumObject == null ? null : enumObject.getCode();
+        return EnumUtil.getByCode(DenyStatus.class, code);
     }
 
     default IODirection toIODirection(String code) {
-        return IODirection.getByCode(code);
-    }
-
-    default String toIODirectionCode(IODirection enumObject) {
-        return enumObject == null ? null : enumObject.getCode();
+        return EnumUtil.getByCode(IODirection.class, code);
     }
 
     default BufferDetailStatus toBufferDetailStatus(String code) {
-        return BufferDetailStatus.getByCode(code);
-    }
-
-    default String toBufferDetailStatusCode(BufferDetailStatus enumObject) {
-        return enumObject == null ? null : enumObject.getCode();
+        return EnumUtil.getByCode(BufferDetailStatus.class, code);
     }
 
     default BufferedRuleStatus toBufferedRuleStatus(String code) {
-        return BufferedRuleStatus.getByCode(code);
+        return EnumUtil.getByCode(BufferedRuleStatus.class, code);
     }
 
-    default String toBufferedRuleStatusCode(BufferedRuleStatus enumObject) {
-        return enumObject == null ? null : enumObject.getCode();
-    }
 
 }

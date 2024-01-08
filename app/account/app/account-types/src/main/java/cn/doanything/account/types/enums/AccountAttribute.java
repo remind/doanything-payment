@@ -30,18 +30,5 @@ public enum AccountAttribute implements CodeEnum {
     public String getDisplayName() {
         return displayName;
     }
-    /**
-     * 通过枚举code获得枚举
-     *
-     * @param code
-     * @return AccountAttribute
-     */
-    public static AccountAttribute getByCode(String code) {
-        for (AccountAttribute enumObject : values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-        return null;
-    }
+
 }

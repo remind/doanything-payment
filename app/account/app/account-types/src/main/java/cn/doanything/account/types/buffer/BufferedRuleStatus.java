@@ -22,21 +22,6 @@ public enum BufferedRuleStatus implements CodeEnum {
         this.displayName = displayName;
     }
 
-    /**
-     * 根据code获取枚举
-     *
-     * @param code
-     * @return BalanceDirection
-     */
-    public static BufferedRuleStatus getByCode(String code) {
-        for (BufferedRuleStatus enumObject : BufferedRuleStatus.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-        return null;
-    }
-
     @Override
     public String getCode() {
         return this.code;

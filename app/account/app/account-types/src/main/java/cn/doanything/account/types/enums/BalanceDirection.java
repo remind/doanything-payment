@@ -23,22 +23,6 @@ public enum BalanceDirection implements CodeEnum {
         this.displayName = displayName;
     }
 
-    /**
-     * 根据code获取枚举
-     *
-     * @param code
-     * @return BalanceDirection
-     */
-    public static BalanceDirection getByCode(String code) {
-        for (BalanceDirection enumObject : BalanceDirection.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-        return null;
-    }
-
-
     @Override
     public String getCode() {
         return this.code;

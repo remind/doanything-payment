@@ -33,19 +33,4 @@ public enum AccountTitleType implements CodeEnum {
         return displayName;
     }
 
-    /**
-     * 通过枚举code获得枚举
-     *
-     * @param code
-     * @return AccountType
-     */
-    public static AccountTitleType getByCode(String code) {
-        for (AccountTitleType enumObject : values()) {
-            if (enumObject.code.equals(code)) {
-                return enumObject;
-            }
-        }
-
-        return null;
-    }
 }

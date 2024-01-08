@@ -24,21 +24,6 @@ public enum CrDr implements CodeEnum {
     }
 
     /**
-     * 根据代码获取枚举
-     * @param code
-     * @return
-     */
-    public static CrDr getByCode(String code) {
-        for (CrDr enumObject : CrDr.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * 获取反向借贷
      * @return
      */

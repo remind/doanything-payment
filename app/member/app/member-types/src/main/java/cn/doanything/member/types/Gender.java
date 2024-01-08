@@ -1,54 +1,40 @@
 package cn.doanything.member.types;
 
+import cn.doanything.commons.enums.CodeEnum;
+
 /**
  * 性别枚举
  *
  * @author wxj
  * 2023/12/10
  */
-public enum Gender {
+public enum Gender implements CodeEnum {
 
-    UNKNOWN(0, "保密"), MALE(1, "男性"), FEMALE(2, "女性");
+    UNKNOWN("0", "保密"),
+    MALE("1", "男性"),
+    FEMALE("2", "女性");
 
     /**
      * 代码,只能为1位正整数
      */
-    private final int code;
+    private final String code;
     /**
      * 信息
      */
-    private final String message;
+    private final String displayName;
 
-    Gender(int code, String message) {
+    Gender(String code, String displayName) {
         this.code = code;
-        this.message = message;
+        this.displayName = displayName;
     }
 
-    /**
-     * 通过代码获取枚举项
-     *
-     * @param code
-     * @return
-     */
-    public static Gender getByCode(Integer code) {
-        if (code == null) {
-            return null;
-        }
-
-        for (Gender certType : Gender.values()) {
-            if (certType.getCode() == code) {
-                return certType;
-            }
-        }
-
-        return null;
+    @Override
+    public String getCode() {
+        return this.code;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
+    @Override
+    public String getDisplayName() {
+        return this.displayName;
     }
 }

@@ -27,20 +27,6 @@ public enum AccountFamily  implements CodeEnum {
         this.displayName = displayName;
     }
 
-    /**
-     * 根据代码获取枚举
-     * @param code
-     * @return AccountFamily
-     */
-    public static AccountFamily getByCode(String code) {
-        for (AccountFamily enumObject : AccountFamily.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-
-        return null;
-    }
     @Override
     public String getCode() {
         return code;

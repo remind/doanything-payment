@@ -25,22 +25,6 @@ public enum DenyStatus implements CodeEnum {
 
     }
 
-    /**
-     * 根据代码获取枚举
-     *
-     * @param code
-     * @return
-     */
-    public static DenyStatus getByCode(String code) {
-        for (DenyStatus enumObject : DenyStatus.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-
-        return null;
-    }
-
     public String getCode() {
         return code;
     }

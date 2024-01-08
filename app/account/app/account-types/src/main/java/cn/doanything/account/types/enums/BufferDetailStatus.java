@@ -22,21 +22,6 @@ public enum BufferDetailStatus implements CodeEnum {
         this.displayName = displayName;
     }
 
-    /**
-     * 根据code获取枚举
-     *
-     * @param code
-     * @return BufferDetailStatus
-     */
-    public static BufferDetailStatus getByCode(String code) {
-        for (BufferDetailStatus enumObject : BufferDetailStatus.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-        return null;
-    }
-
     @Override
     public String getCode() {
         return this.code;

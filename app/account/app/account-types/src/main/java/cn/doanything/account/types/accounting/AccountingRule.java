@@ -29,18 +29,4 @@ public enum AccountingRule implements CodeEnum {
         return displayName;
     }
 
-    /**
-     * 通过枚举code获得枚举
-     *
-     * @param code
-     * @return AccountingRule
-     */
-    public static AccountingRule getByCode(String code) {
-        for (AccountingRule enumObject : values()) {
-            if (enumObject.code.equals(code)) {
-                return enumObject;
-            }
-        }
-        return null;
-    }
 }

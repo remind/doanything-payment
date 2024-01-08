@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-01
+ * @since 2024-01-08
  */
 @TableName("t_personal_member")
 public class PersonalMemberDO implements Serializable {
@@ -32,7 +32,7 @@ public class PersonalMemberDO implements Serializable {
     /**
      * 性别
      */
-    private Byte gender;
+    private String gender;
 
     /**
      * 创建时间
@@ -60,11 +60,11 @@ public class PersonalMemberDO implements Serializable {
         this.memberName = memberName;
     }
 
-    public Byte getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

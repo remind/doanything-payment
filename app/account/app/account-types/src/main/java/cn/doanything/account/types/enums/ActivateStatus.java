@@ -21,23 +21,6 @@ public enum ActivateStatus implements CodeEnum {
 
     }
 
-    /**
-     * 根据代码获取枚举
-     *
-     * @param code
-     * @return ActivateStatus
-     */
-    public static ActivateStatus getByCode(String code) {
-        for (ActivateStatus enumObject : ActivateStatus.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-
-        return null;
-    }
-
-
     @Override
     public String getCode() {
         return code;

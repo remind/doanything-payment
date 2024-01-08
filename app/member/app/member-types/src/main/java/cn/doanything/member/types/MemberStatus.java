@@ -29,26 +29,6 @@ public enum MemberStatus implements CodeEnum {
         this.displayName = displayName;
     }
 
-    /**
-     * 通过代码获取枚举项
-     *
-     * @param code
-     * @return
-     */
-    public static MemberStatus getByCode(String code) {
-        if (code == null) {
-            return null;
-        }
-
-        for (MemberStatus memberStatus : MemberStatus.values()) {
-            if (memberStatus.getCode().equals(code)) {
-                return memberStatus;
-            }
-        }
-
-        return null;
-    }
-
     @Override
     public String getCode() {
         return code;

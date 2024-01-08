@@ -23,21 +23,6 @@ public enum IODirection implements CodeEnum {
         this.displayName = displayName;
     }
 
-    /**
-     * 根据代码获取枚举
-     * @param code
-     * @return
-     */
-    public static IODirection getByCode(String code) {
-        for (IODirection enumObject : IODirection.values()) {
-            if (enumObject.getCode().equals(code)) {
-                return enumObject;
-            }
-        }
-
-        return null;
-    }
-
     @Override
     public String getCode() {
         return code;

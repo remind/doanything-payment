@@ -43,14 +43,4 @@ public interface MemberDalConvertor {
         return MemberType.getByCode(Integer.valueOf(memberType));
     }
 
-    default Byte toGender(Gender gender) {
-        if (gender != null) {
-            return (byte) gender.getCode();
-        }
-        return 0;
-    }
-
-    default Gender toGender(Byte gender) {
-        return Gender.getByCode(Integer.valueOf(gender));
-    }
 }
