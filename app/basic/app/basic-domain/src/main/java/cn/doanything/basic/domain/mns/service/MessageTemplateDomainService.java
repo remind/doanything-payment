@@ -1,7 +1,7 @@
 package cn.doanything.basic.domain.mns.service;
 
 import cn.doanything.basic.domain.mns.MessageDetail;
-import cn.doanything.basic.mns.message.AuthCode;
+import cn.doanything.basic.mns.content.AuthCode;
 import cn.doanything.basic.domain.mns.MessageTemplate;
 import cn.doanything.basic.domain.mns.repository.MessageTemplateRepository;
 import cn.doanything.commons.lang.utils.AssertUtil;

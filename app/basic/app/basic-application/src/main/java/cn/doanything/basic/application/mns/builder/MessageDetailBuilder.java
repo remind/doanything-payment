@@ -2,7 +2,7 @@ package cn.doanything.basic.application.mns.builder;
 
 import cn.doanything.basic.domain.BasicConstants;
 import cn.doanything.basic.domain.mns.MessageDetail;
-import cn.doanything.basic.mns.message.AuthCode;
+import cn.doanything.basic.mns.content.AuthCode;
 import cn.doanything.basic.domain.mns.service.MessageTemplateDomainService;
 import cn.doanything.basic.facade.mns.dto.AuthCodeRequest;
 import cn.doanything.basic.mns.MessageStatus;

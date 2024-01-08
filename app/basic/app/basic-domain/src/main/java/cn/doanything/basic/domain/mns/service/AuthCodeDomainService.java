@@ -1,6 +1,6 @@
 package cn.doanything.basic.domain.mns.service;
 
-import cn.doanything.basic.mns.message.AuthCode;
+import cn.doanything.basic.mns.content.AuthCode;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.domain.mns.repository.MessageDetailRepository;
 import cn.doanything.basic.mns.MessageStatus;

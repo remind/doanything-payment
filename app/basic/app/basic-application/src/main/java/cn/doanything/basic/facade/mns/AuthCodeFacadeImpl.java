@@ -1,7 +1,6 @@
 package cn.doanything.basic.facade.mns;
 
 import cn.doanything.basic.application.mns.builder.MessageDetailBuilder;
-import cn.doanything.basic.mns.message.AuthCode;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.domain.mns.channel.NotifyChannelAdapter;
 import cn.doanything.basic.domain.mns.repository.MessageDetailRepository;
