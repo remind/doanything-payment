@@ -1,14 +1,13 @@
 package cn.doanything.basic.domain.mns.channel;
 
-import cn.doanything.basic.domain.mns.ChannelRecord;
+import cn.doanything.basic.domain.mns.ChannelRequest;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.domain.mns.NotifyChannel;
-import cn.doanything.basic.domain.mns.repository.ChannelRecordRepository;
+import cn.doanything.basic.domain.mns.repository.ChannelRequestRepository;
 import cn.doanything.basic.domain.mns.service.NotifyChannelDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,7 +24,7 @@ public class NotifyChannelAdapter {
     private NotifyChannelDomainService notifyChannelDomainService;
 
     @Autowired
-    private ChannelRecordRepository channelRecordRepository;
+    private ChannelRequestRepository channelRequestRepository;
 
     @Autowired
     private Map<String, NotifyChannelProcessor> processorMap;
@@ -33,13 +32,13 @@ public class NotifyChannelAdapter {
     public void process(MessageDetail messageDetail) {
         NotifyChannel notifyChannel = notifyChannelDomainService.getDefault(messageDetail.getProtocol());
         NotifyResult notifyResult = processorMap.get(PROCESSOR_BEAN_PREFIX + notifyChannel.getCode()).process(messageDetail);
-        ChannelRecord channelRecord = new ChannelRecord();
-        channelRecord.setChannelCode(notifyChannel.getCode());
-        channelRecord.setMessageId(messageDetail.getId());
-        channelRecord.setStatus(notifyResult.getStatus());
-        channelRecord.setResponseId(notifyResult.getResponseId());
-        channelRecord.setResponseText(notifyResult.getResponseText());
-        channelRecordRepository.store(channelRecord);
+        ChannelRequest channelRequest = new ChannelRequest();
+        channelRequest.setChannelCode(notifyChannel.getCode());
+        channelRequest.setMessageId(messageDetail.getId());
+        channelRequest.setStatus(notifyResult.getStatus());
+        channelRequest.setResponseId(notifyResult.getResponseId());
+        channelRequest.setResponseText(notifyResult.getResponseText());
+        channelRequestRepository.store(channelRequest);
     }
 
 }

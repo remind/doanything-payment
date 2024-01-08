@@ -2,9 +2,11 @@ package cn.doanything.commons.convertor;
 
 import cn.doanything.commons.enums.CodeEnum;
 import cn.doanything.commons.enums.EnableEnum;
+import cn.doanything.commons.enums.ResultStatusEnum;
 import cn.doanything.commons.lang.utils.EnumUtil;
 
 /**
+ * 全局类型转换
  * @author wxj
  * 2024/1/4
  */
@@ -17,7 +19,7 @@ public interface GlobalTypeConvertor {
         return EnumUtil.getByCode(EnableEnum.class, code);
     }
 
-    default String toEnableEnum(EnableEnum enumObject) {
-        return enumObject.getCode();
+    default ResultStatusEnum toResultStatusEnum(String code) {
+        return EnumUtil.getByCode(ResultStatusEnum.class, code);
     }
 }

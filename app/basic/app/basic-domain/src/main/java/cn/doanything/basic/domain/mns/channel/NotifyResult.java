@@ -1,6 +1,6 @@
 package cn.doanything.basic.domain.mns.channel;
 
-import cn.doanything.basic.mns.ChannelSendStatus;
+import cn.doanything.commons.enums.ResultStatusEnum;
 import lombok.Data;
 
 /**
@@ -24,5 +24,5 @@ public class NotifyResult {
     /**
      * 状态,成功、失败
      */
-    private ChannelSendStatus status;
+    private ResultStatusEnum status;
 }

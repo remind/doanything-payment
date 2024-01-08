@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-06
+ * @since 2024-01-08
  */
-@TableName("tm_channel_record")
-public class ChannelRecordDO implements Serializable {
+@TableName("tm_channel_request")
+public class ChannelRequestDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -126,7 +126,7 @@ public class ChannelRecordDO implements Serializable {
 
     @Override
     public String toString() {
-        return "ChannelRecordDO{" +
+        return "ChannelRequestDO{" +
         "id = " + id +
         ", messageId = " + messageId +
         ", channelCode = " + channelCode +

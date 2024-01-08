@@ -40,11 +40,13 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
     @Override
     public void store(MessageDetail messageDetail) {
         mapper.insert(dalConvertor.toDo(messageDetail));
+        contentMapper.insert(dalConvertor.toContent(messageDetail));
     }
 
     @Override
     public void reStore(MessageDetail messageDetail) {
         mapper.updateById(dalConvertor.toDo(messageDetail));
+        contentMapper.updateById(dalConvertor.toContent(messageDetail));
     }
 
     @Override

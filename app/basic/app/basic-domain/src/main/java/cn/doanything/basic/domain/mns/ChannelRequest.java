@@ -1,6 +1,6 @@
 package cn.doanything.basic.domain.mns;
 
-import cn.doanything.basic.mns.ChannelSendStatus;
+import cn.doanything.commons.enums.ResultStatusEnum;
 import cn.doanything.commons.lang.Entity;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import lombok.Data;
  * 2024/1/7
  */
 @Data
-public class ChannelRecord extends Entity {
+public class ChannelRequest extends Entity {
     /**
      * 消息ID
      */
@@ -34,5 +34,5 @@ public class ChannelRecord extends Entity {
     /**
      * 状态,成功、失败
      */
-    private ChannelSendStatus status;
+    private ResultStatusEnum status;
 }

@@ -1,6 +1,6 @@
 package cn.doanything.basic.infrastructure.persistence.mns.mapper;
 
-import cn.doanything.basic.infrastructure.persistence.mns.dataobject.ChannelRecordDO;
+import cn.doanything.basic.infrastructure.persistence.mns.dataobject.ChannelRequestDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2024-01-06
+ * @since 2024-01-08
  */
-public interface ChannelRecordMapper extends BaseMapper<ChannelRecordDO> {
+public interface ChannelRequestMapper extends BaseMapper<ChannelRequestDO> {
 
 }

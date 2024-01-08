@@ -1,6 +1,7 @@
 package cn.doanything.basic.infrastructure.persistence.mns.convertor;
 
 import cn.doanything.basic.domain.mns.MessageDetail;
+import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageContentDO;
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageDetailDO;
 import cn.doanything.basic.mns.content.AuthCode;
 import cn.doanything.commons.convertor.ReadWriteConvertor;
@@ -23,13 +24,17 @@ public interface MessageDetailDalConvertor extends ReadWriteConvertor<MessageDet
         }
     }
 
-    default String toContent(MessageDetail messageDetail, Object content) {
+    default MessageContentDO toContent(MessageDetail messageDetail) {
+        MessageContentDO messageContentDO = new MessageContentDO();
+        messageContentDO.setMessageId(messageDetail.getId());
         switch (messageDetail.getMessageType()) {
             case AUTH_CODE:
-                return JSONUtil.parse(content).toString();
+                messageContentDO.setContent(JSONUtil.parse(messageDetail.getContent()).toString());
+                break;
             default:
-                return content.toString();
+                messageContentDO.setContent(String.valueOf(messageDetail.getContent()));
         }
+        return messageContentDO;
     }
 
 }
