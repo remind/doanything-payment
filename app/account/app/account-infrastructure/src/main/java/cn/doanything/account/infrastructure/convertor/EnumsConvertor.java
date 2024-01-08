@@ -5,7 +5,6 @@ import cn.doanything.account.types.accounting.AccountTitleStatus;
 import cn.doanything.account.types.accounting.AccountTitleType;
 import cn.doanything.account.types.buffer.BufferedRuleStatus;
 import cn.doanything.account.types.enums.*;
-import cn.doanything.commons.enums.CodeEnum;
 import org.mapstruct.Mapper;
 
 /**
@@ -14,14 +13,6 @@ import org.mapstruct.Mapper;
  */
 @Mapper(componentModel = "spring")
 public interface EnumsConvertor {
-
-    default <T extends Enum<?> & CodeEnum> T getByCode(Class<T> enumCls, String code) {
-        T[] enumConstants = enumCls.getEnumConstants();
-        for (T t : enumConstants) {
-            if (t.getCode().equals(code)) return t;
-        }
-        return null;
-    }
 
     default AccountTitleType toAccountTitleType(String titleType) {
         return AccountTitleType.getByCode(titleType);

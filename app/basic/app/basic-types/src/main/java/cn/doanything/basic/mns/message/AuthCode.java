@@ -1,4 +1,4 @@
-package cn.doanything.basic.domain.mns;
+package cn.doanything.basic.mns.message;
 
 import cn.doanything.commons.enums.EnableEnum;
 import lombok.Data;
@@ -12,17 +12,17 @@ import java.util.Date;
  * 2024/1/7
  */
 @Data
-public class MessageAuthCode extends MessageDetail {
-
-    /**
-     * 业务id，同一个业务ID下只能有一个处于可验证状态的
-     */
-    private String bizId;
+public class AuthCode {
 
     /**
      * 验证码内容
      */
     private String authCode;
+
+    /**
+     * 消息文本
+     */
+    private String messageText;
 
     /**
      * 验证状态,可验证、失效

@@ -14,5 +14,5 @@ public interface MessageDetailRepository {
 
     void reStore(MessageDetail messageDetail);
 
-    List<MessageDetail> findBySceneCodeAndBizId(String sceneCode, String bizId);
+    <T> List<MessageDetail<T>> findBySceneCodeAndBizId(String sceneCode, String bizId, String recipient);
 }

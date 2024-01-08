@@ -1,7 +1,7 @@
 package cn.doanything.basic.facade.mns;
 
 import cn.doanything.basic.application.mns.builder.MessageDetailBuilder;
-import cn.doanything.basic.domain.mns.MessageAuthCode;
+import cn.doanything.basic.mns.message.AuthCode;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.domain.mns.channel.NotifyChannelAdapter;
 import cn.doanything.basic.domain.mns.repository.MessageDetailRepository;
@@ -40,10 +40,10 @@ public class AuthCodeFacadeImpl implements AuthCodeFacade {
         transactionTemplate.executeWithoutResult(status -> {
             MessageDetail messageDetail = messageDetailRepository.load(request.getRequestId());
             AssertUtil.isNull(messageDetail, "重复请求");
-            MessageAuthCode messageAuthCode = messageDetailBuilder.build(request);
-            authCodeDomainService.invalid(messageAuthCode.getSceneCode(), messageAuthCode.getBizId());
-            messageDetailRepository.reStore(messageAuthCode);
-            notifyChannelAdapter.process(messageAuthCode);
+            messageDetail = messageDetailBuilder.buildAuthCodeMessage(request);
+            authCodeDomainService.invalid(messageDetail.getSceneCode(), messageDetail.getBatchId(), messageDetail.getRecipient());
+            messageDetailRepository.reStore(messageDetail);
+            notifyChannelAdapter.process(messageDetail);
         });
         return ResponseResult.success();
     }

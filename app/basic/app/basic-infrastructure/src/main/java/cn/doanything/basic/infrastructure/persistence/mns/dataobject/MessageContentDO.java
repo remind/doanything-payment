@@ -7,30 +7,25 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 邮件消息
+ * 消息内容
  * </p>
  *
  * @author wxj
- * @since 2024-01-06
+ * @since 2024-01-08
  */
-@TableName("tm_message_mail")
-public class MessageMailDO implements Serializable {
+@TableName("tm_message_content")
+public class MessageContentDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 消息ID
+     * 主键
      */
     @TableId("message_id")
     private Long messageId;
 
     /**
-     * 主题
-     */
-    private String subject;
-
-    /**
-     * 内容
+     * 消息内容
      */
     private String content;
 
@@ -50,14 +45,6 @@ public class MessageMailDO implements Serializable {
 
     public void setMessageId(Long messageId) {
         this.messageId = messageId;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public String getContent() {
@@ -86,9 +73,8 @@ public class MessageMailDO implements Serializable {
 
     @Override
     public String toString() {
-        return "MessageMailDO{" +
+        return "MessageContentDO{" +
         "messageId = " + messageId +
-        ", subject = " + subject +
         ", content = " + content +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +

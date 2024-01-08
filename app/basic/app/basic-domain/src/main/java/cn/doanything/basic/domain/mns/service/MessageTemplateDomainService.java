@@ -1,6 +1,7 @@
 package cn.doanything.basic.domain.mns.service;
 
-import cn.doanything.basic.domain.mns.MessageAuthCode;
+import cn.doanything.basic.domain.mns.MessageDetail;
+import cn.doanything.basic.mns.message.AuthCode;
 import cn.doanything.basic.domain.mns.MessageTemplate;
 import cn.doanything.basic.domain.mns.repository.MessageTemplateRepository;
 import cn.doanything.commons.lang.utils.AssertUtil;
@@ -24,13 +25,13 @@ public class MessageTemplateDomainService {
     @Autowired
     private MessageTemplateRepository messageTemplateRepository;
 
-    public void render(MessageAuthCode messageAuthCode) {
-        MessageTemplate template = messageTemplateRepository.findBySceneCodeAndProtocol(messageAuthCode.getSceneCode(), messageAuthCode.getProtocol());
+    public void render(MessageDetail<AuthCode> authCodeMessage) {
+        MessageTemplate template = messageTemplateRepository.findBySceneCodeAndProtocol(authCodeMessage.getSceneCode(), authCodeMessage.getProtocol());
         AssertUtil.isNotNull(template, "消息模板不存在");
         Map<String, Object> data = new HashMap<>();
-        data.put("authCode", messageAuthCode.getAuthCode());
-        data.put("validMinute", messageAuthCode.getValidMinute());
-        messageAuthCode.setContent(renderByTemplate(template.getContent(), data));
+        data.put("authCode", authCodeMessage.getContent().getAuthCode());
+        data.put("validMinute", authCodeMessage.getContent().getValidMinute());
+        authCodeMessage.getContent().setMessageText(renderByTemplate(template.getContent(), data));
     }
 
     /**

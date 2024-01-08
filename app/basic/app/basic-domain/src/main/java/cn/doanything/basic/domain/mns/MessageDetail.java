@@ -14,7 +14,7 @@ import java.util.Date;
  * 2024/1/6
  */
 @Data
-public class MessageDetail extends Entity {
+public class MessageDetail<T extends Object> extends Entity {
 
     private Long id;
 
@@ -27,6 +27,12 @@ public class MessageDetail extends Entity {
      * 请求id
      */
     private String requestId;
+
+    /**
+     * 批次ID
+     * 验证码场景下：只有一条有效
+     */
+    private String batchId;
 
     /**
      * 场景编码
@@ -59,9 +65,9 @@ public class MessageDetail extends Entity {
     private Date notifyTime;
 
     /**
-     * 消息内容
+     * 消息内容，其类型由protocol，messageType决定
      */
-    private String content;
+    private T content;
 
     /**
      * 状态,待发送、成功、失败
