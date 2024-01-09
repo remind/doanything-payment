@@ -28,7 +28,7 @@ public class ChannelRequestDO implements Serializable {
     /**
      * 消息ID
      */
-    private Long messageId;
+    private String messageId;
 
     /**
      * 渠道编码
@@ -68,11 +68,11 @@ public class ChannelRequestDO implements Serializable {
         this.id = id;
     }
 
-    public Long getMessageId() {
+    public String getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(Long messageId) {
+    public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
 

@@ -14,7 +14,7 @@ public class ChannelRequest extends Entity {
     /**
      * 消息ID
      */
-    private Long messageId;
+    private String messageId;
 
     /**
      * 渠道编码

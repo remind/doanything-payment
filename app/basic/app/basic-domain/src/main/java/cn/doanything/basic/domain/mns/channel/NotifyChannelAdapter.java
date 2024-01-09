@@ -34,7 +34,7 @@ public class NotifyChannelAdapter {
         NotifyResult notifyResult = processorMap.get(PROCESSOR_BEAN_PREFIX + notifyChannel.getCode()).process(messageDetail);
         ChannelRequest channelRequest = new ChannelRequest();
         channelRequest.setChannelCode(notifyChannel.getCode());
-        channelRequest.setMessageId(messageDetail.getId());
+        channelRequest.setMessageId(messageDetail.getMessageId());
         channelRequest.setStatus(notifyResult.getStatus());
         channelRequest.setResponseId(notifyResult.getResponseId());
         channelRequest.setResponseText(notifyResult.getResponseText());

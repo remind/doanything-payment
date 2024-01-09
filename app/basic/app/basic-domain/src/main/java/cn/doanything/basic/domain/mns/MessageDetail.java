@@ -16,7 +16,10 @@ import java.util.Date;
 @Data
 public class MessageDetail extends Entity {
 
-    private Long id;
+    /**
+     * 消息ID
+     */
+    private String messageId;
 
     /**
      * 会员ID

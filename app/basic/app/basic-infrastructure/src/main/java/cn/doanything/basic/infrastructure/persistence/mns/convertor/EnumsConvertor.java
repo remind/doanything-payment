@@ -1,5 +1,6 @@
 package cn.doanything.basic.infrastructure.persistence.mns.convertor;
 
+import cn.doanything.basic.mns.MessageStatus;
 import cn.doanything.basic.mns.MessageType;
 import cn.doanything.basic.mns.NotifyType;
 import cn.doanything.basic.mns.Protocol;
@@ -26,4 +27,7 @@ public interface EnumsConvertor extends GlobalTypeConvertor {
         return EnumUtil.getByCode(NotifyType.class, code);
     }
 
+    default MessageStatus toMessageStatus(String code) {
+        return EnumUtil.getByCode(MessageStatus.class, code);
+    }
 }

@@ -8,7 +8,6 @@ import cn.doanything.basic.domain.mns.sender.MessageSendProcessor;
 import cn.doanything.basic.mns.MessageStatus;
 import cn.doanything.basic.mns.content.AuthCode;
 import cn.doanything.commons.enums.EnableEnum;
-import cn.hutool.core.util.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,8 +30,6 @@ public class AuthCodeMessageSendProcessor implements MessageSendProcessor {
     @Override
     public void send(MessageDetail messageDetail) {
         invalid(messageDetail.getSceneCode(), messageDetail.getBatchId(), messageDetail.getRecipient());
-        AuthCode authCode = (AuthCode) messageDetail.getContent();
-        authCode.setAuthCode(RandomUtil.randomNumbers(4));
         messageDetailRepository.store(messageDetail);
         notifyChannelAdapter.process(messageDetail);
     }

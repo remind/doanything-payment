@@ -8,4 +8,11 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>doanything-framework-api</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.doanything.commons</groupId>
+            <artifactId>doanything-commons-lang</artifactId>
+        </dependency>
+    </dependencies>
 </project>

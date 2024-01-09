@@ -1,11 +1,16 @@
 package cn.doanything.basic.infrastructure.persistence.mns.repository;
 
+import cn.doanything.basic.domain.IdType;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.domain.mns.repository.MessageDetailRepository;
 import cn.doanything.basic.infrastructure.persistence.mns.convertor.MessageDetailDalConvertor;
+import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageContentDO;
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageDetailDO;
 import cn.doanything.basic.infrastructure.persistence.mns.mapper.MessageContentMapper;
 import cn.doanything.basic.infrastructure.persistence.mns.mapper.MessageDetailMapper;
+import cn.doanything.commons.enums.SystemCodeEnums;
+import cn.doanything.framework.api.sequence.SequenceService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,25 +33,29 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
     @Autowired
     private MessageDetailDalConvertor dalConvertor;
 
+    @Autowired
+    private SequenceService sequenceService;
+
     @Override
     public MessageDetail load(String id) {
-        MessageDetail messageDetail = dalConvertor.toEntity(mapper.selectById(id));
+        MessageDetail messageDetail = dalConvertor.toEntity(mapper.selectOne(getIdWrapper(id)));
         if (messageDetail != null) {
-            messageDetail.setContent(dalConvertor.toContent(messageDetail, contentMapper.selectById(id).getContent()));
+            messageDetail.setContent(dalConvertor.toContent(messageDetail, contentMapper.selectOne(getContentIdWrapper(id)).getContent()));
         }
         return messageDetail;
     }
 
     @Override
     public void store(MessageDetail messageDetail) {
+        messageDetail.setMessageId(getId(messageDetail.getMemberId()));
         mapper.insert(dalConvertor.toDo(messageDetail));
         contentMapper.insert(dalConvertor.toContent(messageDetail));
     }
 
     @Override
     public void reStore(MessageDetail messageDetail) {
-        mapper.updateById(dalConvertor.toDo(messageDetail));
-        contentMapper.updateById(dalConvertor.toContent(messageDetail));
+        mapper.update(dalConvertor.toDo(messageDetail), getIdWrapper(messageDetail.getMessageId()));
+        contentMapper.update(dalConvertor.toContent(messageDetail), getContentIdWrapper(messageDetail.getMessageId()));
     }
 
     @Override
@@ -57,5 +66,17 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
                 .eq(MessageDetailDO::getRecipient, recipient)
         ;
         return dalConvertor.toEntity(mapper.selectList(queryWrapper));
+    }
+
+    private Wrapper<MessageDetailDO> getIdWrapper(String id) {
+        return new LambdaQueryWrapper<MessageDetailDO>().eq(MessageDetailDO::getMessageId, id);
+    }
+
+    private Wrapper<MessageContentDO> getContentIdWrapper(String id) {
+        return new LambdaQueryWrapper<MessageContentDO>().eq(MessageContentDO::getMessageId, id);
+    }
+
+    private String getId(String memberId) {
+        return sequenceService.getId(memberId, SystemCodeEnums.BASIC, IdType.MNS_MESSAGE_DETAIL);
     }
 }

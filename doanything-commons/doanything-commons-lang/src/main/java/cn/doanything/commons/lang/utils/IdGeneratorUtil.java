@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * id生成器
+ *
  * @author wxj
  * 2023/12/10
  */
@@ -15,11 +16,11 @@ public class IdGeneratorUtil {
     /**
      * 生成24位的ID，由 yyyyMMdd + 3位SystemCode + 3位bizType + 2位dbRouteId + 8位自增
      *
-     * @param systemCode    系统编号
-     * @param bizType       业务类型
-     * @param dbRouteId     分表位
-     * @param sequence      自增序列
-     * @return  24位数字
+     * @param systemCode 系统编号
+     * @param bizType    业务类型
+     * @param dbRouteId  分表位
+     * @param sequence   自增序列
+     * @return 24位数字
      */
     public static String getId(String systemCode, String bizType, String dbRouteId, Long sequence) {
         if (StringUtils.isBlank(systemCode) || systemCode.length() != 3) {
@@ -43,5 +44,18 @@ public class IdGeneratorUtil {
                 bizType +
                 dbRouteId +
                 String.format("%08d", sequence);
+    }
+
+    /**
+     * 根据会员ID获取分表位
+     *
+     * @param memberId
+     * @return
+     */
+    public static String getDbRouteIdByMemberId(String memberId) {
+        if (StringUtils.isBlank(memberId)) {
+            throw new IllegalArgumentException("memberId不能为空");
+        }
+        return memberId.substring(memberId.length() - 3, memberId.length() - 1);
     }
 }

@@ -1,5 +1,8 @@
 package cn.doanything.framework.api.sequence;
 
+import cn.doanything.commons.enums.BizIdType;
+import cn.doanything.commons.enums.SystemCodeEnums;
+
 /**
  * 序列接口
  * @author wxj
@@ -13,4 +16,13 @@ public interface SequenceService {
      * @return
      */
     Long getNext(String sequenceName);
+
+    /**
+     * 根据会员ID、系统编码、业务类型获取ID
+     * @param memberId
+     * @param systemCodeEnums
+     * @param idType
+     * @return
+     */
+    String getId(String memberId, SystemCodeEnums systemCodeEnums, BizIdType idType);
 }

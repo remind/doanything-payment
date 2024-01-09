@@ -26,7 +26,7 @@ public interface MessageDetailDalConvertor extends ReadWriteConvertor<MessageDet
 
     default MessageContentDO toContent(MessageDetail messageDetail) {
         MessageContentDO messageContentDO = new MessageContentDO();
-        messageContentDO.setMessageId(messageDetail.getId());
+        messageContentDO.setMessageId(messageDetail.getMessageId());
         switch (messageDetail.getMessageType()) {
             case AUTH_CODE:
                 messageContentDO.setContent(JSONUtil.parse(messageDetail.getContent()).toString());

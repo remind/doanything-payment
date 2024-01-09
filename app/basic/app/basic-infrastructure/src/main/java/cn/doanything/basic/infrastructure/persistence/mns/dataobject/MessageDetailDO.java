@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-08
+ * @since 2024-01-09
  */
 @TableName("tm_message_detail")
 public class MessageDetailDO implements Serializable {
@@ -20,10 +20,15 @@ public class MessageDetailDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 自增ID
+     */
+    @TableId(value = "auto_id", type = IdType.AUTO)
+    private Long autoId;
+
+    /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private String messageId;
 
     /**
      * 请求id
@@ -90,12 +95,20 @@ public class MessageDetailDO implements Serializable {
      */
     private LocalDateTime gmtModified;
 
-    public Long getId() {
-        return id;
+    public Long getAutoId() {
+        return autoId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAutoId(Long autoId) {
+        this.autoId = autoId;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
     public String getRequestId() {
@@ -205,7 +218,8 @@ public class MessageDetailDO implements Serializable {
     @Override
     public String toString() {
         return "MessageDetailDO{" +
-        "id = " + id +
+        "autoId = " + autoId +
+        ", messageId = " + messageId +
         ", requestId = " + requestId +
         ", memberId = " + memberId +
         ", batchId = " + batchId +
