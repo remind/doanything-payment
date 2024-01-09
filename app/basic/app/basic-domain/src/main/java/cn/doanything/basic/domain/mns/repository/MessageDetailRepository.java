@@ -12,6 +12,8 @@ public interface MessageDetailRepository {
 
     MessageDetail load(String id);
 
+    MessageDetail loadByRequestId(String requestId);
+
     void store(MessageDetail messageDetail);
 
     void reStore(MessageDetail messageDetail);

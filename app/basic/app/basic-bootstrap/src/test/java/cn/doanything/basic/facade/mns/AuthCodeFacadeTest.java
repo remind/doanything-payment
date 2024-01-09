@@ -1,6 +1,9 @@
 package cn.doanything.basic.facade.mns;
 
-import cn.doanything.basic.facade.mns.dto.AuthCodeRequest;
+import cn.doanything.basic.facade.mns.dto.AuthCodeSendRequest;
+import cn.doanything.basic.facade.mns.dto.AuthCodeValidateRequest;
+import cn.doanything.commons.response.ResponseResult;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +25,26 @@ public class AuthCodeFacadeTest {
 
     @Test
     public void testSend() {
-        AuthCodeRequest request = new AuthCodeRequest();
+        AuthCodeSendRequest request = new AuthCodeSendRequest();
         request.setRequestId(getUUID());
         request.setMemberId("100000000201");
-        request.setBizId("123");
+        request.setBatchId("123");
         request.setRecipient("135123");
         request.setSceneCode("findPassword");
         authCodeFacade.sendAuthCode(request);
+    }
+
+    @Test
+    public void testValidate() {
+        AuthCodeValidateRequest request = new AuthCodeValidateRequest();
+        request.setSendRequestId("97c492117141437fbcfe6457a0bfc4d3");
+        request.setAuthCode("513160");
+        request.setSceneCode("findPassword");
+        request.setMemberId("100000000201");
+        request.setRecipient("135123");
+        ResponseResult responseResult = authCodeFacade.validate(request);
+        System.out.println(responseResult.getMessage());
+        Assert.assertTrue(responseResult.isSuccess());
     }
 
     private String getUUID() {

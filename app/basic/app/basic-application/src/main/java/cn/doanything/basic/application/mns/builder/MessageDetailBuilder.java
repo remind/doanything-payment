@@ -4,7 +4,7 @@ import cn.doanything.basic.domain.BasicConstants;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.mns.content.AuthCode;
 import cn.doanything.basic.domain.mns.service.MessageTemplateDomainService;
-import cn.doanything.basic.facade.mns.dto.AuthCodeRequest;
+import cn.doanything.basic.facade.mns.dto.AuthCodeSendRequest;
 import cn.doanything.basic.mns.MessageStatus;
 import cn.doanything.basic.mns.MessageType;
 import cn.doanything.basic.mns.NotifyType;
@@ -27,12 +27,12 @@ public class MessageDetailBuilder {
     @Autowired
     private MessageTemplateDomainService messageTemplateDomainService;
 
-    public MessageDetail buildAuthCodeMessage(AuthCodeRequest request) {
+    public MessageDetail buildAuthCodeMessage(AuthCodeSendRequest request) {
         MessageDetail authCodeMessage = new MessageDetail();
 
         authCodeMessage.setRequestId(request.getRequestId());
         authCodeMessage.setSceneCode(request.getSceneCode());
-        authCodeMessage.setBatchId(request.getBizId());
+        authCodeMessage.setBatchId(request.getBatchId());
         authCodeMessage.setRecipient(request.getRecipient());
         authCodeMessage.setMemberId(request.getMemberId());
         authCodeMessage.setMessageType(MessageType.AUTH_CODE);
@@ -46,6 +46,7 @@ public class MessageDetailBuilder {
         authCode.setAuthStatus(EnableEnum.ENABLE);
         authCode.setValidMinute(BasicConstants.MNS_AUTH_CODE_VALID_MINUTE);
         authCode.setVerifiableCount(BasicConstants.MNS_AUTH_CODE_VERIFIABLE_COUNT);
+        authCode.setVerifiedCount(0);
         authCode.setExpireTime(DateUtils.addMinutes(new Date(), BasicConstants.MNS_AUTH_CODE_VALID_MINUTE));
 
         authCodeMessage.setContent(authCode);

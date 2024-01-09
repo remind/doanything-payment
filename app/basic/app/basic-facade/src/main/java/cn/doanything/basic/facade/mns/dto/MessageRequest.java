@@ -11,11 +11,6 @@ import lombok.Data;
 public class MessageRequest {
 
     /**
-     * 请求ID，幂等
-     */
-    private String requestId;
-
-    /**
      * 场景编码
      */
     private String sceneCode;

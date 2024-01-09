@@ -37,7 +37,7 @@ public class AuthCode {
     /**
      * 已验证次数
      */
-    private Integer verifiedCount;
+    private Integer verifiedCount = 0;
 
     /**
      * 可被验证次数
@@ -53,4 +53,16 @@ public class AuthCode {
      * 过期时间
      */
     private Date expireTime;
+
+    public void incVerifiedCount() {
+        this.verifiedCount++;
+        if (this.verifiedCount >= this.verifiableCount) {
+            invalid("验证次数超限");
+        }
+    }
+
+    public void invalid(String reason) {
+        this.authStatus = EnableEnum.DISABLE;
+        this.invalidReason = reason;
+    }
 }

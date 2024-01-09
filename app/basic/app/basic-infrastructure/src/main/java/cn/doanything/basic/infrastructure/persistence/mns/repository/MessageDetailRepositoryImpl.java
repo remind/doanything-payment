@@ -39,9 +39,15 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
     @Override
     public MessageDetail load(String id) {
         MessageDetail messageDetail = dalConvertor.toEntity(mapper.selectOne(getIdWrapper(id)));
-        if (messageDetail != null) {
-            messageDetail.setContent(dalConvertor.toContent(messageDetail, contentMapper.selectOne(getContentIdWrapper(id)).getContent()));
-        }
+        fillContent(messageDetail);
+        return messageDetail;
+    }
+
+    @Override
+    public MessageDetail loadByRequestId(String requestId) {
+        Wrapper<MessageDetailDO> wrapper = new LambdaQueryWrapper<MessageDetailDO>().eq(MessageDetailDO::getRequestId, requestId);
+        MessageDetail messageDetail = dalConvertor.toEntity(mapper.selectOne(wrapper));
+        fillContent(messageDetail);
         return messageDetail;
     }
 
@@ -68,10 +74,16 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
         List<MessageDetail> messageDetails = dalConvertor.toEntity(mapper.selectList(queryWrapper));
         if (messageDetails != null) {
             for (MessageDetail messageDetail : messageDetails) {
-                messageDetail.setContent(dalConvertor.toContent(messageDetail, contentMapper.selectOne(getContentIdWrapper(messageDetail.getMessageId())).getContent()));
+                fillContent(messageDetail);
             }
         }
         return messageDetails;
+    }
+
+    private void fillContent(MessageDetail messageDetail) {
+        if (messageDetail != null) {
+            messageDetail.setContent(dalConvertor.toContent(messageDetail, contentMapper.selectOne(getContentIdWrapper(messageDetail.getMessageId())).getContent()));
+        }
     }
 
     private Wrapper<MessageDetailDO> getIdWrapper(String id) {
