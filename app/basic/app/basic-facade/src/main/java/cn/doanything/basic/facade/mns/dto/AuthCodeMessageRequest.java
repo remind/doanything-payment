@@ -8,12 +8,7 @@ import lombok.Data;
  * 2024/1/7
  */
 @Data
-public class AuthCodeSendRequest extends MessageRequest {
-
-    /**
-     * 请求ID，幂等
-     */
-    private String requestId;
+public class AuthCodeMessageRequest extends MessageRequest {
 
     /**
      * 批次ID，该批次内的验证码只能有一条有效的

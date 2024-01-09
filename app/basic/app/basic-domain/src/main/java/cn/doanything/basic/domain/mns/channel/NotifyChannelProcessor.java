@@ -9,5 +9,7 @@ import cn.doanything.basic.domain.mns.MessageDetail;
  */
 public interface NotifyChannelProcessor {
 
+    String PROCESSOR_BEAN_PREFIX = "MessageSendProcessor_prefix_";
+
     NotifyResult process(MessageDetail messageDetail);
 }

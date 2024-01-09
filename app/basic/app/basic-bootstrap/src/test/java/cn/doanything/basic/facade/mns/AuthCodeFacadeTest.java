@@ -1,6 +1,6 @@
 package cn.doanything.basic.facade.mns;
 
-import cn.doanything.basic.facade.mns.dto.AuthCodeSendRequest;
+import cn.doanything.basic.facade.mns.dto.AuthCodeMessageRequest;
 import cn.doanything.basic.facade.mns.dto.AuthCodeValidateRequest;
 import cn.doanything.commons.response.ResponseResult;
 import org.junit.Assert;
@@ -25,7 +25,7 @@ public class AuthCodeFacadeTest {
 
     @Test
     public void testSend() {
-        AuthCodeSendRequest request = new AuthCodeSendRequest();
+        AuthCodeMessageRequest request = new AuthCodeMessageRequest();
         request.setRequestId(getUUID());
         request.setMemberId("100000000201");
         request.setBatchId("123");
@@ -40,7 +40,6 @@ public class AuthCodeFacadeTest {
         request.setSendRequestId("97c492117141437fbcfe6457a0bfc4d3");
         request.setAuthCode("513160");
         request.setSceneCode("findPassword");
-        request.setMemberId("100000000201");
         request.setRecipient("135123");
         ResponseResult responseResult = authCodeFacade.validate(request);
         System.out.println(responseResult.getMessage());

@@ -1,6 +1,6 @@
 package cn.doanything.basic.facade.mns;
 
-import cn.doanything.basic.facade.mns.dto.AuthCodeSendRequest;
+import cn.doanything.basic.facade.mns.dto.AuthCodeMessageRequest;
 import cn.doanything.basic.facade.mns.dto.AuthCodeValidateRequest;
 import cn.doanything.commons.response.ResponseResult;
 
@@ -18,7 +18,7 @@ public interface AuthCodeFacade {
      * @param request
      * @return
      */
-    ResponseResult<String> sendAuthCode(AuthCodeSendRequest request);
+    ResponseResult<String> sendAuthCode(AuthCodeMessageRequest request);
 
     /**
      * 验证验证码

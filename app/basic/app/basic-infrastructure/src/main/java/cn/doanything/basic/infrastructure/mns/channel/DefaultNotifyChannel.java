@@ -1,7 +1,6 @@
 package cn.doanything.basic.infrastructure.mns.channel;
 
 import cn.doanything.basic.domain.mns.MessageDetail;
-import cn.doanything.basic.domain.mns.channel.NotifyChannelAdapter;
 import cn.doanything.basic.domain.mns.channel.NotifyChannelProcessor;
 import cn.doanything.basic.domain.mns.channel.NotifyResult;
 import cn.doanything.commons.enums.ResultStatusEnum;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author wxj
  * 2024/1/7
  */
-@Component(NotifyChannelAdapter.PROCESSOR_BEAN_PREFIX + "default")
+@Component(NotifyChannelProcessor.PROCESSOR_BEAN_PREFIX + "default")
 public class DefaultNotifyChannel implements NotifyChannelProcessor {
 
     @Override
