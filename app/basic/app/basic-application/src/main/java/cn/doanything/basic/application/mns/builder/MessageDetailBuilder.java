@@ -39,7 +39,7 @@ public class MessageDetailBuilder {
         authCodeMessage.setNotifyTime(new Date());
         authCodeMessage.setNotifyType(NotifyType.REAL);
         authCodeMessage.setProtocol(Protocol.SNS);
-        authCodeMessage.setStatus(MessageStatus.WAIT);
+        authCodeMessage.setStatus(MessageStatus.SUCCESS);
 
         AuthCode authCode = new AuthCode();
         authCode.setAuthCode(RandomUtil.randomNumbers(BasicConstants.MNS_AUTH_CODE_LENGTH));

@@ -41,7 +41,7 @@ public class AuthCodeMessageSendProcessor implements MessageSendProcessor {
             if (messageDetail.getStatus().equals(MessageStatus.SUCCESS) && authCode.getAuthStatus().equals(EnableEnum.ENABLE)) {
                 authCode.setAuthStatus(EnableEnum.DISABLE);
                 if (authCode.getExpireTime().compareTo(new Date()) > 0) {
-                    authCode.setInvalidReason("重新发生");
+                    authCode.setInvalidReason("重新发送");
                 } else {
                     authCode.setInvalidReason("超时");
                 }

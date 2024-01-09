@@ -65,7 +65,13 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
                 .eq(MessageDetailDO::getBatchId, batchId)
                 .eq(MessageDetailDO::getRecipient, recipient)
         ;
-        return dalConvertor.toEntity(mapper.selectList(queryWrapper));
+        List<MessageDetail> messageDetails = dalConvertor.toEntity(mapper.selectList(queryWrapper));
+        if (messageDetails != null) {
+            for (MessageDetail messageDetail : messageDetails) {
+                messageDetail.setContent(dalConvertor.toContent(messageDetail, contentMapper.selectOne(getContentIdWrapper(messageDetail.getMessageId())).getContent()));
+            }
+        }
+        return messageDetails;
     }
 
     private Wrapper<MessageDetailDO> getIdWrapper(String id) {
