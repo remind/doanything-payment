@@ -2,22 +2,17 @@ package cn.doanything.basic.facade.mns;
 
 import cn.doanything.basic.facade.mns.dto.NotifyMessageRequest;
 import cn.doanything.basic.mns.Protocol;
+import cn.doanything.framework.BaseTestBootStarter;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author wxj
  * 2024/1/9
  */
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class NotifyMessageFacadeTest {
+public class NotifyMessageFacadeTest extends BaseTestBootStarter {
 
     @Autowired
     private NotifyMessageFacade notifyMessageFacade;
@@ -25,7 +20,7 @@ public class NotifyMessageFacadeTest {
     @Test
     public void test(){
         NotifyMessageRequest request = new NotifyMessageRequest();
-        request.setMemberId("123");
+        request.setMemberId(randomPersonalMemberId());
         request.setProtocol(Protocol.MAIL);
         request.setRecipient("123");
         request.setReal(true);
@@ -38,8 +33,5 @@ public class NotifyMessageFacadeTest {
         notifyMessageFacade.send(request);
     }
 
-    private String getUUID() {
-        String uuid = UUID.randomUUID().toString();
-        return uuid.replace("-","").substring(0,32);
-    }
+
 }
