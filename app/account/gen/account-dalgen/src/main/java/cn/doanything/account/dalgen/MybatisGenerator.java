@@ -54,7 +54,8 @@ public class MybatisGenerator {
                 .strategyConfig(builder -> {
                     builder.addInclude(config.getArray("db.table.list"))
                             .addTablePrefix(config.getArray("db.table.prefix"))
-                            .mapperBuilder().enableFileOverride()
+                            .mapperBuilder().enableMapperAnnotation()
+                            .enableFileOverride()
                             //.enableBaseResultMap().enableBaseColumnList()
                             .superClass(ExtBaseMapper.class)
                             .entityBuilder().formatFileName("%sDO").enableFileOverride().addIgnoreColumns("auto_id");
