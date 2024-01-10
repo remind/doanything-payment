@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @author wxj
  * @since 2023-12-22
  */
-@TableName("ta_account_title")
+@TableName("t_account_title")
 public class AccountTitleDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

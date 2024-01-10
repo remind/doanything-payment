@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @author wxj
  * @since 2023-12-22
  */
-@TableName("ta_outer_account_type")
+@TableName("t_outer_account_type")
 public class OuterAccountTypeDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

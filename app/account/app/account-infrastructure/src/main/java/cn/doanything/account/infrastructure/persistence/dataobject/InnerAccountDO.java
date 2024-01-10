@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @author wxj
  * @since 2023-12-24
  */
-@TableName("ta_inner_account")
+@TableName("t_inner_account")
 public class InnerAccountDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
