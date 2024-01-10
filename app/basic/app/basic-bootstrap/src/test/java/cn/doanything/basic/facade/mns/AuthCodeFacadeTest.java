@@ -18,7 +18,7 @@ public class AuthCodeFacadeTest extends BaseTestBootStarter {
     private AuthCodeFacade authCodeFacade;
 
     @Test
-    public void testSend() {
+    public void testSend() throws InterruptedException {
         AuthCodeMessageRequest request = new AuthCodeMessageRequest();
         request.setRequestId(getUUID());
         request.setMemberId(randomPersonalMemberId());
@@ -26,6 +26,8 @@ public class AuthCodeFacadeTest extends BaseTestBootStarter {
         request.setRecipient("135123");
         request.setSceneCode("findPassword");
         authCodeFacade.sendAuthCode(request);
+
+//        Thread.sleep(10000);
     }
 
     @Test

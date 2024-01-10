@@ -12,12 +12,15 @@ import cn.doanything.basic.domain.mns.repository.MessageDetailRepository;
 import cn.doanything.basic.domain.mns.service.NotifyChannelDomainService;
 import cn.doanything.basic.mns.MessageStatus;
 import cn.doanything.basic.mns.NotifyType;
+import cn.doanything.commons.enums.ResultStatusEnum;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import cn.doanything.framework.scheduler.SchedulerTaskRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author wxj
@@ -43,28 +46,48 @@ public class MessageNotifyService {
     @Autowired
     private Map<String, NotifyChannelProcessor> notifyChannelProcessorMap;
 
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private ExecutorService executorService;
+
     public void process(MessageDetail messageDetail, Map<String, Object> param) {
         AssertUtil.isNull(messageDetailRepository.loadByRequestId(messageDetail.getRequestId()), "重复请求");
         String processKey = MessageContentProcessor.PROCESSOR_BEAN_PREFIX + messageDetail.getMessageType().getCode();
         messageContentProcessorMap.get(processKey).process(messageDetail, param);
-        messageDetail.setStatus(MessageStatus.SUCCESS);
-        messageDetailRepository.store(messageDetail);
-        if (messageDetail.getNotifyType() == NotifyType.REAL) {
-            send(messageDetail);
-        } else {
-            schedulerTaskRegister.registryTask(BasicConstants.DEFAULT_TASK_TYPE, messageDetail.getMessageId(), messageDetail.getNotifyTime());
-        }
+        transactionTemplate.executeWithoutResult(status -> {
+            messageDetail.setStatus(MessageStatus.WAIT);
+            messageDetailRepository.store(messageDetail);
+            if (messageDetail.getNotifyType() == NotifyType.REAL) {
+                send(messageDetail);
+            } else {
+                schedulerTaskRegister.registryTask(BasicConstants.DEFAULT_TASK_TYPE, messageDetail.getMessageId(), messageDetail.getNotifyTime());
+            }
+        });
     }
 
     public void send(MessageDetail messageDetail) {
         NotifyChannel notifyChannel = notifyChannelDomainService.getDefault(messageDetail.getProtocol());
-        NotifyResult notifyResult = notifyChannelProcessorMap.get(NotifyChannelProcessor.PROCESSOR_BEAN_PREFIX + notifyChannel.getCode()).process(messageDetail);
-        ChannelRequest channelRequest = new ChannelRequest();
-        channelRequest.setChannelCode(notifyChannel.getCode());
-        channelRequest.setMessageId(messageDetail.getMessageId());
+        ChannelRequest channelRequest = new ChannelRequest(notifyChannel.getCode(), messageDetail.getMessageId());
+        channelRequestRepository.store(channelRequest);
+        executorService.submit(() -> {
+            NotifyResult notifyResult = notifyChannelProcessorMap.get(NotifyChannelProcessor.PROCESSOR_BEAN_PREFIX + notifyChannel.getCode()).process(messageDetail);
+            updateSendResult(messageDetail, channelRequest, notifyResult);
+        });
+    }
+
+    private void updateSendResult(MessageDetail messageDetail, ChannelRequest channelRequest, NotifyResult notifyResult) {
         channelRequest.setStatus(notifyResult.getStatus());
         channelRequest.setResponseId(notifyResult.getResponseId());
         channelRequest.setResponseText(notifyResult.getResponseText());
-        channelRequestRepository.store(channelRequest);
+        channelRequestRepository.reStore(channelRequest);
+        if (notifyResult.getStatus() == ResultStatusEnum.SUCCESS) {
+            messageDetail.setStatus(MessageStatus.SUCCESS);
+            messageDetailRepository.reStore(messageDetail);
+        } else if (notifyResult.getStatus() == ResultStatusEnum.FAIL) {
+            messageDetail.setStatus(MessageStatus.FAIL);
+            messageDetailRepository.reStore(messageDetail);
+        }
     }
 }

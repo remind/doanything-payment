@@ -8,5 +8,11 @@ import cn.doanything.basic.domain.mns.ChannelRequest;
  */
 public interface ChannelRequestRepository {
 
+    ChannelRequest load(Long id);
+
+    ChannelRequest lock(Long id);
+
     void store(ChannelRequest channelRequest);
+
+    void reStore(ChannelRequest channelRequest);
 }

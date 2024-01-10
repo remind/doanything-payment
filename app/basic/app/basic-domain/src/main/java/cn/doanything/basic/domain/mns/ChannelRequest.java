@@ -11,6 +11,12 @@ import lombok.Data;
  */
 @Data
 public class ChannelRequest extends Entity {
+
+    /**
+     * 主键ID
+     */
+    private Long id;
+
     /**
      * 消息ID
      */
@@ -35,4 +41,13 @@ public class ChannelRequest extends Entity {
      * 状态,成功、失败
      */
     private ResultStatusEnum status;
+
+    public ChannelRequest() {
+    }
+
+    public ChannelRequest(String channelCode, String messageId) {
+        this.channelCode = channelCode;
+        this.messageId = messageId;
+        this.status = ResultStatusEnum.UNKNOWN;
+    }
 }

@@ -20,6 +20,13 @@ public class DefaultNotifyChannel implements NotifyChannelProcessor {
         result.setResponseId("123");
         result.setResponseText("456");
         result.setStatus(ResultStatusEnum.SUCCESS);
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         return result;
     }
 }

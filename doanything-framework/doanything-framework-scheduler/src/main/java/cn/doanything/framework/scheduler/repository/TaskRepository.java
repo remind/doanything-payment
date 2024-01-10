@@ -32,7 +32,9 @@ public class TaskRepository {
      * @return
      */
     public String store(Task task) {
-        taskMapper.insert(dalConvertor.toDo(task));
+        SchedulerTaskDO taskDO = dalConvertor.toDo(task);
+        taskMapper.insert(taskDO);
+        task.setId(String.valueOf(taskDO.getId()));
         return task.getId();
     }
 

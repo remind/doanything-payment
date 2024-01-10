@@ -7,7 +7,7 @@ import cn.doanything.commons.response.ResponseResult;
  * @author wxj
  * 2024/1/9
  */
-public interface NotifyMessageFacade {
+public interface MessageNotifyFacade {
 
     /**
      * 发送消息

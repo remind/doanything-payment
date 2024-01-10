@@ -1,7 +1,7 @@
 package cn.doanything.basic.infrastructure.persistence.mns.mapper;
 
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.ChannelRequestDO;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-01-08
  */
 @Mapper
-public interface ChannelRequestMapper extends BaseMapper<ChannelRequestDO> {
+public interface ChannelRequestMapper extends ExtBaseMapper<ChannelRequestDO> {
 
 }

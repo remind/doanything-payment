@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 2024/1/9
  */
 @DubboService
-public class NotifyMessageFacadeImpl implements NotifyMessageFacade {
+public class MessageNotifyFacadeImpl implements MessageNotifyFacade {
 
     @Autowired
     private MessageNotifyService messageNotifyService;

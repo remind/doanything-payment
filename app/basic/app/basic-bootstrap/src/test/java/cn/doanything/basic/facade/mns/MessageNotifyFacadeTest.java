@@ -14,10 +14,10 @@ import java.util.Map;
  * @author wxj
  * 2024/1/9
  */
-public class NotifyMessageFacadeTest extends BaseTestBootStarter {
+public class MessageNotifyFacadeTest extends BaseTestBootStarter {
 
     @Autowired
-    private NotifyMessageFacade notifyMessageFacade;
+    private MessageNotifyFacade messageNotifyFacade;
 
     @Autowired
     private SchedulerTaskLoader schedulerTaskLoader;
@@ -34,7 +34,7 @@ public class NotifyMessageFacadeTest extends BaseTestBootStarter {
         request.setParam(Map.of("a", "vv"));
         request.setRequestId(getUUID());
         request.setSubject("测试");
-        notifyMessageFacade.send(request);
+        messageNotifyFacade.send(request);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class NotifyMessageFacadeTest extends BaseTestBootStarter {
         request.setParam(Map.of("a", "vv"));
         request.setRequestId(getUUID());
         request.setSubject("测试");
-        notifyMessageFacade.send(request);
+        messageNotifyFacade.send(request);
     }
 
     @Test
