@@ -5,6 +5,7 @@ import io.prometheus.client.Collector;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -20,11 +21,7 @@ public class MainTest {
         List<Test> tests = List.of(new Test(1),new Test(2),new Test(3));
         System.out.println(tests.stream().collect(Collectors.summarizingInt(Test::getC)).getSum());
 
-        System.out.println(LocalDateTime.now());
-        System.out.println(new Date());
-
         System.out.println(LocalDateTime.now().plusDays(1).isBefore(LocalDateTime.now()));
-        System.out.println(DateUtils.addMinutes(new Date(), 1).compareTo(new Date()));
     }
 
     static class Test {

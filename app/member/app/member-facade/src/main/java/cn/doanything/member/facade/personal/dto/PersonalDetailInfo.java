@@ -3,6 +3,7 @@ package cn.doanything.member.facade.personal.dto;
 import cn.doanything.member.types.personal.PersonalBaseInfo;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -21,10 +22,10 @@ public class PersonalDetailInfo extends PersonalBaseInfo {
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
     /**
      * 修改时间
      */
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 }

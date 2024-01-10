@@ -17,6 +17,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -95,7 +96,7 @@ public class PasswordDomainServiceImpl implements PasswordDomainService {
 
         long errorCount = personalPasswords.stream().collect(Collectors.summarizingInt(PersonalPassword::getErrorCount)).getSum();
         if (errorCount >= MemberConstants.PWD_MAX_ERROR_COUNT
-                && DateUtils.isSameDay(new Date(), currentPassword.getLastErrorDate())) {
+                && LocalDate.now().equals(currentPassword.getLastErrorDate().toLocalDate())) {
             throw new BizException(MemberResultCode.PASSWORD_LOCKED, "已失败" + MemberConstants.PWD_MAX_ERROR_COUNT
                     + "次，已锁定，请明天再试");
         }

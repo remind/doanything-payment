@@ -3,6 +3,7 @@ package cn.doanything.basic.mns.content;
 import cn.doanything.commons.enums.EnableEnum;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -52,7 +53,7 @@ public class AuthCode {
     /**
      * 过期时间
      */
-    private Date expireTime;
+    private LocalDateTime expireTime;
 
     public void incVerifiedCount() {
         this.verifiedCount++;

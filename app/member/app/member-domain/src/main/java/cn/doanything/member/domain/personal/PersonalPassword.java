@@ -7,6 +7,8 @@ import cn.doanything.member.types.PasswordUseType;
 import lombok.Data;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -51,7 +53,7 @@ public class PersonalPassword extends Entity {
     /**
      * 锁定结束时间
      */
-    private Date lockEndTime;
+    private LocalDateTime lockEndTime;
 
     /**
      * 错误次数
@@ -61,14 +63,14 @@ public class PersonalPassword extends Entity {
     /**
      * 上次错误日期
      */
-    private Date lastErrorDate;
+    private LocalDateTime lastErrorDate;
 
     public void incErrorCount() {
-        if (lastErrorDate != null && DateUtils.isSameDay(lastErrorDate, new Date())) {
+        if (lastErrorDate != null && lastErrorDate.toLocalDate().equals(LocalDate.now())) {
             this.errorCount++;
         } else {
             this.errorCount = 1;
-            this.lastErrorDate = new Date();
+            this.lastErrorDate = LocalDateTime.now();
         }
     }
 

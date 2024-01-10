@@ -14,6 +14,7 @@ import cn.doanything.commons.response.ResponseResult;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -53,7 +54,8 @@ public class AuthCodeFacadeImpl implements AuthCodeFacade {
             if (authCode.getVerifiedCount() >= authCode.getVerifiableCount()) {
                 authCode.invalid("验证次数超限");
                 result = ResponseResult.fail("验证次数超限，请重新获取");
-            } else if (new Date().compareTo(authCode.getExpireTime()) >= 0) {
+
+            } else if (authCode.getExpireTime().isBefore(LocalDateTime.now())) {
                 authCode.invalid("验证码已过期");
                 result = ResponseResult.fail("验证码已过期");
             } else {

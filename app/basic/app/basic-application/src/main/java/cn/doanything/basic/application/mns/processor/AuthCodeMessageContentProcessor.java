@@ -13,6 +13,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AuthCodeMessageContentProcessor extends AbstractMessageContentProce
         authCode.setValidMinute(BasicConstants.MNS_AUTH_CODE_VALID_MINUTE);
         authCode.setVerifiableCount(BasicConstants.MNS_AUTH_CODE_VERIFIABLE_COUNT);
         authCode.setVerifiedCount(0);
-        authCode.setExpireTime(DateUtils.addMinutes(new Date(), BasicConstants.MNS_AUTH_CODE_VALID_MINUTE));
+        authCode.setExpireTime(LocalDateTime.now().plusMinutes(BasicConstants.MNS_AUTH_CODE_VALID_MINUTE));
 
         param = new HashMap<>();
         param.put("authCode", authCode.getAuthCode());
@@ -54,7 +55,7 @@ public class AuthCodeMessageContentProcessor extends AbstractMessageContentProce
             AuthCode authCode = (AuthCode) messageDetail.getContent();
             if (messageDetail.getStatus().equals(MessageStatus.SUCCESS) && authCode.getAuthStatus().equals(EnableEnum.ENABLE)) {
                 authCode.setAuthStatus(EnableEnum.DISABLE);
-                if (authCode.getExpireTime().compareTo(new Date()) > 0) {
+                if (authCode.getExpireTime().isBefore(LocalDateTime.now())) {
                     authCode.setInvalidReason("重新发送");
                 } else {
                     authCode.setInvalidReason("超时");
