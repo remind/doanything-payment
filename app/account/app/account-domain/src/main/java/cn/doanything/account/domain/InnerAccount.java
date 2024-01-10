@@ -5,7 +5,6 @@ import cn.doanything.account.types.enums.AccountFamily;
 import cn.doanything.account.types.enums.IODirection;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
-import lombok.Setter;
 
 /**
  * @author wxj

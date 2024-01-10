@@ -9,7 +9,6 @@ import cn.doanything.basic.mns.Protocol;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 消息构造器

@@ -1,6 +1,5 @@
 package cn.doanything.member.infrastructure.persistence.repository;
 
-import cn.doanything.member.domain.personal.PersonalMember;
 import cn.doanything.member.domain.personal.PersonalPassword;
 import cn.doanything.member.domain.repository.PersonalPasswordRepository;
 import cn.doanything.member.infrastructure.persistence.convertor.PersonalPasswordDalConvertor;

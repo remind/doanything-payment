@@ -1,6 +1,7 @@
 package cn.doanything.basic.infrastructure.persistence.mns.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

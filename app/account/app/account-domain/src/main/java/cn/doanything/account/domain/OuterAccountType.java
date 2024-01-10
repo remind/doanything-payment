@@ -5,7 +5,6 @@ import cn.doanything.commons.lang.Entity;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 /**

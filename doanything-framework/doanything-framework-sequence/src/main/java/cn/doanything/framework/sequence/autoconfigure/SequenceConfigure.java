@@ -1,10 +1,10 @@
 package cn.doanything.framework.sequence.autoconfigure;
 
+import cn.doanything.framework.api.sequence.SequenceService;
+import cn.doanything.framework.sequence.SequenceInnerService;
 import cn.doanything.framework.sequence.SequenceServiceImpl;
 import cn.doanything.framework.sequence.repository.JdbcSequenceRepository;
 import cn.doanything.framework.sequence.repository.SequenceRepository;
-import cn.doanything.framework.api.sequence.SequenceService;
-import cn.doanything.framework.sequence.SequenceInnerService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;

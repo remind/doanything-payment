@@ -1,11 +1,10 @@
 package cn.doanything.member.infrastructure.persistence.convertor;
 
+import cn.doanything.member.domain.Member;
+import cn.doanything.member.domain.personal.PersonalMember;
 import cn.doanything.member.infrastructure.convertor.EnumsConvertor;
 import cn.doanything.member.infrastructure.persistence.dataobject.MemberDO;
 import cn.doanything.member.infrastructure.persistence.dataobject.PersonalMemberDO;
-import cn.doanything.member.domain.Member;
-import cn.doanything.member.domain.personal.PersonalMember;
-import cn.doanything.member.types.Gender;
 import cn.doanything.member.types.MemberType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

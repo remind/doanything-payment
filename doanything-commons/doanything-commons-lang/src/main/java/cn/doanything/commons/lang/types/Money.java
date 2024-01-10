@@ -4,8 +4,6 @@ package cn.doanything.commons.lang.types;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Currency;
 
 /**

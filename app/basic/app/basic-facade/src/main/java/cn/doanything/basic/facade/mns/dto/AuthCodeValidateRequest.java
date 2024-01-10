@@ -2,8 +2,6 @@ package cn.doanything.basic.facade.mns.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * 校验验证码请求
  *

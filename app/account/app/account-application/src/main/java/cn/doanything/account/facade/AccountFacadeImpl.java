@@ -1,7 +1,6 @@
 package cn.doanything.account.facade;
 
 import cn.doanything.account.application.convertor.AccountingRequestConvertor;
-import cn.doanything.account.domain.detail.AccountDetail;
 import cn.doanything.account.facade.dto.AccountingRequest;
 import cn.doanything.account.facade.dto.EntryDetail;
 

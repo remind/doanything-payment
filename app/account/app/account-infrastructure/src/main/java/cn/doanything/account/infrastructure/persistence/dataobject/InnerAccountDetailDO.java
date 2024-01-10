@@ -1,6 +1,7 @@
 package cn.doanything.account.infrastructure.persistence.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

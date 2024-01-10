@@ -1,7 +1,6 @@
 package cn.doanything.account.domain.service;
 
 import cn.doanything.account.domain.detail.AccountDetail;
-import cn.doanything.account.domain.detail.InnerAccountDetail;
 
 import java.util.List;
 

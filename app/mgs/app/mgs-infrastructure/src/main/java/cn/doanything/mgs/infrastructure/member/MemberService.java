@@ -2,7 +2,6 @@ package cn.doanything.mgs.infrastructure.member;
 
 import cn.doanything.member.facade.personal.PersonalManageFacade;
 import cn.doanything.member.facade.personal.dto.PersonalDetailInfo;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
 /**

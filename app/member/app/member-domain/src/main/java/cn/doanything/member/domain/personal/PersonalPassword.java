@@ -5,11 +5,9 @@ import cn.doanything.member.types.PasswordStatus;
 import cn.doanything.member.types.PasswordType;
 import cn.doanything.member.types.PasswordUseType;
 import lombok.Data;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 个人用户密码

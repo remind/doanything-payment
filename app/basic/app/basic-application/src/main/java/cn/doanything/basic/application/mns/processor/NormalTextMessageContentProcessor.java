@@ -1,7 +1,5 @@
 package cn.doanything.basic.application.mns.processor;
 
-import cn.doanything.basic.application.mns.processor.AbstractMessageContentProcessor;
-import cn.doanything.basic.application.mns.processor.MessageContentProcessor;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import org.springframework.stereotype.Component;
 

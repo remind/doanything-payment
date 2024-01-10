@@ -5,7 +5,6 @@ import cn.doanything.account.infrastructure.convertor.EnumsConvertor;
 import cn.doanything.account.infrastructure.persistence.dataobject.OuterAccountTypeDO;
 import cn.doanything.commons.convertor.ReadWriteConvertor;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.util.CollectionUtils;

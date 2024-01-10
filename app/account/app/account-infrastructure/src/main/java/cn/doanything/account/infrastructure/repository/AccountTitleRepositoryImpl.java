@@ -4,7 +4,6 @@ import cn.doanything.account.domain.accounting.AccountTitle;
 import cn.doanything.account.domain.repository.AccountTitleRepository;
 import cn.doanything.account.infrastructure.persistence.convertor.AccountTitleDalConvertor;
 import cn.doanything.account.infrastructure.persistence.dataobject.AccountTitleDO;
-import cn.doanything.account.infrastructure.persistence.dataobject.OuterAccountTypeDO;
 import cn.doanything.account.infrastructure.persistence.mapper.AccountTitleMapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

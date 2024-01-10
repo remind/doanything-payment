@@ -6,7 +6,6 @@ import cn.doanything.account.infrastructure.convertor.EnumsConvertor;
 import cn.doanything.account.infrastructure.persistence.dataobject.AccountTitleDO;
 import cn.doanything.commons.convertor.ReadWriteConvertor;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 /**
  * @author wxj

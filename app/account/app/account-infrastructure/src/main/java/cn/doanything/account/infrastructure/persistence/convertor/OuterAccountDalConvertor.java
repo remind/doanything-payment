@@ -6,7 +6,6 @@ import cn.doanything.account.infrastructure.persistence.dataobject.OuterAccountD
 import cn.doanything.account.infrastructure.persistence.dataobject.OuterSubAccountDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
