@@ -1,4 +1,4 @@
-package cn.doanything.basic;
+package cn.doanything;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @Slf4j
 @EnableDubbo
-@MapperScan("cn.doanything.basic.infrastructure.persistence.mns.mapper")
+//@MapperScan("cn.doanything")
 public class BootstrapApplication {
 
     public static void main(String[] args) {

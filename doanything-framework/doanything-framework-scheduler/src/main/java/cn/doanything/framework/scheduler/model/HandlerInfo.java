@@ -20,10 +20,6 @@ public class HandlerInfo {
     /**
      * 任务处理器
      */
-    private SchedulerTaskHandler<Object> schedulerTaskHandler;
+    private SchedulerTaskHandler schedulerTaskHandler;
 
-    /**
-     * 参数类型
-     */
-    private Class<?> paramClazz;
 }

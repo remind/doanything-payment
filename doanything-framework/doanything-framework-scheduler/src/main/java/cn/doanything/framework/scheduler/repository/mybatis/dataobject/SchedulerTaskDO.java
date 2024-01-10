@@ -54,12 +54,12 @@ public class SchedulerTaskDO implements Serializable {
     /**
      * 下次执行时间
      */
-    private Long nextExecuteTime;
+    private LocalDateTime nextExecuteTime;
 
     /**
      * 开始执行时间
      */
-    private Long startExecuteTime;
+    private LocalDateTime startExecuteTime;
 
     /**
      * 环境
@@ -124,19 +124,19 @@ public class SchedulerTaskDO implements Serializable {
         this.executeCount = executeCount;
     }
 
-    public Long getNextExecuteTime() {
+    public LocalDateTime getNextExecuteTime() {
         return nextExecuteTime;
     }
 
-    public void setNextExecuteTime(Long nextExecuteTime) {
+    public void setNextExecuteTime(LocalDateTime nextExecuteTime) {
         this.nextExecuteTime = nextExecuteTime;
     }
 
-    public Long getStartExecuteTime() {
+    public LocalDateTime getStartExecuteTime() {
         return startExecuteTime;
     }
 
-    public void setStartExecuteTime(Long startExecuteTime) {
+    public void setStartExecuteTime(LocalDateTime startExecuteTime) {
         this.startExecuteTime = startExecuteTime;
     }
 

@@ -7,7 +7,7 @@ package cn.doanything.framework.scheduler.load;
  * @version V1.0
  * @description:任务加载器
  */
-public interface CommonTaskLoader {
+public interface SchedulerTaskLoader {
 
     /**
      * 加载并分发

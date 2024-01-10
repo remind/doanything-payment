@@ -10,6 +10,8 @@ import cn.doanything.framework.scheduler.model.Task;
  */
 public interface TaskDistributor {
 
+    String TASK_DISTRIBUTE_PREFIX = "TaskDistributorPrefix";
+
     ExecuteResult process(Task task, HandlerInfo handlerInfo);
 
 }

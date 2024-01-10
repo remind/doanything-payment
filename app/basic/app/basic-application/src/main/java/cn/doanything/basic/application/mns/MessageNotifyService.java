@@ -1,6 +1,7 @@
 package cn.doanything.basic.application.mns;
 
 import cn.doanything.basic.application.mns.processor.MessageContentProcessor;
+import cn.doanything.basic.domain.BasicConstants;
 import cn.doanything.basic.domain.mns.ChannelRequest;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.domain.mns.NotifyChannel;
@@ -12,6 +13,7 @@ import cn.doanything.basic.domain.mns.service.NotifyChannelDomainService;
 import cn.doanything.basic.mns.MessageStatus;
 import cn.doanything.basic.mns.NotifyType;
 import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.framework.scheduler.SchedulerTaskRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +36,9 @@ public class MessageNotifyService {
     private ChannelRequestRepository channelRequestRepository;
 
     @Autowired
+    private SchedulerTaskRegister schedulerTaskRegister;
+
+    @Autowired
     private Map<String, MessageContentProcessor> messageContentProcessorMap;
     @Autowired
     private Map<String, NotifyChannelProcessor> notifyChannelProcessorMap;
@@ -46,6 +51,8 @@ public class MessageNotifyService {
         messageDetailRepository.store(messageDetail);
         if (messageDetail.getNotifyType() == NotifyType.REAL) {
             send(messageDetail);
+        } else {
+            schedulerTaskRegister.registryTask(BasicConstants.DEFAULT_TASK_TYPE, messageDetail.getMessageId(), messageDetail.getNotifyTime());
         }
     }
 

@@ -1,6 +1,8 @@
 package cn.doanything.framework.scheduler.handler;
 
 
+import cn.doanything.framework.scheduler.handler.annotation.TaskHandler;
+
 /**
  * 处理器注册器
  * Created by 2023/12/13
@@ -11,6 +13,8 @@ package cn.doanything.framework.scheduler.handler;
  */
 public interface HandlerRegister {
 
-    void registry(HandlerContainer handlerContainer, SchedulerTaskHandler<?> commonSchedulerTaskHandler, cn.doanything.framework.scheduler.handler.annotation.TaskHandler taskHandler);
+    String HANDLER_REGISTER_PREFIX = "HandlerRegisterPrefix";
+
+    void registry(HandlerContainer handlerContainer, SchedulerTaskHandler commonSchedulerTaskHandler, TaskHandler taskHandler);
 
 }

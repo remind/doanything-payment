@@ -3,11 +3,13 @@ package cn.doanything.framework.scheduler.properties;
 import cn.doanything.framework.scheduler.CommonTaskConstants;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * 配置属性
  */
 @ConfigurationProperties(CommonTaskConstants.PREFIX)
+@Component
 @Data
 public class CommonTaskProperties {
 

@@ -8,6 +8,7 @@ import cn.doanything.framework.scheduler.repository.mybatis.dataobject.Scheduler
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -15,12 +16,14 @@ import java.util.List;
  * @author wxj
  * 2023/12/27
  */
+@Repository
 public class TaskRepository {
 
     @Autowired
     private SchedulerTaskMapper taskMapper;
 
-    private final TaskDalConvertor dalConvertor = TaskDalConvertor.INSTANCE;
+    @Autowired
+    private TaskDalConvertor dalConvertor;
 
     /**
      * 新增任务

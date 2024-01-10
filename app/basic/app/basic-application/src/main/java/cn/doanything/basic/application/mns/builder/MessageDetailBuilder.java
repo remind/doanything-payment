@@ -8,6 +8,7 @@ import cn.doanything.basic.mns.NotifyType;
 import cn.doanything.basic.mns.Protocol;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -26,7 +27,7 @@ public class MessageDetailBuilder {
         authCodeMessage.setRecipient(request.getRecipient());
         authCodeMessage.setMemberId(request.getMemberId());
         authCodeMessage.setMessageType(MessageType.AUTH_CODE);
-        authCodeMessage.setNotifyTime(new Date());
+        authCodeMessage.setNotifyTime(LocalDateTime.now());
         authCodeMessage.setNotifyType(NotifyType.REAL);
         authCodeMessage.setProtocol(Protocol.SNS);
         return authCodeMessage;

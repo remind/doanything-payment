@@ -44,6 +44,13 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
     }
 
     @Override
+    public MessageDetail lock(String id) {
+        MessageDetail messageDetail = dalConvertor.toEntity(mapper.lockOne(getIdWrapper(id)));
+        fillContent(messageDetail);
+        return messageDetail;
+    }
+
+    @Override
     public MessageDetail loadByRequestId(String requestId) {
         Wrapper<MessageDetailDO> wrapper = new LambdaQueryWrapper<MessageDetailDO>().eq(MessageDetailDO::getRequestId, requestId);
         MessageDetail messageDetail = dalConvertor.toEntity(mapper.selectOne(wrapper));
@@ -54,7 +61,8 @@ public class MessageDetailRepositoryImpl implements MessageDetailRepository {
     @Override
     public void store(MessageDetail messageDetail) {
         messageDetail.setMessageId(getId(messageDetail.getMemberId()));
-        mapper.insert(dalConvertor.toDo(messageDetail));
+        MessageDetailDO messageDetailDO = dalConvertor.toDo(messageDetail);
+        mapper.insert(messageDetailDO);
         contentMapper.insert(dalConvertor.toContent(messageDetail));
     }
 

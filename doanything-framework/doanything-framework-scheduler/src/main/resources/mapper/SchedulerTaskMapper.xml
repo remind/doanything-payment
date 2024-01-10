@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.doanything.framework.scheduler.repository.SchedulerTaskMapper">
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.doanything.framework.scheduler.model.Task">
+    <resultMap id="BaseResultMap" type="cn.doanything.framework.scheduler.repository.mybatis.dataobject.SchedulerTaskDO">
         <id column="id" property="id" />
         <result column="biz_id" property="bizId" />
         <result column="type" property="type" />
         <result column="param" property="param" />
-        <result column="status" property="status" type=""/>
+        <result column="status" property="status"/>
         <result column="execute_count" property="executeCount" />
         <result column="next_execute_time" property="nextExecuteTime" />
         <result column="start_execute_time" property="startExecuteTime" />

@@ -7,6 +7,8 @@ import cn.doanything.framework.scheduler.model.TaskStatus;
 import cn.doanything.framework.scheduler.properties.CommonTaskProperties;
 import cn.doanything.framework.scheduler.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -19,14 +21,19 @@ import java.util.concurrent.Future;
  * 默认任务加载器
  */
 @Slf4j
-public class DefaultCommonTaskLoaderImpl implements CommonTaskLoader {
+@Component
+public class DefaultSchedulerTaskLoaderImpl implements SchedulerTaskLoader {
 
+    @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
     private CommonTaskProperties properties;
 
+    @Autowired
     private DistributorAdapter distributorAdapter;
 
+    @Autowired
     private ExecutorService executorService;
 
     @Override

@@ -20,4 +20,9 @@ public interface BasicConstants {
      * 验证码可验证次数
      */
     int MNS_AUTH_CODE_VERIFIABLE_COUNT = 3;
+
+    /**
+     * 默认任务类型
+     */
+    String DEFAULT_TASK_TYPE = "notify_message";
 }

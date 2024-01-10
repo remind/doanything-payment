@@ -2,6 +2,7 @@ package cn.doanything.framework.scheduler.model;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -32,6 +33,11 @@ public class Task {
     private TaskStatus status;
 
     /**
+     * 任务参数
+     */
+    private String param;
+
+    /**
      * 执行次数
      */
     private int executeCount;
@@ -39,21 +45,22 @@ public class Task {
     /**
      * 下次执行时间
      */
-    private Date nextExecuteTime;
+    private LocalDateTime nextExecuteTime;
 
     /**
      * 开始执行时间
      */
-    private Date startExecuteTime;
+    private LocalDateTime startExecuteTime;
 
     public Task() {
     }
 
-    public Task(String bizId, String type) {
-        this.bizId = Objects.requireNonNull(bizId);;
-        this.type = Objects.requireNonNull(type);;
+    public Task(String type, String bizId, LocalDateTime nextExecuteTime, String param) {
+        this.type = Objects.requireNonNull(type);
+        this.bizId = Objects.requireNonNull(bizId);
         this.status = TaskStatus.WAIT;
         this.executeCount = 0;
-        this.nextExecuteTime = new Date();
+        this.nextExecuteTime = nextExecuteTime == null ? LocalDateTime.now() : nextExecuteTime;
+        this.param = param;
     }
 }

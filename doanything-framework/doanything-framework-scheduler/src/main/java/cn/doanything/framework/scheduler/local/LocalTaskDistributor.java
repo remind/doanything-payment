@@ -2,23 +2,31 @@ package cn.doanything.framework.scheduler.local;
 
 
 import cn.doanything.framework.scheduler.distribute.TaskDistributor;
+import cn.doanything.framework.scheduler.handler.HandlerRegister;
 import cn.doanything.framework.scheduler.model.*;
 import cn.doanything.framework.scheduler.properties.CommonTaskProperties;
 import cn.doanything.framework.scheduler.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Slf4j
+@Component(TaskDistributor.TASK_DISTRIBUTE_PREFIX + "LOCAL")
 public class LocalTaskDistributor implements TaskDistributor {
 
+    @Autowired
     private TaskRepository commonTaskRepository;
 
+    @Autowired
     private TransactionTemplate transactionTemplate;
 
+    @Autowired
     private CommonTaskProperties properties;
 
     @Override
@@ -55,14 +63,14 @@ public class LocalTaskDistributor implements TaskDistributor {
         Assert.isTrue(TaskStatus.WAIT.equals(task.getStatus())
                         || (TaskStatus.PROCESS.equals(task.getStatus())
                         && task.getStartExecuteTime() != null
-                        && DateUtils.addMinutes(task.getStartExecuteTime(), properties.getMaxExecuteMinutes()).compareTo(new Date()) < 0
+                        && task.getStartExecuteTime().plusMinutes(properties.getMaxExecuteMinutes()).isBefore(LocalDateTime.now())
                 )
                 , "该任务在处理中或者已经失败");
     }
 
     private ExecuteResult handle(Task task, LocalHandlerInfo handlerInfo) {
         boolean ret = handlerInfo.getSchedulerTaskHandler().handle(task.getId(), task.getType()
-                , task.getBizId());
+                , task.getBizId(), task.getParam());
         if (ret) {
             commonTaskRepository.delete(task.getId());
             return ExecuteResult.success(task.getId());
@@ -83,10 +91,10 @@ public class LocalTaskDistributor implements TaskDistributor {
             log.error("任务执行次数达到最大执行次数，置为失败:{}", task.getId());
             task.setStatus(TaskStatus.FAIL);
             handlerInfo.getSchedulerTaskHandler().failHandle(task.getId(), task.getType()
-                    , task.getBizId());
+                    , task.getBizId(), task.getParam());
         } else {
             task.setStatus(TaskStatus.WAIT);
-            task.setNextExecuteTime(DateUtils.addSeconds(task.getNextExecuteTime(), properties.getExecuteIntervalSeconds()));
+            task.setNextExecuteTime(task.getNextExecuteTime().plusMinutes(properties.getExecuteIntervalSeconds()));
         }
         commonTaskRepository.save(task);
     }

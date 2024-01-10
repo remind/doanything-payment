@@ -1,7 +1,9 @@
 package cn.doanything.basic.infrastructure.persistence.mns.mapper;
 
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageDetailDO;
+import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author wxj
  * @since 2024-01-09
  */
-public interface MessageDetailMapper extends BaseMapper<MessageDetailDO> {
+@Mapper
+public interface MessageDetailMapper extends ExtBaseMapper<MessageDetailDO> {
 
 }

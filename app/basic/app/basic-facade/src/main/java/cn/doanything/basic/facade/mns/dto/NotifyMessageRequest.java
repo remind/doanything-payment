@@ -3,7 +3,7 @@ package cn.doanything.basic.facade.mns.dto;
 import cn.doanything.basic.mns.Protocol;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -27,7 +27,7 @@ public class NotifyMessageRequest extends MessageRequest {
     /**
      * 发送时间
      */
-    private Date notifyTime;
+    private LocalDateTime notifyTime;
 
     /**
      * 邮件标题

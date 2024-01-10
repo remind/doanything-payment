@@ -7,7 +7,7 @@ import cn.doanything.basic.mns.Protocol;
 import cn.doanything.commons.lang.Entity;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author wxj
@@ -65,7 +65,7 @@ public class MessageDetail extends Entity {
     /**
      * 通知时间
      */
-    private Date notifyTime;
+    private LocalDateTime notifyTime;
 
     /**
      * 消息内容，其类型由protocol，messageType决定
