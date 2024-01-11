@@ -48,7 +48,7 @@ public class MybatisGenerator {
 
                 }))
                 .packageConfig(builder -> {
-                    builder.parent("cn.doanything.basic.infrastructure.persistence.mns") // 设置父包名
+                    builder.parent("cn.doanything.basic.infrastructure.persistence.oss") // 设置父包名
                             .pathInfo(pathInfo).entity("dataobject"); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {

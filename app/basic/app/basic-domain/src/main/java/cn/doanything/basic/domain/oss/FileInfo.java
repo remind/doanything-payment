@@ -19,12 +19,12 @@ public class FileInfo extends Entity {
     /**
      * 场景编码
      */
-    private String sceneCode;
+    private String scene;
 
     /**
      * 文件hash值
      */
-    private String hash;
+    private String digestHash;
 
     /**
      * 会员ID

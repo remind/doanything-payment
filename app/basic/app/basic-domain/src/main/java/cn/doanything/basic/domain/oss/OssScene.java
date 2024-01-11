@@ -10,7 +10,7 @@ import java.util.List;
  * 2024/1/11
  */
 @Data
-public class OssSceneConfig {
+public class OssScene {
 
     /**
      * 编码
@@ -53,4 +53,5 @@ public class OssSceneConfig {
         }
         return this.suffix.contains(suffix);
     }
+
 }

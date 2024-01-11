@@ -1,6 +1,6 @@
 package cn.doanything.basic.domain.oss.repository;
 
-import cn.doanything.basic.domain.oss.OssSceneConfig;
+import cn.doanything.basic.domain.oss.OssScene;
 
 /**
  * @author wxj
@@ -8,5 +8,5 @@ import cn.doanything.basic.domain.oss.OssSceneConfig;
  */
 public interface OssSceneConfigRepository {
 
-    OssSceneConfig load(String sceneCode);
+    OssScene load(String sceneCode);
 }

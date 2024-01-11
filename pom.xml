@@ -15,6 +15,7 @@
         <module>app/member</module>
         <module>app/mgs</module>
         <module>doanything-archetypes</module>
+        <module>doanything-dependencies-third</module>
     </modules>
 
     <properties>

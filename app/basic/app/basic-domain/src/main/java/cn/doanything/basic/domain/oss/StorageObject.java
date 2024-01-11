@@ -14,12 +14,12 @@ public class StorageObject extends Entity {
     /**
      * 文件hash
      */
-    private String hash;
+    private String digestHash;
 
     /**
      * 标识，在渠道唯一
      */
-    private String key;
+    private String storageKey;
 
     /**
      * 渠道

@@ -35,7 +35,7 @@ public class FileDownloadService {
     public InputStream download(String fileId) {
         FileInfo fileInfo = fileInfoRepository.load(fileId);
         AssertUtil.isNotNull(fileInfo, "文件不存在");
-        StorageObject storageObject = storageObjectRepository.load(fileInfo.getHash());
-        return ossChannelMap.get(OssChannel.BEAN_PREFIX + storageObject.getChannel()).download(storageObject.getKey());
+        StorageObject storageObject = storageObjectRepository.load(fileInfo.getDigestHash());
+        return ossChannelMap.get(OssChannel.BEAN_PREFIX + storageObject.getChannel()).download(storageObject.getStorageKey());
     }
 }
