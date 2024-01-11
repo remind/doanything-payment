@@ -9,7 +9,8 @@ import cn.doanything.commons.enums.BizIdType;
  */
 public enum IdType implements BizIdType {
 
-    MNS_MESSAGE_DETAIL("1", "01", "seq_message_detail_id","消息详情")
+    MNS_MESSAGE_DETAIL("1", "01", "seq_message_detail_id","消息详情"),
+    OSS_FILE_INFO("2", "01", "seq_oss_file_info_id","文件ID"),
     ;
 
     /**

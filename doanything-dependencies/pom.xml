@@ -74,6 +74,11 @@
                 <artifactId>hutool-json</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-crypto</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
             <!-- end 外部依赖包定义 -->
 
             <!-- start 二方commons包依赖定义 -->

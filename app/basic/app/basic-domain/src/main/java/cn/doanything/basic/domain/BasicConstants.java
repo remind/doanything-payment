@@ -25,4 +25,9 @@ public interface BasicConstants {
      * 默认任务类型
      */
     String DEFAULT_TASK_TYPE = "notify_message";
+
+    /**
+     * 对象存储默认渠道
+     */
+    String OSS_DEFAULT_CHANNEL = "default";
 }
