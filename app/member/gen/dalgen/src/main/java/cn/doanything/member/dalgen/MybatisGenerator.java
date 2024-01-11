@@ -1,5 +1,6 @@
 package cn.doanything.member.dalgen;
 
+import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
@@ -56,6 +57,7 @@ public class MybatisGenerator {
                             .addTablePrefix(config.getArray("db.table.prefix"))
                             .mapperBuilder().enableMapperAnnotation()
                             .enableFileOverride()//.enableBaseResultMap().enableBaseColumnList()
+                            .superClass(ExtBaseMapper.class)
                             .entityBuilder().formatFileName("%sDO").enableFileOverride();
                 })
 

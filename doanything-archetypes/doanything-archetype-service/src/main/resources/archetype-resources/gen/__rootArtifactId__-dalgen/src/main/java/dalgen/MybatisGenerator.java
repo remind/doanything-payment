@@ -58,6 +58,7 @@ public class MybatisGenerator {
                             .addTablePrefix(config.getArray("db.table.prefix"))
                             .mapperBuilder().enableMapperAnnotation()
                             .enableFileOverride()//.enableBaseResultMap().enableBaseColumnList()
+                            .superClass(ExtBaseMapper.class)
                             .entityBuilder().formatFileName("%sDO").enableFileOverride();
                 })
 
