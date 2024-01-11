@@ -2,7 +2,6 @@ package cn.doanything.framework.scheduler.repository.mybatis;
 
 import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 import cn.doanything.framework.scheduler.repository.mybatis.dataobject.SchedulerTaskDO;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -12,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author wxj
  * @since 2023-12-27
  */
-@Mapper
 public interface SchedulerTaskMapper extends ExtBaseMapper<SchedulerTaskDO> {
 
 }
