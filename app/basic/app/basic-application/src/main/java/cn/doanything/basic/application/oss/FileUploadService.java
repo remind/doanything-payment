@@ -53,6 +53,7 @@ public class FileUploadService {
 
     public FileInfo upload(UploadFile uploadFile) {
         OssScene ossScene = ossSceneConfigRepository.load(uploadFile.getScene());
+        uploadFile.setInput(convert(uploadFile.getInput()));
         validate(ossScene, uploadFile);
         FileInfo fileInfo = buildFileInfo(uploadFile);
         if (storageObjectRepository.load(fileInfo.getDigestHash()) == null) {
@@ -98,14 +99,26 @@ public class FileUploadService {
 
     private String getFileHash(InputStream input) {
         try {
-            InputStream is = new BufferedInputStream(input);
-            is.mark(is.available());
-            String hash = SecureUtil.md5(is);
-            is.reset();
+            input.mark(0);
+            String hash = SecureUtil.md5(input);
+            input.reset();
             return hash;
         } catch (IOException e) {
             log.error("获取文件hash异常", e);
             throw new BizException("文件上传失败");
         }
+    }
+
+    /**
+     * 转换为可mark的流，以方便重复处理
+     * @param inputStream
+     * @return
+     */
+    private static InputStream convert(InputStream inputStream) {
+        if (!inputStream.markSupported()) {
+            // 如果不支持mark，则转换为BufferedInputStream
+            return new BufferedInputStream(inputStream);
+        }
+        return inputStream;
     }
 }
