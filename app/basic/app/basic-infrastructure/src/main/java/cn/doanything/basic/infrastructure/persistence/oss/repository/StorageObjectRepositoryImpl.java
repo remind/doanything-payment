@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * 2024/1/11
  */
 @Repository
-public class StorageObjectRepositoryImpl extends AbstractBaseRepository<StorageObject, StorageObjectDO, String> implements StorageObjectRepository {
+public class StorageObjectRepositoryImpl extends AbstractBaseRepository<StorageObject, StorageObjectDO> implements StorageObjectRepository {
 
 
 }

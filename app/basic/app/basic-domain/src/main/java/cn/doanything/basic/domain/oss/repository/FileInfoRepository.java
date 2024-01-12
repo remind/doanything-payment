@@ -2,13 +2,15 @@ package cn.doanything.basic.domain.oss.repository;
 
 import cn.doanything.basic.domain.oss.FileInfo;
 
+import java.io.Serializable;
+
 /**
  * @author wxj
  * 2024/1/11
  */
 public interface FileInfoRepository {
 
-    void store(FileInfo fileInfo);
+    FileInfo store(FileInfo fileInfo);
 
-    FileInfo load(String fileId);
+    FileInfo load(Serializable fileId);
 }

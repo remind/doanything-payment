@@ -1,4 +1,4 @@
-package cn.doanything.basic.facade;
+package cn.doanything.basic.infrastructure.repository;
 
 import cn.doanything.basic.domain.oss.StorageObject;
 import cn.doanything.basic.domain.oss.repository.StorageObjectRepository;

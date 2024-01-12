@@ -2,17 +2,19 @@ package cn.doanything.basic.domain.mns.repository;
 
 import cn.doanything.basic.domain.mns.ChannelRequest;
 
+import java.io.Serializable;
+
 /**
  * @author wxj
  * 2024/1/7
  */
 public interface ChannelRequestRepository {
 
-    ChannelRequest load(Long id);
+    ChannelRequest load(Serializable id);
 
-    ChannelRequest lock(Long id);
+    ChannelRequest lock(Serializable id);
 
-    void store(ChannelRequest channelRequest);
+    ChannelRequest store(ChannelRequest channelRequest);
 
-    void reStore(ChannelRequest channelRequest);
+    ChannelRequest reStore(ChannelRequest channelRequest);
 }

@@ -24,6 +24,7 @@ public class FileInfoDO implements Serializable {
     /**
      * 文件ID
      */
+    @TableId(value = "file_id", type = IdType.NONE)
     private String fileId;
 
     /**

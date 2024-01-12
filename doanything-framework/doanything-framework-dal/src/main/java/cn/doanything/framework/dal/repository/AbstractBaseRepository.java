@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author wxj
  * 2024/1/12
  */
-public abstract class AbstractBaseRepository<EntityType, DoType, IdType extends Serializable> {
+public abstract class AbstractBaseRepository<EntityType, DoType> {
 
     @Autowired
     protected ReadWriteConvertor<EntityType, DoType> dalConvertor;
@@ -20,7 +20,7 @@ public abstract class AbstractBaseRepository<EntityType, DoType, IdType extends 
     @Autowired
     protected ExtBaseMapper<DoType> dalMapper;
 
-    public EntityType load(IdType id) {
+    public EntityType load(Serializable id) {
         Wrapper<DoType> idWrapper = getIdWrapper(id);
         if (idWrapper == null) {
             return dalConvertor.toEntity(dalMapper.selectById(id));
@@ -28,7 +28,7 @@ public abstract class AbstractBaseRepository<EntityType, DoType, IdType extends 
         return dalConvertor.toEntity(dalMapper.selectOne(idWrapper));
     }
 
-    public EntityType lock(IdType id) {
+    public EntityType lock(Serializable id) {
         Wrapper<DoType> idWrapper = getIdWrapper(id);
         if (idWrapper == null) {
             return dalConvertor.toEntity(dalMapper.lockById(id));
@@ -58,7 +58,7 @@ public abstract class AbstractBaseRepository<EntityType, DoType, IdType extends 
      * @param id
      * @return
      */
-    protected Wrapper<DoType> getIdWrapper(IdType id) {
+    protected Wrapper<DoType> getIdWrapper(Serializable id) {
         return null;
     }
 }
