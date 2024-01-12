@@ -2,7 +2,7 @@ package cn.doanything.basic.domain.mns.service;
 
 import cn.doanything.basic.domain.mns.NotifyChannel;
 import cn.doanything.basic.domain.mns.repository.NotifyChannelRepository;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

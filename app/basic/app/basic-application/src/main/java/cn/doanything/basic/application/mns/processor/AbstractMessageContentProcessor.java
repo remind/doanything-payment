@@ -2,7 +2,7 @@ package cn.doanything.basic.application.mns.processor;
 
 import cn.doanything.basic.domain.mns.MessageTemplate;
 import cn.doanything.basic.domain.mns.repository.MessageTemplateRepository;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import cn.doanything.commons.lang.utils.AssertUtil;
 import cn.hutool.extra.template.Template;
 import cn.hutool.extra.template.TemplateConfig;

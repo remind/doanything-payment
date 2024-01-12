@@ -1,4 +1,4 @@
-package cn.doanything.basic.mns;
+package cn.doanything.basic.types.mns;
 
 import cn.doanything.commons.enums.CodeEnum;
 

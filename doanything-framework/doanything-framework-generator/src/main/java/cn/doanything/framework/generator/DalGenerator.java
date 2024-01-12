@@ -38,6 +38,9 @@ public class DalGenerator {
     public void execute(String projectPath, String packageName) {
         String classDir = projectPath + "/app/" + genConfig.getProject().getName() + "-infrastructure/src/main/java";
         String xmlDir = projectPath + "/app/" + genConfig.getProject().getName() + "-infrastructure/src/main/resources/mapper";
+        if (StrUtil.isNotBlank(packageName)) {
+            xmlDir += "/" + packageName;
+        }
 
         FastAutoGenerator.create(genConfig.getDb().getDataSource().getUrl()
                         , genConfig.getDb().getDataSource().getUser()

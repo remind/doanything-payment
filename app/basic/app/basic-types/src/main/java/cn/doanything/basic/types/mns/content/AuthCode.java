@@ -1,4 +1,4 @@
-package cn.doanything.basic.mns.content;
+package cn.doanything.basic.types.mns.content;
 
 import cn.doanything.commons.enums.EnableEnum;
 import lombok.Data;

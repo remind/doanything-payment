@@ -3,9 +3,9 @@ package cn.doanything.basic.application.mns.builder;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.facade.mns.dto.AuthCodeMessageRequest;
 import cn.doanything.basic.facade.mns.dto.NotifyMessageRequest;
-import cn.doanything.basic.mns.MessageType;
-import cn.doanything.basic.mns.NotifyType;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.MessageType;
+import cn.doanything.basic.types.mns.NotifyType;
+import cn.doanything.basic.types.mns.Protocol;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

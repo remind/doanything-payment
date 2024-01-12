@@ -1,6 +1,6 @@
 package cn.doanything.basic.domain.mns;
 
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import cn.doanything.commons.lang.Entity;
 import lombok.Data;
 

@@ -5,7 +5,7 @@ import cn.doanything.basic.domain.mns.repository.MessageTemplateRepository;
 import cn.doanything.basic.infrastructure.persistence.mns.convertor.MessageTemplateDalConvertor;
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageTemplateDO;
 import cn.doanything.basic.infrastructure.persistence.mns.mapper.MessageTemplateMapper;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import cn.doanything.commons.enums.EnableEnum;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,6 +17,6 @@ public class BasicGenerator {
         DalGenerator dalGenerator = new DalGenerator(genConfig);
         File f = new File(BasicGenerator.class.getResource("/").getPath());
         String projectPath = f.getParentFile().getParentFile().getParentFile().getParentFile().getPath();
-        dalGenerator.execute(projectPath, "oss");
+        dalGenerator.execute(projectPath, "md");
     }
 }

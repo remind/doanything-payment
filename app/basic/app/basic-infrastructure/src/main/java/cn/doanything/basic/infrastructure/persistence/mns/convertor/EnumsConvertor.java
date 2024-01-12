@@ -1,9 +1,9 @@
 package cn.doanything.basic.infrastructure.persistence.mns.convertor;
 
-import cn.doanything.basic.mns.MessageStatus;
-import cn.doanything.basic.mns.MessageType;
-import cn.doanything.basic.mns.NotifyType;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.MessageStatus;
+import cn.doanything.basic.types.mns.MessageType;
+import cn.doanything.basic.types.mns.NotifyType;
+import cn.doanything.basic.types.mns.Protocol;
 import cn.doanything.commons.convertor.GlobalTypeConvertor;
 import cn.doanything.commons.lang.utils.EnumUtil;
 import org.mapstruct.Mapper;

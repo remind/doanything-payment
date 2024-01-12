@@ -1,19 +1,17 @@
-package cn.doanything.basic.mns;
+package cn.doanything.basic.types.mns;
 
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
- * 消息协议
+ * 通知类型
  *
  * @author wxj
  * 2024/1/6
  */
-public enum Protocol implements CodeEnum {
-    MAIL("M", "邮件"),
-    SNS("S", "手机短信"),
-    APP("A", "应用推送"),
+public enum NotifyType implements CodeEnum {
+    REAL("R", "实时发送"),
 
-    ;
+    DELAY("D", "延时发送");
 
     /**
      * 代码
@@ -30,10 +28,11 @@ public enum Protocol implements CodeEnum {
      * @param code
      * @param displayName
      */
-    Protocol(String code, String displayName) {
+    NotifyType(String code, String displayName) {
         this.code = code;
         this.displayName = displayName;
     }
+
     @Override
     public String getCode() {
         return code;

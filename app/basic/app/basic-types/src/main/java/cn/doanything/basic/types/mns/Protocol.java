@@ -1,15 +1,17 @@
-package cn.doanything.basic.mns;
+package cn.doanything.basic.types.mns;
 
 import cn.doanything.commons.enums.CodeEnum;
 
 /**
- * 消息类型
+ * 消息协议
+ *
  * @author wxj
  * 2024/1/6
  */
-public enum MessageType implements CodeEnum {
-    NORMAL_TEXT("1", "普通文本"),
-    AUTH_CODE("2", "验证码"),
+public enum Protocol implements CodeEnum {
+    MAIL("M", "邮件"),
+    SNS("S", "手机短信"),
+    APP("A", "应用推送"),
 
     ;
 
@@ -28,7 +30,7 @@ public enum MessageType implements CodeEnum {
      * @param code
      * @param displayName
      */
-    MessageType(String code, String displayName) {
+    Protocol(String code, String displayName) {
         this.code = code;
         this.displayName = displayName;
     }

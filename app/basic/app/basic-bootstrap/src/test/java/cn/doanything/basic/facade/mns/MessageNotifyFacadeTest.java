@@ -1,7 +1,7 @@
 package cn.doanything.basic.facade.mns;
 
 import cn.doanything.basic.facade.mns.dto.NotifyMessageRequest;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import cn.doanything.framework.BaseTestBootStarter;
 import cn.doanything.framework.scheduler.load.SchedulerTaskLoader;
 import org.junit.Test;

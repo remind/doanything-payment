@@ -12,6 +12,7 @@ db:
       - tf_
       - tm_
       - to_
+      - td_
     name:
     # 依次为：表名,业务主键字段(如果也是表主键就不用)
 #      - tm_channel_request
@@ -20,6 +21,8 @@ db:
 #      - tm_message_scene
 #      - tm_message_template
 #      - tm_notify_channel
-      - to_file_info
-      - to_oss_scene
-      - to_storage_object,digest_hash
+#      - to_file_info
+#      - to_oss_scene
+#      - to_storage_object,digest_hash
+      - td_data_item
+      - td_item_field

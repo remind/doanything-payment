@@ -3,7 +3,7 @@ package cn.doanything.basic.infrastructure.persistence.mns.convertor;
 import cn.doanything.basic.domain.mns.MessageDetail;
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageContentDO;
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.MessageDetailDO;
-import cn.doanything.basic.mns.content.AuthCode;
+import cn.doanything.basic.types.mns.content.AuthCode;
 import cn.doanything.commons.convertor.ReadWriteConvertor;
 import cn.hutool.json.JSONUtil;
 import org.mapstruct.Mapper;

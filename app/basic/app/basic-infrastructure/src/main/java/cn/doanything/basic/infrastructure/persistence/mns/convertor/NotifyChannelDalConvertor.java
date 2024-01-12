@@ -2,7 +2,7 @@ package cn.doanything.basic.infrastructure.persistence.mns.convertor;
 
 import cn.doanything.basic.domain.mns.NotifyChannel;
 import cn.doanything.basic.infrastructure.persistence.mns.dataobject.NotifyChannelDO;
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import cn.doanything.commons.convertor.ReadWriteConvertor;
 import cn.doanything.commons.lang.utils.EnumUtil;
 import org.mapstruct.Mapper;

@@ -1,6 +1,6 @@
 package cn.doanything.basic.facade.mns.dto;
 
-import cn.doanything.basic.mns.Protocol;
+import cn.doanything.basic.types.mns.Protocol;
 import lombok.Data;
 
 import java.time.LocalDateTime;
