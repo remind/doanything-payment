@@ -2,6 +2,9 @@ package cn.doanything.basic.domain.md.repository;
 
 import cn.doanything.basic.domain.md.DataItem;
 import cn.doanything.basic.types.md.ItemField;
+import cn.doanything.basic.types.md.query.DataItemQuery;
+import cn.doanything.commons.response.page.PageResult;
+import cn.doanything.commons.response.page.Paging;
 
 /**
  * @author wxj
@@ -11,9 +14,9 @@ public interface DataItemRepository {
 
     DataItem load(String code);
 
-    DataItem store(DataItem dataItem);
+    void store(DataItem dataItem);
 
-    DataItem reStore(DataItem dataItem);
+    void reStore(DataItem dataItem);
 
     /**
      * 新增字段
@@ -28,4 +31,6 @@ public interface DataItemRepository {
     void updateItemField(ItemField itemField);
 
     void deleteItemField(String itemCode, String fieldCode);
+
+    PageResult<DataItem> pageQuery(DataItemQuery query, Paging paging);
 }
