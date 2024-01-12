@@ -9,7 +9,7 @@ import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2024-01-11
+ * @since 2024-01-12
  */
 public interface FileInfoMapper extends ExtBaseMapper<FileInfoDO> {
 

@@ -13,6 +13,7 @@
         <module>doanything-framework-sequence</module>
         <module>doanything-framework-scheduler</module>
         <module>doanything-framework-test</module>
+        <module>doanything-framework-generator</module>
     </modules>
 
     <properties>

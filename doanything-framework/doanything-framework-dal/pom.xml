@@ -34,5 +34,9 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.doanything.commons</groupId>
+            <artifactId>doanything-commons-lang</artifactId>
+        </dependency>
     </dependencies>
 </project>

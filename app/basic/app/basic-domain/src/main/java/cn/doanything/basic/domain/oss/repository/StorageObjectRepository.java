@@ -10,5 +10,9 @@ public interface StorageObjectRepository {
 
     StorageObject load(String hash);
 
-    void store(StorageObject storageObject);
+    StorageObject store(StorageObject storageObject);
+
+    StorageObject lock(String hash);
+
+    StorageObject reStore(StorageObject storageObject);
 }

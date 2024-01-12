@@ -1,5 +1,8 @@
 package cn.doanything.basic.infrastructure.persistence.oss.dataobject;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -11,7 +14,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-11
+ * @since 2024-01-12
  */
 @TableName("to_file_info")
 public class FileInfoDO implements Serializable {
@@ -21,7 +24,6 @@ public class FileInfoDO implements Serializable {
     /**
      * 文件ID
      */
-    @TableId("file_id")
     private String fileId;
 
     /**
@@ -52,11 +54,13 @@ public class FileInfoDO implements Serializable {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime gmtCreate;
 
     /**
      * 最后修改时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime gmtModified;
 
     public String getFileId() {

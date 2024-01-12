@@ -1,8 +1,9 @@
-package cn.doanything.framework.dal.mybatis;
+package cn.doanything.framework.dal;
 
 import cn.doanything.framework.dal.mybatis.ext.ExtSqlInjector;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -10,10 +11,11 @@ import org.springframework.context.annotation.Configuration;
  * 2023/12/18
  */
 @Configuration
+@ComponentScan("cn.doanything.framework.dal")
 public class MybatisPlusConfig {
 
-    @Bean
-    public ISqlInjector sqlInjector() {
-        return new ExtSqlInjector();
-    }
+//    @Bean
+//    public ISqlInjector sqlInjector() {
+//        return new ExtSqlInjector();
+//    }
 }

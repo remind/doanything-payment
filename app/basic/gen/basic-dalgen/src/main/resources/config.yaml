@@ -1,0 +1,25 @@
+project:
+  name: basic
+  author: wxj
+
+db:
+  dataSource:
+    url: jdbc:mysql://127.0.0.1:3306/basic?useUnicode=true&characterEncoding=utf8
+    user: root
+    password: root
+  table:
+    prefix:
+      - tf_
+      - tm_
+      - to_
+    name:
+    # 依次为：表名,业务主键字段(如果也是表主键就不用)
+#      - tm_channel_request
+#      - tm_message_detail
+#      - tm_message_content
+#      - tm_message_scene
+#      - tm_message_template
+#      - tm_notify_channel
+      - to_file_info
+      - to_oss_scene
+      - to_storage_object,digest_hash

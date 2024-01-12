@@ -72,6 +72,11 @@
                 <artifactId>doanything-framework-scheduler</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.doanything.framework</groupId>
+                <artifactId>doanything-framework-generator</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- end 二方框架包依赖定义 -->
 
         </dependencies>
