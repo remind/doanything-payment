@@ -17,4 +17,11 @@ public class FieldValue {
      * 值
      */
     private String value;
+
+    public FieldValue() {
+    }
+    public FieldValue(String fieldCode, String value) {
+        this.fieldCode = fieldCode;
+        this.value = value;
+    }
 }

@@ -24,5 +24,7 @@ db:
 #      - to_file_info
 #      - to_oss_scene
 #      - to_storage_object,digest_hash
-      - td_data_item
-      - td_item_field
+#      - td_data_item
+#      - td_item_field
+#      - td_item_value
+      - td_field_value

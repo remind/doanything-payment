@@ -6,7 +6,7 @@ package cn.doanything.commons.response.page;
  */
 public class PageQuery {
 
-    private Paging paging;
+    private Paging paging = new Paging();
 
     public Paging getPaging() {
         return paging;
