@@ -1,4 +1,4 @@
-package cn.doanything.basic.domain.md;
+package cn.doanything.basic.facade.md.dto;
 
 import cn.doanything.basic.types.md.ItemField;
 import cn.doanything.commons.lang.Entity;
@@ -7,10 +7,11 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 数据项
+ * @author wxj
+ * 2024/1/13
  */
 @Data
-public class DataItem extends Entity {
+public class DataItemResponse extends Entity {
 
     /**
      * 编码

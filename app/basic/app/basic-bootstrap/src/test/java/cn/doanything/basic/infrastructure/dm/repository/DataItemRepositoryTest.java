@@ -1,6 +1,6 @@
 package cn.doanything.basic.infrastructure.dm.repository;
 
-import cn.doanything.basic.domain.md.DataItem;
+import cn.doanything.basic.types.md.DataItem;
 import cn.doanything.basic.domain.md.repository.DataItemRepository;
 import cn.doanything.basic.types.md.query.DataItemQuery;
 import cn.doanything.commons.response.page.PageResult;
@@ -24,7 +24,8 @@ public class DataItemRepositoryTest extends BaseTestBootStarter {
         Paging paging = new Paging();
         DataItemQuery query = new DataItemQuery();
         query.setCode("area");
-        PageResult<DataItem> result = dataItemRepository.pageQuery(query, paging);
+        query.setPaging(paging);
+        PageResult<DataItem> result = dataItemRepository.pageQuery(query);
         Assert.assertNotNull(result);
     }
 }

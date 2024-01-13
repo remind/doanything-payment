@@ -1,16 +1,16 @@
-package cn.doanything.basic.facade.md.dto;
+package cn.doanything.basic.types.md;
 
 import cn.doanything.basic.types.md.ItemField;
+import cn.doanything.commons.lang.Entity;
 import lombok.Data;
 
 import java.util.List;
 
 /**
- * @author wxj
- * 2024/1/12
+ * 数据项
  */
 @Data
-public class DataItemAddRequest {
+public class DataItem extends Entity {
 
     /**
      * 编码
@@ -31,5 +31,4 @@ public class DataItemAddRequest {
      * 字段
      */
     private List<ItemField> itemFields;
-
 }

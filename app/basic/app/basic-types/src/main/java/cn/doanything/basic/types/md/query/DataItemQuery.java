@@ -1,5 +1,6 @@
 package cn.doanything.basic.types.md.query;
 
+import cn.doanything.commons.response.page.PageQuery;
 import lombok.Data;
 
 /**
@@ -7,7 +8,7 @@ import lombok.Data;
  * 2024/1/12
  */
 @Data
-public class DataItemQuery {
+public class DataItemQuery extends PageQuery {
 
     /**
      * 编码

@@ -1,6 +1,6 @@
 package cn.doanything.basic.infrastructure.persistence.md.repository;
 
-import cn.doanything.basic.domain.md.DataItem;
+import cn.doanything.basic.types.md.DataItem;
 import cn.doanything.basic.domain.md.repository.DataItemRepository;
 import cn.doanything.basic.infrastructure.persistence.md.convertor.DataItemDalConvertor;
 import cn.doanything.basic.infrastructure.persistence.md.convertor.ItemFieldDalConvertor;
@@ -61,8 +61,13 @@ public class DataItemRepositoryImpl implements DataItemRepository {
     }
 
     @Override
-    public void reStore(DataItem dataItem) {
-        dalMapper.updateById(dalConvertor.toDo(dataItem));
+    public boolean reStore(DataItem dataItem) {
+        return dalMapper.updateById(dalConvertor.toDo(dataItem)) == 1;
+    }
+
+    @Override
+    public boolean remove(String code) {
+        return dalMapper.deleteById(code) == 1;
     }
 
     @Override
@@ -81,7 +86,7 @@ public class DataItemRepositoryImpl implements DataItemRepository {
     }
 
     @Override
-    public PageResult<DataItem> pageQuery(DataItemQuery query, Paging paging) {
+    public PageResult<DataItem> pageQuery(DataItemQuery query) {
         LambdaQueryWrapper<DataItemDO> wrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(query.getCode())) {
             wrapper.like(DataItemDO::getCode, query.getCode());
@@ -89,7 +94,7 @@ public class DataItemRepositoryImpl implements DataItemRepository {
         if (StrUtil.isNotBlank(query.getName())) {
             wrapper.like(DataItemDO::getName, query.getName());
         }
-        IPage<DataItemDO> pageDo = dalMapper.selectPage(dalConvertor.toPage(paging), wrapper);
+        IPage<DataItemDO> pageDo = dalMapper.selectPage(dalConvertor.toPage(query.getPaging()), wrapper);
         return dalConvertor.toEntity(pageDo);
     }
 
