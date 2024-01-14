@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.doanything</groupId>
+        <artifactId>doanything-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../doanything-parent/pom.xml</relativePath>
+    </parent>
+    <groupId>cn.doanything.payment</groupId>
+    <artifactId>payment</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>app/payment-bootstrap</module>
+        <module>app/payment-facade</module>
+        <module>app/payment-infrastructure</module>
+        <module>app/payment-application</module>
+        <module>app/payment-domain</module>
+        <module>app/payment-types</module>
+        <module>gen/payment-dalgen</module>
+    </modules>
+
+    <properties>
+        <revision>1.0-SNAPSHOT</revision>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>payment-types</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>payment-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>payment-facade</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>payment-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>payment-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

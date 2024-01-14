@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: payment
+server:
+  port: 8080
+dubbo:
+  application:
+    name: payment-dubbo
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848

@@ -1,14 +1,10 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
-package ${package}.dalgen;
+package cn.doanything.payment.dalgen;
 
 import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-
 
 import java.io.File;
 import java.sql.Types;
@@ -29,8 +25,8 @@ public class MybatisGenerator {
     }
 
     public static void gen(Config config, String projectPath) {
-        String classDir = projectPath + "/app/${rootArtifactId}-infrastructure/src/main/java";
-        String xmlDir = projectPath + "/app/${rootArtifactId}-infrastructure/src/main/resources/mapper";
+        String classDir = projectPath + "/app/payment-infrastructure/src/main/java";
+        String xmlDir = projectPath + "/app/payment-infrastructure/src/main/resources/mapper";
         Map<OutputFile, String> pathInfo = new HashMap<>();
         pathInfo.put(OutputFile.xml, xmlDir);
         pathInfo.put(OutputFile.controller, "");
@@ -52,7 +48,7 @@ public class MybatisGenerator {
 
                 }))
                 .packageConfig(builder -> {
-                    builder.parent("${package}.infrastructure.persistence") // 设置父包名
+                    builder.parent("cn.doanything.payment.infrastructure.persistence") // 设置父包名
                             .pathInfo(pathInfo).entity("dataobject"); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
