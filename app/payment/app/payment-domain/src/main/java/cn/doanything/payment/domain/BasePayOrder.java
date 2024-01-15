@@ -1,6 +1,8 @@
 package cn.doanything.payment.domain;
 
 import cn.doanything.commons.lang.types.Money;
+import cn.doanything.payment.types.funds.FundDetail;
+import cn.doanything.payment.types.funds.FundsRelation;
 import lombok.Data;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public abstract class BasePayOrder<T extends OrderStatus> {
     private Money orderAmount;
 
     /**
-     * 会员ID
+     * 发起人会员ID
      */
     private String memberId;
 
@@ -47,5 +49,10 @@ public abstract class BasePayOrder<T extends OrderStatus> {
      * 付款方资金详情
      */
     private List<FundDetail> payerDetails;
+
+    /**
+     * 资金关系
+     */
+    private List<FundsRelation> fundsRelations;
 
 }

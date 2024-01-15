@@ -14,11 +14,6 @@ import java.util.List;
 public class InstantPaymentRequest extends BasePaymentRequest {
 
     /**
-     * 支付人
-     */
-    private String payerId;
-
-    /**
      * 支付金额
      */
     private Money amount;

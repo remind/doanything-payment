@@ -1,4 +1,4 @@
-package cn.doanything.payment.instant.builder;
+package cn.doanything.payment.application.instant.builder;
 
 import cn.doanything.payment.domain.instant.PayOrder;
 import cn.doanything.payment.facade.request.InstantPaymentRequest;

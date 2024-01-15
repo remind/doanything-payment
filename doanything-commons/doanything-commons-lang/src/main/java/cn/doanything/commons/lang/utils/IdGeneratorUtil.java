@@ -14,7 +14,7 @@ import java.util.Date;
 public class IdGeneratorUtil {
 
     /**
-     * 生成24位的ID，由 yyyyMMdd + 3位SystemCode + 3位bizType + 2位dbRouteId + 8位自增
+     * 生成24位的ID，由 8位yyyyMMdd + 3位SystemCode + 3位bizType + 2位dbRouteId + 8位自增
      *
      * @param systemCode 系统编号
      * @param bizType    业务类型
@@ -44,6 +44,15 @@ public class IdGeneratorUtil {
                 bizType +
                 dbRouteId +
                 String.format("%08d", sequence);
+    }
+
+    /**
+     * 根据id获取分表位
+     * @param id
+     * @return
+     */
+    public static String reverseIdGetDbRouteId(String id) {
+        return id.substring(14,16);
     }
 
     /**

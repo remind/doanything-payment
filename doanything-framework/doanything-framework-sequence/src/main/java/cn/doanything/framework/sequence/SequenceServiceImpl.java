@@ -26,6 +26,12 @@ public class SequenceServiceImpl implements SequenceService {
                 , IdGeneratorUtil.getDbRouteIdByMemberId(memberId), getNext(idType.getSeqName()));
     }
 
+    @Override
+    public String getIdByRouteId(String routeId, SystemCodeEnums systemCodeEnums, BizIdType idType) {
+        return IdGeneratorUtil.getId(systemCodeEnums.getCode(), idType.getBizTypeCode()
+                , routeId, getNext(idType.getSeqName()));
+    }
+
     public SequenceServiceImpl(SequenceInnerService sequenceInnerService) {
         this.sequenceInnerService = sequenceInnerService;
     }

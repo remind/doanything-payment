@@ -1,4 +1,4 @@
-package cn.doanything.payment.instant.builder;
+package cn.doanything.payment.application.instant.builder;
 
 /**
  * @author wxj

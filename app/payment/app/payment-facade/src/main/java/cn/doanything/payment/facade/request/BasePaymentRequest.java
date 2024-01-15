@@ -14,4 +14,9 @@ public abstract class BasePaymentRequest {
      */
     private String requestId;
 
+    /**
+     * 发起人ID
+     */
+    private String memberId;
+
 }

@@ -22,12 +22,14 @@ public abstract class BasePayment {
     private PaymentType paymentType;
 
     /**
-     * 付款方用户ID
+     * 发起人用户ID
      */
-    private String payerId;
+    private String memberId;
 
     /**
      * 商户ID
      */
     private String merchantId;
+
+
 }

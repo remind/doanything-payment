@@ -1,6 +1,7 @@
 package cn.doanything.payment.facade.request;
 
 import cn.doanything.commons.lang.types.Money;
+import cn.doanything.payment.types.asset.AssetInfo;
 import lombok.Data;
 
 /**
@@ -22,7 +23,7 @@ public class FundDetailInfo {
     private Money amount;
 
     /**
-     * 资产编码
+     * 资产信息
      */
-    private String assetCode;
+    private AssetInfo assetInfo;
 }
