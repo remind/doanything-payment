@@ -13,7 +13,7 @@ import lombok.Data;
 public class FundDetailInfo {
 
     /**
-     * 用户ID
+     * 资产用户ID
      */
     private String memberId;
 

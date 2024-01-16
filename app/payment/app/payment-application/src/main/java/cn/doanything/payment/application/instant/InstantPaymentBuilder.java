@@ -19,20 +19,40 @@ public class InstantPaymentBuilder extends PaymentBuilder {
 
     public InstantPayment build(InstantPaymentRequest request) {
         InstantPayment instantPayment = new InstantPayment();
-        fillPayment(instantPayment, request, PaymentType.INSTANT);
+        fillBasePayment(instantPayment, request, PaymentType.INSTANT);
         instantPayment.setPayOrder(buildPayOrder(instantPayment.getPaymentId(), request));
+        fillFundDetails(instantPayment.getPayOrder(), request);
         return instantPayment;
     }
 
     private PayOrder buildPayOrder(String paymentId, InstantPaymentRequest request) {
         PayOrder payOrder = new PayOrder();
-        payOrder.setOrderId(idGeneratorService.genSubPayOrder(paymentId, IdType.PAY_ORDER_ID));
+        payOrder.setOrderId(idGeneratorDomainService.genSubPayOrder(paymentId, IdType.PAY_ORDER_ID));
         payOrder.setRequestId(request.getRequestId());
-        payOrder.setOrderAmount(request.getAmount());
-        payOrder.setMemberId(request.getMemberId());
+        payOrder.setOrderAmount(request.getPayAmount());
+        payOrder.setMemberId(request.getPayerId());
         payOrder.setOrderStatus(PayOrderStatus.INIT);
-        payOrder.setPayeeDetails(buildFundDetails(request.getMemberId(), payOrder.getOrderId(), request.getPayeeFundDetail(), BelongTo.PAYEE));
-        payOrder.setPayerDetails(buildFundDetails(request.getMemberId(), payOrder.getOrderId(), request.getPayerFundDetail(), BelongTo.PAYER));
         return payOrder;
+    }
+
+    /**
+     * 填充资金明细
+     * @param payOrder
+     * @param request
+     */
+    private void fillFundDetails(PayOrder payOrder, InstantPaymentRequest request) {
+        request.getPayerFundDetail().forEach(fundDetailInfo -> {
+            payOrder.addPayerFundDetail(buildFundDetail(payOrder.getPaymentId(), payOrder.getOrderId(), fundDetailInfo, BelongTo.PAYER));
+        });
+
+        request.getTradeInfos().forEach(tradeInfo -> {
+            tradeInfo.getPayeeFundDetail().forEach(fundDetailInfo -> {
+                payOrder.addPayeeFundDetail(buildFundDetail(payOrder.getPaymentId(), payOrder.getOrderId(), fundDetailInfo, BelongTo.PAYEE));
+            });
+        });
+    }
+
+    private void fillFundRelations(PayOrder payOrder, InstantPaymentRequest request) {
+
     }
 }

@@ -15,8 +15,14 @@ public abstract class BasePaymentRequest {
     private String requestId;
 
     /**
-     * 发起人ID
+     * 商户ID
      */
-    private String memberId;
+    private String merchantId;
+
+    /**
+     * 发起人ID，会做为生成各类ID的凭证
+     * @return
+     */
+    public abstract String getMemberId();
 
 }

@@ -11,15 +11,26 @@ import lombok.Data;
  */
 @Data
 public class FundDetail {
+
+    /**
+     * 支付总单ID
+     */
+    private String paymentId;
+
+    /**
+     * 支付单ID
+     */
+    private String orderId;
+
     /**
      * 详情ID
      */
     private String detailId;
 
     /**
-     * 参与方ID
+     * 资产所有人ID
      */
-    private String partyId;
+    private String memberId;
 
     /**
      * 所属方

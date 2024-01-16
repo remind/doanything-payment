@@ -16,15 +16,25 @@ public class InstantPaymentRequest extends BasePaymentRequest {
     /**
      * 支付金额
      */
-    private Money amount;
+    private Money payAmount;
 
     /**
-     * 收款资金明细
+     * 付款方ID
      */
-    private List<FundDetailInfo> payeeFundDetail;
+    private String payerId;
+
+    /**
+     * 交易信息
+     */
+    private List<TradeInfo> tradeInfos;
 
     /**
      * 付款资金明细
      */
     private List<FundDetailInfo> payerFundDetail;
+
+    @Override
+    public String getMemberId() {
+        return this.payerId;
+    }
 }

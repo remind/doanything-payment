@@ -21,6 +21,11 @@ public abstract class BasePayOrder<T extends OrderStatus> {
     private String requestId;
 
     /**
+     * 支付总单号
+     */
+    private String paymentId;
+
+    /**
      * 订单号
      */
     private String orderId;
@@ -43,16 +48,24 @@ public abstract class BasePayOrder<T extends OrderStatus> {
     /**
      * 收款方资金详情
      */
-    private List<FundDetail> payeeDetails;
+    private List<FundDetail> payeeDetails = List.of();
 
     /**
      * 付款方资金详情
      */
-    private List<FundDetail> payerDetails;
+    private List<FundDetail> payerDetails = List.of();
 
     /**
      * 资金关系
      */
     private List<FundsRelation> fundsRelations;
+
+    public void addPayeeFundDetail(FundDetail fundDetail) {
+        this.payeeDetails.add(fundDetail);
+    }
+
+    public void addPayerFundDetail(FundDetail fundDetail) {
+        this.payeeDetails.add(fundDetail);
+    }
 
 }
