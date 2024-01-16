@@ -52,7 +52,4 @@ public class InstantPaymentBuilder extends PaymentBuilder {
         });
     }
 
-    private void fillFundRelations(PayOrder payOrder, InstantPaymentRequest request) {
-
-    }
 }

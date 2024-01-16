@@ -58,7 +58,7 @@ public abstract class BasePayOrder<T extends OrderStatus> {
     /**
      * 资金关系
      */
-    private List<FundsRelation> fundsRelations;
+//    private List<FundsRelation> fundsRelations;
 
     public void addPayeeFundDetail(FundDetail fundDetail) {
         this.payeeDetails.add(fundDetail);
