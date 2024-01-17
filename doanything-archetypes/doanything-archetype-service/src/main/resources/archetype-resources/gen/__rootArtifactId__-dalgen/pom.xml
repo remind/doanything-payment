@@ -18,5 +18,9 @@
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-generator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-extra</artifactId>
+        </dependency>
     </dependencies>
 </project>
