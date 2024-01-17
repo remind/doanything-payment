@@ -1,0 +1,15 @@
+project:
+  name: ${rootArtifactId}
+  author: wxj
+
+db:
+  dataSource:
+    url: jdbc:mysql://127.0.0.1:3306/do_${rootArtifactId}?useUnicode=true&characterEncoding=utf8
+    user: root
+    password: root
+  table:
+    prefix:
+      - tf_
+    name:
+    # 依次为：表名,业务主键字段(如果也是表主键就不用)
+#      - to_storage_object,digest_hash
