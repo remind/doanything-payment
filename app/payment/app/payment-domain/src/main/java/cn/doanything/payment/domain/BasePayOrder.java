@@ -2,7 +2,6 @@ package cn.doanything.payment.domain;
 
 import cn.doanything.commons.lang.types.Money;
 import cn.doanything.payment.types.funds.FundDetail;
-import cn.doanything.payment.types.funds.FundsRelation;
 import lombok.Data;
 
 import java.util.List;

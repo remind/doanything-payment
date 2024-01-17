@@ -1,7 +1,4 @@
-#set($symbol_pound='#')
-        #set($symbol_dollar='$')
-        #set($symbol_escape='\' )
-        package ${package}.dalgen;
+package cn.doanything.payment.dalgen;
 
 import cn.doanything.framework.generator.DalGenerator;
 import cn.doanything.framework.generator.config.GenConfig;

@@ -8,7 +8,7 @@ import cn.doanything.payment.facade.request.FundDetailInfo;
 import cn.doanything.payment.types.PaymentType;
 import cn.doanything.payment.types.asset.BelongTo;
 import cn.doanything.payment.types.funds.FundDetail;
-import cn.doanything.payment.types.funds.FundsAction;
+import cn.doanything.payment.types.funds.FundActionType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -50,7 +50,7 @@ public abstract class PaymentBuilder {
         fundDetail.setMemberId(info.getMemberId());
         fundDetail.setAssetInfo(info.getAssetInfo());
         fundDetail.setBelongTo(belongTo);
-        fundDetail.setAction(belongTo == BelongTo.PAYER ? FundsAction.REDUCE : FundsAction.INCREASE);
+        fundDetail.setActionType(FundActionType.FUNDS_CHANGE);
         return fundDetail;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * 2024/1/15
  */
 @Data
-public class FundsRelation {
+public class FundRelation {
 
     /**
      * 总单号
