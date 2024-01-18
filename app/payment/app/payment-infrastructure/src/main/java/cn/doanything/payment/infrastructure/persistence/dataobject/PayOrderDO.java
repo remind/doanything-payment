@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-17
+ * @since 2024-01-18
  */
 @TableName("tp_pay_order")
 public class PayOrderDO implements Serializable {
@@ -34,6 +34,11 @@ public class PayOrderDO implements Serializable {
     private String paymentId;
 
     /**
+     * 关联订单ID
+     */
+    private String relationId;
+
+    /**
      * 请求ID
      */
     private String requestId;
@@ -42,6 +47,11 @@ public class PayOrderDO implements Serializable {
      * 会员ID
      */
     private String memberId;
+
+    /**
+     * 订单类型
+     */
+    private String orderType;
 
     /**
      * 订单金额
@@ -86,6 +96,14 @@ public class PayOrderDO implements Serializable {
         this.paymentId = paymentId;
     }
 
+    public String getRelationId() {
+        return relationId;
+    }
+
+    public void setRelationId(String relationId) {
+        this.relationId = relationId;
+    }
+
     public String getRequestId() {
         return requestId;
     }
@@ -100,6 +118,14 @@ public class PayOrderDO implements Serializable {
 
     public void setMemberId(String memberId) {
         this.memberId = memberId;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public BigDecimal getOrderAmount() {
@@ -147,8 +173,10 @@ public class PayOrderDO implements Serializable {
         return "PayOrderDO{" +
         "orderId = " + orderId +
         ", paymentId = " + paymentId +
+        ", relationId = " + relationId +
         ", requestId = " + requestId +
         ", memberId = " + memberId +
+        ", orderType = " + orderType +
         ", orderAmount = " + orderAmount +
         ", currencyCode = " + currencyCode +
         ", orderStatus = " + orderStatus +

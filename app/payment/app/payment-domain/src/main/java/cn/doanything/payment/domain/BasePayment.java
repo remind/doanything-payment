@@ -1,5 +1,6 @@
 package cn.doanything.payment.domain;
 
+import cn.doanything.commons.lang.Entity;
 import cn.doanything.payment.types.PaymentType;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import lombok.Data;
  * 2024/1/15
  */
 @Data
-public abstract class BasePayment {
+public class BasePayment extends Entity {
 
     /**
      * 支付总单号

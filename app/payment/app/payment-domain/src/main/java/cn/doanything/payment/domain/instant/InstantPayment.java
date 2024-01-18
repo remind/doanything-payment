@@ -3,6 +3,7 @@ package cn.doanything.payment.domain.instant;
 import cn.doanything.payment.domain.BasePayment;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,5 +21,6 @@ public class InstantPayment extends BasePayment {
     /**
      * 退款单，可多次退款
      */
-    private List<RefundOrder> refundOrderList;
+    private List<RefundOrder> refundOrderList = new ArrayList<>();
+
 }

@@ -3,9 +3,12 @@ package cn.doanything.commons.convertor;
 import cn.doanything.commons.enums.CodeEnum;
 import cn.doanything.commons.enums.EnableEnum;
 import cn.doanything.commons.enums.ResultStatusEnum;
+import cn.doanything.commons.lang.types.Money;
 import cn.doanything.commons.lang.utils.EnumUtil;
 import cn.hutool.core.util.StrUtil;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.List;
 
 /**
@@ -39,5 +42,16 @@ public interface GlobalTypeConvertor {
 
     default ResultStatusEnum toResultStatusEnum(String code) {
         return EnumUtil.getByCode(ResultStatusEnum.class, code);
+    }
+
+    default Money toMoney(BigDecimal amount, String currencyCode) {
+        return new Money(amount, Currency.getInstance(currencyCode));
+    }
+
+    default String toCurrencyCode(Money money) {
+        return money != null ? money.getCurrency().getCurrencyCode() : "";
+    }
+    default BigDecimal toAmountValue(Money money) {
+        return money != null ? money.getAmount() : BigDecimal.ZERO;
     }
 }

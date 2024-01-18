@@ -9,4 +9,6 @@ import cn.doanything.payment.domain.instant.InstantPayment;
 public interface InstantPaymentRepository {
 
     void store(InstantPayment payment);
+
+    void load(String paymentId);
 }

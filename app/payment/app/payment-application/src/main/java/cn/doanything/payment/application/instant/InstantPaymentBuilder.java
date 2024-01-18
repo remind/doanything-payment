@@ -1,11 +1,11 @@
 package cn.doanything.payment.application.instant;
 
 import cn.doanything.payment.application.builder.PaymentBuilder;
-import cn.doanything.payment.types.IdType;
 import cn.doanything.payment.domain.instant.InstantPayment;
 import cn.doanything.payment.domain.instant.PayOrder;
 import cn.doanything.payment.domain.instant.PayOrderStatus;
 import cn.doanything.payment.facade.request.InstantPaymentRequest;
+import cn.doanything.payment.types.PayOrderType;
 import cn.doanything.payment.types.PaymentType;
 import cn.doanything.payment.types.asset.BelongTo;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class InstantPaymentBuilder extends PaymentBuilder {
 
     private PayOrder buildPayOrder(String paymentId, InstantPaymentRequest request) {
         PayOrder payOrder = new PayOrder();
-        payOrder.setOrderId(idGeneratorDomainService.genSubPayOrder(paymentId, IdType.PAY_ORDER_ID));
+        payOrder.setOrderId(idGeneratorDomainService.genSubPayOrder(paymentId, PayOrderType.PAY.getIdType()));
         payOrder.setRequestId(request.getRequestId());
         payOrder.setOrderAmount(request.getPayAmount());
         payOrder.setMemberId(request.getPayerId());

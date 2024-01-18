@@ -42,7 +42,12 @@ public abstract class BasePayOrder<T extends OrderStatus> {
     /**
      * 订单状态
      */
-    private OrderStatus orderStatus;
+    private T orderStatus;
+
+    /**
+     * 订单扩展信息
+     */
+    private String orderExtension;
 
     /**
      * 收款方资金详情
