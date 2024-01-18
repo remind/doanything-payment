@@ -16,10 +16,10 @@ public enum RefundOrderStatus implements OrderStatus {
 
     private String code;
 
-    private String name;
+    private String displayName;
 
-    RefundOrderStatus(String code, String name) {
+    RefundOrderStatus(String code, String displayName) {
         this.code = code;
-        this.name = name;
+        this.displayName = displayName;
     }
 }

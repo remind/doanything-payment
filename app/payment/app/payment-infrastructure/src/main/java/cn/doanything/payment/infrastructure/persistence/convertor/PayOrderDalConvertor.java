@@ -4,6 +4,7 @@ import cn.doanything.commons.convertor.GlobalTypeConvertor;
 import cn.doanything.payment.domain.BasePayOrder;
 import cn.doanything.payment.domain.instant.PayOrder;
 import cn.doanything.payment.domain.instant.RefundOrder;
+import cn.doanything.payment.infrastructure.convertor.EnumsConvertor;
 import cn.doanything.payment.infrastructure.persistence.dataobject.PayOrderDO;
 import cn.doanything.payment.types.PayOrderType;
 import org.mapstruct.Mapper;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author wxj
  * 2024/1/17
  */
-@Mapper(componentModel = "spring", uses = {GlobalTypeConvertor.class})
+@Mapper(componentModel = "spring", uses = {EnumsConvertor.class})
 public interface PayOrderDalConvertor extends GlobalTypeConvertor {
 
     default BasePayOrder toBasePayOrder(PayOrderDO payOrderDO) {

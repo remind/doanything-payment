@@ -29,7 +29,11 @@ public class BasePayOrderInnerRepository {
     @Autowired
     private PayOrderDalConvertor dalConvertor;
 
+    @Autowired
     private OrderExtensionMapper extensionMapper;
+
+    @Autowired
+    private FundDetailInnerRepository fundDetailInnerRepository;
 
     public List<BasePayOrder> loadByPaymentId(String paymentId) {
         List<BasePayOrder> basePayOrders = dalConvertor.toBasePayOrder(dalMapper.selectList(buildPaymentIdQueryWrapper(paymentId)));
@@ -45,18 +49,26 @@ public class BasePayOrderInnerRepository {
 
     public void store(BasePayOrder payOrder) {
         dalMapper.insert(dalConvertor.toDo(payOrder));
-
         if (StrUtil.isNotBlank(payOrder.getOrderExtension())) {
-            OrderExtensionDO orderExtensionDO = new OrderExtensionDO();
-            orderExtensionDO.setPaymentId(payOrder.getPaymentId());
-            orderExtensionDO.setOrderId(payOrder.getOrderId());
-            orderExtensionDO.setContent(payOrder.getOrderExtension());
-            extensionMapper.insert(orderExtensionDO);
+            extensionMapper.insert(buildOrderExtensionDO(payOrder));
         }
+        fundDetailInnerRepository.store(payOrder.getPayerDetails());
+        fundDetailInnerRepository.store(payOrder.getPayeeDetails());
     }
 
     public void reStore(BasePayOrder payOrder) {
         dalMapper.updateById(dalConvertor.toDo(payOrder));
+        extensionMapper.updateById(buildOrderExtensionDO(payOrder));
+        fundDetailInnerRepository.reStore(payOrder.getPayerDetails());
+        fundDetailInnerRepository.reStore(payOrder.getPayeeDetails());
+    }
+
+    private OrderExtensionDO buildOrderExtensionDO(BasePayOrder payOrder) {
+        OrderExtensionDO orderExtensionDO = new OrderExtensionDO();
+        orderExtensionDO.setPaymentId(payOrder.getPaymentId());
+        orderExtensionDO.setOrderId(payOrder.getOrderId());
+        orderExtensionDO.setContent(payOrder.getOrderExtension());
+        return orderExtensionDO;
     }
 
     private Map<String, OrderExtensionDO> getOrderExtensionMap(String paymentId) {
@@ -67,6 +79,7 @@ public class BasePayOrderInnerRepository {
     private Wrapper<OrderExtensionDO> buildPaymentIdExtQueryWrapper(String paymentId) {
         return new LambdaQueryWrapper<OrderExtensionDO>().eq(OrderExtensionDO::getPaymentId, paymentId);
     }
+
     private Wrapper<PayOrderDO> buildPaymentIdQueryWrapper(String paymentId) {
         return new LambdaQueryWrapper<PayOrderDO>().eq(PayOrderDO::getPaymentId, paymentId);
     }

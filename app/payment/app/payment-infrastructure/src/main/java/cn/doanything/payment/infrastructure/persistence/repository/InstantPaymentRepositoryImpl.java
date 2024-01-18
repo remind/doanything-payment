@@ -30,7 +30,7 @@ public class InstantPaymentRepositoryImpl extends AbstractPaymentRepository impl
 
     @Override
     public void store(InstantPayment payment) {
-        if (storePayment(payment)) {
+        if(storePayment(payment)) {
             basePayOrderInnerRepository.store(payment.getPayOrder());
         }
     }
@@ -65,4 +65,4 @@ public class InstantPaymentRepositoryImpl extends AbstractPaymentRepository impl
             }
         });
     }
-}
+ }

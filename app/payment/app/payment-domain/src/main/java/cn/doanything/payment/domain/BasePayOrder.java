@@ -1,9 +1,11 @@
 package cn.doanything.payment.domain;
 
+import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
 import cn.doanything.payment.types.funds.FundDetail;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,7 +14,7 @@ import java.util.List;
  * 2024/1/15
  */
 @Data
-public abstract class BasePayOrder<T extends OrderStatus> {
+public abstract class BasePayOrder<T extends OrderStatus> extends Entity {
 
     /**
      * 支付请求流水号
@@ -52,12 +54,12 @@ public abstract class BasePayOrder<T extends OrderStatus> {
     /**
      * 收款方资金详情
      */
-    private List<FundDetail> payeeDetails = List.of();
+    private List<FundDetail> payeeDetails = new ArrayList<>();
 
     /**
      * 付款方资金详情
      */
-    private List<FundDetail> payerDetails = List.of();
+    private List<FundDetail> payerDetails = new ArrayList<>();
 
     /**
      * 资金关系

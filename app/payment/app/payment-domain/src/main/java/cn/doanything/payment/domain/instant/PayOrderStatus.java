@@ -7,6 +7,7 @@ import lombok.Getter;
  * @author wxj
  * 2024/1/15
  */
+@Getter
 public enum PayOrderStatus implements OrderStatus {
 
     INIT("INIT", "初始化"),
@@ -22,10 +23,10 @@ public enum PayOrderStatus implements OrderStatus {
     private String code;
 
     @Getter
-    private String name;
+    private String displayName;
 
-    PayOrderStatus(String code, String name) {
+    PayOrderStatus(String code, String displayName) {
         this.code = code;
-        this.name = name;
+        this.displayName = displayName;
     }
 }
