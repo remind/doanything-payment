@@ -1,6 +1,6 @@
 package cn.doanything.payment.domain.instant;
 
-import cn.doanything.payment.domain.OrderStatus;
+import cn.doanything.payment.types.OrderStatus;
 import lombok.Getter;
 
 /**

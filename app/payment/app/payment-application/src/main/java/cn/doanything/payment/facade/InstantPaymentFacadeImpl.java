@@ -1,6 +1,7 @@
 package cn.doanything.payment.facade;
 
 import cn.doanything.payment.application.instant.InstantPaymentBuilder;
+import cn.doanything.payment.application.instant.InstantPaymentService;
 import cn.doanything.payment.domain.instant.InstantPayment;
 import cn.doanything.payment.facade.request.InstantPaymentRequest;
 import cn.doanything.payment.facade.response.InstantPaymentResponse;
@@ -17,9 +18,17 @@ public class InstantPaymentFacadeImpl implements InstantPaymentFacade {
     @Autowired
     private InstantPaymentBuilder instantPaymentBuilder;
 
+    @Autowired
+    private InstantPaymentService instantPaymentService;
+
     @Override
     public InstantPaymentResponse pay(InstantPaymentRequest request) {
         InstantPayment instantPayment = instantPaymentBuilder.build(request);
-        return null;
+        instantPaymentService.pay(instantPayment);
+        InstantPaymentResponse response = new InstantPaymentResponse();
+        response.setPaymentId(instantPayment.getPaymentId());
+        response.setOrderId(instantPayment.getPayOrder().getOrderId());
+        response.setOrderStatus(instantPayment.getPayOrder().getOrderStatus());
+        return response;
     }
 }

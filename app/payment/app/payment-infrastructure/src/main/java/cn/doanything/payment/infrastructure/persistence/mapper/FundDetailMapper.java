@@ -9,7 +9,7 @@ import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2024-01-17
+ * @since 2024-01-19
  */
 public interface FundDetailMapper extends ExtBaseMapper<FundDetailDO> {
 

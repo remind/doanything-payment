@@ -19,6 +19,12 @@ public class BalanceAsset extends AssetInfo {
      */
     private String accountNo;
 
+    public BalanceAsset() {}
+    public BalanceAsset(String memberId, String accountNo) {
+        this.memberId = memberId;
+        this.accountNo = accountNo;
+    }
+
     @Override
     public AssetType getAssetType() {
         return AssetType.BALANCE;

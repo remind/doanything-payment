@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wxj
- * @since 2024-01-17
+ * @since 2024-01-19
  */
 @TableName("tp_fund_detail")
 public class FundDetailDO implements Serializable {
@@ -51,7 +51,7 @@ public class FundDetailDO implements Serializable {
     /**
      * 订单金额
      */
-    private BigDecimal orderAmount;
+    private BigDecimal amount;
 
     /**
      * 币种
@@ -120,12 +120,12 @@ public class FundDetailDO implements Serializable {
         this.memberId = memberId;
     }
 
-    public BigDecimal getOrderAmount() {
-        return orderAmount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setOrderAmount(BigDecimal orderAmount) {
-        this.orderAmount = orderAmount;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getCurrencyCode() {
@@ -176,7 +176,7 @@ public class FundDetailDO implements Serializable {
         ", paymentId = " + paymentId +
         ", belongTo = " + belongTo +
         ", memberId = " + memberId +
-        ", orderAmount = " + orderAmount +
+        ", amount = " + amount +
         ", currencyCode = " + currencyCode +
         ", actionType = " + actionType +
         ", assetInfo = " + assetInfo +

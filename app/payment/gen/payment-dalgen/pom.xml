@@ -11,10 +11,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.doanything.payment</groupId>
-            <artifactId>payment-infrastructure</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-generator</artifactId>
         </dependency>

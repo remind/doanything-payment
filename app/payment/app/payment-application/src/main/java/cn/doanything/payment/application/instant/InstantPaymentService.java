@@ -20,6 +20,8 @@ public class InstantPaymentService {
     private TransactionTemplate transactionTemplate;
 
     public void pay(InstantPayment payment) {
-        instantPaymentRepository.store(payment);
+        transactionTemplate.executeWithoutResult(status -> {
+            instantPaymentRepository.store(payment);
+        });
     }
 }

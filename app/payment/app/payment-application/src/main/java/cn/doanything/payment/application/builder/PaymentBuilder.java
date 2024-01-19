@@ -50,7 +50,7 @@ public abstract class PaymentBuilder {
         fundDetail.setMemberId(info.getMemberId());
         fundDetail.setAssetInfo(info.getAssetInfo());
         fundDetail.setBelongTo(belongTo);
-        fundDetail.setActionType(FundActionType.FUNDS_CHANGE);
+        fundDetail.setActionType(FundActionType.FUND_CHANGE);
         return fundDetail;
     }
 }

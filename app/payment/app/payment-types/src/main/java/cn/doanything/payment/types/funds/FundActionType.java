@@ -10,9 +10,9 @@ import lombok.Getter;
 @Getter
 public enum FundActionType implements CodeEnum {
 
-    FUNDS_CHANGE("FUNDS_CHANGE", "资金变更"),
+    FUND_CHANGE("FUND_CHANGE", "资金变更"),
 
-    FUNDS_FREEZE("FUNDS_FREEZE", "资金冻结解冻"),
+    FUND_FREEZE("FUND_FREEZE", "资金冻结解冻"),
 
     ;
 

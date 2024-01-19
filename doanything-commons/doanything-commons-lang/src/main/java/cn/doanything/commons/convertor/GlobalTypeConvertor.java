@@ -44,14 +44,4 @@ public interface GlobalTypeConvertor {
         return EnumUtil.getByCode(ResultStatusEnum.class, code);
     }
 
-    default Money toMoney(BigDecimal amount, String currencyCode) {
-        return new Money(amount, Currency.getInstance(currencyCode));
-    }
-
-    default String toCurrencyCode(Money money) {
-        return money != null ? money.getCurrency().getCurrencyCode() : "";
-    }
-    default BigDecimal toAmountValue(Money money) {
-        return money != null ? money.getAmount() : BigDecimal.ZERO;
-    }
 }

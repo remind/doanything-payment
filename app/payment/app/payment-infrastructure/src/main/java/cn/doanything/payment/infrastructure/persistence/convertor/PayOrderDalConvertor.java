@@ -1,6 +1,6 @@
 package cn.doanything.payment.infrastructure.persistence.convertor;
 
-import cn.doanything.commons.convertor.GlobalTypeConvertor;
+import cn.doanything.commons.convertor.BaseExpressionConvertor;
 import cn.doanything.payment.domain.BasePayOrder;
 import cn.doanything.payment.domain.instant.PayOrder;
 import cn.doanything.payment.domain.instant.RefundOrder;
@@ -18,7 +18,7 @@ import java.util.List;
  * 2024/1/17
  */
 @Mapper(componentModel = "spring", uses = {EnumsConvertor.class})
-public interface PayOrderDalConvertor extends GlobalTypeConvertor {
+public interface PayOrderDalConvertor extends BaseExpressionConvertor {
 
     default BasePayOrder toBasePayOrder(PayOrderDO payOrderDO) {
         BasePayOrder basePayOrder = null;
@@ -32,10 +32,10 @@ public interface PayOrderDalConvertor extends GlobalTypeConvertor {
         return basePayOrder;
     }
 
-    @Mapping(target = "orderAmount", expression = "java(toMoney(payOrderDO.getOrderAmount(), payOrderDO.getCurrencyCode()))")
+    @Mapping(target = "amount", expression = "java(toMoney(payOrderDO.getAmount(), payOrderDO.getCurrencyCode()))")
     PayOrder toPayOrder(PayOrderDO payOrderDO);
 
-    @Mapping(target = "orderAmount", expression = "java(toMoney(payOrderDO.getOrderAmount(), payOrderDO.getCurrencyCode()))")
+    @Mapping(target = "amount", expression = "java(toMoney(payOrderDO.getAmount(), payOrderDO.getCurrencyCode()))")
     RefundOrder toRefundOrder(PayOrderDO payOrderDO);
 
     default List<BasePayOrder> toBasePayOrder(List<PayOrderDO> doTypes) {
@@ -47,21 +47,25 @@ public interface PayOrderDalConvertor extends GlobalTypeConvertor {
     }
 
     default PayOrderDO toDo(BasePayOrder basePayOrder) {
+        PayOrderDO payOrderDO;
         if (basePayOrder instanceof PayOrder) {
-            return toDo((PayOrder) basePayOrder);
+            payOrderDO = toDo((PayOrder) basePayOrder);
+            payOrderDO.setOrderType(PayOrderType.PAY.getCode());
         } else if (basePayOrder instanceof RefundOrder) {
-            return toDo((RefundOrder) basePayOrder);
+            payOrderDO = toDo((RefundOrder) basePayOrder);
+            payOrderDO.setOrderType(PayOrderType.REFUND.getCode());
         } else {
-            return null;
+            payOrderDO = null;
         }
+        return payOrderDO;
     }
 
-    @Mapping(target = "currencyCode", expression = "java(toCurrencyCode(payOrder.getOrderAmount()))")
-    @Mapping(target = "orderAmount", expression = "java(toAmountValue(payOrder.getOrderAmount()))")
+    @Mapping(target = "currencyCode", expression = "java(toCurrencyCode(payOrder.getAmount()))")
+    @Mapping(target = "amount", expression = "java(toAmountValue(payOrder.getAmount()))")
     PayOrderDO toDo(PayOrder payOrder);
 
-    @Mapping(target = "currencyCode", expression = "java(toCurrencyCode(refundOrder.getOrderAmount()))")
-    @Mapping(target = "orderAmount", expression = "java(toAmountValue(refundOrder.getOrderAmount()))")
+    @Mapping(target = "currencyCode", expression = "java(toCurrencyCode(refundOrder.getAmount()))")
+    @Mapping(target = "amount", expression = "java(toAmountValue(refundOrder.getAmount()))")
     PayOrderDO toDo(RefundOrder refundOrder);
 
     default List<PayOrderDO> toDo(List<BasePayOrder> doTypes) {

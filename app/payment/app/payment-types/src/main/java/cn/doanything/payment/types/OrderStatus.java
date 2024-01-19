@@ -1,4 +1,4 @@
-package cn.doanything.payment.domain;
+package cn.doanything.payment.types;
 
 import cn.doanything.commons.enums.CodeEnum;
 

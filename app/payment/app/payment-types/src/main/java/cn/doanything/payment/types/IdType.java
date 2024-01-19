@@ -9,9 +9,9 @@ import cn.doanything.payment.types.PaymentType;
  */
 public enum IdType implements BizIdType {
 
-    PAYMENT_INSTANT_ID("1", "01", "seq_payment_instant_id", "支付总单-直接支付模式"),
+    PAYMENT_INSTANT_ID("1", "01", "seq_payment_id", "支付总单-直接支付模式"),
     PAY_ORDER_ID("2", "01", "seq_pay_order_id", "支付子单-支付单"),
-    REFUND_ORDER_ID("2", "02", "seq_refund_order_id", "支付子单-退款单"),
+    REFUND_ORDER_ID("2", "02", "seq_pay_order_id", "支付子单-退款单"),
     FUND_DETAIL_ID("3", "01", "seq_fund_detail_id", "支付明细单ID"),
     ;
 

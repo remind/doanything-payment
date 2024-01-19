@@ -9,7 +9,7 @@ import cn.doanything.framework.dal.mybatis.ext.ExtBaseMapper;
  * </p>
  *
  * @author wxj
- * @since 2024-01-18
+ * @since 2024-01-19
  */
 public interface PayOrderMapper extends ExtBaseMapper<PayOrderDO> {
 

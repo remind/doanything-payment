@@ -4,6 +4,8 @@ import cn.doanything.commons.lang.utils.EnumUtil;
 import cn.doanything.payment.domain.instant.PayOrderStatus;
 import cn.doanything.payment.domain.instant.RefundOrderStatus;
 import cn.doanything.payment.types.PaymentType;
+import cn.doanything.payment.types.asset.BelongTo;
+import cn.doanything.payment.types.funds.FundActionType;
 import org.mapstruct.Mapper;
 
 /**
@@ -24,4 +26,13 @@ public interface EnumsConvertor  {
     default RefundOrderStatus toRefundOrderStatus(String code) {
         return EnumUtil.getByCode(RefundOrderStatus.class, code);
     }
+
+    default FundActionType toFundActionType(String code) {
+        return EnumUtil.getByCode(FundActionType.class, code);
+    }
+
+    default BelongTo toBelongTo(String code) {
+        return EnumUtil.getByCode(BelongTo.class, code);
+    }
+
 }

@@ -2,6 +2,9 @@ package cn.doanything.payment.domain;
 
 import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
+import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.payment.types.OrderStatus;
+import cn.doanything.payment.types.asset.BelongTo;
 import cn.doanything.payment.types.funds.FundDetail;
 import lombok.Data;
 
@@ -34,7 +37,7 @@ public abstract class BasePayOrder<T extends OrderStatus> extends Entity {
     /**
      * 订单金额
      */
-    private Money orderAmount;
+    private Money amount;
 
     /**
      * 发起人会员ID
@@ -67,11 +70,13 @@ public abstract class BasePayOrder<T extends OrderStatus> extends Entity {
 //    private List<FundsRelation> fundsRelations;
 
     public void addPayeeFundDetail(FundDetail fundDetail) {
+        AssertUtil.isTrue(fundDetail.getBelongTo() == BelongTo.PAYEE, "收款方资金详情 belongTo 为 PAYEE");
         this.payeeDetails.add(fundDetail);
     }
 
     public void addPayerFundDetail(FundDetail fundDetail) {
-        this.payeeDetails.add(fundDetail);
+        AssertUtil.isTrue(fundDetail.getBelongTo() == BelongTo.PAYER, "付款方资金详情 belongTo 为 PAYER");
+        this.payerDetails.add(fundDetail);
     }
 
 }

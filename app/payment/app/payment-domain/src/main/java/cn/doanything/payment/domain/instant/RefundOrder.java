@@ -11,5 +11,5 @@ public class RefundOrder extends BasePayOrder<RefundOrderStatus> {
     /**
      * 关联订单号
      */
-    private String relatedOrderId;
+    private String relationId;
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * @author wxj
  * 2023/12/16
  */
-public interface ReadConvertor<EntityType, DoType> {
+public interface ReadConvertor<EntityType, DoType> extends BaseExpressionConvertor {
 
     EntityType toEntity(DoType doType);
 

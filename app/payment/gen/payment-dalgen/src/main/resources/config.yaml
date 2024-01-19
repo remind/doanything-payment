@@ -14,5 +14,5 @@ db:
     # 依次为：表名,业务主键字段(如果也是表主键就不用)
 #      - tp_payment,payment_id
       - tp_pay_order,order_id
-#      - tp_fund_detail,detail_id
-      - tp_order_extension,order_id
+      - tp_fund_detail,detail_id
+#      - tp_order_extension,order_id
