@@ -11,10 +11,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-infrastructure</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-generator</artifactId>
         </dependency>
