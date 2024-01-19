@@ -5,7 +5,6 @@ import cn.doanything.account.domain.OuterAccount;
 import cn.doanything.account.domain.repository.AccountTypeRepository;
 import cn.doanything.account.domain.repository.InnerAccountRepository;
 import cn.doanything.account.domain.repository.OuterAccountRepository;
-import cn.doanything.account.domain.repository.factory.AccountRepositoryFactory;
 import cn.doanything.account.facade.manager.builder.InnerAccountBuilder;
 import cn.doanything.account.facade.manager.builder.OuterAccountBuilder;
 import cn.doanything.account.facade.manager.dto.InnerAccountAddRequest;
@@ -30,9 +29,6 @@ public class AccountManagerFacadeImpl implements AccountManagerFacade {
 
     @Autowired
     private AccountTypeRepository accountTypeRepository;
-
-    @Autowired
-    private AccountRepositoryFactory accountRepositoryFactory;
 
     @Autowired
     private OuterAccountBuilder outerAccountBuilder;
