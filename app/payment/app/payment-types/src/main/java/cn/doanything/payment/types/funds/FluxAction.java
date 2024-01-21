@@ -8,7 +8,7 @@ import lombok.Getter;
  * 2024/1/15
  */
 @Getter
-public enum FundAction implements CodeEnum {
+public enum FluxAction implements CodeEnum {
 
     INCREASE("INCREASE", "增加", 3),
     REDUCE("REDUCE", "减少", 1);
@@ -23,7 +23,7 @@ public enum FundAction implements CodeEnum {
      */
     private int sort;
 
-    FundAction(String code, String displayName, int sort) {
+    FluxAction(String code, String displayName, int sort) {
         this.code = code;
         this.displayName = displayName;
         this.sort = sort;
