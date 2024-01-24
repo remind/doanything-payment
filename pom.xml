@@ -16,6 +16,7 @@
         <module>app/mgs</module>
         <module>doanything-archetypes</module>
         <module>doanything-dependencies-third</module>
+        <module>app/payment/app/payment-asset-spi</module>
     </modules>
 
     <properties>

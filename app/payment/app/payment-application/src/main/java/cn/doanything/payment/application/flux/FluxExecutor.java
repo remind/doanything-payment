@@ -1,6 +1,6 @@
 package cn.doanything.payment.application.flux;
 
-import cn.doanything.payment.domain.flux.AssetFluxDetail;
+import cn.doanything.payment.domain.flux.AssetFluxInstruct;
 import cn.doanything.payment.domain.flux.AssetFluxOrder;
 
 /**
@@ -9,6 +9,6 @@ import cn.doanything.payment.domain.flux.AssetFluxOrder;
  */
 public interface FluxExecutor {
 
-    ExecutorResult execute(AssetFluxOrder fluxOrder, AssetFluxDetail fluxDetail);
+    ExecutorResult execute(AssetFluxOrder fluxOrder, AssetFluxInstruct fluxInstruct);
 
 }

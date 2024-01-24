@@ -10,9 +10,8 @@ import lombok.Getter;
 @Getter
 public enum FluxAction implements CodeEnum {
 
-    INCREASE("INCREASE", "增加", 3),
+    INCREASE("INCREASE", "增加", 2),
     REDUCE("REDUCE", "减少", 1);
-
 
     private String code;
 

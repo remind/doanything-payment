@@ -1,4 +1,4 @@
-package cn.doanything.payment.application.flux.external;
+package cn.doanything.payment.application.flux.balance;
 
 import cn.doanything.payment.application.flux.ExecutorResult;
 import cn.doanything.payment.application.flux.FluxExecutor;
@@ -7,9 +7,9 @@ import cn.doanything.payment.domain.flux.AssetFluxOrder;
 
 /**
  * @author wxj
- * 2024/1/21
+ * 2024/1/22
  */
-public class ExternalFluxExecutor implements FluxExecutor {
+public class BalanceFluxExecutor implements FluxExecutor {
     @Override
     public ExecutorResult execute(AssetFluxOrder fluxOrder, AssetFluxInstruct fluxInstruct) {
         return null;

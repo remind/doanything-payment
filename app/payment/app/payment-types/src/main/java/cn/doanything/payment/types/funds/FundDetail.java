@@ -6,6 +6,7 @@ import cn.doanything.payment.types.asset.BelongTo;
 import lombok.Data;
 
 /**
+ * 资金明细
  * @author wxj
  * 2024/1/15
  */

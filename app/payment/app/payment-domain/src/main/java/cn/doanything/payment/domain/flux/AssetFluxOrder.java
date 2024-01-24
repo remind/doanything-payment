@@ -35,12 +35,19 @@ public class AssetFluxOrder extends Entity {
     private FluxOrderStatus status;
 
     /**
+     * 交换流
+     */
+    private List<AssetFluxFlow> assetFluxFlows = new ArrayList<>();
+
+    /**
      * 交换明细
      */
-    private List<AssetFluxDetail> assetFluxDetails = new ArrayList<>();
+    private List<AssetFluxInstruct> assetFluxInstructs = new ArrayList<>();
 
-    public void addDetail(AssetFluxDetail assetFluxDetail) {
-        assetFluxDetail.setFluxOrderId(this.fluxOrderId);
-        this.assetFluxDetails.add(assetFluxDetail);
+    public void addDetail(AssetFluxInstruct assetFluxInstruct) {
+        assetFluxInstruct.setFluxOrderId(this.fluxOrderId);
+        this.assetFluxInstructs.add(assetFluxInstruct);
     }
+
+
 }

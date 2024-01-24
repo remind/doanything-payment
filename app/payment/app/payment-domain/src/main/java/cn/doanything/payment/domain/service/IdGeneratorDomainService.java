@@ -24,4 +24,5 @@ public class IdGeneratorDomainService {
     public String genSubPayOrder(String paymentId, IdType idType) {
         return sequenceService.getIdByRouteId(IdGeneratorUtil.reverseIdGetDbRouteId(paymentId), SystemCodeEnums.PAYMENT, idType);
     }
+
 }

@@ -13,6 +13,8 @@ public enum IdType implements BizIdType {
     PAY_ORDER_ID("2", "01", "seq_pay_order_id", "支付子单-支付单"),
     REFUND_ORDER_ID("2", "02", "seq_pay_order_id", "支付子单-退款单"),
     FUND_DETAIL_ID("3", "01", "seq_fund_detail_id", "支付明细单ID"),
+    FLUX_ORDER_ID("4", "01", "seq_flux_order_ID", "资产交换单ID"),
+    FLUX_FLOW_ID("4", "02", "seq_flux_flow_ID", "资产交换流ID"),
     ;
 
     /**
