@@ -6,13 +6,11 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 交换指令
  * @author wxj
- * 2024/1/23
+ * 2024/1/25
  */
 @Data
-public class AssetFluxInstruct {
-
+public class FluxInstruct {
     private String fluxOrderId;
 
     private String fluxFlowId;
@@ -25,6 +23,5 @@ public class AssetFluxInstruct {
 
     private Money amount;
 
-    private List<String> fundDetailIds;
-
+    private String fundDetailId;
 }

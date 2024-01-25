@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 /**
  * @author wxj
- * 2024/1/23
+ * 2024/1/25
  */
 @Data
-public class ExternalAssetFluxInstruct extends AssetFluxInstruct {
+public class ExternalFluxInstruct extends FluxInstruct {
 
     private AssetInfo assetInfo;
 

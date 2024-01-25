@@ -79,4 +79,9 @@ public abstract class BasePayOrder<T extends OrderStatus> extends Entity {
         this.payerDetails.add(fundDetail);
     }
 
+    public FundDetail getFundDetail(String fundDetailId) {
+        FundDetail fundDetail = payeeDetails.stream().filter(fundDetail1 -> fundDetail1.getDetailId().equals(fundDetailId)).findFirst().orElse(null);
+        return fundDetail != null ? fundDetail : payerDetails.stream().filter(fundDetail1 -> fundDetail1.getDetailId().equals(fundDetailId)).findFirst().orElse(null);
+    }
+
 }

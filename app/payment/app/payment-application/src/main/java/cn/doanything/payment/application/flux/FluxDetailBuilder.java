@@ -1,5 +1,7 @@
 package cn.doanything.payment.application.flux;
 
+import cn.doanything.payment.domain.BasePayment;
+import cn.doanything.payment.domain.flux.AssetFluxFlow;
 import cn.doanything.payment.domain.flux.AssetFluxOrder;
 import cn.doanything.payment.types.funds.FundDetail;
 
@@ -9,5 +11,5 @@ import cn.doanything.payment.types.funds.FundDetail;
  */
 public interface FluxDetailBuilder {
 
-    void build(AssetFluxOrder fluxOrder, FundDetail fundDetail);
+    void build(BasePayment payment, AssetFluxOrder fluxOrder, AssetFluxFlow assetFluxFlow);
 }

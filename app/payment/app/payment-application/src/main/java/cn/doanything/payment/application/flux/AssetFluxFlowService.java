@@ -4,8 +4,8 @@ import cn.doanything.payment.application.flux.builder.AssetFluxOrderBuilder;
 import cn.doanything.payment.domain.BasePayOrder;
 import cn.doanything.payment.domain.flux.AssetFluxFlow;
 import cn.doanything.payment.domain.flux.AssetFluxOrder;
-import cn.doanything.payment.domain.flux.BalanceAssetFluxInstruct;
-import cn.doanything.payment.domain.flux.service.AssetFluxFlowDomainService;
+import cn.doanything.payment.domain.flux.FluxInstruct;
+import cn.doanything.payment.domain.flux.service.FluxDomainService;
 import cn.doanything.payment.types.asset.AssetType;
 import cn.doanything.payment.types.funds.FundDetail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +26,11 @@ public class AssetFluxFlowService {
     private AssetFluxOrderBuilder assetFluxOrderBuilder;
 
     @Autowired
-    private AssetFluxFlowDomainService assetFluxFlowDomainService;
+    private FluxDomainService fluxDomainService;
 
     public void execute(BasePayOrder payOrder) {
         AssetFluxOrder assetFluxOrder = assetFluxOrderBuilder.build(payOrder);
-        List<FundDetail> fundDetails = new ArrayList<>(payOrder.getPayerDetails());
-        fundDetails.addAll(payOrder.getPayeeDetails());
-        assetFluxFlowDomainService.fillFluxFlow(assetFluxOrder, fundDetails);
-
-        List<AssetFluxFlow> assetFluxFlows = assetFluxOrder.getAssetFluxFlows();
-        execute(assetFluxOrder, assetFluxFlows.get(0));
+        fluxDomainService.execute(assetFluxOrder, payOrder.getPayerDetails(), payOrder.getPayeeDetails());
     }
     public void execute(AssetFluxOrder assetFluxOrder, AssetFluxFlow assetFluxFlow) {
 

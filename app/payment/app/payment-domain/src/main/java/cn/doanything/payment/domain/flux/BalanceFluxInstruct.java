@@ -5,10 +5,10 @@ import lombok.Data;
 
 /**
  * @author wxj
- * 2024/1/23
+ * 2024/1/25
  */
 @Data
-public class BalanceAssetFluxInstruct extends AssetFluxInstruct {
+public class BalanceFluxInstruct extends FluxInstruct {
 
     /**
      * 借记

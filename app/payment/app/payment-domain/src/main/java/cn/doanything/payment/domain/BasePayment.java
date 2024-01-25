@@ -2,6 +2,7 @@ package cn.doanything.payment.domain;
 
 import cn.doanything.commons.lang.Entity;
 import cn.doanything.payment.types.PaymentType;
+import cn.doanything.payment.types.funds.FundDetail;
 import lombok.Data;
 
 /**
@@ -11,7 +12,7 @@ import lombok.Data;
  * 2024/1/15
  */
 @Data
-public class BasePayment extends Entity {
+public abstract class BasePayment extends Entity {
 
     /**
      * 支付总单号
@@ -33,5 +34,7 @@ public class BasePayment extends Entity {
      */
     private String merchantId;
 
+    public abstract BasePayOrder getBasePayOrder();
+    public abstract FundDetail getFundDetail(String orderId, String fundDetailId);
 
 }
