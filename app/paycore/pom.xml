@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.doanything</groupId>
+        <artifactId>doanything-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../doanything-parent/pom.xml</relativePath>
+    </parent>
+    <groupId>cn.doanything.payment</groupId>
+    <artifactId>paycore</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>app/paycore-bootstrap</module>
+        <module>app/paycore-facade</module>
+        <module>app/paycore-infrastructure</module>
+        <module>app/paycore-application</module>
+        <module>app/paycore-domain</module>
+        <module>app/paycore-types</module>
+        <module>gen/paycore-dalgen</module>
+    </modules>
+
+    <properties>
+        <revision>1.0-SNAPSHOT</revision>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>paycore-types</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>paycore-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>paycore-facade</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>paycore-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.payment</groupId>
+                <artifactId>paycore-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

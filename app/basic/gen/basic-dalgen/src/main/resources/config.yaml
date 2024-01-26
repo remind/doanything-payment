@@ -4,7 +4,7 @@ project:
 
 db:
   dataSource:
-    url: jdbc:mysql://127.0.0.1:3306/basic?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/do_basic?useUnicode=true&characterEncoding=utf8
     user: root
     password: root
   table:
