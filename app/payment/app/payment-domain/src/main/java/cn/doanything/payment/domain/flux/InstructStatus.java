@@ -5,12 +5,12 @@ import lombok.Getter;
 
 /**
  * @author wxj
- * 2024/1/21
+ * 2024/1/20
  */
 @Getter
-public enum FluxDetailStatus implements CodeEnum {
+public enum InstructStatus implements CodeEnum {
 
-    ACCEPT("ACCEPT", "已受理"),
+    INIT("INIT", "初始化"),
 
     PROCESSING("PROCESSING", "处理中"),
 
@@ -23,7 +23,7 @@ public enum FluxDetailStatus implements CodeEnum {
 
     private final String displayName;
 
-    FluxDetailStatus(String code, String displayName) {
+    InstructStatus(String code, String displayName) {
         this.code = code;
         this.displayName = displayName;
     }

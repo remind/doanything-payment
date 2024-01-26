@@ -10,9 +10,9 @@ import lombok.Getter;
 @Getter
 public enum InstructType implements CodeEnum {
 
-    PAY("PAY", "支付"),
+    FORWARD("FORWARD", "正向"),
 
-    REFUND("REFUND", "退款"),
+    REVERSE("REVERSE", "逆向"),
 
     ;
 

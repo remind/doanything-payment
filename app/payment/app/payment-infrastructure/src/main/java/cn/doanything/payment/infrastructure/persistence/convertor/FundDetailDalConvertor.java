@@ -27,7 +27,7 @@ public interface FundDetailDalConvertor extends ReadWriteConvertor<FundDetail, F
 
     @AfterMapping
     default void fillEntityAsset(@MappingTarget FundDetail fundDetail, FundDetailDO fundDetailDO) {
-        if (fundDetailDO.getActionType().equals(AssetType.BALANCE.getCode())) {
+        if (fundDetailDO.getAssetType().equals(AssetType.BALANCE.getCode())) {
             fundDetail.setAssetInfo(JSONUtil.toBean(fundDetailDO.getAssetInfo(), BalanceAsset.class));
         }
     }
@@ -40,7 +40,7 @@ public interface FundDetailDalConvertor extends ReadWriteConvertor<FundDetail, F
 
     @AfterMapping
     default void fillDOAsset(FundDetail fundDetail, @MappingTarget FundDetailDO fundDetailDO) {
-        fundDetailDO.setActionType(fundDetail.getActionType().getCode());
+        fundDetailDO.setAction(fundDetail.getFundAction().getCode());
         fundDetailDO.setAssetInfo(JSONUtil.toJsonStr(fundDetail.getAssetInfo()));
     }
 

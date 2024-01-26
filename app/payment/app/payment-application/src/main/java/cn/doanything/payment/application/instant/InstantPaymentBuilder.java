@@ -28,7 +28,7 @@ public class InstantPaymentBuilder extends PaymentBuilder {
     private PayOrder buildPayOrder(String paymentId, InstantPaymentRequest request) {
         PayOrder payOrder = new PayOrder();
         payOrder.setPaymentId(paymentId);
-        payOrder.setOrderId(idGeneratorDomainService.genSubPayOrder(paymentId, PayOrderType.PAY.getIdType()));
+        payOrder.setOrderId(idGeneratorDomainService.genIdByRelateId(paymentId, PayOrderType.PAY.getIdType()));
         payOrder.setRequestId(request.getRequestId());
         payOrder.setAmount(request.getPayAmount());
         payOrder.setMemberId(request.getPayerId());

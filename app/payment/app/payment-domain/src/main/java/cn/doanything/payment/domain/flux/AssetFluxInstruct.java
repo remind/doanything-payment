@@ -3,18 +3,22 @@ package cn.doanything.payment.domain.flux;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
-import java.util.List;
-
 /**
+ * 资产交换指令
  * @author wxj
  * 2024/1/25
  */
 @Data
-public class FluxInstruct {
+public class AssetFluxInstruct {
+
+    /**
+     * 资产交换订单ID
+     */
     private String fluxOrderId;
 
-    private String fluxFlowId;
-
+    /**
+     * 指令ID
+     */
     private String fluxInstructId;
 
     private InstructType instructType;
@@ -24,4 +28,8 @@ public class FluxInstruct {
     private Money amount;
 
     private String fundDetailId;
+
+    private InstructStatus status;
+
+
 }

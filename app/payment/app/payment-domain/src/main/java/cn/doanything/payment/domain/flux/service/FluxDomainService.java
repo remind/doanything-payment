@@ -1,17 +1,12 @@
 package cn.doanything.payment.domain.flux.service;
 
 import cn.doanything.payment.domain.PaymentConstants;
-import cn.doanything.payment.domain.flux.AssetFluxOrder;
-import cn.doanything.payment.domain.flux.BalanceFluxInstruct;
-import cn.doanything.payment.domain.flux.ExternalFluxInstruct;
-import cn.doanything.payment.domain.flux.FluxInstruct;
+import cn.doanything.payment.domain.flux.*;
 import cn.doanything.payment.types.asset.AssetInfo;
 import cn.doanything.payment.types.asset.BalanceAsset;
 import cn.doanything.payment.types.asset.BelongTo;
-import cn.doanything.payment.types.funds.FluxAction;
 import cn.doanything.payment.types.funds.FundDetail;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,42 +15,44 @@ import java.util.List;
  */
 public class FluxDomainService {
 
-    public void execute(AssetFluxOrder fluxOrder, List<FundDetail> payerFundDetails, List<FundDetail> payeeFundDetails) {
-        List<FluxInstruct> fluxInstructs = new ArrayList<>();
+    public void pay(AssetFluxOrder fluxOrder, List<FundDetail> payerFundDetails, List<FundDetail> payeeFundDetails) {
         payerFundDetails.forEach(fundDetail -> {
             AssetInfo assetInfo = fundDetail.getAssetInfo();
-            FluxInstruct fluxInstruct;
+            AssetFluxInstruct assetFluxInstruct;
             if (assetInfo instanceof BalanceAsset) {
-                fluxInstruct = new BalanceFluxInstruct();
-                fillInstructByBalance((BalanceFluxInstruct) fluxInstruct, (BalanceAsset) assetInfo, fundDetail.getBelongTo());
+                assetFluxInstruct = new BalanceAssetFluxInstruct();
+                fillInstructByBalance((BalanceAssetFluxInstruct) assetFluxInstruct, (BalanceAsset) assetInfo, fundDetail);
             } else {
-                fluxInstruct = new ExternalFluxInstruct();
-                fillInstructByExternal((ExternalFluxInstruct) fluxInstruct, assetInfo, fundDetail.getBelongTo());
+                assetFluxInstruct = new ExternalAssetFluxInstruct();
+                fillInstructByExternal((ExternalAssetFluxInstruct) assetFluxInstruct, assetInfo, fundDetail);
             }
-            fluxInstruct.setFluxOrderId(fluxOrder.getFluxOrderId());
-            fluxInstruct.setAmount(fundDetail.getAmount());
-            fluxInstruct.setFundDetailId(fundDetail.getDetailId());
-            fluxInstructs.add(fluxInstruct);
+            assetFluxInstruct.setInstructType(InstructType.FORWARD);
+            assetFluxInstruct.setFluxOrderId(fluxOrder.getFluxOrderId());
+            assetFluxInstruct.setAmount(fundDetail.getAmount());
+            assetFluxInstruct.setFundDetailId(fundDetail.getDetailId());
+            fluxOrder.addFluxInstruct(assetFluxInstruct);
         });
 
         payeeFundDetails.forEach(fundDetail -> {
             AssetInfo assetInfo = fundDetail.getAssetInfo();
-            FluxInstruct fluxInstruct;
+            AssetFluxInstruct assetFluxInstruct;
             if (assetInfo instanceof BalanceAsset) {
-                fluxInstruct = new BalanceFluxInstruct();
-                fillInstructByBalance((BalanceFluxInstruct) fluxInstruct, (BalanceAsset) assetInfo, fundDetail.getBelongTo());
+                assetFluxInstruct = new BalanceAssetFluxInstruct();
+                fillInstructByBalance((BalanceAssetFluxInstruct) assetFluxInstruct, (BalanceAsset) assetInfo, fundDetail);
             } else {
-                fluxInstruct = new ExternalFluxInstruct();
+                assetFluxInstruct = new ExternalAssetFluxInstruct();
+                fillInstructByExternal((ExternalAssetFluxInstruct) assetFluxInstruct, assetInfo, fundDetail);
             }
-            fluxInstruct.setFluxOrderId(fluxOrder.getFluxOrderId());
-            fluxInstruct.setAmount(fundDetail.getAmount());
-            fluxInstruct.setFundDetailId(fundDetail.getDetailId());
-            fluxInstructs.add(fluxInstruct);
+            assetFluxInstruct.setInstructType(InstructType.FORWARD);
+            assetFluxInstruct.setFluxOrderId(fluxOrder.getFluxOrderId());
+            assetFluxInstruct.setAmount(fundDetail.getAmount());
+            assetFluxInstruct.setFundDetailId(fundDetail.getDetailId());
+            fluxOrder.addFluxInstruct(assetFluxInstruct);
         });
     }
 
-    private void fillInstructByBalance(BalanceFluxInstruct fluxInstruct, BalanceAsset assetInfo, BelongTo belongTo) {
-        if (belongTo == BelongTo.PAYER) {
+    private void fillInstructByBalance(BalanceAssetFluxInstruct fluxInstruct, BalanceAsset assetInfo, FundDetail fundDetail) {
+        if (fundDetail.getBelongTo() == BelongTo.PAYER) {
             fluxInstruct.setDebitAsset(assetInfo);
             fluxInstruct.setCreditAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, PaymentConstants.TRANSITION_ACCOUNT));
         } else {
@@ -64,8 +61,8 @@ public class FluxDomainService {
         }
     }
 
-    private void fillInstructByExternal(ExternalFluxInstruct fluxInstruct, AssetInfo assetInfo, BelongTo belongTo) {
+    private void fillInstructByExternal(ExternalAssetFluxInstruct fluxInstruct, AssetInfo assetInfo, FundDetail fundDetail) {
         fluxInstruct.setAssetInfo(assetInfo);
-        fluxInstruct.setFluxAction(belongTo == BelongTo.PAYER ? FluxAction.REDUCE : FluxAction.INCREASE);
+        fluxInstruct.setFundAction(fundDetail.getFundAction());
     }
 }

@@ -1,7 +1,6 @@
 package cn.doanything.payment.types;
 
 import cn.doanything.commons.enums.BizIdType;
-import cn.doanything.payment.types.PaymentType;
 
 /**
  * @author wxj
@@ -14,7 +13,7 @@ public enum IdType implements BizIdType {
     REFUND_ORDER_ID("2", "02", "seq_pay_order_id", "支付子单-退款单"),
     FUND_DETAIL_ID("3", "01", "seq_fund_detail_id", "支付明细单ID"),
     FLUX_ORDER_ID("4", "01", "seq_flux_order_ID", "资产交换单ID"),
-    FLUX_FLOW_ID("4", "02", "seq_flux_flow_ID", "资产交换流ID"),
+    FLUX_INSTRUCT_ID("4", "02", "seq_flux_instruct_id", "资产交换指令ID"),
     ;
 
     /**

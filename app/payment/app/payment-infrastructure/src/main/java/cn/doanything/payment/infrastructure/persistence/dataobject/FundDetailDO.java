@@ -59,9 +59,14 @@ public class FundDetailDO implements Serializable {
     private String currencyCode;
 
     /**
-     * 资金动作类型
+     * 资金动作
      */
-    private String actionType;
+    private String action;
+
+    /**
+     * 资产类型
+     */
+    private String assetType;
 
     /**
      * 资产信息
@@ -136,12 +141,20 @@ public class FundDetailDO implements Serializable {
         this.currencyCode = currencyCode;
     }
 
-    public String getActionType() {
-        return actionType;
+    public String getAction() {
+        return action;
     }
 
-    public void setActionType(String actionType) {
-        this.actionType = actionType;
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getAssetType() {
+        return assetType;
+    }
+
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
     }
 
     public String getAssetInfo() {
@@ -178,7 +191,7 @@ public class FundDetailDO implements Serializable {
         ", memberId = " + memberId +
         ", amount = " + amount +
         ", currencyCode = " + currencyCode +
-        ", actionType = " + actionType +
+        ", action = " + action +
         ", assetInfo = " + assetInfo +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +

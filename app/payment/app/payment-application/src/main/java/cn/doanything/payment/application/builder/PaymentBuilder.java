@@ -1,14 +1,14 @@
 package cn.doanything.payment.application.builder;
 
 import cn.doanything.payment.domain.BasePayment;
-import cn.doanything.payment.facade.request.BasePaymentRequest;
-import cn.doanything.payment.types.IdType;
 import cn.doanything.payment.domain.service.IdGeneratorDomainService;
+import cn.doanything.payment.facade.request.BasePaymentRequest;
 import cn.doanything.payment.facade.request.FundDetailInfo;
+import cn.doanything.payment.types.IdType;
 import cn.doanything.payment.types.PaymentType;
 import cn.doanything.payment.types.asset.BelongTo;
+import cn.doanything.payment.types.funds.FundAction;
 import cn.doanything.payment.types.funds.FundDetail;
-import cn.doanything.payment.types.funds.FundActionType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -45,12 +45,12 @@ public abstract class PaymentBuilder {
         FundDetail fundDetail = new FundDetail();
         fundDetail.setPaymentId(paymentId);
         fundDetail.setOrderId(orderId);
-        fundDetail.setDetailId(idGeneratorDomainService.genSubPayOrder(paymentId, IdType.FUND_DETAIL_ID));
+        fundDetail.setDetailId(idGeneratorDomainService.genIdByRelateId(paymentId, IdType.FUND_DETAIL_ID));
         fundDetail.setAmount(info.getAmount());
         fundDetail.setMemberId(info.getMemberId());
         fundDetail.setAssetInfo(info.getAssetInfo());
         fundDetail.setBelongTo(belongTo);
-        fundDetail.setActionType(FundActionType.FUND_CHANGE);
+        fundDetail.setFundAction(belongTo == BelongTo.PAYER ? FundAction.REDUCE : FundAction.INCREASE);
         return fundDetail;
     }
 }

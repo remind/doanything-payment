@@ -39,9 +39,9 @@ public class FundDetail {
     private BelongTo belongTo;
 
     /**
-     * 资金动作类型
+     * 资金动作
      */
-    private FundActionType actionType;
+    private FundAction fundAction;
 
     /**
      * 金额

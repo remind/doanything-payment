@@ -21,8 +21,8 @@ public class IdGeneratorDomainService {
         return sequenceService.getId(memberId, SystemCodeEnums.PAYMENT, idType);
     }
 
-    public String genSubPayOrder(String paymentId, IdType idType) {
-        return sequenceService.getIdByRouteId(IdGeneratorUtil.reverseIdGetDbRouteId(paymentId), SystemCodeEnums.PAYMENT, idType);
+    public String genIdByRelateId(String relateId, IdType idType) {
+        return sequenceService.getIdByRouteId(IdGeneratorUtil.reverseIdGetDbRouteId(relateId), SystemCodeEnums.PAYMENT, idType);
     }
 
 }
