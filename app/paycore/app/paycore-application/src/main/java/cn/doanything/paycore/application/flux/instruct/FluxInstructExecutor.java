@@ -1,7 +1,7 @@
 package cn.doanything.paycore.application.flux.instruct;
 
-import cn.doanything.paycore.domain.flux.AssetFluxOrder;
-import cn.doanything.paycore.domain.flux.AssetFluxInstruct;
+import cn.doanything.paycore.domain.flux.FluxOrder;
+import cn.doanything.paycore.domain.flux.FluxInstruction;
 
 /**
  * @author wxj
@@ -9,5 +9,5 @@ import cn.doanything.paycore.domain.flux.AssetFluxInstruct;
  */
 public interface FluxInstructExecutor {
 
-    ExecutorResult execute(AssetFluxOrder fluxOrder, AssetFluxInstruct assetFluxInstruct);
+    ExecutorResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction);
 }

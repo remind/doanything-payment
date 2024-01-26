@@ -1,6 +1,6 @@
 package cn.doanything.paycore.application.flux;
 
-import cn.doanything.paycore.domain.flux.AssetFluxOrder;
+import cn.doanything.paycore.domain.flux.FluxOrder;
 import cn.doanything.paycore.types.PayResult;
 
 /**
@@ -9,5 +9,5 @@ import cn.doanything.paycore.types.PayResult;
  */
 public interface FluxService {
 
-    PayResult process(AssetFluxOrder fluxOrder);
+    PayResult process(FluxOrder fluxOrder);
 }

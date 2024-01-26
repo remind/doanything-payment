@@ -2,9 +2,9 @@ package cn.doanything.paycore.application.flux.instruct.impl;
 
 import cn.doanything.paycore.application.flux.instruct.ExecutorResult;
 import cn.doanything.paycore.application.flux.instruct.FluxInstructExecutor;
-import cn.doanything.paycore.domain.flux.AssetFluxOrder;
-import cn.doanything.paycore.domain.flux.BalanceAssetFluxInstruct;
-import cn.doanything.paycore.domain.flux.AssetFluxInstruct;
+import cn.doanything.paycore.domain.flux.FluxOrder;
+import cn.doanything.paycore.domain.flux.BalanceFluxInstruction;
+import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.InstructStatus;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BalanceInstructExecutor implements FluxInstructExecutor {
     @Override
-    public ExecutorResult execute(AssetFluxOrder fluxOrder, AssetFluxInstruct assetFluxInstruct) {
-        BalanceAssetFluxInstruct balanceFluxInstruct = (BalanceAssetFluxInstruct) assetFluxInstruct;
+    public ExecutorResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
+        BalanceFluxInstruction balanceFluxInstruct = (BalanceFluxInstruction) fluxInstruction;
         ExecutorResult result = new ExecutorResult();
         result.setStatus(InstructStatus.SUCCESS);
         return result;

@@ -3,11 +3,11 @@ package cn.doanything.paycore.application.flux.impl;
 import cn.doanything.paycore.application.flux.FluxService;
 import cn.doanything.paycore.application.flux.instruct.ExecutorResult;
 import cn.doanything.paycore.application.flux.instruct.FluxInstructExecutor;
-import cn.doanything.paycore.domain.flux.AssetFluxOrder;
-import cn.doanything.paycore.domain.flux.BalanceAssetFluxInstruct;
-import cn.doanything.paycore.domain.flux.AssetFluxInstruct;
+import cn.doanything.paycore.domain.flux.FluxOrder;
+import cn.doanything.paycore.domain.flux.BalanceFluxInstruction;
+import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.InstructStatus;
-import cn.doanything.paycore.domain.flux.service.AssetFluxOrderDomainService;
+import cn.doanything.paycore.domain.flux.service.FluxOrderDomainService;
 import cn.doanything.paycore.types.PayResult;
 import cn.doanything.paycore.types.PayStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,41 +30,41 @@ public class FluxServiceImpl implements FluxService {
     private FluxInstructExecutor externalFluxInstructExecutor;
 
     @Autowired
-    private AssetFluxOrderDomainService fluxOrderDomainService;
+    private FluxOrderDomainService fluxOrderDomainService;
 
     @Override
-    public PayResult process(AssetFluxOrder fluxOrder) {
+    public PayResult process(FluxOrder fluxOrder) {
         ExecutorResult result = null;
-        AssetFluxInstruct executeAssetFluxInstruct = fluxOrder.getExecuteFluxInstruct();
-        while (executeAssetFluxInstruct != null) {
-            if (executeAssetFluxInstruct instanceof BalanceAssetFluxInstruct) {
-                result = balanceInstructExecutor.execute(fluxOrder, executeAssetFluxInstruct);
+        FluxInstruction executeFluxInstruction = fluxOrder.getExecuteFluxInstruct();
+        while (executeFluxInstruction != null) {
+            if (executeFluxInstruction instanceof BalanceFluxInstruction) {
+                result = balanceInstructExecutor.execute(fluxOrder, executeFluxInstruction);
             } else {
-                result = externalFluxInstructExecutor.execute(fluxOrder, executeAssetFluxInstruct);
+                result = externalFluxInstructExecutor.execute(fluxOrder, executeFluxInstruction);
             }
-            executeAssetFluxInstruct.setStatus(result.getStatus());
+            executeFluxInstruction.setStatus(result.getStatus());
             if (result.getStatus() == InstructStatus.SUCCESS) {
-                insertNewFluxInstruct(fluxOrder, executeAssetFluxInstruct, result.getNewAssetFluxInstructs());
-                executeAssetFluxInstruct = fluxOrder.getExecuteFluxInstruct();
+                insertNewFluxInstruct(fluxOrder, executeFluxInstruction, result.getNewFluxInstructions());
+                executeFluxInstruction = fluxOrder.getExecuteFluxInstruct();
             } else if (result.getStatus() == InstructStatus.FAIL) {
-                fluxOrderDomainService.failHandle(fluxOrder, executeAssetFluxInstruct);
-                executeAssetFluxInstruct = fluxOrder.getExecuteFluxInstruct();
+                fluxOrderDomainService.failHandle(fluxOrder, executeFluxInstruction);
+                executeFluxInstruction = fluxOrder.getExecuteFluxInstruct();
             } else {
-                executeAssetFluxInstruct = null;
+                executeFluxInstruction = null;
             }
         }
         return convertToPayResult(fluxOrder, result);
     }
 
-    private void insertNewFluxInstruct(AssetFluxOrder fluxOrder, AssetFluxInstruct assetFluxInstruct, List<AssetFluxInstruct> newAssetFluxInstructs) {
-        AssetFluxInstruct afterAssetFluxInstruct = assetFluxInstruct;
-        for (AssetFluxInstruct newAssetFluxInstruct : newAssetFluxInstructs) {
-            fluxOrder.insertFluxInstruct(afterAssetFluxInstruct, newAssetFluxInstruct);
-            afterAssetFluxInstruct = newAssetFluxInstruct;
+    private void insertNewFluxInstruct(FluxOrder fluxOrder, FluxInstruction fluxInstruction, List<FluxInstruction> newFluxInstructions) {
+        FluxInstruction afterFluxInstruction = fluxInstruction;
+        for (FluxInstruction newFluxInstruction : newFluxInstructions) {
+            fluxOrder.insertFluxInstruct(afterFluxInstruction, newFluxInstruction);
+            afterFluxInstruction = newFluxInstruction;
         }
     }
 
-    private PayResult convertToPayResult(AssetFluxOrder fluxOrder, ExecutorResult executorResult) {
+    private PayResult convertToPayResult(FluxOrder fluxOrder, ExecutorResult executorResult) {
         PayResult payResult = new PayResult();
 
         if (executorResult == null || executorResult.getStatus() == InstructStatus.SUCCESS) {

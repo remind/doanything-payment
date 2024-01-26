@@ -14,7 +14,7 @@ import java.util.List;
  * 2024/1/20
  */
 
-public class AssetFluxOrder extends Entity {
+public class FluxOrder extends Entity {
 
     /**
      * 支付总单号
@@ -53,85 +53,85 @@ public class AssetFluxOrder extends Entity {
     private List<String> updateFluxInstructIds = new ArrayList<>();
     private List<String> deleteFluxInstructIds = new ArrayList<>();
 
-    public void initFluxInstructs(List<AssetFluxInstruct> assetFluxInstructs) {
-        assetFluxInstructs.forEach(this::addFluxInstruct);
+    public void initFluxInstructs(List<FluxInstruction> fluxInstructions) {
+        fluxInstructions.forEach(this::addFluxInstruct);
     }
 
-    public void addFluxInstruct(AssetFluxInstruct assetFluxInstruct) {
+    public void addFluxInstruct(FluxInstruction fluxInstruction) {
         if (first == null) {
-            first = new FluxInstructChain(assetFluxInstruct);
-            last = new FluxInstructChain(assetFluxInstruct);
+            first = new FluxInstructChain(fluxInstruction);
+            last = new FluxInstructChain(fluxInstruction);
         } else {
             if (last == null) {
-                last = new FluxInstructChain(assetFluxInstruct);
+                last = new FluxInstructChain(fluxInstruction);
                 first.setNext(last);
                 last.setPrev(first);
             } else {
-                FluxInstructChain fluxInstructChain = new FluxInstructChain(assetFluxInstruct);
+                FluxInstructChain fluxInstructChain = new FluxInstructChain(fluxInstruction);
                 fluxInstructChain.setPrev(last);
                 last.setNext(fluxInstructChain);
             }
         }
-        newFluxInstructIds.add(assetFluxInstruct.getFluxInstructId());
+        newFluxInstructIds.add(fluxInstruction.getInstructionId());
     }
 
-    public void insertFluxInstruct(AssetFluxInstruct assetFluxInstruct, AssetFluxInstruct newAssetFluxInstruct) {
-        FluxInstructChain fluxInstructChain = find(assetFluxInstruct);
-        FluxInstructChain newFluxInstructChain = new FluxInstructChain(newAssetFluxInstruct);
+    public void insertFluxInstruct(FluxInstruction fluxInstruction, FluxInstruction newFluxInstruction) {
+        FluxInstructChain fluxInstructChain = find(fluxInstruction);
+        FluxInstructChain newFluxInstructChain = new FluxInstructChain(newFluxInstruction);
         newFluxInstructChain.setNext(fluxInstructChain.getNext());
         newFluxInstructChain.setPrev(fluxInstructChain);
         fluxInstructChain.setNext(newFluxInstructChain);
-        newFluxInstructIds.add(assetFluxInstruct.getFluxInstructId());
+        newFluxInstructIds.add(fluxInstruction.getInstructionId());
     }
 
-    public void deleteAfterFluxInstruct(AssetFluxInstruct assetFluxInstruct) {
-        FluxInstructChain fluxInstructChain = find(assetFluxInstruct);
+    public void deleteAfterFluxInstruct(FluxInstruction fluxInstruction) {
+        FluxInstructChain fluxInstructChain = find(fluxInstruction);
         FluxInstructChain next = fluxInstructChain.getNext();
         fluxInstructChain.setNext(null);
         while (next != null) {
-            deleteFluxInstructIds.add(next.getAssetFluxInstruct().getFluxOrderId());
+            deleteFluxInstructIds.add(next.getFluxInstruction().getFluxOrderId());
             next = next.getNext();
         }
     }
 
-    public AssetFluxInstruct find(String fluxInstructId) {
+    public FluxInstruction find(String fluxInstructId) {
         FluxInstructChain fluxInstructChain = first;
         while (fluxInstructChain != null) {
-            if (fluxInstructChain.getAssetFluxInstruct().getFluxInstructId().equals(fluxInstructId)) {
-                return fluxInstructChain.getAssetFluxInstruct();
+            if (fluxInstructChain.getFluxInstruction().getInstructionId().equals(fluxInstructId)) {
+                return fluxInstructChain.getFluxInstruction();
             }
             fluxInstructChain = fluxInstructChain.getNext();
         }
         return null;
     }
 
-    public AssetFluxInstruct getExecuteFluxInstruct() {
+    public FluxInstruction getExecuteFluxInstruct() {
         FluxInstructChain fluxInstructChain = first;
         while (fluxInstructChain != null) {
-            if (fluxInstructChain.getAssetFluxInstruct().getStatus() == InstructStatus.INIT) {
-                return fluxInstructChain.getAssetFluxInstruct();
+            if (fluxInstructChain.getFluxInstruction().getStatus() == InstructStatus.INIT) {
+                return fluxInstructChain.getFluxInstruction();
             }
             fluxInstructChain = fluxInstructChain.getNext();
         }
         return null;
     }
 
-    public List<AssetFluxInstruct> getAllFluxInstructs() {
-        List<AssetFluxInstruct> assetFluxInstructs = new ArrayList<>();
+    public List<FluxInstruction> getAllFluxInstructs() {
+        List<FluxInstruction> fluxInstructions = new ArrayList<>();
         FluxInstructChain fluxInstructChain = first;
         while (fluxInstructChain != null) {
-            assetFluxInstructs.add(fluxInstructChain.getAssetFluxInstruct());
+            fluxInstructions.add(fluxInstructChain.getFluxInstruction());
             fluxInstructChain = fluxInstructChain.getNext();
         }
-        return assetFluxInstructs;
+        return fluxInstructions;
     }
 
 
 
-    private FluxInstructChain find(AssetFluxInstruct assetFluxInstruct) {
+    private FluxInstructChain find(FluxInstruction fluxInstruction) {
         FluxInstructChain fluxInstructChain = first;
         while (fluxInstructChain != null) {
-            if (fluxInstructChain.getAssetFluxInstruct().getFluxInstructId().equals(assetFluxInstruct.getFluxInstructId())) {
+            if (fluxInstructChain.getFluxInstruction().getInstructionId().equals(fluxInstruction.getInstructionId())) {
                 return fluxInstructChain;
             }
             fluxInstructChain = fluxInstructChain.getNext();
@@ -142,14 +142,14 @@ public class AssetFluxOrder extends Entity {
     @Getter
     private static class FluxInstructChain {
 
-        private final AssetFluxInstruct assetFluxInstruct;
+        private final FluxInstruction fluxInstruction;
         @Setter
         private FluxInstructChain prev;
         @Setter
         private FluxInstructChain next;
 
-        public FluxInstructChain(AssetFluxInstruct assetFluxInstruct) {
-            this.assetFluxInstruct = assetFluxInstruct;
+        public FluxInstructChain(FluxInstruction fluxInstruction) {
+            this.fluxInstruction = fluxInstruction;
         }
 
     }

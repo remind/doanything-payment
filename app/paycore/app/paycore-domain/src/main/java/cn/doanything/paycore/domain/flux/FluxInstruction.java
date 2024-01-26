@@ -4,12 +4,12 @@ import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
 /**
- * 资产交换指令
+ * 交换指令
  * @author wxj
  * 2024/1/25
  */
 @Data
-public class AssetFluxInstruct {
+public class FluxInstruction {
 
     /**
      * 资产交换订单ID
@@ -19,11 +19,11 @@ public class AssetFluxInstruct {
     /**
      * 指令ID
      */
-    private String fluxInstructId;
+    private String instructionId;
 
-    private InstructType instructType;
+    private InstructionType instructionType;
 
-    private String relatedFluxInstructId;
+    private String relatedInstructionId;
 
     private Money amount;
 

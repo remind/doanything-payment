@@ -1,6 +1,6 @@
 package cn.doanything.paycore.application.flux.instruct;
 
-import cn.doanything.paycore.domain.flux.AssetFluxInstruct;
+import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.InstructStatus;
 import lombok.Data;
 
@@ -15,5 +15,5 @@ public class ExecutorResult {
 
     private InstructStatus status;
 
-    private List<AssetFluxInstruct> newAssetFluxInstructs;
+    private List<FluxInstruction> newFluxInstructions;
 }

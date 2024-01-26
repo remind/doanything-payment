@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 2024/1/25
  */
 @Data
-public class ExternalAssetFluxInstruct extends AssetFluxInstruct {
+public class ExternalFluxInstruction extends FluxInstruction {
 
     private AssetInfo assetInfo;
 

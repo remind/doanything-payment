@@ -8,7 +8,7 @@ import lombok.Data;
  * 2024/1/25
  */
 @Data
-public class BalanceAssetFluxInstruct extends AssetFluxInstruct {
+public class BalanceFluxInstruction extends FluxInstruction {
 
     /**
      * 借记

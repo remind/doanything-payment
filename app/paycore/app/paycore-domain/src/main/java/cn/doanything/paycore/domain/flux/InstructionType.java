@@ -8,7 +8,7 @@ import lombok.Getter;
  * 2024/1/23
  */
 @Getter
-public enum InstructType implements CodeEnum {
+public enum InstructionType implements CodeEnum {
 
     FORWARD("FORWARD", "正向"),
 
@@ -20,7 +20,7 @@ public enum InstructType implements CodeEnum {
 
     private final String displayName;
 
-    InstructType(String code, String displayName) {
+    InstructionType(String code, String displayName) {
         this.code = code;
         this.displayName = displayName;
     }

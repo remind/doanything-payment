@@ -16,23 +16,23 @@ import java.util.List;
 @Component
 public class ExternalFluxInstructExecutor implements FluxInstructExecutor {
     @Override
-    public ExecutorResult execute(AssetFluxOrder fluxOrder, AssetFluxInstruct assetFluxInstruct) {
-        ExternalAssetFluxInstruct externalFluxInstruct = (ExternalAssetFluxInstruct) assetFluxInstruct;
+    public ExecutorResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
+        ExternalFluxInstruction externalFluxInstruct = (ExternalFluxInstruction) fluxInstruction;
         ExecutorResult result = new ExecutorResult();
         String clearingAccountNo = "clearingAccountNo";
         externalFluxInstruct.setClearingAccountNo(clearingAccountNo);
         result.setStatus(InstructStatus.SUCCESS);
-        result.setNewAssetFluxInstructs(List.of(buildClearingFluxInstruct(externalFluxInstruct, externalFluxInstruct.getClearingAccountNo())));
+        result.setNewFluxInstructions(List.of(buildClearingFluxInstruct(externalFluxInstruct, externalFluxInstruct.getClearingAccountNo())));
         return result;
     }
 
-    private BalanceAssetFluxInstruct buildClearingFluxInstruct(AssetFluxInstruct assetFluxInstruct, String clearAccountNo) {
-        BalanceAssetFluxInstruct newFluxInstruct = new BalanceAssetFluxInstruct();
-        newFluxInstruct.setFluxOrderId(assetFluxInstruct.getFluxOrderId());
-        newFluxInstruct.setInstructType(InstructType.FORWARD);
-        newFluxInstruct.setRelatedFluxInstructId(assetFluxInstruct.getFluxInstructId());
-        newFluxInstruct.setFundDetailId(assetFluxInstruct.getFundDetailId());
-        newFluxInstruct.setAmount(assetFluxInstruct.getAmount());
+    private BalanceFluxInstruction buildClearingFluxInstruct(FluxInstruction fluxInstruction, String clearAccountNo) {
+        BalanceFluxInstruction newFluxInstruct = new BalanceFluxInstruction();
+        newFluxInstruct.setFluxOrderId(fluxInstruction.getFluxOrderId());
+        newFluxInstruct.setInstructionType(InstructionType.FORWARD);
+        newFluxInstruct.setRelatedInstructionId(fluxInstruction.getInstructionId());
+        newFluxInstruct.setFundDetailId(fluxInstruction.getFundDetailId());
+        newFluxInstruct.setAmount(fluxInstruction.getAmount());
         newFluxInstruct.setDebitAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, clearAccountNo));
         newFluxInstruct.setCreditAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, PaymentConstants.TRANSITION_ACCOUNT));
         return newFluxInstruct;
