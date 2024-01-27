@@ -1,8 +1,5 @@
 package cn.doanything.paycore.application;
 
-import cn.doanything.paycore.application.flux.FluxService;
-import cn.doanything.paycore.application.flux.builder.AssetFluxOrderBuilder;
-import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.domain.BasePayment;
 import cn.doanything.paycore.domain.payorder.PayOrder;
 import cn.doanything.paycore.domain.payorder.service.PayOrderDomainService;
@@ -16,12 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class AbstractPaymentService {
 
     @Autowired
-    private AssetFluxOrderBuilder fluxOrderBuilder;
-
-    @Autowired
-    private FluxService fluxService;
-
-    @Autowired
     private PayOrderDomainService payOrderDomainService;
 
     @SuppressWarnings({"rawtypes"})
@@ -30,5 +21,4 @@ public abstract class AbstractPaymentService {
         return null;
     }
 
-    protected abstract void payCallBack(BasePayment payment, BasePayOrder basePayOrder, PayResult payResult);
 }

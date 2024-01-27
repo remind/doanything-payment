@@ -1,14 +1,10 @@
 package cn.doanything.paycore.application.instant;
 
 import cn.doanything.paycore.application.AbstractPaymentService;
-import cn.doanything.paycore.domain.payorder.BasePayOrder;
-import cn.doanything.paycore.domain.BasePayment;
 import cn.doanything.paycore.domain.instant.InstantPayment;
 import cn.doanything.paycore.domain.payorder.PayOrder;
-import cn.doanything.paycore.domain.payorder.PayOrderStatus;
 import cn.doanything.paycore.domain.repository.InstantPaymentRepository;
 import cn.doanything.paycore.types.PayResult;
-import cn.doanything.paycore.types.PayStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -33,15 +29,5 @@ public class InstantPaymentService extends AbstractPaymentService {
         });
     }
 
-    @Override
-    protected void payCallBack(BasePayment payment, BasePayOrder basePayOrder, PayResult payResult) {
-        PayOrder payOrder = (PayOrder) basePayOrder;
-        if (payResult.getPayStatus() == PayStatus.SUCCESS) {
-            payOrder.setOrderStatus(PayOrderStatus.SUCCESS);
-        } else if (payResult.getPayStatus() == PayStatus.FAIL) {
-            payOrder.setOrderStatus(PayOrderStatus.FAIL);
-        } else {
-            payOrder.setOrderStatus(PayOrderStatus.PAYING);
-        }
-    }
+
 }
