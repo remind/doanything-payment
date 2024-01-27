@@ -9,5 +9,5 @@ import cn.doanything.paycore.domain.flux.FluxOrder;
  */
 public interface FluxEngineService {
 
-    FluxInstruction execute(FluxOrder fluxOrder);
+    FluxInstruction process(FluxOrder fluxOrder);
 }

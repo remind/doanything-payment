@@ -30,7 +30,7 @@ public class FluxEngineServiceImpl implements FluxEngineService {
     private FluxInstructionRepository instructionRepository;
 
     @Override
-    public FluxInstruction execute(FluxOrder fluxOrder) {
+    public FluxInstruction process(FluxOrder fluxOrder) {
         FluxInstruction executeInstruction = fluxOrder.getExecuteFluxInstruct();
         while (executeInstruction != null) {
             AssetType assetType = executeInstruction.getAssetType();
@@ -38,7 +38,7 @@ public class FluxEngineServiceImpl implements FluxEngineService {
             FluxResult result = instructionExecutor.execute(fluxOrder, executeInstruction);
             executeInstruction.setStatus(convertToInstructStatus(result.getStatus()));
             if (result.getStatus() == PayStatus.SUCCESS) {
-                insertNewFluxInstruct(fluxOrder, executeInstruction, result.getNewFluxInstructions());
+                insertFluxInstruct(fluxOrder, executeInstruction, result.getNewFluxInstructions());
                 instructionRepository.reStore(executeInstruction);
                 executeInstruction = fluxOrder.getExecuteFluxInstruct();
             } else if (result.getStatus() == PayStatus.FAIL) {
@@ -64,7 +64,7 @@ public class FluxEngineServiceImpl implements FluxEngineService {
         }
     }
 
-    private void insertNewFluxInstruct(FluxOrder fluxOrder, FluxInstruction fluxInstruction, List<FluxInstruction> newFluxInstructions) {
+    private void insertFluxInstruct(FluxOrder fluxOrder, FluxInstruction fluxInstruction, List<FluxInstruction> newFluxInstructions) {
         if (!CollectionUtils.isEmpty(newFluxInstructions)) {
             FluxInstruction afterFluxInstruction = fluxInstruction;
             for (FluxInstruction newFluxInstruction : newFluxInstructions) {

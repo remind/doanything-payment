@@ -1,11 +1,14 @@
-package cn.doanything.paycore.application.flux.instruct.impl;
+package cn.doanything.paycore.domain.asset.channel;
 
-import cn.doanything.paycore.application.flux.instruct.ExecutorResult;
-import cn.doanything.paycore.application.flux.instruct.FluxInstructExecutor;
 import cn.doanything.paycore.domain.PaymentConstants;
+import cn.doanything.paycore.domain.asset.FluxInstructionExecutor;
+import cn.doanything.paycore.domain.asset.FluxResult;
 import cn.doanything.paycore.domain.asset.balance.BalanceFluxInstruction;
-import cn.doanything.paycore.domain.asset.channel.ChannelFluxInstruction;
-import cn.doanything.paycore.domain.flux.*;
+import cn.doanything.paycore.domain.flux.FluxInstruction;
+import cn.doanything.paycore.domain.flux.FluxOrder;
+import cn.doanything.paycore.domain.flux.InstructStatus;
+import cn.doanything.paycore.domain.flux.InstructionType;
+import cn.doanything.paycore.types.PayStatus;
 import cn.doanything.paycore.types.asset.BalanceAsset;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +16,17 @@ import java.util.List;
 
 /**
  * @author wxj
- * 2024/1/26
+ * 2024/1/27
  */
 @Component
-public class ExternalFluxInstructExecutor implements FluxInstructExecutor {
+public class ChannelFluxInstructExecutor implements FluxInstructionExecutor {
     @Override
-    public ExecutorResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
+    public FluxResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
         ChannelFluxInstruction externalFluxInstruct = (ChannelFluxInstruction) fluxInstruction;
-        ExecutorResult result = new ExecutorResult();
+        FluxResult result = new FluxResult();
         String clearingAccountNo = "clearingAccountNo";
         externalFluxInstruct.setClearingAccountNo(clearingAccountNo);
-        result.setStatus(InstructStatus.SUCCESS);
+        result.setStatus(PayStatus.SUCCESS);
         result.setNewFluxInstructions(List.of(buildClearingFluxInstruct(externalFluxInstruct, externalFluxInstruct.getClearingAccountNo())));
         return result;
     }
@@ -39,5 +42,4 @@ public class ExternalFluxInstructExecutor implements FluxInstructExecutor {
         newFluxInstruct.setCreditAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, PaymentConstants.TRANSITION_ACCOUNT));
         return newFluxInstruct;
     }
-
 }
