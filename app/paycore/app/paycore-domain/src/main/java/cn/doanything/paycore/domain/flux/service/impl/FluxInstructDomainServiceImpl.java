@@ -1,8 +1,10 @@
 package cn.doanything.paycore.domain.flux.service.impl;
 
+import cn.doanything.paycore.domain.asset.balance.BalanceFluxInstruction;
+import cn.doanything.paycore.domain.asset.channel.ChannelFluxInstruction;
 import cn.doanything.paycore.domain.flux.*;
 import cn.doanything.paycore.domain.flux.service.FluxInstructDomainService;
-import cn.doanything.paycore.domain.service.IdGeneratorDomainService;
+import cn.doanything.paycore.domain.service.IdGeneratorService;
 import cn.doanything.paycore.types.IdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class FluxInstructDomainServiceImpl implements FluxInstructDomainService {
 
     @Autowired
-    private IdGeneratorDomainService idGeneratorDomainService;
+    private IdGeneratorService idGeneratorService;
     @Override
     public FluxInstruction createReverseInstruct(FluxInstruction fluxInstruction) {
         FluxInstruction reverseInstruct;
@@ -23,10 +25,10 @@ public class FluxInstructDomainServiceImpl implements FluxInstructDomainService 
             reverseInstruct = new BalanceFluxInstruction();
             fillBalanceInstruct((BalanceFluxInstruction) reverseInstruct, (BalanceFluxInstruction) fluxInstruction);
         } else {
-            reverseInstruct = new ExternalFluxInstruction();
-            fillExternalInstruct((ExternalFluxInstruction) reverseInstruct, (ExternalFluxInstruction) fluxInstruction);
+            reverseInstruct = new ChannelFluxInstruction();
+            fillExternalInstruct((ChannelFluxInstruction) reverseInstruct, (ChannelFluxInstruction) fluxInstruction);
         }
-        reverseInstruct.setInstructionId(idGeneratorDomainService.genIdByRelateId(fluxInstruction.getFluxOrderId(), IdType.FLUX_INSTRUCT_ID));
+        reverseInstruct.setInstructionId(idGeneratorService.genIdByRelateId(fluxInstruction.getFluxOrderId(), IdType.FLUX_INSTRUCT_ID));
         reverseInstruct.setInstructionType(InstructionType.REVERSE);
         reverseInstruct.setAmount(fluxInstruction.getAmount());
         reverseInstruct.setStatus(InstructStatus.INIT);
@@ -40,7 +42,7 @@ public class FluxInstructDomainServiceImpl implements FluxInstructDomainService 
         reverseInstruct.setCreditAsset(forwardInstruct.getDebitAsset());
     }
 
-    private void fillExternalInstruct(ExternalFluxInstruction reverseInstruct, ExternalFluxInstruction forwardInstruct) {
+    private void fillExternalInstruct(ChannelFluxInstruction reverseInstruct, ChannelFluxInstruction forwardInstruct) {
         reverseInstruct.setAssetInfo(forwardInstruct.getAssetInfo());
         reverseInstruct.setFundAction(forwardInstruct.getFundAction().reverse());
     }

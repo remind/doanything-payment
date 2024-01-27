@@ -1,7 +1,9 @@
 package cn.doanything.paycore.domain.instant;
 
-import cn.doanything.paycore.domain.BasePayOrder;
+import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.domain.BasePayment;
+import cn.doanything.paycore.domain.payorder.PayOrder;
+import cn.doanything.paycore.domain.payorder.RefundOrder;
 import cn.doanything.paycore.types.funds.FundDetail;
 import lombok.Data;
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * 2024/1/15
  */
 @Component
-public class IdGeneratorDomainService {
+public class IdGeneratorService {
 
     @Autowired
     private SequenceService sequenceService;

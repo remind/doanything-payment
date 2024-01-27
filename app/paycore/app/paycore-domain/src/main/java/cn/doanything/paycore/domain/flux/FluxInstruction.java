@@ -1,6 +1,7 @@
 package cn.doanything.paycore.domain.flux;
 
 import cn.doanything.commons.lang.types.Money;
+import cn.doanything.paycore.types.asset.AssetType;
 import lombok.Data;
 
 /**
@@ -9,7 +10,7 @@ import lombok.Data;
  * 2024/1/25
  */
 @Data
-public class FluxInstruction {
+public abstract class FluxInstruction {
 
     /**
      * 资产交换订单ID
@@ -31,5 +32,7 @@ public class FluxInstruction {
 
     private InstructStatus status;
 
+
+    public abstract AssetType getAssetType();
 
 }

@@ -1,11 +1,11 @@
 package cn.doanything.paycore.application.instant;
 
 import cn.doanything.paycore.application.AbstractPaymentService;
-import cn.doanything.paycore.domain.BasePayOrder;
+import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.domain.BasePayment;
 import cn.doanything.paycore.domain.instant.InstantPayment;
-import cn.doanything.paycore.domain.instant.PayOrder;
-import cn.doanything.paycore.domain.instant.PayOrderStatus;
+import cn.doanything.paycore.domain.payorder.PayOrder;
+import cn.doanything.paycore.domain.payorder.PayOrderStatus;
 import cn.doanything.paycore.domain.repository.InstantPaymentRepository;
 import cn.doanything.paycore.types.PayResult;
 import cn.doanything.paycore.types.PayStatus;
@@ -29,7 +29,7 @@ public class InstantPaymentService extends AbstractPaymentService {
     public PayResult pay(InstantPayment payment) {
         return transactionTemplate.execute(status -> {
             instantPaymentRepository.store(payment);
-            return pay(payment, payment.getBasePayOrder());
+            return pay(payment, (PayOrder) payment.getBasePayOrder());
         });
     }
 

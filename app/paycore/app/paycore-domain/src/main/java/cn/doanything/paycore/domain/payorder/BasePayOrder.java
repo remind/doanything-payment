@@ -1,4 +1,4 @@
-package cn.doanything.paycore.domain;
+package cn.doanything.paycore.domain.payorder;
 
 import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;

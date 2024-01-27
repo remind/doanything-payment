@@ -1,6 +1,8 @@
 package cn.doanything.paycore.domain.flux.service.impl;
 
 import cn.doanything.commons.lang.utils.AssertUtil;
+import cn.doanything.paycore.domain.asset.FluxInstructionExecutor;
+import cn.doanything.paycore.domain.asset.FluxResult;
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.FluxOrder;
 import cn.doanything.paycore.domain.flux.InstructStatus;
@@ -8,8 +10,7 @@ import cn.doanything.paycore.domain.flux.InstructionType;
 import cn.doanything.paycore.domain.flux.service.AbstractFluxService;
 import cn.doanything.paycore.domain.flux.service.FluxInstructDomainService;
 import cn.doanything.paycore.domain.flux.service.FluxOrderDomainService;
-import cn.doanything.paycore.types.asset.AssetInfo;
-import cn.doanything.paycore.types.funds.FundDetail;
+import cn.doanything.paycore.types.asset.AssetType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -27,29 +28,6 @@ public class FluxOrderDomainServiceImpl extends AbstractFluxService implements F
 
     @Autowired
     private FluxInstructDomainService instructDomainService;
-
-    @Override
-    public void process(FluxOrder fluxOrder, List<FundDetail> payerFundDetails, List<FundDetail> payeeFundDetails) {
-        payerFundDetails.forEach(fundDetail -> {
-            AssetInfo assetInfo = fundDetail.getAssetInfo();
-            FluxInstruction fluxInstruction = getProcessor(assetInfo.getAssetType()).build(fundDetail);
-            fluxInstruction.setInstructionType(InstructionType.FORWARD);
-            fluxInstruction.setFluxOrderId(fluxOrder.getFluxOrderId());
-            fluxInstruction.setAmount(fundDetail.getAmount());
-            fluxInstruction.setFundDetailId(fundDetail.getDetailId());
-            fluxOrder.addFluxInstruct(fluxInstruction);
-        });
-
-        payeeFundDetails.forEach(fundDetail -> {
-            AssetInfo assetInfo = fundDetail.getAssetInfo();
-            FluxInstruction fluxInstruction = getProcessor(assetInfo.getAssetType()).build(fundDetail);
-            fluxInstruction.setInstructionType(InstructionType.FORWARD);
-            fluxInstruction.setFluxOrderId(fluxOrder.getFluxOrderId());
-            fluxInstruction.setAmount(fundDetail.getAmount());
-            fluxInstruction.setFundDetailId(fundDetail.getDetailId());
-            fluxOrder.addFluxInstruct(fluxInstruction);
-        });
-    }
 
     @Override
     public void failHandle(FluxOrder fluxOrder, FluxInstruction failInstruct) {

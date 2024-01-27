@@ -2,8 +2,8 @@ package cn.doanything.paycore.application.instant;
 
 import cn.doanything.paycore.application.builder.PaymentBuilder;
 import cn.doanything.paycore.domain.instant.InstantPayment;
-import cn.doanything.paycore.domain.instant.PayOrder;
-import cn.doanything.paycore.domain.instant.PayOrderStatus;
+import cn.doanything.paycore.domain.payorder.PayOrder;
+import cn.doanything.paycore.domain.payorder.PayOrderStatus;
 import cn.doanything.paycore.facade.request.InstantPaymentRequest;
 import cn.doanything.paycore.types.PayOrderType;
 import cn.doanything.paycore.types.PaymentType;
@@ -28,7 +28,7 @@ public class InstantPaymentBuilder extends PaymentBuilder {
     private PayOrder buildPayOrder(String paymentId, InstantPaymentRequest request) {
         PayOrder payOrder = new PayOrder();
         payOrder.setPaymentId(paymentId);
-        payOrder.setOrderId(idGeneratorDomainService.genIdByRelateId(paymentId, PayOrderType.PAY.getIdType()));
+        payOrder.setOrderId(idGeneratorService.genIdByRelateId(paymentId, PayOrderType.PAY.getIdType()));
         payOrder.setRequestId(request.getRequestId());
         payOrder.setAmount(request.getPayAmount());
         payOrder.setMemberId(request.getPayerId());

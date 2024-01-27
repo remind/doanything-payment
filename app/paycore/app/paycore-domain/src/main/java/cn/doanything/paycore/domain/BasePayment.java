@@ -1,6 +1,7 @@
 package cn.doanything.paycore.domain;
 
 import cn.doanything.commons.lang.Entity;
+import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.types.PaymentType;
 import cn.doanything.paycore.types.funds.FundDetail;
 import lombok.Data;

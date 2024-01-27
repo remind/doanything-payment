@@ -1,9 +1,9 @@
 package cn.doanything.paycore.infrastructure.persistence.repository;
 
-import cn.doanything.paycore.domain.BasePayOrder;
+import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.domain.instant.InstantPayment;
-import cn.doanything.paycore.domain.instant.PayOrder;
-import cn.doanything.paycore.domain.instant.RefundOrder;
+import cn.doanything.paycore.domain.payorder.PayOrder;
+import cn.doanything.paycore.domain.payorder.RefundOrder;
 import cn.doanything.paycore.domain.repository.InstantPaymentRepository;
 import cn.doanything.paycore.infrastructure.persistence.repository.inner.BasePayOrderInnerRepository;
 import cn.doanything.paycore.infrastructure.persistence.repository.inner.FundDetailInnerRepository;

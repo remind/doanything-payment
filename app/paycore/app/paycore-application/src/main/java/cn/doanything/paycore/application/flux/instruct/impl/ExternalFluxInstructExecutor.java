@@ -3,6 +3,8 @@ package cn.doanything.paycore.application.flux.instruct.impl;
 import cn.doanything.paycore.application.flux.instruct.ExecutorResult;
 import cn.doanything.paycore.application.flux.instruct.FluxInstructExecutor;
 import cn.doanything.paycore.domain.PaymentConstants;
+import cn.doanything.paycore.domain.asset.balance.BalanceFluxInstruction;
+import cn.doanything.paycore.domain.asset.channel.ChannelFluxInstruction;
 import cn.doanything.paycore.domain.flux.*;
 import cn.doanything.paycore.types.asset.BalanceAsset;
 import org.springframework.stereotype.Component;
@@ -17,7 +19,7 @@ import java.util.List;
 public class ExternalFluxInstructExecutor implements FluxInstructExecutor {
     @Override
     public ExecutorResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
-        ExternalFluxInstruction externalFluxInstruct = (ExternalFluxInstruction) fluxInstruction;
+        ChannelFluxInstruction externalFluxInstruct = (ChannelFluxInstruction) fluxInstruction;
         ExecutorResult result = new ExecutorResult();
         String clearingAccountNo = "clearingAccountNo";
         externalFluxInstruct.setClearingAccountNo(clearingAccountNo);

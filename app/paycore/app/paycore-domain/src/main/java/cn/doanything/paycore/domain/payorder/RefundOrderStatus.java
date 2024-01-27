@@ -1,4 +1,4 @@
-package cn.doanything.paycore.domain.instant;
+package cn.doanything.paycore.domain.payorder;
 
 import cn.doanything.paycore.types.OrderStatus;
 import lombok.Getter;

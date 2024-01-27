@@ -1,6 +1,4 @@
-package cn.doanything.paycore.domain.instant;
-
-import cn.doanything.paycore.domain.BasePayOrder;
+package cn.doanything.paycore.domain.payorder;
 
 /**
  * @author wxj

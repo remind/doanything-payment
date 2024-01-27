@@ -4,7 +4,7 @@ import cn.doanything.paycore.application.flux.FluxService;
 import cn.doanything.paycore.application.flux.instruct.ExecutorResult;
 import cn.doanything.paycore.application.flux.instruct.FluxInstructExecutor;
 import cn.doanything.paycore.domain.flux.FluxOrder;
-import cn.doanything.paycore.domain.flux.BalanceFluxInstruction;
+import cn.doanything.paycore.domain.asset.balance.BalanceFluxInstruction;
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.InstructStatus;
 import cn.doanything.paycore.domain.flux.service.FluxOrderDomainService;

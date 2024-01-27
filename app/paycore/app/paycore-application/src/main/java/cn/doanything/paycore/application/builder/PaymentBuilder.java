@@ -1,7 +1,7 @@
 package cn.doanything.paycore.application.builder;
 
 import cn.doanything.paycore.domain.BasePayment;
-import cn.doanything.paycore.domain.service.IdGeneratorDomainService;
+import cn.doanything.paycore.domain.service.IdGeneratorService;
 import cn.doanything.paycore.facade.request.BasePaymentRequest;
 import cn.doanything.paycore.facade.request.FundDetailInfo;
 import cn.doanything.paycore.types.IdType;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class PaymentBuilder {
 
     @Autowired
-    protected IdGeneratorDomainService idGeneratorDomainService;
+    protected IdGeneratorService idGeneratorService;
 
     /**
      * 填充支付基础信息
@@ -27,7 +27,7 @@ public abstract class PaymentBuilder {
      * @param paymentType
      */
     protected void fillBasePayment(BasePayment payment, BasePaymentRequest request, PaymentType paymentType) {
-        payment.setPaymentId(idGeneratorDomainService.genPaymentId(request.getMemberId(), paymentType.getIdType()));
+        payment.setPaymentId(idGeneratorService.genPaymentId(request.getMemberId(), paymentType.getIdType()));
         payment.setMemberId(request.getMemberId());
         payment.setPaymentType(paymentType);
         payment.setMerchantId(request.getMerchantId());
@@ -45,7 +45,7 @@ public abstract class PaymentBuilder {
         FundDetail fundDetail = new FundDetail();
         fundDetail.setPaymentId(paymentId);
         fundDetail.setOrderId(orderId);
-        fundDetail.setDetailId(idGeneratorDomainService.genIdByRelateId(paymentId, IdType.FUND_DETAIL_ID));
+        fundDetail.setDetailId(idGeneratorService.genIdByRelateId(paymentId, IdType.FUND_DETAIL_ID));
         fundDetail.setAmount(info.getAmount());
         fundDetail.setMemberId(info.getMemberId());
         fundDetail.setAssetInfo(info.getAssetInfo());

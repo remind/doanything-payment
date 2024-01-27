@@ -1,8 +1,8 @@
 package cn.doanything.paycore.infrastructure.convertor;
 
 import cn.doanything.commons.lang.utils.EnumUtil;
-import cn.doanything.paycore.domain.instant.PayOrderStatus;
-import cn.doanything.paycore.domain.instant.RefundOrderStatus;
+import cn.doanything.paycore.domain.payorder.PayOrderStatus;
+import cn.doanything.paycore.domain.payorder.RefundOrderStatus;
 import cn.doanything.paycore.types.PaymentType;
 import cn.doanything.paycore.types.asset.BelongTo;
 import cn.doanything.paycore.types.funds.FundActionType;

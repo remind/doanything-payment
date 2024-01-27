@@ -1,6 +1,6 @@
 package cn.doanything.paycore.infrastructure.persistence.repository.inner;
 
-import cn.doanything.paycore.domain.BasePayOrder;
+import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.infrastructure.persistence.convertor.PayOrderDalConvertor;
 import cn.doanything.paycore.infrastructure.persistence.dataobject.OrderExtensionDO;
 import cn.doanything.paycore.infrastructure.persistence.dataobject.PayOrderDO;
