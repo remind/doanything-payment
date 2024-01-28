@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>cn.doanything.mgs</groupId>
-    <artifactId>doanything-mgs</artifactId>
+    <artifactId>mgs</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
