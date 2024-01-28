@@ -1,10 +1,11 @@
 package cn.doanything.paycore.domain.payorder.service;
 
-import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.domain.asset.AssetFluxFactory;
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.FluxOrder;
 import cn.doanything.paycore.domain.flux.InstructionType;
+import cn.doanything.paycore.domain.flux.chain.InstructChainService;
+import cn.doanything.paycore.domain.payorder.BasePayOrder;
 import cn.doanything.paycore.domain.service.IdGeneratorService;
 import cn.doanything.paycore.types.IdType;
 import cn.doanything.paycore.types.asset.AssetInfo;
@@ -25,6 +26,9 @@ public abstract class AbstractBasePayService {
     @Autowired
     protected AssetFluxFactory assetFluxFactory;
 
+    @Autowired
+    protected InstructChainService instructChainService;
+
     @SuppressWarnings({"unchecked", "rawtypes"})
     protected FluxOrder buildFluxOrder(BasePayOrder payOrder) {
         FluxOrder fluxOrder = new FluxOrder();
@@ -43,7 +47,7 @@ public abstract class AbstractBasePayService {
             fluxInstruction.setFluxOrderId(fluxOrder.getFluxOrderId());
             fluxInstruction.setAmount(fundDetail.getAmount());
             fluxInstruction.setFundDetailId(fundDetail.getDetailId());
-            fluxOrder.addFluxInstruct(fluxInstruction);
+            instructChainService.addInstruct(fluxOrder, fluxInstruction);
         });
 
         payeeFundDetails.forEach(fundDetail -> {
@@ -53,7 +57,7 @@ public abstract class AbstractBasePayService {
             fluxInstruction.setFluxOrderId(fluxOrder.getFluxOrderId());
             fluxInstruction.setAmount(fundDetail.getAmount());
             fluxInstruction.setFundDetailId(fundDetail.getDetailId());
-            fluxOrder.addFluxInstruct(fluxInstruction);
+            instructChainService.addInstruct(fluxOrder, fluxInstruction);
         });
     }
 }

@@ -32,7 +32,6 @@ public abstract class FluxInstruction {
 
     private InstructStatus status;
 
-
     public abstract AssetType getAssetType();
 
 }

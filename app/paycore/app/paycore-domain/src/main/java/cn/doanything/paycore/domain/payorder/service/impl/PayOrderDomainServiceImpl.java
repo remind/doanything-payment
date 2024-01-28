@@ -6,6 +6,7 @@ import cn.doanything.paycore.domain.payorder.PayOrder;
 import cn.doanything.paycore.domain.payorder.service.AbstractBasePayService;
 import cn.doanything.paycore.domain.payorder.service.PayOrderDomainService;
 import cn.doanything.paycore.domain.repository.FluxOrderRepository;
+import cn.doanything.paycore.types.PayResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,9 @@ public class PayOrderDomainServiceImpl extends AbstractBasePayService implements
     @Autowired
     private FluxOrderRepository fluxOrderRepository;
     @Override
-    public void pay(PayOrder payOrder) {
+    public PayResult pay(PayOrder payOrder) {
         FluxOrder fluxOrder = buildFluxOrder(payOrder);
         fluxOrderRepository.store(fluxOrder);
-        fluxEngineService.process(fluxOrder);
+        return fluxEngineService.process(fluxOrder);
     }
 }

@@ -7,6 +7,7 @@ import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.FluxOrder;
 import cn.doanything.paycore.domain.flux.InstructStatus;
 import cn.doanything.paycore.domain.flux.InstructionType;
+import cn.doanything.paycore.domain.flux.chain.InstructChainService;
 import cn.doanything.paycore.domain.flux.service.AbstractFluxService;
 import cn.doanything.paycore.domain.flux.service.FluxInstructDomainService;
 import cn.doanything.paycore.domain.flux.service.FluxOrderDomainService;
@@ -29,6 +30,9 @@ public class FluxOrderDomainServiceImpl extends AbstractFluxService implements F
     @Autowired
     private FluxInstructDomainService instructDomainService;
 
+    @Autowired
+    private InstructChainService instructChainService;
+
     @Override
     public void failHandle(FluxOrder fluxOrder, FluxInstruction failInstruct) {
         if (failInstruct.getInstructionType() == InstructionType.FORWARD) {
@@ -41,13 +45,13 @@ public class FluxOrderDomainServiceImpl extends AbstractFluxService implements F
     @Override
     public void reverse(FluxOrder fluxOrder, FluxInstruction failInstruct) {
         AssertUtil.isTrue(failInstruct.getInstructionType() == InstructionType.FORWARD, "只有正向才能逆向");
-        fluxOrder.deleteAfterFluxInstruct(failInstruct);
+        instructChainService.deleteAfterFluxInstruct(fluxOrder, failInstruct.getInstructionId());
         List<FluxInstruction> forwardInstructs = fluxOrder.getAllFluxInstructs().stream()
                 .filter(assetFluxInstruct -> assetFluxInstruct.getStatus() == InstructStatus.SUCCESS)
                 .collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(forwardInstructs)) {
             Collections.reverse(forwardInstructs);
-            forwardInstructs.forEach(assetFluxInstruct -> fluxOrder.addFluxInstruct(instructDomainService.createReverseInstruct(assetFluxInstruct)));
+            forwardInstructs.forEach(assetFluxInstruct -> instructChainService.addInstruct(fluxOrder, instructDomainService.createReverseInstruct(assetFluxInstruct)));
         }
     }
 }

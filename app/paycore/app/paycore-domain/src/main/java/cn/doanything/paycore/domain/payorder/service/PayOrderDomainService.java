@@ -1,6 +1,7 @@
 package cn.doanything.paycore.domain.payorder.service;
 
 import cn.doanything.paycore.domain.payorder.PayOrder;
+import cn.doanything.paycore.types.PayResult;
 
 /**
  * @author wxj
@@ -8,6 +9,6 @@ import cn.doanything.paycore.domain.payorder.PayOrder;
  */
 public interface PayOrderDomainService {
 
-    void pay(PayOrder payOrder);
+    PayResult pay(PayOrder payOrder);
 
 }

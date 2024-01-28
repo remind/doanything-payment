@@ -1,4 +1,4 @@
-package cn.doanything.paycore.domain.flux.executor;
+package cn.doanything.paycore.domain.flux.chain;
 
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import lombok.Getter;
