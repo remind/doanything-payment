@@ -10,13 +10,10 @@
         <module>doanything-commons</module>
         <module>doanything-framework</module>
         <module>doanything-parent</module>
-        <module>app/sample</module>
-        <module>app/sampleweb</module>
         <module>app/member</module>
         <module>app/mgs</module>
         <module>doanything-archetypes</module>
         <module>doanything-dependencies-third</module>
-        <module>app/paycore/app/payment-asset-spi</module>
     </modules>
 
     <properties>
