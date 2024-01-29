@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
  * @author wxj
  * 2024/1/26
  */
-@Component
+@Component("CHANNEL_FluxInstructBuilder")
 public class ChannelFluxInstructBuilder implements FluxInstructBuilder {
     @Override
     public FluxInstruction build(FundDetail fundDetail) {
         ChannelFluxInstruction fluxInstruction = new ChannelFluxInstruction();
-        fluxInstruction.setAssetInfo(fundDetail.getAssetInfo());
+        fluxInstruction.setAssetType(fundDetail.getAssetInfo().getAssetType());
+        fluxInstruction.setAsset(fundDetail.getAssetInfo());
         fluxInstruction.setFundAction(fundDetail.getFundAction());
         return fluxInstruction;
     }

@@ -18,7 +18,7 @@ import java.util.List;
  * @author wxj
  * 2024/1/27
  */
-@Component
+@Component("CHANNEL_FluxInstructExecutor")
 public class ChannelFluxInstructExecutor implements FluxInstructionExecutor {
     @Override
     public FluxResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
@@ -34,8 +34,8 @@ public class ChannelFluxInstructExecutor implements FluxInstructionExecutor {
     private BalanceFluxInstruction buildClearingFluxInstruct(FluxInstruction fluxInstruction, String clearAccountNo) {
         BalanceFluxInstruction newFluxInstruct = new BalanceFluxInstruction();
         newFluxInstruct.setFluxOrderId(fluxInstruction.getFluxOrderId());
-        newFluxInstruct.setInstructionType(InstructionType.FORWARD);
-        newFluxInstruct.setRelatedInstructionId(fluxInstruction.getInstructionId());
+        newFluxInstruct.setType(InstructionType.FORWARD);
+        newFluxInstruct.setRelatedId(fluxInstruction.getInstructionId());
         newFluxInstruct.setFundDetailId(fluxInstruction.getFundDetailId());
         newFluxInstruct.setAmount(fluxInstruction.getAmount());
         newFluxInstruct.setDebitAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, clearAccountNo));

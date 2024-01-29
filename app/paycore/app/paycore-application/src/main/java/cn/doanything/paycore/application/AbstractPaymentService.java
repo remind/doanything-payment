@@ -15,10 +15,8 @@ public abstract class AbstractPaymentService {
     @Autowired
     private PayOrderDomainService payOrderDomainService;
 
-    @SuppressWarnings({"rawtypes"})
     protected PayResult pay(BasePayment payment, PayOrder payOrder) {
-        payOrderDomainService.pay(payOrder);
-        return null;
+        return payOrderDomainService.pay(payOrder);
     }
 
 }

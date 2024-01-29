@@ -3,6 +3,8 @@ package cn.doanything.paycore.domain.flux.chain;
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.FluxOrder;
 
+import java.util.List;
+
 /**
  * 指令链服务
  * @author wxj
@@ -24,6 +26,14 @@ public interface InstructChainService {
      * @param newFluxInstruction
      */
     void insertInstruct(FluxOrder fluxOrder, String instructId, FluxInstruction newFluxInstruction);
+
+    /**
+     * 插入指令在指定指令之后
+     * @param fluxOrder
+     * @param instructId
+     * @param newFluxInstructions
+     */
+    void insertInstruct(FluxOrder fluxOrder, String instructId, List<FluxInstruction> newFluxInstructions);
 
     /**
      * 删除指定指令后面的指令

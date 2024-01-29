@@ -3,10 +3,8 @@ package cn.doanything.paycore.infrastructure.persistence.convertor;
 import cn.doanything.commons.convertor.ReadWriteConvertor;
 import cn.doanything.paycore.infrastructure.convertor.EnumsConvertor;
 import cn.doanything.paycore.infrastructure.persistence.dataobject.FundDetailDO;
-import cn.doanything.paycore.types.asset.AssetType;
-import cn.doanything.paycore.types.asset.BalanceAsset;
+import cn.doanything.paycore.types.asset.AssetInfo;
 import cn.doanything.paycore.types.funds.FundDetail;
-import cn.hutool.json.JSONUtil;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -27,9 +25,7 @@ public interface FundDetailDalConvertor extends ReadWriteConvertor<FundDetail, F
 
     @AfterMapping
     default void fillEntityAsset(@MappingTarget FundDetail fundDetail, FundDetailDO fundDetailDO) {
-        if (fundDetailDO.getAssetType().equals(AssetType.BALANCE.getCode())) {
-            fundDetail.setAssetInfo(JSONUtil.toBean(fundDetailDO.getAssetInfo(), BalanceAsset.class));
-        }
+        fundDetail.setAssetInfo(AssetInfo.parse(fundDetailDO.getAssetType(), fundDetailDO.getAssetInfo()));
     }
 
     @Override
@@ -41,7 +37,8 @@ public interface FundDetailDalConvertor extends ReadWriteConvertor<FundDetail, F
     @AfterMapping
     default void fillDOAsset(FundDetail fundDetail, @MappingTarget FundDetailDO fundDetailDO) {
         fundDetailDO.setAction(fundDetail.getFundAction().getCode());
-        fundDetailDO.setAssetInfo(JSONUtil.toJsonStr(fundDetail.getAssetInfo()));
+        fundDetailDO.setAssetType(fundDetail.getAssetInfo().getAssetType().getCode());
+        fundDetailDO.setAssetInfo(fundDetail.getAssetInfo().toJsonStr());
     }
 
 }

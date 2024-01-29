@@ -17,14 +17,14 @@ import java.util.List;
 public class FluxOrder extends Entity {
 
     /**
-     * 支付总单号
+     * 支付总单ID
      */
     private String paymentId;
 
     /**
-     * 支付订单号
+     * 支付订单ID
      */
-    private String orderId;
+    private String payId;
 
     /**
      * 交换ID
@@ -34,7 +34,12 @@ public class FluxOrder extends Entity {
     /**
      * 交换状态
      */
-    private InstructStatus status;
+    private FluxOrderStatus status;
+
+    /**
+     * 关联ID
+     */
+    private String relationId;
 
     private FluxInstructChain firstInstruct = null;
 

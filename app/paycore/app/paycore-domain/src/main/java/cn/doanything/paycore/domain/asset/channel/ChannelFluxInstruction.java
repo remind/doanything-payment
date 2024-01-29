@@ -2,30 +2,37 @@ package cn.doanything.paycore.domain.asset.channel;
 
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.types.asset.AssetInfo;
-import cn.doanything.paycore.types.asset.AssetType;
-import cn.doanything.paycore.types.funds.FundAction;
-import lombok.Data;
-
-import java.time.LocalDateTime;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 
 /**
  * @author wxj
  * 2024/1/25
  */
-@Data
 public class ChannelFluxInstruction extends FluxInstruction {
 
-    private AssetInfo assetInfo;
+    public AssetInfo getAsset() {
+        String assetInfo = getAssetInfo();
+        return StrUtil.isNotBlank(assetInfo) ? JSONUtil.toBean(assetInfo, AssetInfo.class) : null;
+    }
 
-    private FundAction fundAction;
+    public void setAsset(AssetInfo asset) {
+        setAssetInfo(JSONUtil.toJsonStr(asset));
+    }
 
-    private String clearingAccountNo;
+    public String getClearingAccountNo() {
+        return getExtValue("clearingAccountNo");
+    }
 
-    private LocalDateTime clearDate;
+    public void setClearingAccountNo(String clearingAccountNo) {
+        putExtValue("clearingAccountNo", clearingAccountNo);
+    }
 
+    public String getClearDate() {
+        return getExtValue("clearDate");
+    }
 
-    @Override
-    public AssetType getAssetType() {
-        return assetInfo.getAssetType();
+    public void setClearDate(String clearDate) {
+        putExtValue("clearDate", clearDate);
     }
 }

@@ -2,7 +2,11 @@ package cn.doanything.paycore.domain.flux;
 
 import cn.doanything.commons.lang.types.Money;
 import cn.doanything.paycore.types.asset.AssetType;
+import cn.doanything.paycore.types.funds.FundAction;
 import lombok.Data;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 交换指令
@@ -10,7 +14,17 @@ import lombok.Data;
  * 2024/1/25
  */
 @Data
-public abstract class FluxInstruction {
+public class FluxInstruction {
+
+    /**
+     * 支付总单ID
+     */
+    private String paymentId;
+
+    /**
+     * 支付订单ID
+     */
+    private String payId;
 
     /**
      * 资产交换订单ID
@@ -22,9 +36,12 @@ public abstract class FluxInstruction {
      */
     private String instructionId;
 
-    private InstructionType instructionType;
+    /**
+     * 指令类型
+     */
+    private InstructionType type;
 
-    private String relatedInstructionId;
+    private String relatedId;
 
     private Money amount;
 
@@ -32,6 +49,20 @@ public abstract class FluxInstruction {
 
     private InstructStatus status;
 
-    public abstract AssetType getAssetType();
+    private FundAction fundAction;
+
+    private AssetType assetType;
+
+    private String assetInfo;
+
+    private Map<String, String> extMap = new HashMap<>();
+
+    public String getExtValue(String key) {
+        return extMap == null ? null : extMap.get(key);
+    }
+
+    public void putExtValue(String key, String value) {
+        extMap.put(key, value);
+    }
 
 }

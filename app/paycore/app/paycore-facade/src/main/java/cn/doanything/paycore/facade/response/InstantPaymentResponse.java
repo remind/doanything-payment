@@ -8,12 +8,16 @@ import lombok.Data;
  * 2023年07月14日 20:28
  */
 @Data
-public class InstantPaymentResponse {
+public class InstantPaymentResponse extends BaseResponse {
 
-    private String paymentId;
+    /**
+     * 支付单号
+     */
+    private String payOrderId;
 
-    private String orderId;
-
+    /**
+     * 支付单状态
+     */
     private OrderStatus orderStatus;
 
 }

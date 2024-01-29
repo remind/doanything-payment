@@ -28,8 +28,9 @@ public class InstantPaymentFacadeImpl implements InstantPaymentFacade {
         PayResult result = instantPaymentService.pay(instantPayment);
         InstantPaymentResponse response = new InstantPaymentResponse();
         response.setPaymentId(instantPayment.getPaymentId());
-        response.setOrderId(instantPayment.getPayOrder().getOrderId());
+        response.setPayOrderId(instantPayment.getPayOrder().getOrderId());
         response.setOrderStatus(instantPayment.getPayOrder().getOrderStatus());
+        response.setResult(result);
         return response;
     }
 }

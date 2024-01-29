@@ -6,6 +6,9 @@ import cn.doanything.paycore.domain.flux.InstructStatus;
 import cn.doanything.paycore.domain.flux.chain.FluxInstructChain;
 import cn.doanything.paycore.domain.flux.chain.InstructChainService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * @author wxj
@@ -19,17 +22,12 @@ public class InstructChainServiceImpl implements InstructChainService {
         FluxInstructChain lastInstruct = fluxOrder.getLastInstruct();
         if (firstInstruct == null) {
             firstInstruct = new FluxInstructChain(fluxInstruction);
-            lastInstruct = new FluxInstructChain(fluxInstruction);
+            lastInstruct = firstInstruct;
         } else {
-            if (lastInstruct == null) {
-                lastInstruct = new FluxInstructChain(fluxInstruction);
-                firstInstruct.setNext(lastInstruct);
-                lastInstruct.setPrev(firstInstruct);
-            } else {
-                FluxInstructChain fluxInstructChain = new FluxInstructChain(fluxInstruction);
-                fluxInstructChain.setPrev(lastInstruct);
-                lastInstruct.setNext(fluxInstructChain);
-            }
+            FluxInstructChain fluxInstructChain = new FluxInstructChain(fluxInstruction);
+            fluxInstructChain.setPrev(lastInstruct);
+            lastInstruct.setNext(fluxInstructChain);
+            lastInstruct = fluxInstructChain;
         }
         fluxOrder.setFirstInstruct(firstInstruct);
         fluxOrder.setLastInstruct(lastInstruct);
@@ -42,6 +40,17 @@ public class InstructChainServiceImpl implements InstructChainService {
         newFluxInstructChain.setNext(fluxInstructChain.getNext());
         newFluxInstructChain.setPrev(fluxInstructChain);
         fluxInstructChain.setNext(newFluxInstructChain);
+    }
+
+    @Override
+    public void insertInstruct(FluxOrder fluxOrder, String instructId, List<FluxInstruction> newFluxInstructions) {
+        if (!CollectionUtils.isEmpty(newFluxInstructions)) {
+            String afterInstructionId = instructId;
+            for (FluxInstruction newFluxInstruction : newFluxInstructions) {
+                insertInstruct(fluxOrder, afterInstructionId, newFluxInstruction);
+                afterInstructionId = newFluxInstruction.getInstructionId();
+            }
+        }
     }
 
     @Override

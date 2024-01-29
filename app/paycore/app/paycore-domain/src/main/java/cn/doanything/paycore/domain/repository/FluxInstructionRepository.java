@@ -7,5 +7,7 @@ import cn.doanything.paycore.domain.flux.FluxInstruction;
  * 2024/1/27
  */
 public interface FluxInstructionRepository {
+
+    void store(FluxInstruction fluxInstruction);
     void  reStore(FluxInstruction fluxInstruction);
 }

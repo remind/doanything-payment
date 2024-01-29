@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author wxj
  * 2024/1/27
  */
-@Component
+@Component("BALANCE_FluxInstructExecutor")
 public class BalanceFluxInstructionExecutor implements FluxInstructionExecutor {
     @Override
     public FluxResult execute(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {

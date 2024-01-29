@@ -13,7 +13,8 @@ public enum FundAction implements CodeEnum {
     UNFREEZE("UNFREEZE", "解冻", 4),
     FREEZE("FREEZE", "冻结", 3),
     INCREASE("INCREASE", "增加", 2),
-    REDUCE("REDUCE", "减少", 1);
+    REDUCE("REDUCE", "减少", 1),
+    TRANSFER("TRANSFER", "转账", 0);
 
     private String code;
 

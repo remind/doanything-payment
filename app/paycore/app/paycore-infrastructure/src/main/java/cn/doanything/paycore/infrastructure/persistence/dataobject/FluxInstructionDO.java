@@ -11,27 +11,32 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 支付总单
+ * 交换指令
  * </p>
  *
  * @author wxj
  * @since 2024-01-29
  */
-@TableName("tp_fund_detail")
-public class FundDetailDO implements Serializable {
+@TableName("tp_flux_instruction")
+public class FluxInstructionDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 明细ID
+     * 指令ID
      */
-    @TableId(value = "detail_id", type = IdType.NONE)
-    private String detailId;
+    @TableId(value = "instruction_id", type = IdType.NONE)
+    private String instructionId;
 
     /**
-     * 支付单号
+     * 交换单ID
      */
-    private String orderId;
+    private String fluxOrderId;
+
+    /**
+     * 支付单ID
+     */
+    private String payId;
 
     /**
      * 支付总单ID
@@ -39,14 +44,24 @@ public class FundDetailDO implements Serializable {
     private String paymentId;
 
     /**
-     * 归属方
+     * 交换类型
      */
-    private String belongTo;
+    private String type;
 
     /**
-     * 会员ID
+     * 资金操作类型
      */
-    private String memberId;
+    private String fundAction;
+
+    /**
+     * 指令状态
+     */
+    private String status;
+
+    /**
+     * 关联订单ID
+     */
+    private String relationId;
 
     /**
      * 订单金额
@@ -59,9 +74,9 @@ public class FundDetailDO implements Serializable {
     private String currencyCode;
 
     /**
-     * 资金动作
+     * 资金明细ID
      */
-    private String action;
+    private String fundDetailId;
 
     /**
      * 资产类型
@@ -72,6 +87,11 @@ public class FundDetailDO implements Serializable {
      * 资产信息
      */
     private String assetInfo;
+
+    /**
+     * 扩展字段
+     */
+    private String extension;
 
     /**
      * 创建时间
@@ -85,20 +105,28 @@ public class FundDetailDO implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime gmtModified;
 
-    public String getDetailId() {
-        return detailId;
+    public String getInstructionId() {
+        return instructionId;
     }
 
-    public void setDetailId(String detailId) {
-        this.detailId = detailId;
+    public void setInstructionId(String instructionId) {
+        this.instructionId = instructionId;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getFluxOrderId() {
+        return fluxOrderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setFluxOrderId(String fluxOrderId) {
+        this.fluxOrderId = fluxOrderId;
+    }
+
+    public String getPayId() {
+        return payId;
+    }
+
+    public void setPayId(String payId) {
+        this.payId = payId;
     }
 
     public String getPaymentId() {
@@ -109,20 +137,36 @@ public class FundDetailDO implements Serializable {
         this.paymentId = paymentId;
     }
 
-    public String getBelongTo() {
-        return belongTo;
+    public String getType() {
+        return type;
     }
 
-    public void setBelongTo(String belongTo) {
-        this.belongTo = belongTo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public String getFundAction() {
+        return fundAction;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setFundAction(String fundAction) {
+        this.fundAction = fundAction;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRelationId() {
+        return relationId;
+    }
+
+    public void setRelationId(String relationId) {
+        this.relationId = relationId;
     }
 
     public BigDecimal getAmount() {
@@ -141,12 +185,12 @@ public class FundDetailDO implements Serializable {
         this.currencyCode = currencyCode;
     }
 
-    public String getAction() {
-        return action;
+    public String getFundDetailId() {
+        return fundDetailId;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setFundDetailId(String fundDetailId) {
+        this.fundDetailId = fundDetailId;
     }
 
     public String getAssetType() {
@@ -163,6 +207,14 @@ public class FundDetailDO implements Serializable {
 
     public void setAssetInfo(String assetInfo) {
         this.assetInfo = assetInfo;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 
     public LocalDateTime getGmtCreate() {
@@ -183,17 +235,21 @@ public class FundDetailDO implements Serializable {
 
     @Override
     public String toString() {
-        return "FundDetailDO{" +
-        "detailId = " + detailId +
-        ", orderId = " + orderId +
+        return "FluxInstructionDO{" +
+        "instructionId = " + instructionId +
+        ", fluxOrderId = " + fluxOrderId +
+        ", payId = " + payId +
         ", paymentId = " + paymentId +
-        ", belongTo = " + belongTo +
-        ", memberId = " + memberId +
+        ", type = " + type +
+        ", fundAction = " + fundAction +
+        ", status = " + status +
+        ", relationId = " + relationId +
         ", amount = " + amount +
         ", currencyCode = " + currencyCode +
-        ", action = " + action +
+        ", fundDetailId = " + fundDetailId +
         ", assetType = " + assetType +
         ", assetInfo = " + assetInfo +
+        ", extension = " + extension +
         ", gmtCreate = " + gmtCreate +
         ", gmtModified = " + gmtModified +
         "}";

@@ -1,5 +1,7 @@
-package cn.doanything.paycore.domain.asset;
+package cn.doanything.paycore.domain.asset.factory;
 
+import cn.doanything.paycore.domain.asset.FluxInstructBuilder;
+import cn.doanything.paycore.domain.asset.FluxInstructionExecutor;
 import cn.doanything.paycore.types.asset.AssetType;
 
 /**

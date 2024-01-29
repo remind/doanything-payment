@@ -6,6 +6,4 @@ package cn.doanything.paycore.domain.flux.service;
  */
 public abstract class AbstractFluxService {
 
-
-
 }

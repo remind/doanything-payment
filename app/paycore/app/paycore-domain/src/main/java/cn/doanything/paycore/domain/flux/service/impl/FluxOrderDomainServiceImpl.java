@@ -15,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author wxj
@@ -32,7 +31,7 @@ public class FluxOrderDomainServiceImpl extends AbstractFluxService implements F
 
     @Override
     public void failHandle(FluxOrder fluxOrder, FluxInstruction failInstruct) {
-        if (failInstruct.getInstructionType() == InstructionType.FORWARD) {
+        if (failInstruct.getType() == InstructionType.FORWARD) {
             reverse(fluxOrder, failInstruct);
         } else {
             // 逆向的再失败
@@ -41,11 +40,11 @@ public class FluxOrderDomainServiceImpl extends AbstractFluxService implements F
 
     @Override
     public void reverse(FluxOrder fluxOrder, FluxInstruction failInstruct) {
-        AssertUtil.isTrue(failInstruct.getInstructionType() == InstructionType.FORWARD, "只有正向才能逆向");
+        AssertUtil.isTrue(failInstruct.getType() == InstructionType.FORWARD, "只有正向才能逆向");
         instructChainService.deleteAfterFluxInstruct(fluxOrder, failInstruct.getInstructionId());
         List<FluxInstruction> forwardInstructs = fluxOrder.getAllFluxInstructs().stream()
                 .filter(assetFluxInstruct -> assetFluxInstruct.getStatus() == InstructStatus.SUCCESS)
-                .collect(Collectors.toList());
+                .toList();
         if (!CollectionUtils.isEmpty(forwardInstructs)) {
             Collections.reverse(forwardInstructs);
             forwardInstructs.forEach(assetFluxInstruct -> instructChainService.addInstruct(fluxOrder, instructDomainService.createReverseInstruct(assetFluxInstruct)));

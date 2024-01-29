@@ -29,11 +29,11 @@ public class FluxInstructDomainServiceImpl implements FluxInstructDomainService 
             fillExternalInstruct((ChannelFluxInstruction) reverseInstruct, (ChannelFluxInstruction) fluxInstruction);
         }
         reverseInstruct.setInstructionId(idGeneratorService.genIdByRelateId(fluxInstruction.getFluxOrderId(), IdType.FLUX_INSTRUCT_ID));
-        reverseInstruct.setInstructionType(InstructionType.REVERSE);
+        reverseInstruct.setType(InstructionType.REVERSE);
         reverseInstruct.setAmount(fluxInstruction.getAmount());
         reverseInstruct.setStatus(InstructStatus.INIT);
         reverseInstruct.setFundDetailId(fluxInstruction.getFundDetailId());
-        reverseInstruct.setRelatedInstructionId(fluxInstruction.getInstructionId());
+        reverseInstruct.setRelatedId(fluxInstruction.getInstructionId());
         return reverseInstruct;
     }
 
@@ -43,7 +43,7 @@ public class FluxInstructDomainServiceImpl implements FluxInstructDomainService 
     }
 
     private void fillExternalInstruct(ChannelFluxInstruction reverseInstruct, ChannelFluxInstruction forwardInstruct) {
-        reverseInstruct.setAssetInfo(forwardInstruct.getAssetInfo());
+        reverseInstruct.setAsset(forwardInstruct.getAsset());
         reverseInstruct.setFundAction(forwardInstruct.getFundAction().reverse());
     }
 }

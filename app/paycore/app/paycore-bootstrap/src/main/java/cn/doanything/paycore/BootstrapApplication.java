@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @Slf4j
 @EnableDubbo
-@MapperScan("cn.doanything.payment.infrastructure.persistence.mapper")
+@MapperScan("cn.doanything.paycore.infrastructure.persistence.mapper")
 public class BootstrapApplication {
 
     public static void main(String[] args) {
