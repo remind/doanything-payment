@@ -6,6 +6,6 @@ package cn.doanything.paycore.domain;
  */
 public interface PaymentConstants {
 
-    String TRANSITION_ACCOUNT = "123";
+    String TRANSITION_ACCOUNT = "TRANSITION_ACCOUNT";
     String INNER_MEMBER_ID = "inner_member";
 }

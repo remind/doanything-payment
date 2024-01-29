@@ -41,4 +41,9 @@ public class FluxOrderRepositoryImpl implements FluxOrderRepository {
         }
 
     }
+
+    @Override
+    public void reStore(FluxOrder fluxOrder) {
+        dalMapper.updateById(dalConvertor.toDo(fluxOrder));
+    }
 }

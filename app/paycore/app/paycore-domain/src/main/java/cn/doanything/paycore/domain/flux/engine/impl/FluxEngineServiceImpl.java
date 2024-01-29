@@ -5,13 +5,17 @@ import cn.doanything.paycore.domain.asset.FluxResult;
 import cn.doanything.paycore.domain.asset.factory.AssetFluxFactory;
 import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.domain.flux.FluxOrder;
-import cn.doanything.paycore.domain.flux.InstructStatus;
 import cn.doanything.paycore.domain.flux.chain.InstructChainService;
 import cn.doanything.paycore.domain.flux.engine.FluxEngineService;
+import cn.doanything.paycore.domain.flux.engine.processor.FluxResultProcessor;
+import cn.doanything.paycore.domain.flux.engine.processor.InstructResultProcessor;
+import cn.doanything.paycore.domain.flux.service.FluxInstructDomainService;
 import cn.doanything.paycore.domain.repository.FluxInstructionRepository;
+import cn.doanything.paycore.domain.repository.FluxOrderRepository;
 import cn.doanything.paycore.types.PayResult;
 import cn.doanything.paycore.types.PayStatus;
 import cn.doanything.paycore.types.asset.AssetType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Service;
  * 2024/1/27
  */
 @Service
+@Slf4j
 public class FluxEngineServiceImpl implements FluxEngineService {
 
     @Autowired
@@ -29,30 +34,36 @@ public class FluxEngineServiceImpl implements FluxEngineService {
     private FluxInstructionRepository instructionRepository;
 
     @Autowired
+    private FluxOrderRepository fluxOrderRepository;
+
+    @Autowired
     private InstructChainService instructChainService;
+
+    @Autowired
+    private FluxInstructDomainService instructDomainService;
+
+    @Autowired
+    private FluxResultProcessor fluxResultProcessor;
+
+    @Autowired
+    private InstructResultProcessor instructResultProcessor;
 
     @Override
     public PayResult process(FluxOrder fluxOrder) {
         FluxInstruction executeInstruction = instructChainService.getExecuteFluxInstruct(fluxOrder);
-        FluxResult result = null;
-        while (executeInstruction != null) {
+        FluxResult fluxResult = null;
+        boolean isContinue = true;
+        while (executeInstruction != null && isContinue) {
             AssetType assetType = executeInstruction.getAssetType();
             FluxInstructionExecutor instructionExecutor = assetFluxFactory.getFluxInstructionExecutor(assetType);
-            result = instructionExecutor.execute(fluxOrder, executeInstruction);
-            executeInstruction.setStatus(convertToInstructStatus(result.getStatus()));
-            if (result.getStatus() == PayStatus.SUCCESS) {
-                instructChainService.insertInstruct(fluxOrder, executeInstruction.getInstructionId(), result.getNewFluxInstructions());
-                instructionRepository.reStore(executeInstruction);
+            fluxResult = instructionExecutor.execute(fluxOrder, executeInstruction);
+            isContinue = instructResultProcessor.process(fluxOrder, executeInstruction, fluxResult);
+            if (isContinue) {
                 executeInstruction = instructChainService.getExecuteFluxInstruct(fluxOrder);
-            } else if (result.getStatus() == PayStatus.FAIL) {
-                instructionRepository.reStore(executeInstruction);
-                executeInstruction = instructChainService.getExecuteFluxInstruct(fluxOrder);
-            } else {
-                executeInstruction = null;
             }
-            // TODO 需要判断fluxOrder状态是否为已撤消，如果是就要走逆向流程
         }
-        return convertToPayResult(result);
+        fluxResultProcessor.process(fluxOrder, executeInstruction, fluxResult);
+        return convertToPayResult(fluxResult);
     }
 
     private PayResult convertToPayResult(FluxResult fluxResult) {
@@ -67,16 +78,4 @@ public class FluxEngineServiceImpl implements FluxEngineService {
         return payResult;
     }
 
-    private InstructStatus convertToInstructStatus(PayStatus payStatus) {
-        switch (payStatus) {
-            case SUCCESS:
-                return InstructStatus.SUCCESS;
-            case FAIL:
-                return InstructStatus.FAIL;
-            case PROCESS:
-                return InstructStatus.PROCESS;
-            default:
-                return null;
-        }
-    }
 }

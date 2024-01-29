@@ -8,6 +8,8 @@ import cn.doanything.paycore.infrastructure.persistence.mapper.FluxInstructionMa
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author wxj
  * 2024/1/28
@@ -31,5 +33,10 @@ public class FluxInstructionRepositoryImpl implements FluxInstructionRepository 
     public void reStore(FluxInstruction fluxInstruction) {
         FluxInstructionDO instructionDO = dalConvertor.toDo(fluxInstruction);
         dalMapper.updateById(instructionDO);
+    }
+
+    @Override
+    public void remove(List<String> fluxInstructionIds) {
+        fluxInstructionIds.forEach(instructionId -> dalMapper.deleteById(instructionId));
     }
 }

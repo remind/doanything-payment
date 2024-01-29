@@ -9,4 +9,6 @@ import cn.doanything.paycore.domain.flux.FluxOrder;
 public interface FluxOrderRepository {
 
     void store(FluxOrder fluxOrder);
+
+    void reStore(FluxOrder fluxOrder);
 }

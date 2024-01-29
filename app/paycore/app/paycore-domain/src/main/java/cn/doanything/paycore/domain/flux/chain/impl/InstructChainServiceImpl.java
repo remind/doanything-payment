@@ -5,9 +5,12 @@ import cn.doanything.paycore.domain.flux.FluxOrder;
 import cn.doanything.paycore.domain.flux.InstructStatus;
 import cn.doanything.paycore.domain.flux.chain.FluxInstructChain;
 import cn.doanything.paycore.domain.flux.chain.InstructChainService;
+import cn.doanything.paycore.domain.repository.FluxInstructionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +19,10 @@ import java.util.List;
  */
 @Service
 public class InstructChainServiceImpl implements InstructChainService {
+
+    @Autowired
+    private FluxInstructionRepository fluxInstructionRepository;
+
     @Override
     public void addInstruct(FluxOrder fluxOrder, FluxInstruction fluxInstruction) {
         FluxInstructChain firstInstruct = fluxOrder.getFirstInstruct();
@@ -54,14 +61,16 @@ public class InstructChainServiceImpl implements InstructChainService {
     }
 
     @Override
-    public void deleteAfterFluxInstruct(FluxOrder fluxOrder, String instructId) {
+    public List<String> deleteAfterFluxInstruct(FluxOrder fluxOrder, String instructId) {
         FluxInstructChain fluxInstructChain = find(fluxOrder, instructId);
         FluxInstructChain next = fluxInstructChain.getNext();
         fluxInstructChain.setNext(null);
+        List<String> deleteIds = new ArrayList<>();
         while (next != null) {
-            // 删除
+            deleteIds.add(next.getInstructionId());
             next = next.getNext();
         }
+        return deleteIds;
     }
 
     @Override

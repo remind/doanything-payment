@@ -4,7 +4,9 @@ import cn.doanything.paycore.domain.flux.FluxInstruction;
 import cn.doanything.paycore.types.PayStatus;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 交换结果
@@ -34,4 +36,9 @@ public class FluxResult {
      * 返回信息
      */
     private String resultMessage;
+
+    /**
+     * 扩展信息
+     */
+    private Map<String, String> extMap = new HashMap<>();
 }
