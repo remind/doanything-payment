@@ -4,7 +4,6 @@ import cn.doanything.commons.lang.utils.AssertUtil;
 import cn.doanything.paycore.domain.asset.FluxResult;
 import cn.doanything.paycore.domain.flux.*;
 import cn.doanything.paycore.domain.flux.chain.InstructChainService;
-import cn.doanything.paycore.domain.flux.engine.FluxEngineService;
 import cn.doanything.paycore.domain.flux.engine.processor.FluxResultProcessor;
 import cn.doanything.paycore.domain.flux.service.FluxInstructDomainService;
 import cn.doanything.paycore.domain.repository.FluxInstructionRepository;
@@ -15,7 +14,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 /**
  * @author wxj
@@ -36,14 +34,8 @@ public class FluxResultProcessorImpl implements FluxResultProcessor {
     @Autowired
     private FluxInstructDomainService instructDomainService;
 
-    @Autowired
-    private FluxEngineService fluxEngineService;
-
-    @Autowired
-    private ExecutorService executorService;
-
     @Override
-    public void process(FluxOrder fluxOrder, FluxInstruction lastInstruction, FluxResult lastResult) {
+    public boolean process(FluxOrder fluxOrder, FluxInstruction lastInstruction, FluxResult lastResult) {
         boolean isContinue = false;
         switch (lastResult.getStatus()) {
             case SUCCESS:
@@ -57,12 +49,7 @@ public class FluxResultProcessorImpl implements FluxResultProcessor {
                 break;
         }
         fluxOrderRepository.reStore(fluxOrder);
-        if (isContinue) {
-            executorService.submit(() -> {
-                // 组合支付，后面的失败了，需要对前面的退款
-                fluxEngineService.process(fluxOrder);
-            });
-        }
+        return isContinue;
     }
 
     private boolean successProcess(FluxOrder fluxOrder) {

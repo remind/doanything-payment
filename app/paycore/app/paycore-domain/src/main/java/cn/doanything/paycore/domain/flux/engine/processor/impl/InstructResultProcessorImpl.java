@@ -8,9 +8,12 @@ import cn.doanything.paycore.domain.flux.InstructionType;
 import cn.doanything.paycore.domain.flux.chain.InstructChainService;
 import cn.doanything.paycore.domain.flux.engine.processor.InstructResultProcessor;
 import cn.doanything.paycore.domain.repository.FluxInstructionRepository;
+import cn.doanything.paycore.domain.service.IdGeneratorService;
+import cn.doanything.paycore.types.IdType;
 import cn.doanything.paycore.types.PayStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -26,6 +29,9 @@ public class InstructResultProcessorImpl implements InstructResultProcessor {
 
     @Autowired
     private InstructChainService instructChainService;
+
+    @Autowired
+    private IdGeneratorService idGeneratorService;
 
     @Override
     public boolean process(FluxOrder fluxOrder, FluxInstruction fluxInstruction, FluxResult fluxResult) {
@@ -46,8 +52,19 @@ public class InstructResultProcessorImpl implements InstructResultProcessor {
     }
 
     private void successProcess(FluxOrder fluxOrder, FluxInstruction fluxInstruction, FluxResult fluxResult) {
-        instructChainService.insertInstruct(fluxOrder, fluxInstruction.getInstructionId(), fluxResult.getNewFluxInstructions());
-
+        if (!CollectionUtils.isEmpty(fluxResult.getNewFluxInstructions())) {
+            for (FluxInstruction newFluxInstruction : fluxResult.getNewFluxInstructions()) {
+                newFluxInstruction.setPaymentId(fluxInstruction.getPaymentId());
+                newFluxInstruction.setPayId(fluxInstruction.getPayId());
+                newFluxInstruction.setFluxOrderId(fluxOrder.getFluxOrderId());
+                newFluxInstruction.setInstructionId(idGeneratorService.genIdByRelateId(fluxInstruction.getInstructionId(), IdType.FLUX_INSTRUCT_ID));
+                newFluxInstruction.setStatus(InstructStatus.INIT);
+            }
+            List<FluxInstruction> addInstructions = instructChainService.insertInstruct(fluxOrder, fluxInstruction, fluxResult.getNewFluxInstructions());
+            addInstructions.forEach(instruction -> {
+                instructionRepository.store(instruction);
+            });
+        }
     }
 
     private void failProcess(FluxOrder fluxOrder, FluxInstruction fluxInstruction, FluxResult fluxResult) {

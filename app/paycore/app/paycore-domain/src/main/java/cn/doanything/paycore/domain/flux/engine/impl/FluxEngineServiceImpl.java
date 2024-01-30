@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ExecutorService;
+
 /**
  * @author wxj
  * 2024/1/27
@@ -48,8 +50,23 @@ public class FluxEngineServiceImpl implements FluxEngineService {
     @Autowired
     private InstructResultProcessor instructResultProcessor;
 
+    @Autowired
+    private ExecutorService executorService;
+
     @Override
     public PayResult process(FluxOrder fluxOrder) {
+        FluxResult fluxResult = execute(fluxOrder);
+        boolean isContinue = fluxResultProcessor.process(fluxOrder, fluxResult.getExecuteInstruction(), fluxResult);
+        if (isContinue) {
+            executorService.submit(() -> {
+                // 组合支付，后面的失败了，需要对前面的退款
+                execute(fluxOrder);
+            });
+        }
+        return convertToPayResult(fluxResult);
+    }
+
+    private FluxResult execute(FluxOrder fluxOrder) {
         FluxInstruction executeInstruction = instructChainService.getExecuteFluxInstruct(fluxOrder);
         FluxResult fluxResult = null;
         boolean isContinue = true;
@@ -57,14 +74,15 @@ public class FluxEngineServiceImpl implements FluxEngineService {
             AssetType assetType = executeInstruction.getAssetType();
             FluxInstructionExecutor instructionExecutor = assetFluxFactory.getFluxInstructionExecutor(assetType);
             fluxResult = instructionExecutor.execute(fluxOrder, executeInstruction);
+            fluxResult.setExecuteInstruction(executeInstruction);
             isContinue = instructResultProcessor.process(fluxOrder, executeInstruction, fluxResult);
             if (isContinue) {
                 executeInstruction = instructChainService.getExecuteFluxInstruct(fluxOrder);
             }
         }
-        fluxResultProcessor.process(fluxOrder, executeInstruction, fluxResult);
-        return convertToPayResult(fluxResult);
+        return fluxResult;
     }
+
 
     private PayResult convertToPayResult(FluxResult fluxResult) {
         PayResult payResult = new PayResult();
@@ -74,6 +92,7 @@ public class FluxEngineServiceImpl implements FluxEngineService {
             payResult.setPayStatus(fluxResult.getStatus());
             payResult.setResultMessage(fluxResult.getResultMessage());
             payResult.setResultCode(fluxResult.getResultCode());
+            payResult.setPayParam(fluxResult.getPayParam());
         }
         return payResult;
     }

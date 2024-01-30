@@ -10,6 +10,7 @@ import cn.doanything.paycore.domain.flux.InstructStatus;
 import cn.doanything.paycore.domain.flux.InstructionType;
 import cn.doanything.paycore.types.PayStatus;
 import cn.doanything.paycore.types.asset.BalanceAsset;
+import cn.doanything.paycore.types.funds.FundAction;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class ChannelFluxInstructExecutor implements FluxInstructionExecutor {
         newFluxInstruct.setAmount(fluxInstruction.getAmount());
         newFluxInstruct.setDebitAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, clearAccountNo));
         newFluxInstruct.setCreditAsset(new BalanceAsset(PaymentConstants.INNER_MEMBER_ID, PaymentConstants.TRANSITION_ACCOUNT));
+        newFluxInstruct.setFundAction(FundAction.TRANSFER);
         return newFluxInstruct;
     }
 }

@@ -13,6 +13,13 @@ public class BankCardAsset extends AssetInfo {
 
     private String bankName;
 
+    public BankCardAsset() {
+    }
+
+    public BankCardAsset(String bankCardNo) {
+        this.bankCardNo = bankCardNo;
+    }
+
     @Override
     public AssetType getAssetType() {
         return AssetType.BANKCARD;

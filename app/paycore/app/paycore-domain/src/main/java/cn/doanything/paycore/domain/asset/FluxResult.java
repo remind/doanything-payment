@@ -23,6 +23,11 @@ public class FluxResult {
     private PayStatus status;
 
     /**
+     * 执行指令
+     */
+    private FluxInstruction executeInstruction;
+
+    /**
      * 新增交换指令
      */
     private List<FluxInstruction> newFluxInstructions;
@@ -36,6 +41,11 @@ public class FluxResult {
      * 返回信息
      */
     private String resultMessage;
+
+    /**
+     * 支付参数
+     */
+    private Map<String, String> payParam = new HashMap<>();
 
     /**
      * 扩展信息

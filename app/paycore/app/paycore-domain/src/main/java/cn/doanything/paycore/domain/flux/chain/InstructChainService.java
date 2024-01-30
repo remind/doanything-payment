@@ -22,18 +22,20 @@ public interface InstructChainService {
     /**
      * 插入指令在指定指令之后
      * @param fluxOrder
-     * @param instructId
+     * @param fluxInstruction
      * @param newFluxInstruction
+     * @return
      */
-    void insertInstruct(FluxOrder fluxOrder, String instructId, FluxInstruction newFluxInstruction);
+    boolean insertInstruct(FluxOrder fluxOrder, FluxInstruction fluxInstruction, FluxInstruction newFluxInstruction);
 
     /**
      * 插入指令在指定指令之后
      * @param fluxOrder
-     * @param instructId
+     * @param fluxInstruction
      * @param newFluxInstructions
+     * @return
      */
-    void insertInstruct(FluxOrder fluxOrder, String instructId, List<FluxInstruction> newFluxInstructions);
+    List<FluxInstruction> insertInstruct(FluxOrder fluxOrder, FluxInstruction fluxInstruction, List<FluxInstruction> newFluxInstructions);
 
     /**
      * 删除指定指令后面的指令

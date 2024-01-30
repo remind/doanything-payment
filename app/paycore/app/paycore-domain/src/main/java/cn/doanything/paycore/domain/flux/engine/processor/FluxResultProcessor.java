@@ -10,5 +10,5 @@ import cn.doanything.paycore.domain.flux.FluxOrder;
  */
 public interface FluxResultProcessor {
 
-    void process(FluxOrder fluxOrder, FluxInstruction lastInstruction, FluxResult lastResult);
+    boolean process(FluxOrder fluxOrder, FluxInstruction lastInstruction, FluxResult lastResult);
 }

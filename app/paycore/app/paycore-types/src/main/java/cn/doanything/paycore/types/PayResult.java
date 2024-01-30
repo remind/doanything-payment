@@ -2,6 +2,8 @@ package cn.doanything.paycore.types;
 
 import lombok.Data;
 
+import java.util.Map;
+
 /**
  * @author wxj
  * 2024/1/26
@@ -13,6 +15,11 @@ public class PayResult {
      * 支付状态
      */
     private PayStatus payStatus;
+
+    /**
+     * 支付参数
+     */
+    private Map<String, String> payParam;
 
     /**
      * 返回结果码
