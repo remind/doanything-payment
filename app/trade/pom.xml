@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.doanything</groupId>
+        <artifactId>doanything-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>cn.doanything.trade</groupId>
+    <artifactId>trade</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>app/trade-bootstrap</module>
+        <module>app/trade-facade</module>
+        <module>app/trade-infrastructure</module>
+        <module>app/trade-application</module>
+        <module>app/trade-domain</module>
+        <module>app/trade-types</module>
+        <module>gen/trade-dalgen</module>
+    </modules>
+
+    <properties>
+        <revision>1.0-SNAPSHOT</revision>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.doanything.trade</groupId>
+                <artifactId>trade-types</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.trade</groupId>
+                <artifactId>trade-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.trade</groupId>
+                <artifactId>trade-facade</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.trade</groupId>
+                <artifactId>trade-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.trade</groupId>
+                <artifactId>trade-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
