@@ -14,6 +14,7 @@
         <module>doanything-framework-scheduler</module>
         <module>doanything-framework-test</module>
         <module>doanything-framework-generator</module>
+        <module>doanything-framework-state</module>
     </modules>
 
     <properties>
