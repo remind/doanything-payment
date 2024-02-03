@@ -1,7 +1,7 @@
 package cn.doanything.trade.application.fund;
 
+import cn.doanything.commons.payment.result.PayResult;
 import cn.doanything.trade.domain.fund.FundOrder;
-import cn.doanything.trade.domain.payment.PaymentOrder;
 
 /**
  * @author wxj
@@ -9,5 +9,5 @@ import cn.doanything.trade.domain.payment.PaymentOrder;
  */
 public interface FundService {
 
-    PaymentOrder pay(FundOrder fundOrder);
+    PayResult pay(FundOrder fundOrder);
 }

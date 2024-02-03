@@ -1,9 +1,11 @@
 package cn.doanything.trade.facade;
 
 import cn.doanything.commons.payment.asset.BalanceAsset;
+import cn.doanything.commons.payment.result.PayResult;
 import cn.doanything.trade.TradeType;
-import cn.doanything.trade.application.transfer.TransferService;
+import cn.doanything.trade.application.fund.FundService;
 import cn.doanything.trade.domain.fund.FundOrder;
+import cn.doanything.trade.domain.repository.FundOrderRepository;
 import cn.doanything.trade.domain.service.IdGeneratorService;
 import cn.doanything.trade.facade.fund.FundTradeFacade;
 import cn.doanything.trade.facade.fund.deposit.DepositRequest;
@@ -14,6 +16,7 @@ import cn.doanything.trade.facade.fund.withdrawal.WithdrawalRequest;
 import cn.doanything.trade.facade.fund.withdrawal.WithdrawalResponse;
 import cn.doanything.trade.status.FundOrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * @author wxj
@@ -22,10 +25,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class FundTradeFacadeImpl implements FundTradeFacade {
 
     @Autowired
-    private TransferService transferService;
+    private FundService fundService;
+
+    @Autowired
+    private FundOrderRepository fundOrderRepository;
 
     @Autowired
     private IdGeneratorService idGeneratorService;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
 
     @Override
     public DepositResponse deposit(DepositRequest request) {
@@ -34,7 +43,13 @@ public class FundTradeFacadeImpl implements FundTradeFacade {
         fundOrder.setPayerAsset(request.getDepositAsset());
         fundOrder.setPayeeId(request.getMemberId());
         fundOrder.setPayeeAsset(new BalanceAsset(request.getMemberId(), request.getAccountNo()));
-        return null;
+        PayResult result = pay(fundOrder);
+        DepositResponse response = new DepositResponse();
+        response.setTradeId(fundOrder.getTradeId());
+        response.setStatus(result.getPayStatus());
+        response.setResultCode(result.getResultCode());
+        response.setResultMessage(result.getResultMessage());
+        return response;
     }
 
     @Override
@@ -44,8 +59,13 @@ public class FundTradeFacadeImpl implements FundTradeFacade {
         fundOrder.setPayeeAsset(new BalanceAsset(request.getPayeeId(), request.getPayeeAccountNo()));
         fundOrder.setPayerId(request.getPayerId());
         fundOrder.setPayerAsset(new BalanceAsset(request.getPayerId(), request.getPayerAccountNo()));
-        transferService.pay(fundOrder);
-        return null;
+        PayResult result = pay(fundOrder);
+        TransferResponse response = new TransferResponse();
+        response.setTradeId(fundOrder.getTradeId());
+        response.setStatus(result.getPayStatus());
+        response.setResultCode(result.getResultCode());
+        response.setResultMessage(result.getResultMessage());
+        return response;
     }
 
     @Override
@@ -55,7 +75,22 @@ public class FundTradeFacadeImpl implements FundTradeFacade {
         fundOrder.setPayerAsset(request.getBankCardAsset());
         fundOrder.setPayeeId(request.getMemberId());
         fundOrder.setPayeeAsset(new BalanceAsset(request.getMemberId(), request.getAccountNo()));
-        return null;
+        PayResult result = pay(fundOrder);
+        WithdrawalResponse response = new WithdrawalResponse();
+        response.setTradeId(fundOrder.getTradeId());
+
+        // TODO 提现状态
+
+        response.setResultCode(result.getResultCode());
+        response.setResultMessage(result.getResultMessage());
+        return response;
+    }
+
+    private PayResult pay(FundOrder fundOrder) {
+        return transactionTemplate.execute(status -> {
+            fundOrderRepository.store(fundOrder);
+            return fundService.pay(fundOrder);
+        });
     }
 
     private FundOrder build(TradeType tradeType, String memberId, TradeRequest request) {

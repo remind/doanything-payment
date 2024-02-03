@@ -1,6 +1,7 @@
 package cn.doanything.trade.facade.fund.transfer;
 
-import cn.doanything.trade.status.TransferOrderStatus;
+import cn.doanything.commons.payment.result.PayStatus;
+import cn.doanything.trade.facade.TradeResponse;
 import lombok.Data;
 
 /**
@@ -8,20 +9,10 @@ import lombok.Data;
  * 2024/2/2
  */
 @Data
-public class TransferResponse {
-
-    /**
-     * 转账流水号
-     */
-    private String tradeId;
-
+public class TransferResponse extends TradeResponse {
     /**
      * 状态
      */
-    private TransferOrderStatus status;
+    private PayStatus status;
 
-    /**
-     * 消息
-     */
-    private String message;
 }
