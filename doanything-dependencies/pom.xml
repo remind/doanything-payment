@@ -34,6 +34,11 @@
                 <artifactId>doanything-commons-lang</artifactId>
                 <version>${framework-commons-lang.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.doanything.commons</groupId>
+                <artifactId>doanything-commons-payment</artifactId>
+                <version>${framework-commons-lang.version}</version>
+            </dependency>
             <!-- end 二方commons包依赖定义 -->
 
             <!-- start 二方框架包依赖定义 -->

@@ -16,7 +16,7 @@
         </dependency>
         <dependency>
             <groupId>cn.doanything.trade</groupId>
-            <artifactId>trade-infrastructure</artifactId>
+            <artifactId>trade-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>

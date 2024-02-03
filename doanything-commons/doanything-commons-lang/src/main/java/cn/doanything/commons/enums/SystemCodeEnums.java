@@ -11,6 +11,7 @@ public enum SystemCodeEnums {
     PAYMENT("001", "PAYMENT", "支付核心"),
 
     BASIC("002", "BASIC", "公共平台"),
+    TRADE("003", "TRADE", "交易"),
 
     ;
 

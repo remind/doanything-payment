@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.trade</groupId>
-            <artifactId>trade-domain</artifactId>
+            <artifactId>trade-application</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>
@@ -22,6 +22,12 @@
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-config</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.doanything.payment</groupId>
+            <artifactId>paycore-facade</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

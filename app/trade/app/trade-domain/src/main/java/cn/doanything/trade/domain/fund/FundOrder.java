@@ -11,12 +11,13 @@ import lombok.Data;
 public class FundOrder extends TradeOrder {
 
     /**
-     * 收款方ID
+     * 发起人ID
+     * 分为：提现人、转账人、充值人、代发出款户、代扣收款户
      */
-    private String payeeId;
+    private String memberId;
 
     /**
-     * 收款方ID
+     * 状态
      */
-    private String payerId;
+    private FundOrderStatus status;
 }

@@ -7,6 +7,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>doanything-commons-lang</module>
+        <module>doanything-commons-payment</module>
     </modules>
 
     <properties>
@@ -27,6 +28,11 @@
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.doanything.commons</groupId>
+                <artifactId>doanything-commons-lang</artifactId>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

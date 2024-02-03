@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.trade</groupId>
-            <artifactId>trade-application</artifactId>
+            <artifactId>trade-infrastructure</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>
