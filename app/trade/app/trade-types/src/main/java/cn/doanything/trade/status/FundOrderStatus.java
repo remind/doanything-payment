@@ -1,4 +1,4 @@
-package cn.doanything.trade.domain.fund;
+package cn.doanything.trade.status;
 
 import cn.doanything.commons.enums.CodeEnum;
 import lombok.Getter;

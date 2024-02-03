@@ -1,6 +1,6 @@
-package cn.doanything.trade.transfer;
+package cn.doanything.trade.facade.fund.transfer;
 
-import cn.doanything.commons.lang.types.Money;
+import cn.doanything.trade.facade.TradeRequest;
 import lombok.Data;
 
 /**
@@ -8,7 +8,7 @@ import lombok.Data;
  * 2024/2/2
  */
 @Data
-public class TransferRequest {
+public class TransferRequest extends TradeRequest {
 
     /**
      * 付款人id
@@ -30,13 +30,4 @@ public class TransferRequest {
      */
     private String payeeAccountNo;
 
-    /**
-     * 转账金额
-     */
-    private Money amount;
-
-    /**
-     * 备注
-     */
-    private String memo;
 }

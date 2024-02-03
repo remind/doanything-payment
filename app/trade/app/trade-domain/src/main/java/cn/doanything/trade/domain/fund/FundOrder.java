@@ -1,6 +1,8 @@
 package cn.doanything.trade.domain.fund;
 
+import cn.doanything.commons.payment.asset.AssetInfo;
 import cn.doanything.trade.domain.TradeOrder;
+import cn.doanything.trade.status.FundOrderStatus;
 import lombok.Data;
 
 /**
@@ -11,10 +13,24 @@ import lombok.Data;
 public class FundOrder extends TradeOrder {
 
     /**
-     * 发起人ID
-     * 分为：提现人、转账人、充值人、代发出款户、代扣收款户
+     * 收款方ID
      */
-    private String memberId;
+    private String payeeId;
+
+    /**
+     * 收款方资产
+     */
+    private AssetInfo payeeAsset;
+
+    /**
+     * 收款方ID
+     */
+    private String payerId;
+
+    /**
+     * 付款方资产
+     */
+    private AssetInfo payerAsset;
 
     /**
      * 状态

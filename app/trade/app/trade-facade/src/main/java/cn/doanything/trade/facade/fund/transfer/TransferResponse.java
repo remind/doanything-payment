@@ -1,4 +1,4 @@
-package cn.doanything.trade.transfer;
+package cn.doanything.trade.facade.fund.transfer;
 
 import cn.doanything.trade.status.TransferOrderStatus;
 import lombok.Data;

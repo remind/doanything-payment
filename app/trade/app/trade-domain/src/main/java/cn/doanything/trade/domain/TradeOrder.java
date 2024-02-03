@@ -5,7 +5,6 @@ import cn.doanything.trade.TradeType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @author wxj
@@ -22,7 +21,7 @@ public class TradeOrder {
     /**
      * 交易类型
      */
-    private TradeType type;
+    private TradeType tradeType;
 
     /**
      * 交易金额
@@ -38,5 +37,10 @@ public class TradeOrder {
      * 提交时间
      */
     private LocalDateTime gmtSubmit;
+
+    /**
+     * 备注
+     */
+    private String memo;
 
 }

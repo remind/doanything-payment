@@ -10,7 +10,11 @@ import lombok.Getter;
 @Getter
 public enum TradeType implements CodeEnum {
 
-    TRANSFER("01", "普通转账交易");
+    DEPOSIT("01", "充值交易"),
+    TRANSFER("02", "转账交易"),
+    WITHDRAWAL("03", "提现交易"),
+
+    ;
 
     private String code;
 
