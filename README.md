@@ -2,7 +2,11 @@
 
     面向中大型互联网平台的支付平台
 
-# 开发进度
+# 整体架构
+
+![架构图](https://github.com/remind/doanything-payment/blob/main/doc/img/architecture.png)
+
+# 应用说明
 
 | 应用      | 中文名称 | 简介                             |
 |---------|------|--------------------------------|
@@ -12,12 +16,8 @@
 | basic   | 公共服务 | 封装如文件存储、短信、邮件等等                |
 | member  | 会员系统 | 个人、企业会员，会员信息                   |
 
-# 整体架构
-
-![架构图](https://raw.github.com/remind/doanything-payment/tree/main/doc/img/architecture.png)
-
 # 应用结构
 
-![架构图](https://raw.github.com/remind/doanything-payment/tree/main/doc/img/app-architecture.png)
+![架构图](https://github.com/remind/doanything-payment/blob/main/doc/img/app-architecture.png)
 
 [技术规范](https://www.yuque.com/fengyu-sfney/uc5srd/qfxlya2nx73cggl8?singleDoc#)
