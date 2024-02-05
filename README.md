@@ -33,4 +33,15 @@
 
 ![架构图](/doc/img/app-architecture.png)
 
-[技术规范](https://www.yuque.com/fengyu-sfney/uc5srd/qfxlya2nx73cggl8?singleDoc#)
+# 技术规范
+## 技术选型
+
+| 框架          | 版本    | 说明      |
+|-------------|-------|---------|
+| Java        | 17    | 开发语言    |
+| Spring Boot | 3.1.6 | 基础开发框架  |
+| Dubbo       | 3.2.9 | 微服务通信框架 | 
+| MySQL       | 8+    | 数据库     | 
+
+## 技术规范
+[技术规范文档地址](https://www.yuque.com/fengyu-sfney/uc5srd/qfxlya2nx73cggl8?singleDoc#)
