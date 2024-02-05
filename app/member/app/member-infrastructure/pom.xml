@@ -11,11 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.member</groupId>
-            <artifactId>member-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.doanything.framework</groupId>
-            <artifactId>doanything-framework-rpc</artifactId>
+            <artifactId>member-application</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>

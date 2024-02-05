@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.payment</groupId>
-            <artifactId>paycore-domain</artifactId>
+            <artifactId>paycore-application</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>

@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.account</groupId>
-            <artifactId>account-application</artifactId>
+            <artifactId>account-infrastructure</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

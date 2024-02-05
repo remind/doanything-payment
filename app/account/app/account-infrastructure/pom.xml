@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.account</groupId>
-            <artifactId>account-domain</artifactId>
+            <artifactId>account-application</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>

@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.member</groupId>
-            <artifactId>member-application</artifactId>
+            <artifactId>member-infrastructure</artifactId>
         </dependency>
 
         <dependency>

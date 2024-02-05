@@ -16,7 +16,7 @@
         </dependency>
         <dependency>
             <groupId>cn.doanything.basic</groupId>
-            <artifactId>basic-infrastructure</artifactId>
+            <artifactId>basic-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>
@@ -25,6 +25,14 @@
         <dependency>
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-scheduler</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.doanything.basic</groupId>
-            <artifactId>basic-application</artifactId>
+            <artifactId>basic-infrastructure</artifactId>
         </dependency>
 
         <dependency>

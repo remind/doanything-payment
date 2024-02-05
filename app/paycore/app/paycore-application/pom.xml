@@ -16,11 +16,15 @@
         </dependency>
         <dependency>
             <groupId>cn.doanything.payment</groupId>
-            <artifactId>paycore-infrastructure</artifactId>
+            <artifactId>paycore-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.doanything.framework</groupId>
             <artifactId>doanything-framework-rpc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -15,6 +15,10 @@
             <artifactId>basic-types</artifactId>
         </dependency>
         <dependency>
+            <groupId>cn.doanything.framework</groupId>
+            <artifactId>doanything-framework-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
