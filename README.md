@@ -4,7 +4,7 @@
 
 # 整体架构
 
-![架构图](https://github.com/remind/doanything-payment/blob/main/doc/img/architecture.png)
+![架构图](/doc/img/architecture.png)
 
 # 项目结构
     doanything-payment
@@ -31,6 +31,6 @@
 
 # 应用结构
 
-![架构图](https://github.com/remind/doanything-payment/blob/main/doc/img/app-architecture.png)
+![架构图](/doc/img/app-architecture.png)
 
 [技术规范](https://www.yuque.com/fengyu-sfney/uc5srd/qfxlya2nx73cggl8?singleDoc#)
