@@ -1,6 +1,6 @@
 package cn.doanything.trade.domain.service;
 
-import cn.doanything.trade.TradeType;
+import cn.doanything.types.TradeType;
 
 /**
  * @author wxj

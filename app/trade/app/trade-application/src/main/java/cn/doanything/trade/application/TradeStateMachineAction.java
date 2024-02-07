@@ -1,7 +1,7 @@
 package cn.doanything.trade.application;
 
 import cn.doanything.framework.state.Action;
-import cn.doanything.trade.status.TradeOrderStatus;
+import cn.doanything.types.status.TradeOrderStatus;
 
 /**
  * @author wxj

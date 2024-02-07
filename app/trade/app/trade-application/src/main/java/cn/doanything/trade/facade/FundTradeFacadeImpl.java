@@ -2,7 +2,7 @@ package cn.doanything.trade.facade;
 
 import cn.doanything.commons.payment.asset.BalanceAsset;
 import cn.doanything.commons.payment.result.PayResult;
-import cn.doanything.trade.TradeType;
+import cn.doanything.types.TradeType;
 import cn.doanything.trade.application.fund.FundService;
 import cn.doanything.trade.domain.fund.FundOrder;
 import cn.doanything.trade.domain.repository.FundOrderRepository;
@@ -14,7 +14,7 @@ import cn.doanything.trade.facade.fund.transfer.TransferRequest;
 import cn.doanything.trade.facade.fund.transfer.TransferResponse;
 import cn.doanything.trade.facade.fund.withdrawal.WithdrawalRequest;
 import cn.doanything.trade.facade.fund.withdrawal.WithdrawalResponse;
-import cn.doanything.trade.status.FundOrderStatus;
+import cn.doanything.types.status.FundOrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.support.TransactionTemplate;
 

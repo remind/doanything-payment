@@ -1,4 +1,4 @@
-package cn.doanything.trade.status;
+package cn.doanything.types.status;
 
 import cn.doanything.commons.enums.CodeEnum;
 import lombok.Getter;

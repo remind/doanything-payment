@@ -2,7 +2,7 @@ package cn.doanything.trade.domain.fund;
 
 import cn.doanything.commons.payment.asset.AssetInfo;
 import cn.doanything.trade.domain.TradeOrder;
-import cn.doanything.trade.status.FundOrderStatus;
+import cn.doanything.types.status.FundOrderStatus;
 import lombok.Data;
 
 /**
@@ -23,7 +23,7 @@ public class FundOrder extends TradeOrder {
     private AssetInfo payeeAsset;
 
     /**
-     * 收款方ID
+     * 付款方ID
      */
     private String payerId;
 

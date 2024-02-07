@@ -1,9 +1,9 @@
 package cn.doanything.trade.config;
 
 import cn.doanything.framework.state.builder.SateMachineBuilder;
-import cn.doanything.trade.TradeType;
+import cn.doanything.types.TradeType;
 import cn.doanything.trade.application.TradeEvent;
-import cn.doanything.trade.status.TransferOrderStatus;
+import cn.doanything.types.status.TransferOrderStatus;
 import org.springframework.context.annotation.Configuration;
 
 /**

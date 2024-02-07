@@ -1,4 +1,4 @@
-package cn.doanything.trade.status;
+package cn.doanything.types.status;
 
 /**
  * @author wxj

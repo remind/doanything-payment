@@ -3,7 +3,7 @@ package cn.doanything.trade.domain.service.impl;
 import cn.doanything.commons.enums.BizIdType;
 import cn.doanything.commons.enums.SystemCodeEnums;
 import cn.doanything.framework.api.sequence.SequenceService;
-import cn.doanything.trade.TradeType;
+import cn.doanything.types.TradeType;
 import cn.doanything.trade.domain.IdType;
 import cn.doanything.trade.domain.service.IdGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;

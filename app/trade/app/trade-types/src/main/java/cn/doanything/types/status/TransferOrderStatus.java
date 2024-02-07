@@ -1,4 +1,4 @@
-package cn.doanything.trade.status;
+package cn.doanything.types.status;
 
 import cn.doanything.commons.enums.CodeEnum;
 import lombok.Getter;
@@ -16,9 +16,9 @@ public enum TransferOrderStatus implements CodeEnum, TradeOrderStatus {
     FAIL("04", "转账失败"),
     ;
 
-    private String code;
+    private final String code;
 
-    private String displayName;
+    private final String displayName;
 
     TransferOrderStatus(String code, String displayName) {
         this.code = code;

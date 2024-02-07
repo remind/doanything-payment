@@ -1,7 +1,7 @@
 package cn.doanything.trade.domain;
 
 import cn.doanything.commons.lang.types.Money;
-import cn.doanything.trade.TradeType;
+import cn.doanything.types.TradeType;
 import lombok.Data;
 
 import java.time.LocalDateTime;

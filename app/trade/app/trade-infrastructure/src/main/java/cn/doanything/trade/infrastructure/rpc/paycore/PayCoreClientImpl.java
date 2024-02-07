@@ -1,4 +1,4 @@
-package cn.doanything.trade.rpc.paycore;
+package cn.doanything.trade.infrastructure.rpc.paycore;
 
 import cn.doanything.commons.payment.result.PayResult;
 import cn.doanything.paycore.facade.InstantPaymentFacade;

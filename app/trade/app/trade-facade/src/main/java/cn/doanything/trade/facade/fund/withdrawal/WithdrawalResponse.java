@@ -1,7 +1,7 @@
 package cn.doanything.trade.facade.fund.withdrawal;
 
 import cn.doanything.trade.facade.TradeResponse;
-import cn.doanything.trade.status.FundOrderStatus;
+import cn.doanything.types.status.FundOrderStatus;
 import lombok.Data;
 
 /**
