@@ -3,6 +3,7 @@ package cn.doanything.trade.facade;
 import cn.doanything.commons.payment.SettleTimeType;
 import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.trade.domain.acquiring.AcquiringOrder;
+import cn.doanything.trade.domain.acquiring.service.AcquiringDomainService;
 import cn.doanything.trade.domain.repository.AcquiringTradeRepository;
 import cn.doanything.trade.domain.service.IdGeneratorService;
 import cn.doanything.trade.facade.acquiring.AcquiringTradeFacade;
@@ -10,6 +11,7 @@ import cn.doanything.trade.facade.acquiring.instant.InstantRequest;
 import cn.doanything.trade.facade.acquiring.instant.InstantResponse;
 import cn.doanything.types.TradeType;
 import cn.doanything.types.status.AcquiringTradeStatus;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -23,7 +25,11 @@ public class AcquiringTradeFacadeImpl implements AcquiringTradeFacade {
     @Autowired
     private IdGeneratorService idGeneratorService;
 
+    @Autowired
     private AcquiringTradeRepository acquiringTradeRepository;
+
+    @Autowired
+    private AcquiringDomainService acquiringDomainService;
 
     @Override
     public InstantResponse createInstantTrade(InstantRequest request) {
@@ -47,17 +53,31 @@ public class AcquiringTradeFacadeImpl implements AcquiringTradeFacade {
         trade.setGmtSubmit(LocalDateTime.now());
         trade.setPartnerId(request.getPartnerId());
         trade.setSellerId(request.getSellerId());
-        trade.setSellerAccountNo("TODO");
         trade.setBuyerId(request.getBuyerId());
         trade.setProductDesc(request.getProductDesc());
         trade.setShowUrl(request.getShowUrl());
         trade.setTradeType(TradeType.INSTANT_ACQUIRING);
         trade.setSettleTimeType(SettleTimeType.REAL);
+
+        fillSellerAccount(trade, request);
+        fillExpireTime(trade, request);
+        return trade;
+    }
+
+    private void fillSellerAccount(AcquiringOrder trade, InstantRequest request) {
+        if (StrUtil.isBlank(request.getSellerAccountNo())) {
+            trade.setSellerAccountNo(acquiringDomainService.getSellerAccount(trade.getPartnerId(), trade.getSellerId()));
+        } else {
+            trade.setSellerAccountNo(request.getSellerAccountNo());
+        }
+    }
+
+    private void fillExpireTime(AcquiringOrder trade, InstantRequest request) {
         if (request.getExpireTime() == null) {
             trade.setExpireTime(trade.getGmtSubmit().plusMinutes(30));
         } else {
             trade.setExpireTime(request.getExpireTime());
         }
-        return trade;
     }
+
 }

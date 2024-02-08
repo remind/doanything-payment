@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * 即时到账请求
+ *
  * @author wxj
  * 2024/2/7
  */
@@ -27,6 +28,11 @@ public class InstantRequest extends TradeRequest {
      * 卖家ID
      */
     private String sellerId;
+
+    /**
+     * 卖家收款账户，为空就取默认账户
+     */
+    private String sellerAccountNo;
 
     /**
      * 买家ID
