@@ -1,6 +1,7 @@
 package cn.doanything.trade.facade;
 
 import cn.doanything.commons.payment.SettleTimeType;
+import cn.doanything.commons.payment.result.PayResult;
 import cn.doanything.commons.response.GlobalResultCode;
 import cn.doanything.trade.domain.acquiring.AcquiringOrder;
 import cn.doanything.trade.domain.acquiring.service.AcquiringDomainService;
@@ -13,8 +14,10 @@ import cn.doanything.types.TradeType;
 import cn.doanything.types.status.AcquiringTradeStatus;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author wxj
@@ -31,6 +34,9 @@ public class AcquiringTradeFacadeImpl implements AcquiringTradeFacade {
     @Autowired
     private AcquiringDomainService acquiringDomainService;
 
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
     @Override
     public InstantResponse createInstantTrade(InstantRequest request) {
         AcquiringOrder trade = build(request);
@@ -41,6 +47,11 @@ public class AcquiringTradeFacadeImpl implements AcquiringTradeFacade {
         response.setStatus(AcquiringTradeStatus.WAIT_PAY);
         response.setResultCode(GlobalResultCode.SUCCESS.getCode());
         return response;
+    }
+
+    @Override
+    public PayResult pay(List<String> tradeIds) {
+        return null;
     }
 
     private AcquiringOrder build(InstantRequest request) {

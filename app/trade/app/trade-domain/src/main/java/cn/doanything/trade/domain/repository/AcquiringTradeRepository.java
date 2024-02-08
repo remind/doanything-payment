@@ -9,4 +9,6 @@ import cn.doanything.trade.domain.acquiring.AcquiringOrder;
 public interface AcquiringTradeRepository {
 
     void store(AcquiringOrder acquiringOrder);
+
+    AcquiringOrder load(String tradeId);
 }
