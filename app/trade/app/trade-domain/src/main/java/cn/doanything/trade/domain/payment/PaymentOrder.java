@@ -4,6 +4,7 @@ import cn.doanything.commons.lang.Entity;
 import cn.doanything.commons.lang.types.Money;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,11 +48,11 @@ public class PaymentOrder extends Entity {
     /**
      * 付款方
      */
-    private List<PaymentParty> payerParty;
+    private List<PaymentParty> payerParty = new ArrayList<>();
 
     /**
      * 收款方
      */
-    private List<PaymentParty> payeeParty;
+    private List<PaymentParty> payeeParty = new ArrayList<>();
 
 }
