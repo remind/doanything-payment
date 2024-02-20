@@ -30,6 +30,7 @@ public class FundServiceImpl extends AbstractBaseTradeService implements FundSer
         fillPaymentFromFundOrder(paymentOrder, fundOrder);
         paymentOrderRepository.store(paymentOrder);
         PayResult payResult = payCoreClient.pay(paymentOrder);
+
         // TODO 调用状态机处理
         return payResult;
     }

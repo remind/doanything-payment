@@ -39,11 +39,6 @@ public class SateMachineBuilder<S, E, C> {
         return this;
     }
 
-    public SateMachineBuilder<S, E, C> target(S state) {
-        current.target(state);
-        return this;
-    }
-
     public SateMachineBuilder<S, E, C> event(E event) {
         current.event(event);
         return this;
@@ -51,6 +46,11 @@ public class SateMachineBuilder<S, E, C> {
 
     public SateMachineBuilder<S, E, C> action(Action<S, E, C> action) {
         current.action(action);
+        return this;
+    }
+
+    public SateMachineBuilder<S, E, C> target(S state) {
+        current.target(state);
         return this;
     }
 

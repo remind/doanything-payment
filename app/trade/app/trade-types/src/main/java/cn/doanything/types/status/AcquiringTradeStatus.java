@@ -34,7 +34,12 @@ public enum AcquiringTradeStatus implements CodeEnum, TradeOrderStatus {
     /**
      * 超时或者商家主动关闭
      */
-    TRADE_CLOSED("90", "交易关闭");
+    TRADE_CLOSED("90", "交易关闭"),
+
+    /**
+     * 资金类的不可重复支付，在一次支付可能出现失败
+     */
+    TRADE_FAIL("91", "交易失败");
 
     private final String code;
 

@@ -10,10 +10,10 @@ import lombok.Getter;
 @Getter
 public enum TransferOrderStatus implements CodeEnum, TradeOrderStatus {
 
-    INIT("01", "初始化"),
-    PAYING("02", "转账中"),
-    SUCCESS("03", "转账成功"),
-    FAIL("04", "转账失败"),
+    INIT("10", "初始化"),
+    PAYING("20", "转账中"),
+    SUCCESS("30", "转账成功"),
+    FAIL("40", "转账失败"),
     ;
 
     private final String code;
